@@ -15,7 +15,7 @@ public class PageService implements PageServiceRemote, PageServiceLocal {
      * Default constructor. 
      */
     public PageService() {
-        
+          
     }
 
 }
