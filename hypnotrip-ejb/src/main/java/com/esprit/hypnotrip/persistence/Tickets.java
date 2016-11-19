@@ -1,11 +1,16 @@
 package com.esprit.hypnotrip.persistence;
 // Generated 19 nov. 2016 19:30:02 by Hibernate Tools 4.3.1.Final
 
+import static javax.persistence.GenerationType.IDENTITY;
+
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -20,6 +25,8 @@ public class Tickets implements java.io.Serializable {
 	private float price;
 	private String type;
 	private String userId;
+	
+	private List<BookDescription> bookDescriptions;
 
 	public Tickets() {
 	}
@@ -82,6 +89,16 @@ public class Tickets implements java.io.Serializable {
 
 	public void setUserId(String userId) {
 		this.userId = userId;
+	}
+
+	
+	@OneToMany(mappedBy="tickets",fetch=FetchType.EAGER)
+	public List<BookDescription> getBookDescriptions() {
+		return bookDescriptions;
+	}
+
+	public void setBookDescriptions(List<BookDescription> bookDescriptions) {
+		this.bookDescriptions = bookDescriptions;
 	}
 
 }

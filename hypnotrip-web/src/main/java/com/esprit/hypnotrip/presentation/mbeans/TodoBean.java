@@ -8,7 +8,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
 import com.esprit.hypnotrip.persistence.Todo;
-import com.esprit.hypnotrip.services.TodoServiceLocal;
+import com.esprit.hypnotrip.services.interfaces.TodoServiceLocal;
 
 @ManagedBean
 @RequestScoped

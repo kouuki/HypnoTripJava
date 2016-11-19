@@ -5,7 +5,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
 import com.esprit.hypnotrip.persistence.Todo;
-import com.esprit.hypnotrip.services.TodoServiceRemote;
+import com.esprit.hypnotrip.services.interfaces.TodoServiceRemote;
 
 public class test {
 

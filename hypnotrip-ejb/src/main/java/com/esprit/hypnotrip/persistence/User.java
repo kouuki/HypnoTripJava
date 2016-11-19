@@ -2,9 +2,13 @@ package com.esprit.hypnotrip.persistence;
 // Generated 19 nov. 2016 19:30:02 by Hibernate Tools 4.3.1.Final
 
 import java.util.Date;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -37,6 +41,8 @@ public class User implements java.io.Serializable {
 	private String securityStamp;
 	private boolean twoFactorEnabled;
 	private String userName;
+
+	private List<BookDescription> bookDescriptions;
 
 	public User() {
 	}
@@ -272,6 +278,16 @@ public class User implements java.io.Serializable {
 
 	public void setUserName(String userName) {
 		this.userName = userName;
+	}
+    
+	
+	@OneToMany(mappedBy="user", fetch=FetchType.EAGER)
+	public List<BookDescription> getBookDescriptions() {
+		return bookDescriptions;
+	}
+
+	public void setBookDescriptions(List<BookDescription> bookDescriptions) {
+		this.bookDescriptions = bookDescriptions;
 	}
 
 }

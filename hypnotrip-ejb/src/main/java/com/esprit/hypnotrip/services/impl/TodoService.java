@@ -1,4 +1,4 @@
-package com.esprit.hypnotrip.services;
+package com.esprit.hypnotrip.services.impl;
 
 import java.util.List;
 
@@ -7,6 +7,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import com.esprit.hypnotrip.persistence.Todo;
+import com.esprit.hypnotrip.services.interfaces.TodoServiceLocal;
+import com.esprit.hypnotrip.services.interfaces.TodoServiceRemote;
 
 @Stateless
 public class TodoService implements TodoServiceRemote, TodoServiceLocal {

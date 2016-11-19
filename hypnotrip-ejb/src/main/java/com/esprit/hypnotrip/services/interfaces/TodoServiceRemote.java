@@ -1,4 +1,4 @@
-package com.esprit.hypnotrip.services;
+package com.esprit.hypnotrip.services.interfaces;
 
 import java.util.List;
 
