@@ -15,6 +15,10 @@ import javax.persistence.Table;
 @Table(name = "pages", catalog = "hypnodb")
 public class Pages implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Integer pageId;
 	private String description;
 	private String userId;
