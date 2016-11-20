@@ -1,13 +1,13 @@
 package com.esprit.hypnotrip.persistence;
 // Generated 19 nov. 2016 19:30:02 by Hibernate Tools 4.3.1.Final
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 
-import java.beans.EventSetDescriptor;
-
+import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -16,6 +16,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "pages", catalog = "hypnodb")
+@DiscriminatorColumn(name = "Discriminator", discriminatorType = DiscriminatorType.STRING)
 public class Pages implements java.io.Serializable {
 
 	/**

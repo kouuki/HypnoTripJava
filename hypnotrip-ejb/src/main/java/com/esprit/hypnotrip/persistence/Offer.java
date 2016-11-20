@@ -2,9 +2,9 @@ package com.esprit.hypnotrip.persistence;
 // Generated 19 nov. 2016 19:30:02 by Hibernate Tools 4.3.1.Final
 
 import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -14,34 +14,34 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "offer", catalog = "hypnodb")
-public class Offer implements java.io.Serializable {
+public class Offer extends Pages implements java.io.Serializable {
 
-	private int pageId;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Date beginDate;
 	private Date finishDate;
 
 	public Offer() {
+
 	}
 
-	public Offer(int pageId, Date beginDate, Date finishDate) {
-		this.pageId = pageId;
+	public Offer(String description, String userId) {
+		super(description, userId);
+		this.beginDate = new Date();
+		this.finishDate = new Date();
+		// TODO Auto-generated constructor stub
+	}
+
+	public Offer(String description, String userId, Date beginDate, Date finishDate) {
+		super(description, userId);
 		this.beginDate = beginDate;
 		this.finishDate = finishDate;
 	}
 
-	@Id
-
-	@Column(name = "PageId", unique = true, nullable = false)
-	public int getPageId() {
-		return this.pageId;
-	}
-
-	public void setPageId(int pageId) {
-		this.pageId = pageId;
-	}
-
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "BeginDate", nullable = false, length = 0)
+	@Column(name = "BeginDate", nullable = true, length = 0)
 	public Date getBeginDate() {
 		return this.beginDate;
 	}
@@ -51,7 +51,7 @@ public class Offer implements java.io.Serializable {
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "FinishDate", nullable = false, length = 0)
+	@Column(name = "FinishDate", nullable = true, length = 0)
 	public Date getFinishDate() {
 		return this.finishDate;
 	}
