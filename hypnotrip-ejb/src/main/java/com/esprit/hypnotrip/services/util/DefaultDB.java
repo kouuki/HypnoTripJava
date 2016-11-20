@@ -30,7 +30,7 @@ public class DefaultDB {
 		pageServiceLocal.saveOrUpdatePage(pages);
 
 		Pages offre = new Offer("My first offer", "b38f3299-6949-42c7-9a6c-f998c66f485d");
-
+  
 		pageServiceLocal.saveOrUpdatePage(offre);
 	}
 
