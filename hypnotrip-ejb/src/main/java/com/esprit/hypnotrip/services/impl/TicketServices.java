@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import com.esprit.hypnotrip.persistence.Pages;
 import com.esprit.hypnotrip.persistence.Tickets;
 import com.esprit.hypnotrip.services.exceptions.EventOverException;
 import com.esprit.hypnotrip.services.exceptions.TicketAlreadyBookedException;
@@ -44,11 +45,14 @@ public class TicketServices implements TicketServicesRemote, TicketServicesLocal
 								"You can not update the price of a ticket already booked");
 				}
 			} else {
+				Pages e = entityManager.find(Pages.class, 1);
+				ticket.setEvent(e);
 				entityManager.merge(ticket);
 			}
 		}
 
 		// TODO Event if over exception
+		// TODO delete static affectation to the event
 	}
 
 	@Override
@@ -66,13 +70,13 @@ public class TicketServices implements TicketServicesRemote, TicketServicesLocal
 				entityManager.remove(mergedTicket);
 			}
 		}
-    
+
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Tickets> selectAllTicketsByIdEvent(Integer idEvent) {
-		
+
 		String jpql = "SELECT ticket FROM Tickets ticket WHERE Tickets.eventPageId=:param1";
 		Query query = entityManager.createQuery(jpql);
 		query.setParameter("param1", idEvent);
@@ -81,14 +85,18 @@ public class TicketServices implements TicketServicesRemote, TicketServicesLocal
 
 	@Override
 	public Tickets findTicketById(Integer idTicket) {
-	
-		return 	entityManager.find(Tickets.class, idTicket);
+
+		return entityManager.find(Tickets.class, idTicket);
 	}
 
 	@Override
 	public Integer numberOfTicketsBookedByIdTicket(Integer idTicket) {
-	    Tickets ticketFound  = findTicketById(idTicket) ; 
+		Tickets ticketFound = findTicketById(idTicket);
 		return ticketFound.getBookDescriptions().size();
+	}
+	
+	public void test() {
+		System.out.println("hellooooo");
 	}
 
 }

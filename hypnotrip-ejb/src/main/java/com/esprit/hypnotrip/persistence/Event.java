@@ -2,9 +2,13 @@ package com.esprit.hypnotrip.persistence;
 // Generated 19 nov. 2016 19:30:02 by Hibernate Tools 4.3.1.Final
 
 import java.util.Date;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -16,10 +20,17 @@ import javax.persistence.TemporalType;
 @Table(name = "event", catalog = "hypnodb")
 public class Event implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int pageId;
 	private Date dateOfEvent;
 	private float latitude;
 	private float longitude;
+	
+	
+	private List<Tickets> tickets;
 
 	public Event() {
 	}
@@ -68,6 +79,15 @@ public class Event implements java.io.Serializable {
 
 	public void setLongitude(float longitude) {
 		this.longitude = longitude;
+	}
+	
+	@OneToMany(mappedBy="event" , fetch = FetchType.EAGER)
+	public List<Tickets> getTickets() {
+		return tickets;
+	}
+
+	public void setTickets(List<Tickets> tickets) {
+		this.tickets = tickets;
 	}
 
 }
