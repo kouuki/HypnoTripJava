@@ -3,12 +3,16 @@ package com.esprit.hypnotrip.persistence;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -22,10 +26,14 @@ public class Pages implements java.io.Serializable {
 	/**
 	 * 
 	 */
+	
 	private static final long serialVersionUID = 1L;
 	private Integer pageId;
 	private String description;
 	private String userId;
+	
+	@OneToMany(mappedBy = "page",fetch=FetchType.EAGER)
+	private List<Rates> rates;
 
 	public Pages() {
 	}
