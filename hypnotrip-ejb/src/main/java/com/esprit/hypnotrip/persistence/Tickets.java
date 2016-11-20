@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -21,26 +22,28 @@ import javax.persistence.Table;
 public class Tickets implements java.io.Serializable {
 
 	private Integer ticketId;
-	private Integer eventPageId;
 	private float price;
 	private String type;
-	private String userId;
+	
+
+	private Pages event ; 
+
 	
 	private List<BookDescription> bookDescriptions;
 
 	public Tickets() {
 	}
 
-	public Tickets(float price, String userId) {
+	public Tickets(float price) {
 		this.price = price;
-		this.userId = userId;
+	
 	}
 
-	public Tickets(Integer eventPageId, float price, String type, String userId) {
-		this.eventPageId = eventPageId;
+	public Tickets( float price, String type) {
+
 		this.price = price;
 		this.type = type;
-		this.userId = userId;
+	
 	}
 
 	@Id
@@ -55,14 +58,7 @@ public class Tickets implements java.io.Serializable {
 		this.ticketId = ticketId;
 	}
 
-	@Column(name = "Event_PageId")
-	public Integer getEventPageId() {
-		return this.eventPageId;
-	}
 
-	public void setEventPageId(Integer eventPageId) {
-		this.eventPageId = eventPageId;
-	}
 
 	@Column(name = "Price", nullable = false, precision = 12, scale = 0)
 	public float getPrice() {
@@ -82,14 +78,6 @@ public class Tickets implements java.io.Serializable {
 		this.type = type;
 	}
 
-	@Column(name = "UserId", nullable = false, length = 128)
-	public String getUserId() {
-		return this.userId;
-	}
-
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
 
 	
 	@OneToMany(mappedBy="tickets",fetch=FetchType.EAGER)
@@ -99,6 +87,14 @@ public class Tickets implements java.io.Serializable {
 
 	public void setBookDescriptions(List<BookDescription> bookDescriptions) {
 		this.bookDescriptions = bookDescriptions;
+	}
+	@ManyToOne
+	public Pages getEvent() {
+		return event;
+	}
+
+	public void setEvent(Pages event) {
+		this.event = event;
 	}
 
 }
