@@ -60,4 +60,9 @@ public class Offer extends Pages implements java.io.Serializable {
 		this.finishDate = finishDate;
 	}
 
+	@Override
+	public String toString() {
+		return "Offer [beginDate=" + beginDate + ", finishDate=" + finishDate + "]";
+	}
+
 }
