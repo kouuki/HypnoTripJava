@@ -7,7 +7,6 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -18,43 +17,43 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "event", catalog = "hypnodb")
-public class Event implements java.io.Serializable {
+public class Event extends Pages implements java.io.Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private int pageId;
 	private Date dateOfEvent;
 	private float latitude;
 	private float longitude;
-	
-	
+	private String place;
+
 	private List<Tickets> tickets;
 
 	public Event() {
+		super();
 	}
 
-	public Event(int pageId, Date dateOfEvent, float latitude, float longitude) {
-		this.pageId = pageId;
-		this.dateOfEvent = dateOfEvent;
+	public Event(String description, String userId, Date dateOfEvent, float latitude, float longitude, String place) {
+		super(description, userId);
+		this.dateOfEvent = new Date();
 		this.latitude = latitude;
 		this.longitude = longitude;
+		this.place = place;
 	}
 
-	@Id
-
-	@Column(name = "PageId", unique = true, nullable = false)
-	public int getPageId() {
-		return this.pageId;
-	}
-
-	public void setPageId(int pageId) {
-		this.pageId = pageId;
+	public Event(String description, String userId, Date dateOfEvent, float latitude, float longitude, String place,
+			List<Tickets> tickets) {
+		super(description, userId);
+		this.dateOfEvent = new Date();
+		this.latitude = latitude;
+		this.longitude = longitude;
+		this.place = place;
+		this.tickets = tickets;
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "DateOfEvent", nullable = false, length = 0)
+	@Column(name = "DateOfEvent", nullable = true, length = 0)
 	public Date getDateOfEvent() {
 		return this.dateOfEvent;
 	}
@@ -63,7 +62,7 @@ public class Event implements java.io.Serializable {
 		this.dateOfEvent = dateOfEvent;
 	}
 
-	@Column(name = "Latitude", nullable = false, precision = 12, scale = 0)
+	@Column(name = "Latitude", nullable = true, precision = 12, scale = 0, columnDefinition="Decimal(10,2) default '000.00'")
 	public float getLatitude() {
 		return this.latitude;
 	}
@@ -72,7 +71,7 @@ public class Event implements java.io.Serializable {
 		this.latitude = latitude;
 	}
 
-	@Column(name = "Longitude", nullable = false, precision = 12, scale = 0)
+	@Column(name = "Longitude", nullable = true, precision = 12, scale = 0, columnDefinition="Decimal(10,2) default '000.00'")
 	public float getLongitude() {
 		return this.longitude;
 	}
@@ -80,8 +79,8 @@ public class Event implements java.io.Serializable {
 	public void setLongitude(float longitude) {
 		this.longitude = longitude;
 	}
-	
-	@OneToMany(mappedBy="event" , fetch = FetchType.EAGER)
+
+	@OneToMany(mappedBy = "event", fetch = FetchType.EAGER)
 	public List<Tickets> getTickets() {
 		return tickets;
 	}
@@ -89,5 +88,23 @@ public class Event implements java.io.Serializable {
 	public void setTickets(List<Tickets> tickets) {
 		this.tickets = tickets;
 	}
+
+	public String getPlace() {
+		return place;
+	}
+
+	public void setPlace(String place) {
+		this.place = place;
+	}
+
+	@Override
+	public String toString() {
+		return super.toString() + "Event [dateOfEvent=" + dateOfEvent + ", latitude=" + latitude + ", longitude=" + longitude + ", place="
+				+ place + "]";
+	}
+
+	
+	
+	
 
 }
