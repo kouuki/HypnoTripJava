@@ -1,5 +1,4 @@
 package com.esprit.hypnotrip.persistence;
-// Generated 19 nov. 2016 19:30:02 by Hibernate Tools 4.3.1.Final
 
 import java.util.Date;
 import java.util.List;
@@ -20,6 +19,10 @@ import javax.persistence.TemporalType;
 @Table(name = "user", catalog = "hypnodb")
 public class User implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String id;
 	private int accessFailedCount;
 	private String address;
@@ -41,7 +44,10 @@ public class User implements java.io.Serializable {
 	private String securityStamp;
 	private boolean twoFactorEnabled;
 	private String userName;
-
+	
+	@OneToMany(mappedBy = "user",fetch=FetchType.EAGER)
+	private List<Rates> rates;
+	
 	private List<BookDescription> bookDescriptions;
 
 	public User() {

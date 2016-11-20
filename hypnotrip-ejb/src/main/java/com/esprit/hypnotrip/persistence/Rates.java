@@ -1,12 +1,12 @@
 package com.esprit.hypnotrip.persistence;
-// Generated 19 nov. 2016 19:30:02 by Hibernate Tools 4.3.1.Final
-
 import java.util.Date;
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -18,16 +18,26 @@ import javax.persistence.TemporalType;
 @Table(name = "rates", catalog = "hypnodb")
 public class Rates implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private RatesId id;
-	private Date dateRating;
 	private int niveau;
+	private Date dateRating;
+	
+	@ManyToOne
+	@JoinColumn(name = "id_user", insertable = false, updatable = false)
+	private User user;
+	@ManyToOne
+	@JoinColumn(name = "id_page", insertable = false, updatable = false)
+	private Pages page;
 
 	public Rates() {
 	}
 
 	public Rates(RatesId id, Date dateRating, int niveau) {
 		this.id = id;
-		this.dateRating = dateRating;
 		this.niveau = niveau;
 	}
 
@@ -35,7 +45,7 @@ public class Rates implements java.io.Serializable {
 
 	@AttributeOverrides({
 			@AttributeOverride(name = "id", column = @Column(name = "Id", nullable = false, length = 128) ),
-			@AttributeOverride(name = "postId", column = @Column(name = "PostId", nullable = false) ) })
+			@AttributeOverride(name = "pageId", column = @Column(name = "PostId", nullable = false) ) })
 	public RatesId getId() {
 		return this.id;
 	}
@@ -44,15 +54,7 @@ public class Rates implements java.io.Serializable {
 		this.id = id;
 	}
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "DateRating", nullable = false, length = 0)
-	public Date getDateRating() {
-		return this.dateRating;
-	}
-
-	public void setDateRating(Date dateRating) {
-		this.dateRating = dateRating;
-	}
+	
 
 	@Column(name = "Niveau", nullable = false)
 	public int getNiveau() {
@@ -62,5 +64,13 @@ public class Rates implements java.io.Serializable {
 	public void setNiveau(int niveau) {
 		this.niveau = niveau;
 	}
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "dateRating", nullable = false)
+	public Date getdateRating() {
+		return this.dateRating;
+	}
 
+	public void setdateRating(Date dateRating) {
+		this.dateRating = dateRating;
+	}
 }
