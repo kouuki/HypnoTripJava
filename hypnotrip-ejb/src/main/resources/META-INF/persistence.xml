@@ -2,6 +2,44 @@
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
 	<persistence-unit name="hypnotrip-ejb">
 		<jta-data-source>java:jboss/hypnoDS</jta-data-source>
+		<class>com.esprit.hypnotrip.persistence.Aspnetroles</class>
+		<class>com.esprit.hypnotrip.persistence.Aspnetuserclaims</class>
+		<class>com.esprit.hypnotrip.persistence.Aspnetuserlogins</class>
+		<class>com.esprit.hypnotrip.persistence.AspnetuserloginsId</class>
+		<class>com.esprit.hypnotrip.persistence.Aspnetuserroles</class>
+		<class>com.esprit.hypnotrip.persistence.AspnetuserrolesId</class>
+		<class>com.esprit.hypnotrip.persistence.Belongs</class>
+		<class>com.esprit.hypnotrip.persistence.BelongsId</class>
+		<class>com.esprit.hypnotrip.persistence.BookDescription</class>
+		<class>com.esprit.hypnotrip.persistence.BookId</class>
+		<class>com.esprit.hypnotrip.persistence.Buy</class>
+		<class>com.esprit.hypnotrip.persistence.BuyId</class>
+		<class>com.esprit.hypnotrip.persistence.Cercles</class>
+		<class>com.esprit.hypnotrip.persistence.Comments</class>
+		<class>com.esprit.hypnotrip.persistence.CommentsId</class>
+		<class>com.esprit.hypnotrip.persistence.Complains</class>
+		<class>com.esprit.hypnotrip.persistence.ComplainsId</class>
+		<class>com.esprit.hypnotrip.persistence.Event</class>
+		<class>com.esprit.hypnotrip.persistence.Follows</class>
+		<class>com.esprit.hypnotrip.persistence.FollowsId</class>
+		<class>com.esprit.hypnotrip.persistence.Invitations</class>
+		<class>com.esprit.hypnotrip.persistence.InvitationsId</class>
+		<class>com.esprit.hypnotrip.persistence.Media</class>
+		<class>com.esprit.hypnotrip.persistence.Messages</class>
+		<class>com.esprit.hypnotrip.persistence.MessagesId</class>
+		<class>com.esprit.hypnotrip.persistence.Migrationhistory</class>
+		<class>com.esprit.hypnotrip.persistence.Offer</class>
+		<class>com.esprit.hypnotrip.persistence.Pages</class>
+		<class>com.esprit.hypnotrip.persistence.Posts</class>
+		<class>com.esprit.hypnotrip.persistence.Rates</class>
+		<class>com.esprit.hypnotrip.persistence.RatesId</class>
+		<class>com.esprit.hypnotrip.persistence.TTodo</class>
+		<class>com.esprit.hypnotrip.persistence.Tags</class>
+		<class>com.esprit.hypnotrip.persistence.Tickets</class>
+		<class>com.esprit.hypnotrip.persistence.Todo</class>
+		<class>com.esprit.hypnotrip.persistence.Touristicplace</class>
+		<class>com.esprit.hypnotrip.persistence.User</class>
+		<class>com.esprit.hypnotrip.persistence.Userconnections</class>
 		<properties>
 			<property name="hibernate.hbm2ddl.auto" value="create-drop"/>
 		</properties>
