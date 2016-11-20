@@ -69,4 +69,34 @@ public class Pages implements java.io.Serializable {
 		this.userId = userId;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((pageId == null) ? 0 : pageId.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Pages other = (Pages) obj;
+		if (pageId == null) {
+			if (other.pageId != null)
+				return false;
+		} else if (!pageId.equals(other.pageId))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Pages [pageId=" + pageId + ", description=" + description + ", userId=" + userId + "]";
+	}
+
 }
