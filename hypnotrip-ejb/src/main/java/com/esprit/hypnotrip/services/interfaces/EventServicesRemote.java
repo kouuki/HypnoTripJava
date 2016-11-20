@@ -11,14 +11,14 @@ public interface EventServicesRemote {
 
 	List<Event> getAllThisWeekEvents();
 
-	List<Event> getAllNextWeekEevents();
+	List<Event> getAllNextWeekEvents();
 
 	List<String> getAllEventMonths();
 
-	List<Event> getAllThisMonthEevents();
+	List<Event> getAllThisMonthEvents();
 
-	List<Event> getAllThisMonthEevents2();
-
-	List<Event> getMonthlyEeventsByMonth();
+	List<Event> getAllThisMonthEvents2();
+	
+	List<Event> getMonthlyEventsByMonth();
 
 }

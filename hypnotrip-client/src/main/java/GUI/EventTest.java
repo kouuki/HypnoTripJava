@@ -19,7 +19,7 @@ public class EventTest {
 			String jndiName = "hypnotrip-ear/hypnotrip-ejb/EventServices!com.esprit.hypnotrip.services.interfaces.EventServicesRemote";
 			EventServicesRemote eventServicesRemote = (EventServicesRemote) context.lookup(jndiName);
 
-			List<Event> events = eventServicesRemote.getMonthlyEeventsByMonth();
+			List<Event> events = eventServicesRemote.getAllThisWeekEvents();
 			
 			for (Event event : events) {
 				System.out.println(event.toString());

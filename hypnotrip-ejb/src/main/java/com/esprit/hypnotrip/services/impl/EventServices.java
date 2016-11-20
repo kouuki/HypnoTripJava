@@ -49,7 +49,7 @@ public class EventServices implements EventServicesRemote, EventServicesLocal {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Event> getAllNextWeekEevents() {
+	public List<Event> getAllNextWeekEvents() {
 
 //		List<Event> events = new ArrayList<Event>();
 
@@ -83,7 +83,7 @@ public class EventServices implements EventServicesRemote, EventServicesLocal {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Event> getAllThisMonthEevents() {
+	public List<Event> getAllThisMonthEvents() {
 
 //		List<Event> events = new ArrayList<Event>();
 
@@ -99,7 +99,7 @@ public class EventServices implements EventServicesRemote, EventServicesLocal {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Event> getAllThisMonthEevents2() {
+	public List<Event> getAllThisMonthEvents2() {
 //		List<Event> events = new ArrayList<Event>();
 
 		String sql = "SELECT * FROM Pages WHERE dateofevent BETWEEN curdate() AND DATE_ADD(curdate(),INTERVAL 31 DAY)";
@@ -113,7 +113,7 @@ public class EventServices implements EventServicesRemote, EventServicesLocal {
 	}
 
 	@Override
-	public List<Event> getMonthlyEeventsByMonth() {
+	public List<Event> getMonthlyEventsByMonth() {
 
 //		List<Event> events = new ArrayList<Event>();
 
