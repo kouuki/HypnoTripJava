@@ -1,0 +1,106 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:rich="http://richfaces.org/ric"
+	xmlns:p="http://primefaces.prime.com.tr/ui">
+	<h:form id="formListOfPages" rendered="#{pagesBean.displayForm1}">
+		<h:dataTable value="#{pagesBean.myPages}" var="p" border="2">
+			<h:column id="c1">
+				<f:facet name="header">
+					<h:outputText value="name" />
+				</f:facet>
+				<h:outputText value="#{p.pageId}" />
+			</h:column>
+			<h:column id="c2">
+				<f:facet name="header">
+					<h:outputText value="description" />
+				</f:facet>
+				<h:outputText value="#{p.description}" />
+			</h:column>
+
+			<h:column id="c3">
+				<f:facet name="header">
+					<h:outputText value="#" />
+				</f:facet>
+				<h:commandButton action="#{pagesBean.selectPage()}" value="select">
+					<f:setPropertyActionListener value="#{p}"
+						target="#{pagesBean.pageSelected}"></f:setPropertyActionListener>
+					<f:setPropertyActionListener value="#{p}"
+						target="#{pagesBean.offerSelected}"></f:setPropertyActionListener>
+				</h:commandButton>
+				
+			</h:column>
+		</h:dataTable>
+		<h:commandButton action="#{pagesBean.selectTypeOfPage()}" value="NEW" />
+
+	</h:form>
+	<h:form id="formUpdate" rendered="#{pagesBean.displayForm2}">
+		<h:panelGrid columns="2">
+			<h:outputText value="Description" />
+			<h:inputText value="#{pagesBean.pageSelected.description}"
+				required="true" requiredMessage="field required" />
+
+			<h:commandButton action="#{pagesBean.doAddPage()}"
+				value="save or update" />
+			<h:commandButton action="#{pagesBean.doDeletePage()}" value="delete" />
+			<h:commandButton action="#{pagesBean.cancel}" value="cancel" />
+		</h:panelGrid>
+	</h:form>
+
+
+
+
+	<h:form id="formSavePage" rendered="#{pagesBean.displayForm3}">
+		<h:panelGrid columns="2">
+
+
+			<h:selectOneRadio value="#{pagesBean.selectedType}">
+				<f:selectItem itemValue="1" itemLabel="Offer" />
+				<f:selectItem itemValue="2" itemLabel="Event" />
+				<f:selectItem itemValue="3" itemLabel="Touristic Page" />
+			</h:selectOneRadio>
+			<br />
+			<h:commandButton action="#{pagesBean.RedirectTypeOfPage()}"
+				value="Next" />
+			<h:commandButton action="#{pagesBean.cancel}" value="cancel" />
+		</h:panelGrid>
+	</h:form>
+
+	<h:form id="formForOffer" rendered="#{pagesBean.displayFormOffer}">
+		<h:panelGrid columns="2">
+			<h:outputText value="Description" />
+			<h:inputText value="#{pagesBean.offerSelected.description}"
+				required="true" requiredMessage="field required" />
+			<h:outputText value="Start date" />
+
+			<h:outputText value="End date" />
+			<h:outputText value="Price" />
+			<h:inputText value="#{pagesBean.offerSelected.price}" required="true"
+				requiredMessage="field required" />
+			<h:outputText value="Discount" />
+			<h:inputText value="#{pagesBean.offerSelected.discount}"
+				required="true" requiredMessage="field required" />
+			<h:commandButton action="#{pagesBean.doAddOffer()}" value="save" />
+			<h:commandButton action="#{pagesBean.doDeletePage()}" value="delete" />
+		</h:panelGrid>
+	</h:form>
+	<h:form id="formForEvent" rendered="#{pagesBean.displayFormEvent}">
+		<h:panelGrid columns="2">
+			<h:outputText value="Event" />
+			<h:commandButton action="#{pagesBean.doAddEvent()}" value="save" />
+			<h:commandButton action="#{pagesBean.doDeletePage()}" value="delete" />
+		</h:panelGrid>
+	</h:form>
+
+	<h:form id="formForTouristic"
+		rendered="#{pagesBean.displayFormTouristicPage}">
+		<h:panelGrid columns="2">
+			<h:outputText value="touristic" />
+			<h:commandButton action="#{pagesBean.doAddTouristic()}" value="save" />
+			<h:commandButton action="#{pagesBean.doDeletePage()}" value="delete" />
+		</h:panelGrid>
+	</h:form>
+</ui:composition>

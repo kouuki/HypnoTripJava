@@ -27,19 +27,20 @@ public class PageService implements PageServiceRemote, PageServiceLocal {
 	}
 
 	@Override
-	public void saveOrUpdatePage(Pages page) {
+	public void saveOrUpdatePage(Pages page, String idOwner) {
+		page.setUserId(idOwner);
 		entityManager.merge(page);
 
 	}
 
 	@Override
 	public void deletePage(Pages page) {
-		entityManager.remove(page);
+		entityManager.remove(entityManager.merge(page));
 
 	}
 
 	@Override
-	public List<Pages> ListMyPages(Integer idOwner) {
+	public List<Pages> ListMyPages(String idOwner) {
 
 		String jpql = "SELECT p FROM Pages p WHERE p.userId=:param1";
 		Query query = entityManager.createQuery(jpql);

@@ -8,9 +8,9 @@ import com.esprit.hypnotrip.persistence.Pages;
 
 @Remote
 public interface PageServiceRemote {
-	void saveOrUpdatePage(Pages page);
+	void saveOrUpdatePage(Pages page,String idOwner);
 
 	void deletePage(Pages page);
 
-	List<Pages> ListMyPages(Integer idOwner);
+	List<Pages> ListMyPages(String idOwner);
 }

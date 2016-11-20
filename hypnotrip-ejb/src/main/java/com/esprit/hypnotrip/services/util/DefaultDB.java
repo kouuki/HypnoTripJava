@@ -25,13 +25,13 @@ public class DefaultDB {
 	@PostConstruct
 	public void init() {
 
-		Pages pages = new Pages("My first page", "b38f3299-6949-42c7-9a6c-f998c66f485d");
+		Pages pages = new Pages("My first page");
 
-		pageServiceLocal.saveOrUpdatePage(pages);
+		pageServiceLocal.saveOrUpdatePage(pages, "b38f3299-6949-42c7-9a6c-f998c66f485d");
 
-		Pages offre = new Offer("My first offer", "b38f3299-6949-42c7-9a6c-f998c66f485d");
-  
-		pageServiceLocal.saveOrUpdatePage(offre);
+		Pages offre = new Offer("My first offer", 2.5, 1.1);
+
+		pageServiceLocal.saveOrUpdatePage(offre, "b38f3299-6949-42c7-9a6c-f998c66f485d");
 	}
 
 }

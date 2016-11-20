@@ -30,8 +30,8 @@ public class Pages implements java.io.Serializable {
 	public Pages() {
 	}
 
-	public Pages(String userId) {
-		this.userId = userId;
+	public Pages(String description) {
+		this.description = description;
 	}
 
 	public Pages(String description, String userId) {

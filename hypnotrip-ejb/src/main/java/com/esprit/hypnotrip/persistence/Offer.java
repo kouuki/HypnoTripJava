@@ -22,6 +22,8 @@ public class Offer extends Pages implements java.io.Serializable {
 	private static final long serialVersionUID = 1L;
 	private Date beginDate;
 	private Date finishDate;
+	private double price;
+	private double discount;
 
 	public Offer() {
 
@@ -31,6 +33,15 @@ public class Offer extends Pages implements java.io.Serializable {
 		super(description, userId);
 		this.beginDate = new Date();
 		this.finishDate = new Date();
+		// TODO Auto-generated constructor stub
+	}
+
+	public Offer(String description, double price, double discount) {
+		super(description);
+		this.beginDate = new Date();
+		this.finishDate = new Date();
+		this.price = price;
+		this.discount = discount;
 		// TODO Auto-generated constructor stub
 	}
 
@@ -60,9 +71,26 @@ public class Offer extends Pages implements java.io.Serializable {
 		this.finishDate = finishDate;
 	}
 
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
+
+	public double getDiscount() {
+		return discount;
+	}
+
+	public void setDiscount(double discount) {
+		this.discount = discount;
+	}
+
 	@Override
 	public String toString() {
-		return "Offer [beginDate=" + beginDate + ", finishDate=" + finishDate + "]";
+		return "Offer [beginDate=" + beginDate + ", finishDate=" + finishDate + ", price=" + price + ", discount="
+				+ discount + "]";
 	}
 
 }
