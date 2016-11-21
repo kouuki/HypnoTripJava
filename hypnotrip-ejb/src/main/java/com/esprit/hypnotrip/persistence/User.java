@@ -50,6 +50,9 @@ public class User implements java.io.Serializable {
 	
 	private List<BookDescription> bookDescriptions;
 
+	private List<Follows> pagesFollowed;
+	
+	
 	public User() {
 	}
 
@@ -294,6 +297,15 @@ public class User implements java.io.Serializable {
 
 	public void setBookDescriptions(List<BookDescription> bookDescriptions) {
 		this.bookDescriptions = bookDescriptions;
+	}
+
+	@OneToMany(mappedBy="user", fetch=FetchType.EAGER)
+	public List<Follows> getPagesFollowed() {
+		return pagesFollowed;
+	}
+
+	public void setPagesFollowed(List<Follows> pagesFollowed) {
+		this.pagesFollowed = pagesFollowed;
 	}
 
 }

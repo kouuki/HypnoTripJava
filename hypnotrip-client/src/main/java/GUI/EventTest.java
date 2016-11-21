@@ -1,6 +1,5 @@
 package GUI;
 
-import java.math.BigInteger;
 import java.util.List;
 
 import javax.naming.Context;
@@ -19,19 +18,29 @@ public class EventTest {
 			String jndiName = "hypnotrip-ear/hypnotrip-ejb/EventServices!com.esprit.hypnotrip.services.interfaces.EventServicesRemote";
 			EventServicesRemote eventServicesRemote = (EventServicesRemote) context.lookup(jndiName);
 
-			List<Event> events = eventServicesRemote.getAllThisWeekEvents();
 			
-			for (Event event : events) {
-				System.out.println(event.toString());
-			}
-			
-			
-//			List<String> months = eventServicesRemote.getAllEvenetMonths();
-//			
-//			for (String integer : months) {
-//				System.out.println(integer);
+			//period test
+//			List<Event> events = eventServicesRemote.eventsIHaveMissedInTheLastWeek();
+//
+//			for (Event event : events) {
+//				System.out.println(event.toString());
 //			}
 
+			//months test
+//			 List<String> months = eventServicesRemote.getAllEventMonths();
+//			
+//			 for (String integer : months) {
+//			 System.out.println(integer);
+//			 }
+
+			
+			//most followed upcoming event test
+			// Event event = eventServicesRemote.mostFollowedEventToCome();
+			// System.out.println(event.toString());
+			
+			//is avialable test
+			boolean response = eventServicesRemote.eventIsAvailaible();
+			System.out.println(response);
 
 		} catch (NamingException e) {
 			// TODO Auto-generated catch block

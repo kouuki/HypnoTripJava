@@ -18,6 +18,13 @@ public interface EventServicesLocal {
 	List<Event> getAllThisMonthEvents();
 
 	List<Event> getAllThisMonthEvents2();
-	
+
 	List<Event> getMonthlyEventsByMonth();
+
+	List<Event> eventsIHaveMissedInTheLastWeek();
+
+	Event mostFollowedEventToCome();
+
+	boolean eventIsAvailaible();
+
 }
