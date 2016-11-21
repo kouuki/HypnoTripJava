@@ -2,8 +2,6 @@ package com.esprit.hypnotrip.presentation.mbeans;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -39,49 +37,58 @@ public class PagesBean {
 
 	// le type séléctionné de la page
 	private int selectedType;
-	// le rating de chaque Page
-	private int rating=3;
-	
 
 	private String idOwner;
 	private List<Pages> myPages = new ArrayList<>();
-
 
 	@PostConstruct
 	public void init() {
 		idOwner = "b38f3299-6949-42c7-9a6c-f998c66f485d";
 		myPages = pageServiceLocal.ListMyPages(idOwner);
 	}
-//********************************************************************************	
-//Ajout ou update offer Event Touristic page
+
+	// ********************************************************************************
+	// Ajout ou update offer Event Touristic page
 	public String doAddPage() {
 		pageServiceLocal.saveOrUpdatePage(pageSelected, idOwner);
 		return "/pages/simpleUserHome/listofMyPages?faces-redirect=true";
 	}
+
 	public String doAddOffer() {
 		pageServiceLocal.saveOrUpdatePage(offerSelected, idOwner);
 		return "/pages/simpleUserHome/listofMyPages?faces-redirect=true";
 	}
-	//TODO  doAddEvent()
+
+	// TODO doAddEvent()
 	public String doAddEvent() {
 		pageServiceLocal.saveOrUpdatePage(offerSelected, idOwner);
 		return "/pages/simpleUserHome/listofMyPages?faces-redirect=true";
 	}
-	//TODO doAddEvent()
+
+	// TODO doAddEvent()
 	public String doAddTouristic() {
 		pageServiceLocal.saveOrUpdatePage(offerSelected, idOwner);
 		return "/pages/simpleUserHome/listofMyPages?faces-redirect=true";
 	}
-//********************************************************************************
-//Suppression de la page
+
+	// ********************************************************************************
+	// Suppression de la page
 	public String doDeletePage() {
 		pageServiceLocal.deletePage(pageSelected);
 		return "/pages/simpleUserHome/listofMyPages?faces-redirect=true";
 	}
-//********************************************************************************
+
+	// ********************************************************************************
+	// Passer a La Page Rate
+	public String ratePage() {
+		
+		RateBean.getSelectedItemFromPage(pageSelected.getPageId());
+		return "/pages/simpleUserHome/ratePages?faces-redirect=true";
+	}
+
+	// ********************************************************************************
 	public String selectPage() {
-		if(pageSelected instanceof Pages)
-		{
+		if (pageSelected instanceof Pages) {
 			displayForm1 = false;
 			displayForm2 = true;
 			displayForm3 = false;
@@ -89,8 +96,7 @@ public class PagesBean {
 			displayFormEvent = false;
 			displayFormTouristicPage = false;
 		}
-		if(pageSelected instanceof Offer)
-		{
+		if (pageSelected instanceof Offer) {
 			displayForm1 = false;
 			displayForm2 = false;
 			displayForm3 = false;
@@ -110,9 +116,10 @@ public class PagesBean {
 		displayFormTouristicPage = false;
 		return null;
 	}
-public int ratingLevels(int idPost){
+
+	public int ratingLevels(int idPost) {
 		return rateServiceLocal.getRateLevel(idPost);
-}
+	}
 
 	public String RedirectTypeOfPage() {
 		if (selectedType == 1) {
@@ -254,11 +261,7 @@ public int ratingLevels(int idPost){
 	public Boolean getDisplayFormOffer() {
 		return displayFormOffer;
 	}
-	public int getRating() {
-		return rating;
-	}
-	public void setRating(int rating) {
-		this.rating = rating;
-	}
+
+	
 
 }

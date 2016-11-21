@@ -21,34 +21,42 @@ public class RateBean {
 	RateServiceLocal rateServiceLocal;
 
 	private Integer rating1;
+	private static Integer selectedItem;
 	
 
-	public String onrate(RateEvent rateEvent) {
+	public void onrate(RateEvent rateEvent) {
 		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Rate Event",
 				"You rated:" + ((Integer) rateEvent.getRating()).intValue());
 		FacesContext.getCurrentInstance().addMessage(null, message);
 		// here we will add the connected User & the selected Page
-		int selectedPage=1;
+		
 		String user_id="2e1002bb-57b6-4838-8f8f-e762bae52f7f";
 		//adding the id of the page
 		RatesId rateId = new RatesId();
 		rateId.setId(user_id);
-		rateId.setpageId(selectedPage);
+		rateId.setpageId(selectedItem);
 		//The rate
 		Rates rate = new Rates();
 		rate.setNiveau((Integer) rateEvent.getRating());
 		rate.setId(rateId);
 		rate.setdateRating(new Date());
 		rateServiceLocal.addRate(rate);
-		return "/pages/simpleUserHome/listofMyPages?faces-redirect=true";
+		
 	}
-
+	public static void getSelectedItemFromPage(int idPage){
+		selectedItem = idPage;
+	}
 	public void oncancel() {
 		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cancel Event", "Rate Reset");
 		FacesContext.getCurrentInstance().addMessage(null, message);
 	}
 
-	
+	public String ReturnList(){
+		return "/pages/simpleUserHome/listofMyPages?faces-redirect=true";
+	}
+	public String RatePage(){
+		return "/pages/simpleUserHome/ratePages?faces-redirect=true";
+	}
 
 	public Integer getRating1() {
 		return rating1;
@@ -56,6 +64,14 @@ public class RateBean {
 
 	public void setRating1(Integer rating1) {
 		this.rating1 = rating1;
+	}
+
+	public Integer getSelectedItem() {
+		return selectedItem;
+	}
+
+	public void setSelectedItem(Integer selectedItem) {
+		RateBean.selectedItem = selectedItem;
 	}
 
 	

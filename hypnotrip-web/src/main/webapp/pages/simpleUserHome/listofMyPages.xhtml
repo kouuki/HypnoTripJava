@@ -44,6 +44,16 @@
 						target="#{pagesBean.offerSelected}"></f:setPropertyActionListener>
 				</h:commandButton>
 			</h:column>
+			<h:column id="c5">
+				<f:facet name="header">
+					<h:outputText value="" />
+				</f:facet>
+				<h:commandButton value="Rate" action="#{pagesBean.ratePage()}" >
+					<f:setPropertyActionListener value="#{p}"
+						target="#{pagesBean.pageSelected}"></f:setPropertyActionListener>
+		
+				</h:commandButton>
+			</h:column>
 		</h:dataTable>
 		<h:commandButton action="#{pagesBean.selectTypeOfPage()}" value="NEW" />
 
