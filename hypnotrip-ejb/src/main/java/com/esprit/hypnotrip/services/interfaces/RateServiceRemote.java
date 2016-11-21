@@ -16,5 +16,6 @@ public interface RateServiceRemote {
 
 	Rates findRateById(Integer idRate);
 
+	int getRateLevel(int idPost);
 
 }

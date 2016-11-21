@@ -2,6 +2,7 @@ package com.esprit.hypnotrip.presentation.mbeans;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -11,12 +12,15 @@ import javax.faces.bean.ViewScoped;
 import com.esprit.hypnotrip.persistence.Offer;
 import com.esprit.hypnotrip.persistence.Pages;
 import com.esprit.hypnotrip.services.interfaces.PageServiceLocal;
+import com.esprit.hypnotrip.services.interfaces.RateServiceLocal;
 
 @ManagedBean
 @ViewScoped
 public class PagesBean {
 	@EJB
 	private PageServiceLocal pageServiceLocal;
+	@EJB
+	private RateServiceLocal rateServiceLocal;
 
 	// Controle sur le chargement des form
 	private Boolean displayForm2 = false;
@@ -35,9 +39,13 @@ public class PagesBean {
 
 	// le type séléctionné de la page
 	private int selectedType;
+	// le rating de chaque Page
+	private int rating=3;
+	
 
 	private String idOwner;
 	private List<Pages> myPages = new ArrayList<>();
+
 
 	@PostConstruct
 	public void init() {
@@ -102,6 +110,9 @@ public class PagesBean {
 		displayFormTouristicPage = false;
 		return null;
 	}
+public int ratingLevels(int idPost){
+		return rateServiceLocal.getRateLevel(idPost);
+}
 
 	public String RedirectTypeOfPage() {
 		if (selectedType == 1) {
@@ -242,6 +253,12 @@ public class PagesBean {
 
 	public Boolean getDisplayFormOffer() {
 		return displayFormOffer;
+	}
+	public int getRating() {
+		return rating;
+	}
+	public void setRating(int rating) {
+		this.rating = rating;
 	}
 
 }

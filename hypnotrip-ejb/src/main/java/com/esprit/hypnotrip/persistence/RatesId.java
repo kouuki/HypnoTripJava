@@ -18,25 +18,25 @@ public class RatesId implements java.io.Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private int id_user;
+	private String id_user;
 	private int id_page;
 
 
 	public RatesId() {
 	}
 
-	public RatesId(int id_user, int pageId ) {
+	public RatesId(String id_user, int pageId ) {
 		this.id_user = id_user;
 		this.id_page = pageId;
 		
 	}
 
 	@Column(name = "Id", nullable = false, length = 128)
-	public int getId() {
+	public String getId() {
 		return this.id_user;
 	}
 
-	public void setId(int id_user) {
+	public void setId(String id_user) {
 		this.id_user = id_user;
 	}
 	
@@ -53,8 +53,8 @@ public class RatesId implements java.io.Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + id_user;
 		result = prime * result + id_page;
+		result = prime * result + ((id_user == null) ? 0 : id_user.hashCode());
 		return result;
 	}
 
@@ -67,12 +67,17 @@ public class RatesId implements java.io.Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		RatesId other = (RatesId) obj;
-		if (id_user != other.id_user)
-			return false;
 		if (id_page != other.id_page)
+			return false;
+		if (id_user == null) {
+			if (other.id_user != null)
+				return false;
+		} else if (!id_user.equals(other.id_user))
 			return false;
 		return true;
 	}
+
+	
 
 
 
