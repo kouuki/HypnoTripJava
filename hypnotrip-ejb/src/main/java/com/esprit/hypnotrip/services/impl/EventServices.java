@@ -9,7 +9,6 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import com.esprit.hypnotrip.persistence.Event;
-import com.esprit.hypnotrip.persistence.Follows;
 import com.esprit.hypnotrip.services.interfaces.EventServicesLocal;
 import com.esprit.hypnotrip.services.interfaces.EventServicesRemote;
 
@@ -29,8 +28,6 @@ public class EventServices implements EventServicesRemote, EventServicesLocal {
 	private List<String> months = new ArrayList<String>();
 	private List<Event> events = new ArrayList<Event>();
 	private Event event = new Event();
-	
-	
 
 	public EventServices() {
 		// TODO Auto-generated constructor stub
@@ -85,7 +82,7 @@ public class EventServices implements EventServicesRemote, EventServicesLocal {
 	public List<String> getAllEventMonths() {
 
 		// SQL QUERY
-		String queryMonths = "SELECT DISTINCT DATE_FORMAT(dateofevent, '%M') FROM Pages;";
+		String queryMonths = "SELECT DISTINCT DATE_FORMAT(dateofevent, '%M') FROM Pages WHERE discriminator ='Event'";
 
 		// native SQL QUERY with EM
 		Query queryM = entityManager.createNativeQuery(queryMonths);
@@ -157,69 +154,116 @@ public class EventServices implements EventServicesRemote, EventServicesLocal {
 		// }
 		// for (String month : months) ;ùmm
 		{
-		// switch (month) {
-		// case "January":
-		// case "March":
-		// case "May":
-		// case "July":
-		// case "August":
-		// case "October":
-		// case "December": {
-		//
-		// events = getAllThisMonthEevents();
-		//
-		// break;
-		// }
-		//
-		// case "April":
-		// case "June":
-		// case "September":
-		// case "November": {
-		//
-		// events = getAllThisMonthEevents2();
-		//
-		// break;
-		// }
-		//
-		// default:
-		// System.out.println("error");
-		// break;
-		// }
-		// }
-		//
+			// switch (month) {
+			// case "January":
+			// case "March":
+			// case "May":
+			// case "July":
+			// case "August":
+			// case "October":
+			// case "December": {
+			//
+			// events = getAllThisMonthEevents();
+			//
+			// break;
+			// }
+			//
+			// case "April":
+			// case "June":
+			// case "September":
+			// case "November": {
+			//
+			// events = getAllThisMonthEevents2();
+			//
+			// break;
+			// }
+			//
+			// default:
+			// System.out.println("error");
+			// break;
+			// }
+			// }
+			//
 
-		return null;
+			return null;
 
+		}
 	}
-	}
 
-	//get most followed event
-	//upcoming event
+	// get most followed event
+	// upcoming event
 	// ++ followed by a lot of poeople
 	@Override
 	public Event mostFollowedEventToCome() {
 
-		// SQL QUERY
-		String sql = "SELECT e FROM Event e INNER JOIN e.followers f WHERE f.followStat = true and e.dateOfEvent>curdate() ORDER BY COUNT(f.id.pageId) DESC";
-		
+		// JPQL QUERY
+		String sql = "SELECT e FROM Event e INNER JOIN e.followers f WHERE f.followStat = true AND e.dateOfEvent>curdate() ORDER BY COUNT(f.id.pageId) DESC";
+
 		// JPQL QUERY that get most followed and upcomong event
 		Query query = entityManager.createQuery(sql);
 
-			try {
-					//get the event
-					event = (Event) query.getSingleResult();
+		try {
+			// get the event
+			event = (Event) query.getSingleResult();
 
-				} catch (Exception e) {
-					// TODO: handle exception
-				}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 
-				return event;		
+		return event;
 	}
 
+	// events i haven't followed
+	// that are only in the past week
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Event> eventsIHaveMissedInTheLastWeek() {
+
+		// SQL QUERY
+		String query = "SELECT * FROM Pages p INNER JOIN Follows f ON f.pageid =p.pageid WHERE p.discriminator='Event' AND f.userid !=:param AND p.dateofevent < DATE_ADD(curdate(),INTERVAL -1 DAY) AND p.dateofevent > DATE_ADD(curdate(),INTERVAL -8 DAY) GROUP BY (p.pageid) ORDER BY (p.dateofevent) DESC;";
+
+		// native SQL QUERY with EM
+		Query q = entityManager.createNativeQuery(query, Event.class);
+		q.setParameter("param", 5);
+		try {
+
+			events = q.getResultList();
+
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
+		return events;
+	}
+
+	//test if event is still available or not
+	// dateofevent must be equals or larger than the current date
 	@Override
 	public boolean eventIsAvailaible() {
-		// TODO Auto-generated method stub
-		return false;
+
+		boolean response = false;
+
+		// JPQL QUERY
+		String sql = "SELECT e FROM Event e WHERE e.pageId =:param AND e.dateOfEvent>=curdate()";
+
+		// JPQL QUERY that get most followed and upcomong event
+		Query query = entityManager.createQuery(sql);
+		query.setParameter("param", 5);
+		
+		try {
+			// get the event
+			event = (Event) query.getSingleResult();
+			if (event != null) {
+		
+				response = true;
+			}
+				
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+
+		return response;
 	}
 
 }

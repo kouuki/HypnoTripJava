@@ -21,6 +21,8 @@ public interface EventServicesRemote {
 
 	List<Event> getMonthlyEventsByMonth();
 
+	List<Event> eventsIHaveMissedInTheLastWeek();
+
 	Event mostFollowedEventToCome();
 
 	boolean eventIsAvailaible();
