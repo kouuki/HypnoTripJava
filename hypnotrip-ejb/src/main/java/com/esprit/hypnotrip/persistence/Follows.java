@@ -6,6 +6,8 @@ import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -18,6 +20,12 @@ public class Follows implements java.io.Serializable {
 	private FollowsId id;
 	private boolean followStat;
 
+	
+
+	private User user ;
+	private Pages pages;
+	
+	
 	public Follows() {
 	}
 
@@ -49,4 +57,30 @@ public class Follows implements java.io.Serializable {
 		this.followStat = followStat;
 	}
 
+	@ManyToOne
+	@JoinColumn(name="userId", referencedColumnName="id",updatable=false , insertable= false)
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	@ManyToOne
+	@JoinColumn(name="pageId", referencedColumnName="pageId",updatable=false , insertable= false)
+	public Pages getPages() {
+		return pages;
+	}
+
+	public void setPages(Pages pages) {
+		this.pages = pages;
+	}
+
+	@Override
+	public String toString() {
+		return "Follows [id=" + id + ", followStat=" + followStat + "]";
+	}
+
+	
 }

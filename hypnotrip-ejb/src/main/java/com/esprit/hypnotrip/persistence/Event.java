@@ -30,6 +30,10 @@ public class Event extends Pages implements java.io.Serializable {
 
 	private List<Tickets> tickets;
 
+	
+	private List<Follows> followers;
+
+	
 	public Event() {
 		super();
 	}
@@ -96,6 +100,17 @@ public class Event extends Pages implements java.io.Serializable {
 	public void setPlace(String place) {
 		this.place = place;
 	}
+	
+	
+	@OneToMany(mappedBy="pages",fetch=FetchType.EAGER)
+	public List<Follows> getFollowers() {
+		return followers;
+	}
+
+	public void setFollowers(List<Follows> followers) {
+		this.followers = followers;
+	}
+
 
 	@Override
 	public String toString() {

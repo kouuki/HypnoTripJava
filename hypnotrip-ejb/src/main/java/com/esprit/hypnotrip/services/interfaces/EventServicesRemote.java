@@ -18,7 +18,11 @@ public interface EventServicesRemote {
 	List<Event> getAllThisMonthEvents();
 
 	List<Event> getAllThisMonthEvents2();
-	
+
 	List<Event> getMonthlyEventsByMonth();
+
+	Event mostFollowedEventToCome();
+
+	boolean eventIsAvailaible();
 
 }
