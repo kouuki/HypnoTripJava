@@ -80,7 +80,7 @@ public class Tickets implements java.io.Serializable {
 
 
 	
-	@OneToMany(mappedBy="tickets",fetch=FetchType.EAGER)
+	@OneToMany(mappedBy="ticket",fetch=FetchType.EAGER)
 	public List<BookDescription> getBookDescriptions() {
 		return bookDescriptions;
 	}

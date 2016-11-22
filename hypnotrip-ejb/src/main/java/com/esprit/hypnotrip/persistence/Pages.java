@@ -35,6 +35,9 @@ public class Pages implements java.io.Serializable {
 	@OneToMany(mappedBy = "page",fetch=FetchType.EAGER)
 	private List<Rates> rates;
 	
+	private List<Tickets> tickets ; 
+	
+	
 
 
 
@@ -108,6 +111,16 @@ public class Pages implements java.io.Serializable {
 	@Override
 	public String toString() {
 		return "Pages [pageId=" + pageId + ", description=" + description + ", userId=" + userId + "]";
+	}
+
+	
+	@OneToMany(mappedBy="event" , fetch = FetchType.EAGER)
+	public List<Tickets> getTickets() {
+		return tickets;
+	}
+
+	public void setTickets(List<Tickets> tickets) {
+		this.tickets = tickets;
 	}
 
 	

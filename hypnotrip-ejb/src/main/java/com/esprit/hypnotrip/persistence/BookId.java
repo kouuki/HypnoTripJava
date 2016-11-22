@@ -23,6 +23,15 @@ public class BookId implements Serializable {
 	public BookId() {
 		super();
 	}   
+	
+	public BookId(Integer ticketId , String userId , Date dateOfBooDate) {
+		 
+		this.ticketId = ticketId ; 
+		this.userId  = userId ; 
+		this.dateOfBooking =dateOfBooDate; 
+	}
+	
+	
 
 	public Integer getTicketId() {
 		return this.ticketId;
@@ -83,6 +92,11 @@ public class BookId implements Serializable {
 		} else if (!userId.equals(other.userId))
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "BookId [ticketId=" + ticketId + ", userId=" + userId + ", dateOfBooking=" + dateOfBooking + "]";
 	}
 	
 	
