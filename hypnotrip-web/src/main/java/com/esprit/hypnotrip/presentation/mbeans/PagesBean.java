@@ -1,12 +1,23 @@
 package com.esprit.hypnotrip.presentation.mbeans;
 
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
+
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.Part;
 
+import org.primefaces.context.RequestContext;
+import org.primefaces.event.SelectEvent;
+
+import com.esprit.hypnotrip.persistence.Event;
 import com.esprit.hypnotrip.persistence.Offer;
 import com.esprit.hypnotrip.persistence.Pages;
 import com.esprit.hypnotrip.services.interfaces.PageServiceLocal;
@@ -32,8 +43,12 @@ public class PagesBean {
 	private String selectedItem;
 	private Pages pageSelected = new Pages();
 	private Pages offerSelected = new Offer();
-	// private Pages eventSelected = new Event();
+	private Pages eventSelected = new Event();
 	// private Pages touristicSelected = new Touristicplace();
+
+	// Image
+	private Part file;
+	private String fileContent;
 
 	// le type séléctionné de la page
 	private int selectedType;
@@ -55,18 +70,21 @@ public class PagesBean {
 	}
 
 	public String doAddOffer() {
+		offerSelected.setImageURL(fileContent);
 		pageServiceLocal.saveOrUpdatePage(offerSelected, idOwner);
 		return "/pages/simpleUserHome/listofMyPages?faces-redirect=true";
 	}
 
 	// TODO doAddEvent()
 	public String doAddEvent() {
-		pageServiceLocal.saveOrUpdatePage(offerSelected, idOwner);
+		pageServiceLocal.saveOrUpdatePage(eventSelected, idOwner);
 		return "/pages/simpleUserHome/listofMyPages?faces-redirect=true";
 	}
 
 	// TODO doAddEvent()
+
 	public String doAddTouristic() {
+
 		pageServiceLocal.saveOrUpdatePage(offerSelected, idOwner);
 		return "/pages/simpleUserHome/listofMyPages?faces-redirect=true";
 	}
@@ -81,7 +99,7 @@ public class PagesBean {
 	// ********************************************************************************
 	// Passer a La Page Rate
 	public String ratePage() {
-		
+
 		RateBean.getSelectedItemFromPage(pageSelected.getPageId());
 		return "/pages/simpleUserHome/ratePages?faces-redirect=true";
 	}
@@ -102,6 +120,14 @@ public class PagesBean {
 			displayForm3 = false;
 			displayFormOffer = true;
 			displayFormEvent = false;
+			displayFormTouristicPage = false;
+		}
+		if (pageSelected instanceof Event) {
+			displayForm1 = false;
+			displayForm2 = false;
+			displayForm3 = false;
+			displayFormOffer = false;
+			displayFormEvent = true;
 			displayFormTouristicPage = false;
 		}
 		return null;
@@ -162,6 +188,35 @@ public class PagesBean {
 		return "";
 	}
 
+	// **********************************************************************************
+	public void onDateSelect(SelectEvent event) {
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+		facesContext.addMessage(null,
+				new FacesMessage(FacesMessage.SEVERITY_INFO, "Date Selected", format.format(event.getObject())));
+	}
+
+	public void click() {
+		RequestContext requestContext = RequestContext.getCurrentInstance();
+
+		requestContext.update("form:display");
+		requestContext.execute("PF('dlg').show()");
+	}
+
+	// **********************************************************************************
+	@SuppressWarnings("resource")
+	public void upload() {
+		try {
+			fileContent = new Scanner(file.getInputStream()).useDelimiter("\\A").next();
+			
+			offerSelected.setImageURL(fileContent);
+			
+		} catch (IOException e) {
+			// Error handling
+		}
+	}
+
+	// **********************************************************************************
 	public String getIdOwner() {
 		return idOwner;
 	}
@@ -262,6 +317,46 @@ public class PagesBean {
 		return displayFormOffer;
 	}
 
-	
+	public void setOfferSelected(Pages offerSelected) {
+		this.offerSelected = offerSelected;
+	}
+
+	public Event getEventSelected() {
+		return (Event) eventSelected;
+	}
+
+	public void setEventSelected(Event eventSelected) {
+		this.eventSelected = eventSelected;
+	}
+
+	public Part getFile() {
+		return file;
+	}
+
+	public void setFile(Part file) {
+		this.file = file;
+	}
+
+	@SuppressWarnings("resource")
+	public String getFileContent() {
+		try {
+			fileContent = new Scanner(file.getInputStream()).useDelimiter("\\A").next();
+			System.out.println("houniiiiiiiiii   " + fileContent);
+
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return fileContent;
+	}
+
+	public void setFileContent(String fileContent) {
+		this.fileContent = fileContent;
+	}
+
+	public void setEventSelected(Pages eventSelected) {
+		this.eventSelected = eventSelected;
+	}
 
 }
