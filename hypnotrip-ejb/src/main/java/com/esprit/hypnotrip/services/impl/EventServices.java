@@ -274,8 +274,8 @@ public class EventServices implements EventServicesRemote, EventServicesLocal {
 
 		// JPQL QUERY that get most followed and upcomong event
 		Query query = entityManager.createQuery(sql);
-		query.setParameter("param", idUser);
-		query.setParameter("param1", place);
+		query.setParameter("param", "5");
+		query.setParameter("param1", "ariana");
 		
 			try {
 					// get the event

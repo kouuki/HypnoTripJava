@@ -28,7 +28,6 @@ public class Event extends Pages implements java.io.Serializable {
 	private float longitude;
 	private String place;
 
-	private List<Tickets> tickets;
 
 	
 	private List<Follows> followers;
@@ -44,16 +43,6 @@ public class Event extends Pages implements java.io.Serializable {
 		this.latitude = latitude;
 		this.longitude = longitude;
 		this.place = place;
-	}
-
-	public Event(String description, String userId, Date dateOfEvent, float latitude, float longitude, String place,
-			List<Tickets> tickets) {
-		super(description, userId);
-		this.dateOfEvent = new Date();
-		this.latitude = latitude;
-		this.longitude = longitude;
-		this.place = place;
-		this.tickets = tickets;
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)
@@ -82,15 +71,6 @@ public class Event extends Pages implements java.io.Serializable {
 
 	public void setLongitude(float longitude) {
 		this.longitude = longitude;
-	}
-
-	@OneToMany(mappedBy = "event", fetch = FetchType.EAGER)
-	public List<Tickets> getTickets() {
-		return tickets;
-	}
-
-	public void setTickets(List<Tickets> tickets) {
-		this.tickets = tickets;
 	}
 
 	public String getPlace() {
