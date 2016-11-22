@@ -217,7 +217,7 @@ public class EventServices implements EventServicesRemote, EventServicesLocal {
 	// that are only in the past week
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Event> eventsIHaveMissedInTheLastWeek() {
+	public List<Event> eventsIHaveMissedInTheLastWeek(Integer idUser) {
 
 		// SQL QUERY
 		String query = "SELECT * FROM Pages p INNER JOIN Follows f ON f.pageid =p.pageid WHERE p.discriminator='Event' AND f.userid !=:param AND p.dateofevent < DATE_ADD(curdate(),INTERVAL -1 DAY) AND p.dateofevent > DATE_ADD(curdate(),INTERVAL -8 DAY) GROUP BY (p.pageid) ORDER BY (p.dateofevent) DESC;";
@@ -239,7 +239,7 @@ public class EventServices implements EventServicesRemote, EventServicesLocal {
 	//test if event is still available or not
 	// dateofevent must be equals or larger than the current date
 	@Override
-	public boolean eventIsAvailaible() {
+	public boolean eventIsAvailaible(Integer idPage) {
 
 		boolean response = false;
 
@@ -264,6 +264,28 @@ public class EventServices implements EventServicesRemote, EventServicesLocal {
 		
 
 		return response;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Event> popularAvailableOrUpcomingEventsIMightLike(String idUser,String place) {
+		// JPQL QUERY
+		String sql = "SELECT DISTINCT e FROM Event e INNER JOIN e.followers f INNER JOIN f.user u WHERE e.dateOfEvent>=curdate() AND f.id.userId !=:param AND u.address =:param1 ORDER BY (f.id.pageId)";
+
+		// JPQL QUERY that get most followed and upcomong event
+		Query query = entityManager.createQuery(sql);
+		query.setParameter("param", idUser);
+		query.setParameter("param1", place);
+		
+			try {
+					// get the event
+					events =  query.getResultList();
+
+			} catch (Exception e) {
+					// TODO: handle exception
+				}
+
+				return events;
 	}
 
 }

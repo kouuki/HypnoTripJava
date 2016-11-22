@@ -20,7 +20,7 @@ public class EventTest {
 
 			
 			//period test
-//			List<Event> events = eventServicesRemote.eventsIHaveMissedInTheLastWeek();
+//			List<Event> events = eventServicesRemote.eventsIHaveMissedInTheLastWeek(5);
 //
 //			for (Event event : events) {
 //				System.out.println(event.toString());
@@ -39,8 +39,15 @@ public class EventTest {
 			// System.out.println(event.toString());
 			
 			//is avialable test
-			boolean response = eventServicesRemote.eventIsAvailaible();
-			System.out.println(response);
+//			boolean response = eventServicesRemote.eventIsAvailaible(5);
+//			System.out.println(response);
+			
+			//events i might like test
+			List<Event> events = eventServicesRemote.popularAvailableOrUpcomingEventsIMightLike("5","ariana");
+
+			for (Event event : events) {
+				System.out.println(event.toString());
+			}
 
 		} catch (NamingException e) {
 			// TODO Auto-generated catch block

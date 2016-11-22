@@ -21,10 +21,12 @@ public interface EventServicesRemote {
 
 	List<Event> getMonthlyEventsByMonth();
 
-	List<Event> eventsIHaveMissedInTheLastWeek();
+	List<Event> eventsIHaveMissedInTheLastWeek(Integer idUser);
 
 	Event mostFollowedEventToCome();
 
-	boolean eventIsAvailaible();
+	boolean eventIsAvailaible(Integer idPage);
+
+	List<Event> popularAvailableOrUpcomingEventsIMightLike(String idUser, String place);
 
 }
