@@ -2,6 +2,7 @@ package com.esprit.hypnotrip.services.impl;
 
 import java.util.List;
 
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -26,6 +27,8 @@ public class TicketServices implements TicketServicesRemote, TicketServicesLocal
 	 */
 	@PersistenceContext
 	private EntityManager entityManager;
+	@EJB
+	EventServices eventServices;
 
 	public TicketServices() {
 
@@ -34,7 +37,7 @@ public class TicketServices implements TicketServicesRemote, TicketServicesLocal
 	@Override
 	public void createOrUpdateTicket(Tickets ticket) throws EventOverException, TicketAlreadyBookedException {
 
-		if (false) {
+		if (!eventServices.eventIsAvailaible(ticket.getEvent().getPageId())) {
 			throw new EventOverException("You can not create or update a ticket for a finished event");
 		} else {
 			if (ticket.getTicketId() != null) {
@@ -62,7 +65,7 @@ public class TicketServices implements TicketServicesRemote, TicketServicesLocal
 	@Override
 	public void deleteTicket(Tickets ticket) throws EventOverException, TicketAlreadyBookedException {
 		Tickets mergedTicket = entityManager.merge(ticket);
-		if (false) {
+		if (!eventServices.eventIsAvailaible(ticket.getEvent().getPageId())) {
 			throw new EventOverException("You can not delete a ticket for a finished event");
 			// TODO test if the user want to delete a ticket of a finished event
 		} else {

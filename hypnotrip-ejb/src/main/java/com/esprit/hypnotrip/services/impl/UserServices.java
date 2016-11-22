@@ -39,7 +39,8 @@ public class UserServices implements UserServicesRemote, UserServicesLocal {
 
 	@EJB
 	TicketServicesLocal ticketServicesLocal;
-
+	@EJB
+	EventServices eventServices ; 
 	public UserServices() {
 
 	}
@@ -47,7 +48,7 @@ public class UserServices implements UserServicesRemote, UserServicesLocal {
 	@Override
 	public void bookATicket(Tickets ticket, User user)
 			throws NoMoreTicketsException, LimitOfBookingRechedException, EventOverException {
-		if (false) {
+		if (!eventServices.eventIsAvailaible(ticket.getEvent().getPageId())) {
 			throw new EventOverException("You can not book a ticket for a finished event");
 		} else if (ticket.getNumberOfPlaces() == null) {
 			throw new NoMoreTicketsException("No more tickets avalible");
@@ -73,7 +74,7 @@ public class UserServices implements UserServicesRemote, UserServicesLocal {
 	@Override
 	public void cancelBooking(Tickets ticket, User user, Integer numberOfTicketsToCancel)
 			throws EventOverException, WrongNumberOfCancelingException {
-		if (false) {
+		if (eventServices.eventIsAvailaible(ticket.getEvent().getPageId())) {
 			throw new EventOverException("You can not book a ticket for a finished event");
 		} else if (numberOfTicketsReservedByIdUser(ticket, user.getId()) < numberOfTicketsToCancel) {
 			throw new WrongNumberOfCancelingException("Wrong number of cancel");
