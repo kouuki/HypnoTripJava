@@ -2,9 +2,13 @@ package com.esprit.hypnotrip.persistence;
 // Generated 19 nov. 2016 19:30:02 by Hibernate Tools 4.3.1.Final
 
 import java.util.Date;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -14,65 +18,77 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "touristicplace", catalog = "hypnodb")
-public class Touristicplace implements java.io.Serializable {
+public class Touristicplace extends Pages implements java.io.Serializable {
 
-	private int pageId;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Date dateOfCreation;
 	private String logo;
 	private String name;
+	
+	
+	private List<Rates> rates;
 
-	public Touristicplace() {
-	}
-
-	public Touristicplace(int pageId, Date dateOfCreation) {
-		this.pageId = pageId;
-		this.dateOfCreation = dateOfCreation;
-	}
-
-	public Touristicplace(int pageId, Date dateOfCreation, String logo, String name) {
-		this.pageId = pageId;
+	public Touristicplace(Date dateOfCreation, String logo, String name) {
+		super();
 		this.dateOfCreation = dateOfCreation;
 		this.logo = logo;
 		this.name = name;
 	}
 
-	@Id
 
-	@Column(name = "PageId", unique = true, nullable = false)
-	public int getPageId() {
-		return this.pageId;
-	}
-
-	public void setPageId(int pageId) {
-		this.pageId = pageId;
-	}
-
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "DateOfCreation", nullable = false, length = 0)
-	public Date getDateOfCreation() {
-		return this.dateOfCreation;
-	}
-
-	public void setDateOfCreation(Date dateOfCreation) {
-		this.dateOfCreation = dateOfCreation;
-	}
-
-	@Column(name = "Logo")
 	public String getLogo() {
-		return this.logo;
+		return logo;
+	}
+
+	public Touristicplace() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public Touristicplace(String description, String userId) {
+		super(description, userId);
+		// TODO Auto-generated constructor stub
+	}
+
+	public Touristicplace(String description) {
+		super(description);
+		// TODO Auto-generated constructor stub
 	}
 
 	public void setLogo(String logo) {
 		this.logo = logo;
 	}
 
-	@Column(name = "Name")
+	@Temporal(TemporalType.TIMESTAMP)
+	public Date getDateOfCreation() {
+		return dateOfCreation;
+	}
+
+	public void setDateOfCreation(Date dateOfCreation) {
+		this.dateOfCreation = dateOfCreation;
+	}
+
 	public String getName() {
-		return this.name;
+		return name;
 	}
 
 	public void setName(String name) {
 		this.name = name;
 	}
 
+
+	@OneToMany(mappedBy = "page",fetch=FetchType.EAGER)
+	public List<Rates> getRates() {
+		return rates;
+	}
+
+
+	public void setRates(List<Rates> rates) {
+		this.rates = rates;
+	}
+
 }
+

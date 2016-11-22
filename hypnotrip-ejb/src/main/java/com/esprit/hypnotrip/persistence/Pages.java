@@ -32,8 +32,8 @@ public class Pages implements java.io.Serializable {
 	private String description;
 	private String userId;
 	
-	@OneToMany(mappedBy = "page",fetch=FetchType.EAGER)
-	private List<Rates> rates;
+//	@OneToMany(mappedBy = "page",fetch=FetchType.EAGER)
+//	private List<Rates> rates;
 	
 	private List<Tickets> tickets ; 
 	

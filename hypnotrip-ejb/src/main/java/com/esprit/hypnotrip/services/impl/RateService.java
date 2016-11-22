@@ -47,12 +47,12 @@ public class RateService implements RateServiceRemote, RateServiceLocal {
 		return entityManager.find(Rates.class, idRate);
 	}
 
-	public int getRateLevel(int idPost) {
+	public int getRateLevel(int idPage) {
 
 		int totalRate = 0;
 		int nbrRate = 0;
 		Query query = entityManager.createQuery("SELECT r FROM Rates r WHERE r.id.pageId=:param1");
-		query.setParameter("param1", idPost);
+		query.setParameter("param1", idPage);
 		List<Rates> lr = query.getResultList();
 		for (Rates rates : lr) {
 			totalRate = totalRate + rates.getNiveau();
@@ -61,5 +61,13 @@ public class RateService implements RateServiceRemote, RateServiceLocal {
 		if (nbrRate ==0)
 			return 0;
 		return (int) Math.floor(totalRate / nbrRate);
+	}
+
+	@Override
+	public int getNumberOfRating(int idPage) {
+		Query query = entityManager.createQuery("SELECT r FROM Rates r WHERE r.id.pageId=:param1");
+		query.setParameter("param1", idPage);
+		List<Rates> lr = query.getResultList();
+		return lr.size();
 	}
 }

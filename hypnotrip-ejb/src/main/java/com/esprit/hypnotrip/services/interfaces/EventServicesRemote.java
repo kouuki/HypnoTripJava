@@ -27,6 +27,6 @@ public interface EventServicesRemote {
 
 	boolean eventIsAvailaible(Integer idPage);
 
-	List<Event> availableOrUpcomingEventsIMightLike(String idUser, String place);
+	List<Event> popularAvailableOrUpcomingEventsIMightLike(String idUser, String place);
 
 }

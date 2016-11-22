@@ -15,6 +15,9 @@
 		<!-- ************************************************************************************************************ -->
 		<h:form id="formListOfPages" rendered="#{pagesBean.displayForm1}">
 
+<<<<<<< HEAD
+	
+=======
 			<h:dataTable value="#{pagesBean.myPages}" var="p" border="2">
 				<h:column id="c1">
 					<f:facet name="header">
@@ -28,6 +31,7 @@
 					</f:facet>
 					<h:outputText value="#{p.description}" />
 				</h:column>
+
 
 				<!-- Start Rating Column -->
 				<h:column id="c4">
@@ -231,6 +235,55 @@
 		<!-- ************************************************************************************************************ -->
 
 
+<<<<<<< HEAD
+			<h:selectOneRadio value="#{pagesBean.selectedType}">
+				<f:selectItem itemValue="1" itemLabel="Offer" />
+				<f:selectItem itemValue="2" itemLabel="Event" />
+				<f:selectItem itemValue="3" itemLabel="Touristic Page" />
+			</h:selectOneRadio>
+			<br />
+			<h:commandButton action="#{pagesBean.RedirectTypeOfPage()}"
+				value="Next" />
+			<h:commandButton action="#{pagesBean.cancel}" value="cancel" />
+		</h:panelGrid>
+	</h:form>
+
+	<h:form id="formForOffer" rendered="#{pagesBean.displayFormOffer}">
+		<h:panelGrid columns="2">
+			<h:outputText value="Description" />
+			<h:inputText value="#{pagesBean.offerSelected.description}"
+				required="true" requiredMessage="field required" />
+			<h:outputText value="Start date" />
+
+			<h:outputText value="End date" />
+			<h:outputText value="Price" />
+			<h:inputText value="#{pagesBean.offerSelected.price}" required="true"
+				requiredMessage="field required" />
+			<h:outputText value="Discount" />
+			<h:inputText value="#{pagesBean.offerSelected.discount}"
+				required="true" requiredMessage="field required" />
+			<h:commandButton action="#{pagesBean.doAddOffer()}" value="save" />
+			<h:commandButton action="#{pagesBean.doDeletePage()}" value="delete" />
+		</h:panelGrid>
+	</h:form>
+	<h:form id="formForEvent" rendered="#{pagesBean.displayFormEvent}">
+		<h:panelGrid columns="2">
+			<h:outputText value="Event" />
+			<h:commandButton action="#{pagesBean.doAddEvent()}" value="save" />
+			<h:commandButton action="#{pagesBean.doDeletePage()}" value="delete" />
+		</h:panelGrid>
+	</h:form>
+
+	<h:form id="formForTouristic"
+		rendered="#{pagesBean.displayFormTouristicPage}">
+		<h:panelGrid columns="2">
+			<h:outputText value="touristic" />
+			<h:commandButton action="#{pagesBean.doAddTouristic()}" value="save" />
+			<h:commandButton action="#{pagesBean.doDeletePage()}" value="delete" />
+		</h:panelGrid>
+	</h:form>
+=======
 	</center>
+>>>>>>> branch 'master' of https://github.com/kouuki/HypnoTripJava.git
 </h:body>
 </html>

@@ -1,5 +1,7 @@
 package com.esprit.hypnotrip.persistence;
+
 import java.util.Date;
+
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
@@ -25,12 +27,8 @@ public class Rates implements java.io.Serializable {
 	private RatesId id;
 	private int niveau;
 	private Date dateRating;
-	
-	@ManyToOne
-	@JoinColumn(name = "id_user", insertable = false, updatable = false)
+
 	private User user;
-	@ManyToOne
-	@JoinColumn(name = "id_page", insertable = false, updatable = false)
 	private Pages page;
 
 	public Rates() {
@@ -44,8 +42,8 @@ public class Rates implements java.io.Serializable {
 	@EmbeddedId
 
 	@AttributeOverrides({
-			@AttributeOverride(name = "id", column = @Column(name = "Id", nullable = false, length = 128) ),
-			@AttributeOverride(name = "pageId", column = @Column(name = "PostId", nullable = false) ) })
+		@AttributeOverride(name = "pageId", column = @Column(name = "PageId", nullable = false) ),
+		@AttributeOverride(name = "id", column = @Column(name = "UserId", nullable = false, length = 128) ) })
 	public RatesId getId() {
 		return this.id;
 	}
@@ -53,8 +51,6 @@ public class Rates implements java.io.Serializable {
 	public void setId(RatesId id) {
 		this.id = id;
 	}
-
-	
 
 	@Column(name = "Niveau", nullable = false)
 	public int getNiveau() {
@@ -64,6 +60,7 @@ public class Rates implements java.io.Serializable {
 	public void setNiveau(int niveau) {
 		this.niveau = niveau;
 	}
+
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "dateRating", nullable = false)
 	public Date getdateRating() {
@@ -73,4 +70,25 @@ public class Rates implements java.io.Serializable {
 	public void setdateRating(Date dateRating) {
 		this.dateRating = dateRating;
 	}
+
+	@ManyToOne
+	@JoinColumn(name = "userId", referencedColumnName = "id", insertable = false, updatable = false)
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	@ManyToOne
+	@JoinColumn(name = "pageId", referencedColumnName = "pageId", insertable = false, updatable = false)
+	public Pages getPage() {
+		return page;
+	}
+
+	public void setPage(Pages page) {
+		this.page = page;
+	}
+
 }

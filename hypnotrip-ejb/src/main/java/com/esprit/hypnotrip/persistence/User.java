@@ -45,7 +45,7 @@ public class User implements java.io.Serializable {
 	private boolean twoFactorEnabled;
 	private String userName;
 	
-	@OneToMany(mappedBy = "user",fetch=FetchType.EAGER)
+
 	private List<Rates> rates;
 	
 	private List<BookDescription> bookDescriptions;
@@ -308,6 +308,15 @@ public class User implements java.io.Serializable {
 		this.pagesFollowed = pagesFollowed;
 	}
 	
+	@OneToMany(mappedBy = "user",fetch=FetchType.EAGER)
+	public List<Rates> getRates() {
+		return rates;
+	}
+
+	public void setRates(List<Rates> rates) {
+		this.rates = rates;
+	}
+
 	
 	
 
