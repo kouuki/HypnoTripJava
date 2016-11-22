@@ -18,43 +18,43 @@ public class RatesId implements java.io.Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private String id_user;
-	private int id_page;
+	private String id;
+	private int pageId;
 
 
 	public RatesId() {
 	}
 
-	public RatesId(String id_user, int pageId ) {
-		this.id_user = id_user;
-		this.id_page = pageId;
+	public RatesId(String id, int pageId ) {
+		this.id = id;
+		this.pageId = pageId;
 		
 	}
 
 	@Column(name = "Id", nullable = false, length = 128)
 	public String getId() {
-		return this.id_user;
+		return this.id;
 	}
 
-	public void setId(String id_user) {
-		this.id_user = id_user;
+	public void setId(String id) {
+		this.id = id;
 	}
 	
 	@Column(name = "pageId", nullable = false)
 	public int getpageId() {
-		return this.id_page;
+		return this.pageId;
 	}
 
 	public void setpageId(int pageId) {
-		this.id_page = pageId;
+		this.pageId = pageId;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + id_page;
-		result = prime * result + ((id_user == null) ? 0 : id_user.hashCode());
+		result = prime * result + pageId;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
 
@@ -67,12 +67,12 @@ public class RatesId implements java.io.Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		RatesId other = (RatesId) obj;
-		if (id_page != other.id_page)
+		if (pageId != other.pageId)
 			return false;
-		if (id_user == null) {
-			if (other.id_user != null)
+		if (id == null) {
+			if (other.id != null)
 				return false;
-		} else if (!id_user.equals(other.id_user))
+		} else if (!id.equals(other.id))
 			return false;
 		return true;
 	}

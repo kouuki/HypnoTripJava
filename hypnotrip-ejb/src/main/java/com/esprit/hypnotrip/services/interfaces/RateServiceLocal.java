@@ -16,6 +16,7 @@ public interface RateServiceLocal {
 
 	Rates findRateById(Integer idRate);
 
-	int getRateLevel(int idPost);
+	int getRateLevel(int idPage);
+	int getNumberOfRating(int idPage);
 
 }

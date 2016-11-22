@@ -1,5 +1,7 @@
 package com.esprit.hypnotrip.services.impl;
 
+import com.esprit.hypnotrip.persistence.Event;
+import com.esprit.hypnotrip.persistence.Rates;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,21 +29,27 @@ import com.esprit.hypnotrip.services.interfaces.TicketServicesLocal;
 import com.esprit.hypnotrip.services.interfaces.UserServicesLocal;
 import com.esprit.hypnotrip.services.interfaces.UserServicesRemote;
 
+import java.util.List;
+
+import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+
 /**
  * Session Bean implementation class UserServices
  */
 @Stateless
 public class UserServices implements UserServicesRemote, UserServicesLocal {
-	/**
-	 * Default constructor.
-	 */
+
 	@PersistenceContext
 	EntityManager entityManager;
 
 	@EJB
 	TicketServicesLocal ticketServicesLocal;
 	@EJB
-	EventServicesLocal eventServices ; 
+	EventServicesLocal eventServices;
+
 	public UserServices() {
 
 	}
@@ -166,6 +174,40 @@ public class UserServices implements UserServicesRemote, UserServicesLocal {
 		}
 
 		return usersGoingToTheEnvent;
+	}
+
+	@Override
+	public void blocUser(String idUser) {
+		User user = getUserbyId(idUser);
+		user.setEtat(-1);
+		entityManager.merge(user);
+
+	}
+
+	@Override
+	public List<User> listBlockedUser() {
+		Query query = entityManager.createQuery("SELECT u FROM User WHERE Etat=0 ");
+		List<User> lr = query.getResultList();
+		return lr;
+	}
+
+	@Override
+	public List<User> listNotBlockedUser() {
+		Query query = entityManager.createQuery("SELECT u FROM User WHERE Etat= 1 ");
+		List<User> lr = query.getResultList();
+		return lr;
+	}
+
+	@Override
+	public User getUserbyId(String idUser) {
+		entityManager.find(User.class, idUser);
+		return null;
+	}
+
+	@Override
+	public void saveOrUpdate(User user) {
+		entityManager.merge(user);
+
 	}
 
 }
