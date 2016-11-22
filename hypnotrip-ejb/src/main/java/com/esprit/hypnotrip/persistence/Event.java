@@ -26,6 +26,7 @@ public class Event extends Pages implements java.io.Serializable {
 	private Date dateOfEvent;
 	private float latitude;
 	private float longitude;
+
 	private String place;
 
 
@@ -55,7 +56,7 @@ public class Event extends Pages implements java.io.Serializable {
 		this.dateOfEvent = dateOfEvent;
 	}
 
-	@Column(name = "Latitude", nullable = true, precision = 12, scale = 0, columnDefinition="Decimal(10,2) default '000.00'")
+	@Column(name = "Latitude", nullable = true, precision = 12, scale = 0, columnDefinition = "Decimal(10,2) default '000.00'")
 	public float getLatitude() {
 		return this.latitude;
 	}
@@ -64,7 +65,7 @@ public class Event extends Pages implements java.io.Serializable {
 		this.latitude = latitude;
 	}
 
-	@Column(name = "Longitude", nullable = true, precision = 12, scale = 0, columnDefinition="Decimal(10,2) default '000.00'")
+	@Column(name = "Longitude", nullable = true, precision = 12, scale = 0, columnDefinition = "Decimal(10,2) default '000.00'")
 	public float getLongitude() {
 		return this.longitude;
 	}
@@ -94,12 +95,8 @@ public class Event extends Pages implements java.io.Serializable {
 
 	@Override
 	public String toString() {
-		return super.toString() + "Event [dateOfEvent=" + dateOfEvent + ", latitude=" + latitude + ", longitude=" + longitude + ", place="
-				+ place + "]";
+		return super.toString() + "Event [dateOfEvent=" + dateOfEvent + ", latitude=" + latitude + ", longitude="
+				+ longitude + ", place=" + place + "]";
 	}
-
-	
-	
-	
 
 }

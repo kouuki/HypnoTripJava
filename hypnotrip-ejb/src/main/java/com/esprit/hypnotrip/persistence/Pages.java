@@ -37,9 +37,17 @@ public class Pages implements java.io.Serializable {
 	
 	private List<Tickets> tickets ; 
 	
-	
+	private String ImageURL;
 
 
+
+	public String getImageURL() {
+		return ImageURL;
+	}
+
+	public void setImageURL(String imageURL) {
+		ImageURL = imageURL;
+	}
 
 	public Pages() {
 	}

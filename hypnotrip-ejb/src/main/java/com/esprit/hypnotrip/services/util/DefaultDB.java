@@ -53,6 +53,8 @@ public class DefaultDB {
 		offerServiceLocal.addBuy(buy1);
 		offerServiceLocal.addBuy(buy2);
 		offerServiceLocal.addBuy(buy3);
+		
+		// Dhafer
 	}
 
 }
