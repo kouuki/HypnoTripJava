@@ -1,6 +1,8 @@
 package com.esprit.hypnotrip.services.impl;
 
+import com.esprit.hypnotrip.persistence.BookDescription;
 import com.esprit.hypnotrip.persistence.Event;
+import com.esprit.hypnotrip.persistence.Pages;
 import com.esprit.hypnotrip.persistence.Tickets;
 import com.esprit.hypnotrip.persistence.User;
 import com.esprit.hypnotrip.services.exceptions.EventOverException;
@@ -20,37 +22,45 @@ import javax.ejb.Stateless;
 @Stateless
 public class UserServices implements UserServicesRemote, UserServicesLocal {
 
-    /**
-     * Default constructor. 
-     */
-    public UserServices() {
-        // TODO Auto-generated constructor stub
-    }
-
 	@Override
-	public void bookATicket(Tickets ticket, String idUser)
+	public void bookATicket(Tickets ticket, User user)
 			throws NoMoreTicketsException, LimitOfBookingRechedException, EventOverException {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void cancelBooking(Tickets ticket, String idUser, Integer numberOfTicketsToCancel)
+	public void cancelBooking(Tickets ticket, User user, Integer numberOfTicketsToCancel)
 			throws EventOverException, WrongNumberOfCancelingException {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public List<Tickets> listTicketsBookedByUserEvent(User user, Event event) {
+	public List<Tickets> listTicketsBookedByUserEvent(User user, Pages event) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Integer numberOfTicketsReservedByIdUser(Tickets ticket, String idUser) {
+	public Long numberOfTicketsReservedByIdUser(Tickets ticket, String idUser) {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public List<BookDescription> listOfBookingByUser(User user, Tickets ticket) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<User> getAllFriendsWhoAreGoingToTheSameEvent(Pages enent, String userId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+  
+
 
 }

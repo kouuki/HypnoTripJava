@@ -19,6 +19,8 @@ public interface TicketServicesLocal {
 
 	Tickets findTicketById(Integer idTicket);
 
-	Integer numberOfTicketsBookedByIdTicket(Integer idTicket);
+	Long numberOfTicketsBookedByIdTicket(Integer idTicket);
+
+	Tickets mostBookedTicket();
 
 }
