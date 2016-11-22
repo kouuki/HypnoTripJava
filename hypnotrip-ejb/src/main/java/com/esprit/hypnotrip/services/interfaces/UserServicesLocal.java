@@ -16,13 +16,13 @@ import com.esprit.hypnotrip.services.exceptions.WrongNumberOfCancelingException;
 @Local
 public interface UserServicesLocal {
 
-	User getUserbyId(String idUser) ;
+	User getUserbyId(String idUser);
+
 	void bookATicket(Tickets ticket, User user)
 			throws NoMoreTicketsException, LimitOfBookingRechedException, EventOverException;
 
 	void cancelBooking(Tickets ticket, User user, Integer numberOfTicketsToCancel)
 			throws EventOverException, WrongNumberOfCancelingException;
-
 
 	List<Tickets> listTicketsBookedByUserEvent(User user, Pages event);
 
@@ -39,4 +39,8 @@ public interface UserServicesLocal {
 	List<User> listNotBlockedUser();
 
 	void saveOrUpdate(User user);
+
+	// services for yasmine
+	User findUserById(String idUser);
+
 }

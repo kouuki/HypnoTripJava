@@ -268,9 +268,9 @@ public class EventServices implements EventServicesRemote, EventServicesLocal {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Event> popularAvailableOrUpcomingEventsIMightLike(String idUser,String place) {
+	public List<Event> availableOrUpcomingEventsIMightLike(String idUser,String place) {
 		// JPQL QUERY
-		String sql = "SELECT DISTINCT e FROM Event e INNER JOIN e.followers f INNER JOIN f.user u WHERE e.dateOfEvent>=curdate() AND f.id.userId !=:param AND u.address =:param1 ORDER BY (f.id.pageId)";
+		String sql = "SELECT DISTINCT e FROM Event e INNER JOIN e.followers f INNER JOIN f.user u WHERE e.dateOfEvent>=curdate() AND f.id.userId !=:param AND e.place =:param1 ORDER BY (f.id.pageId)";
 
 		// JPQL QUERY that get most followed and upcomong event
 		Query query = entityManager.createQuery(sql);

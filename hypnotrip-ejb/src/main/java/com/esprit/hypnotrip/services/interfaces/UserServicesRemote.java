@@ -30,4 +30,7 @@ public interface UserServicesRemote {
 
 	List<User> getAllFriendsWhoAreGoingToTheSameEvent(Pages enent, String userId);
 
+	//services for yasmine
+	User findUserById(String idUser);
+	
 }

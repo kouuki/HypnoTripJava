@@ -2,13 +2,9 @@ package com.esprit.hypnotrip.services.interfaces;
 
 import javax.ejb.Local;
 
-import com.esprit.hypnotrip.persistence.Invitations;
-
 @Local
 public interface InvitationServicesLocal {
 
-	void saveOrUpdateInvitation(Invitations invitation);
+	void saveOrUpdateInvitation(String idSender, String idReciever, int idPage);
 
-	void deleteInvitation(Invitations invitation);
-	
 }

@@ -52,6 +52,9 @@ public class User implements java.io.Serializable {
 
 	private List<Follows> pagesFollowed;
 	
+	private List<Invitations> pagesSendInvitation;
+	
+	private List<Invitations> pagesRecieveInvitation;
 	
 	public User() {
 	}
@@ -343,6 +346,24 @@ public class User implements java.io.Serializable {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+	@OneToMany(mappedBy="sender", fetch=FetchType.EAGER)
+	public List<Invitations> getPagesSendInvitation() {
+		return pagesSendInvitation;
+	}
+
+	public void setPagesSendInvitation(List<Invitations> pagesSendInvitation) {
+		this.pagesSendInvitation = pagesSendInvitation;
+	}
+
+	@OneToMany(mappedBy="reciever", fetch=FetchType.EAGER)
+	public List<Invitations> getPagesRecieveInvitation() {
+		return pagesRecieveInvitation;
+	}
+
+	public void setPagesRecieveInvitation(List<Invitations> pagesRecieveInvitation) {
+		this.pagesRecieveInvitation = pagesRecieveInvitation;
 	}
 	
 

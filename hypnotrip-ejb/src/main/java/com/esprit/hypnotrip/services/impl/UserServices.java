@@ -1,7 +1,5 @@
 package com.esprit.hypnotrip.services.impl;
 
-import com.esprit.hypnotrip.persistence.Event;
-import com.esprit.hypnotrip.persistence.Rates;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,13 +26,6 @@ import com.esprit.hypnotrip.services.interfaces.EventServicesLocal;
 import com.esprit.hypnotrip.services.interfaces.TicketServicesLocal;
 import com.esprit.hypnotrip.services.interfaces.UserServicesLocal;
 import com.esprit.hypnotrip.services.interfaces.UserServicesRemote;
-
-import java.util.List;
-
-import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 
 /**
  * Session Bean implementation class UserServices
@@ -208,6 +199,13 @@ public class UserServices implements UserServicesRemote, UserServicesLocal {
 	public void saveOrUpdate(User user) {
 		entityManager.merge(user);
 
+	}
+
+	// services for yasmine
+	@Override
+	public User findUserById(String idUser) {
+
+		return entityManager.find(User.class, idUser);
 	}
 
 }
