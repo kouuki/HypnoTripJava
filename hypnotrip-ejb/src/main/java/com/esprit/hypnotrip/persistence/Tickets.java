@@ -24,11 +24,10 @@ public class Tickets implements java.io.Serializable {
 	private Integer ticketId;
 	private float price;
 	private String type;
-	
+	private Integer numberOfPlaces;
 
-	private Pages event ; 
+	private Pages event;
 
-	
 	private List<BookDescription> bookDescriptions;
 
 	public Tickets() {
@@ -36,14 +35,14 @@ public class Tickets implements java.io.Serializable {
 
 	public Tickets(float price) {
 		this.price = price;
-	
+
 	}
 
-	public Tickets( float price, String type) {
+	public Tickets(float price, String type) {
 
 		this.price = price;
 		this.type = type;
-	
+
 	}
 
 	@Id
@@ -57,8 +56,6 @@ public class Tickets implements java.io.Serializable {
 	public void setTicketId(Integer ticketId) {
 		this.ticketId = ticketId;
 	}
-
-
 
 	@Column(name = "Price", nullable = false, precision = 12, scale = 0)
 	public float getPrice() {
@@ -78,9 +75,7 @@ public class Tickets implements java.io.Serializable {
 		this.type = type;
 	}
 
-
-	
-	@OneToMany(mappedBy="ticket",fetch=FetchType.EAGER)
+	@OneToMany(mappedBy = "ticket", fetch = FetchType.EAGER)
 	public List<BookDescription> getBookDescriptions() {
 		return bookDescriptions;
 	}
@@ -88,6 +83,7 @@ public class Tickets implements java.io.Serializable {
 	public void setBookDescriptions(List<BookDescription> bookDescriptions) {
 		this.bookDescriptions = bookDescriptions;
 	}
+
 	@ManyToOne
 	public Pages getEvent() {
 		return event;
@@ -95,6 +91,14 @@ public class Tickets implements java.io.Serializable {
 
 	public void setEvent(Pages event) {
 		this.event = event;
+	}
+
+	public Integer getNumberOfPlaces() {
+		return numberOfPlaces;
+	}
+
+	public void setNumberOfPlaces(Integer numberOfPlaces) {
+		this.numberOfPlaces = numberOfPlaces;
 	}
 
 }
