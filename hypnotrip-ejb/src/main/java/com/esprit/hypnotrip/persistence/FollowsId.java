@@ -76,4 +76,9 @@ public class FollowsId implements java.io.Serializable {
 		return result;
 	}
 
+	@Override
+	public String toString() {
+		return "FollowsId [dateFollow=" + dateFollow + ", pageId=" + pageId + ", userId=" + userId + "]";
+	}
+
 }

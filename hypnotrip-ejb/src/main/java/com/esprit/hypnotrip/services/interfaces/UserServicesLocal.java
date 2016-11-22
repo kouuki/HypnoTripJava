@@ -15,6 +15,8 @@ import com.esprit.hypnotrip.services.exceptions.WrongNumberOfCancelingException;
 
 @Local
 public interface UserServicesLocal {
+	
+	User findUserByLoginAndPassword(String email, String password);
 
 	User getUserbyId(String idUser);
 

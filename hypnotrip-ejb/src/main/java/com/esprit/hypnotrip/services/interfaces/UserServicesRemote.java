@@ -16,6 +16,8 @@ import com.esprit.hypnotrip.services.exceptions.WrongNumberOfCancelingException;
 @Remote
 public interface UserServicesRemote {
 
+	User findUserByLoginAndPassword(String email, String password);
+
 	void bookATicket(Tickets ticket, User user)
 			throws NoMoreTicketsException, LimitOfBookingRechedException, EventOverException;
 
@@ -30,7 +32,7 @@ public interface UserServicesRemote {
 
 	List<User> getAllFriendsWhoAreGoingToTheSameEvent(Pages enent, String userId);
 
-	//services for yasmine
+	// services for yasmine
 	User findUserById(String idUser);
-	
+
 }

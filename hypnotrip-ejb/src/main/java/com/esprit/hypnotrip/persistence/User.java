@@ -365,6 +365,20 @@ public class User implements java.io.Serializable {
 	public void setPagesRecieveInvitation(List<Invitations> pagesRecieveInvitation) {
 		this.pagesRecieveInvitation = pagesRecieveInvitation;
 	}
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", accessFailedCount=" + accessFailedCount + ", address=" + address + ", dateOfBirth="
+				+ dateOfBirth + ", email=" + email + ", emailConfirmed=" + emailConfirmed + ", etat=" + etat
+				+ ", firstName=" + firstName + ", imageUrl=" + imageUrl + ", lockoutEnabled=" + lockoutEnabled
+				+ ", lockoutEndDateUtc=" + lockoutEndDateUtc + ", login=" + login + ", password=" + password
+				+ ", passwordHash=" + passwordHash + ", phoneNumber=" + phoneNumber + ", phoneNumberConfirmed="
+				+ phoneNumberConfirmed + ", role=" + role + ", secondName=" + secondName + ", securityStamp="
+				+ securityStamp + ", twoFactorEnabled=" + twoFactorEnabled + ", userName=" + userName + ", rates="
+				+ rates + ", bookDescriptions=" + bookDescriptions + ", pagesFollowed=" + pagesFollowed
+				+ ", pagesSendInvitation=" + pagesSendInvitation + ", pagesRecieveInvitation=" + pagesRecieveInvitation
+				+ "]";
+	}
 	
 
 }

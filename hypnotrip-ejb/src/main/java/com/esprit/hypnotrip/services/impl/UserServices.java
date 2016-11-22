@@ -208,4 +208,19 @@ public class UserServices implements UserServicesRemote, UserServicesLocal {
 		return entityManager.find(User.class, idUser);
 	}
 
+	@Override
+	public User findUserByLoginAndPassword(String email, String password) {
+		String jpql = "SELECT u FROM User u WHERE u.email=:param AND u.password=:param1 AND u.etat='1'";
+		Query query = entityManager.createQuery(jpql);
+		query.setParameter("param", email);
+		query.setParameter("param1", password);
+		@SuppressWarnings("unchecked")
+		List<User> userFounded = query.getResultList();
+		if (userFounded.isEmpty()) {
+			return null;
+		}
+		return userFounded.get(0);
+
+	}
+
 }

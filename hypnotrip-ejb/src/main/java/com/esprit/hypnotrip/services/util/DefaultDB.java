@@ -76,15 +76,16 @@ public class DefaultDB {
 		user.setAddress("tunis");
 		user.setAccessFailedCount(0);
 		user.setDateOfBirth(new Date());
-		user.setEmail("daouesd@gmail.com");
+		user.setEmail("daouesd@hotmail.com");
 		user.setEmailConfirmed(false);
-		user.setEtat(1);
+		user.setEtat(0);
 		user.setFirstName("dhafer");
 		user.setSecondName("daoues");
 		user.setPassword("123456789Azerty");
 		user.setPasswordHash("123456789Azerty");
 		user.setLogin("daouesd");
 		user.setUserName("daouesd");
+		user.setRole("0");
 		user.setId("b38f3299-6949-42c7-9a6c-f998c66f485d");
 		
 		User user2 = new User();
@@ -100,6 +101,7 @@ public class DefaultDB {
 		user2.setPasswordHash("123456789Azerty");
 		user2.setLogin("daouesd");
 		user2.setUserName("daouesd");
+		user2.setRole("1");
 		user2.setId("b38f3299-6949-42c7-9a6c-f998c66f4852");
 		
 		
