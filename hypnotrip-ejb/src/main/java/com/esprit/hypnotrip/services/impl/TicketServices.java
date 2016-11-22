@@ -13,6 +13,7 @@ import com.esprit.hypnotrip.persistence.Pages;
 import com.esprit.hypnotrip.persistence.Tickets;
 import com.esprit.hypnotrip.services.exceptions.EventOverException;
 import com.esprit.hypnotrip.services.exceptions.TicketAlreadyBookedException;
+import com.esprit.hypnotrip.services.interfaces.EventServicesLocal;
 import com.esprit.hypnotrip.services.interfaces.TicketServicesLocal;
 import com.esprit.hypnotrip.services.interfaces.TicketServicesRemote;
 
@@ -28,7 +29,7 @@ public class TicketServices implements TicketServicesRemote, TicketServicesLocal
 	@PersistenceContext
 	private EntityManager entityManager;
 	@EJB
-	EventServices eventServices;
+	EventServicesLocal eventServices;
 
 	public TicketServices() {
 
@@ -118,7 +119,8 @@ public class TicketServices implements TicketServicesRemote, TicketServicesLocal
 	@Override
 	public Tickets mostBookedTicket() {
 
-		String jpql = "select ticket from Tickets ticket INNER JOIN ticket.bookDescriptions book GROUP BY book.bookId.ticketId ORDER BY Count(book.bookId.ticketId) DESC";
+		String jpql = "select ticket from Tickets ticket INNER JOIN ticket.bookDescriptions "
+				+ "book GROUP BY book.bookId.ticketId ORDER BY Count(book.bookId.ticketId) DESC";
 
 		Query query = entityManager.createQuery(jpql);
 
@@ -129,5 +131,28 @@ public class TicketServices implements TicketServicesRemote, TicketServicesLocal
 
 		return null;
 	}
+
+	@Override
+	public Tickets mostBookedTicketByEvent(Pages event) {
+
+		String jpql = "SELECT ticket FROM Tickets ticket INNER JOIN ticket.bookDescriptions book "
+				+ "WHERE ticket.event=:param1 "
+				+ "GROUP BY book.bookId.ticketId ORDER BY Count(book.bookId.ticketId) DESC ";
+		
+
+		Query query = entityManager.createQuery(jpql);
+		query.setParameter("param1", event);
+
+		if (query.getResultList() != null) {
+			Tickets ticket = (Tickets) query.getResultList().get(0);
+			return ticket;
+		}
+
+		return null;
+	}
+	
+	
+	
+	
 
 }

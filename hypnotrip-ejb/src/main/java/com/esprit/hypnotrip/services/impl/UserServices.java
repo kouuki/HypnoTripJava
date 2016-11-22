@@ -22,6 +22,7 @@ import com.esprit.hypnotrip.services.exceptions.LimitOfBookingRechedException;
 import com.esprit.hypnotrip.services.exceptions.NoMoreTicketsException;
 import com.esprit.hypnotrip.services.exceptions.TicketAlreadyBookedException;
 import com.esprit.hypnotrip.services.exceptions.WrongNumberOfCancelingException;
+import com.esprit.hypnotrip.services.interfaces.EventServicesLocal;
 import com.esprit.hypnotrip.services.interfaces.TicketServicesLocal;
 import com.esprit.hypnotrip.services.interfaces.UserServicesLocal;
 import com.esprit.hypnotrip.services.interfaces.UserServicesRemote;
@@ -40,7 +41,7 @@ public class UserServices implements UserServicesRemote, UserServicesLocal {
 	@EJB
 	TicketServicesLocal ticketServicesLocal;
 	@EJB
-	EventServices eventServices ; 
+	EventServicesLocal eventServices ; 
 	public UserServices() {
 
 	}

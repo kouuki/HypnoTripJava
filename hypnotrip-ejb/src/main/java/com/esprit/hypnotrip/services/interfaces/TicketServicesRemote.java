@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.ejb.Remote;
 
+import com.esprit.hypnotrip.persistence.Pages;
 import com.esprit.hypnotrip.persistence.Tickets;
 import com.esprit.hypnotrip.services.exceptions.EventOverException;
 import com.esprit.hypnotrip.services.exceptions.TicketAlreadyBookedException;
@@ -22,4 +23,6 @@ public interface TicketServicesRemote {
 	Long numberOfTicketsBookedByIdTicket(Integer idTicket);
 
 	Tickets mostBookedTicket();
+	
+	Tickets mostBookedTicketByEvent(Pages event);
 }
