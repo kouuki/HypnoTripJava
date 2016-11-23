@@ -22,6 +22,9 @@
 				<h:commandButton
 					action="#{eventsBean.selectNextMonthEventsToShow()}"
 					value="Next Month" />
+					<h:commandButton
+					action="#{eventsBean.selectEventsInMyAreaToShow()}"
+					value="My Area" />
 			</h:form>
 
 
@@ -111,7 +114,34 @@
 				</h:dataTable>
 			</h:form>
 
+			<h:form id="formEvenetsInMyArea"
+				rendered="#{eventsBean.displayFormMyArea}">
+				<h:dataTable value="#{eventsBean.eventsInMyArea}" var="event"
+					border="3">
 
+					<h:column id="eventDate">
+						<f:facet name="header">
+							<h:outputText value="DateOfEvent" />
+						</f:facet>
+						<h:outputText value="#{event.dateOfEvent}" />
+					</h:column>
+
+					<h:column id="eventPlace">
+						<f:facet name="header">
+							<h:outputText value="Place" />
+						</f:facet>
+						<h:outputText value="#{event.place}" />
+					</h:column>
+
+					<h:column id="id">
+						<f:facet name="header">
+							<h:outputText value="Id" />
+						</f:facet>
+						<h:outputText value="#{event.pageId}" />
+					</h:column>
+				</h:dataTable>
+			</h:form>
+			
 		</center>
 
 	</ui:define>

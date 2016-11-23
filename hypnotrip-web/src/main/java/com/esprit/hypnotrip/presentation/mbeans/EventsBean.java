@@ -19,11 +19,13 @@ public class EventsBean {
 	private List<Event> eventsThisWeek = new ArrayList<Event>();
 	private List<Event> eventsNextWeek = new ArrayList<Event>();
 	private List<Event> eventsThisMonth = new ArrayList<Event>();
+	private List<Event> eventsInMyArea = new ArrayList<Event>();
 
 	// Forms to show in this page
 	private Boolean displayFormThisWeek = true;
 	private Boolean displayFormNextWeek = false;
 	private Boolean displayFormThisMonth = false;
+	private Boolean displayFormMyArea = false;
 
 	// inject event services bean
 	@EJB
@@ -34,12 +36,14 @@ public class EventsBean {
 		eventsThisWeek = eventServicesLocal.getAllThisWeekEvents();
 		eventsNextWeek = eventServicesLocal.getAllNextWeekEvents();
 		eventsThisMonth = eventServicesLocal.getMonthlyEventsByMonth();
+		eventsInMyArea = eventServicesLocal.availableOrUpcomingEventsInMyArea("5", "tunis");
 	}
 
 	public String selectThisWeekEventsToShow() {
 		displayFormThisWeek = true;
 		displayFormNextWeek = false;
 		displayFormThisMonth = false;
+		displayFormMyArea = false;
 		return null;
 	}
 
@@ -47,15 +51,25 @@ public class EventsBean {
 		displayFormThisWeek = false;
 		displayFormNextWeek = true;
 		displayFormThisMonth = false;
+		displayFormMyArea = false;
 		return null;
 	}
+	
 	public String selectNextMonthEventsToShow() {
 		displayFormThisWeek = false;
 		displayFormNextWeek = false;
 		displayFormThisMonth = true;
+		displayFormMyArea = false;
 		return null;
 	}
 	
+	public String selectEventsInMyAreaToShow() {
+		displayFormThisWeek = false;
+		displayFormNextWeek = false;
+		displayFormThisMonth = false;
+		displayFormMyArea = true;
+		return null;
+	}
 	
 	// recall of wanted methods/services
 
@@ -105,6 +119,22 @@ public class EventsBean {
 
 	public void setDisplayFormThisMonth(Boolean displayFormThisMonth) {
 		this.displayFormThisMonth = displayFormThisMonth;
+	}
+
+	public Boolean getDisplayFormMyArea() {
+		return displayFormMyArea;
+	}
+
+	public void setDisplayFormMyArea(Boolean displayFormMyArea) {
+		this.displayFormMyArea = displayFormMyArea;
+	}
+
+	public List<Event> getEventsInMyArea() {
+		return eventsInMyArea;
+	}
+
+	public void setEventsInMyArea(List<Event> eventsInMyArea) {
+		this.eventsInMyArea = eventsInMyArea;
 	}
 
 }

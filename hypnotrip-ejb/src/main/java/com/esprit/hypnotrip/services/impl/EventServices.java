@@ -27,10 +27,14 @@ public class EventServices implements EventServicesRemote, EventServicesLocal {
 	@PersistenceContext
 	EntityManager entityManager;
 
-	private String jpql;
-	private Query query;
+	private String jpql,jpql1;
+	private Query query,query1;
 	private List<Integer> months = new ArrayList<Integer>();
 	private List<Event> events = new ArrayList<Event>();
+
+	List<Event> events1 = new ArrayList<Event>();
+	List<Event> events2 = new ArrayList<Event>();
+
 	private Event event = new Event();
 	private Calendar calendar = Calendar.getInstance();
 	private Calendar calendar2 = Calendar.getInstance();
@@ -225,14 +229,14 @@ public class EventServices implements EventServicesRemote, EventServicesLocal {
 	public Event mostFollowedEventToCome() {
 
 		// JPQL QUERY
-		 jpql = "SELECT e FROM Event e INNER JOIN e.followers f WHERE f.followStat = true AND e.dateOfEvent>curdate() ORDER BY COUNT(f.id.pageId) DESC";
+		jpql = "SELECT e FROM Event e INNER JOIN e.followers f WHERE f.followStat = true AND e.dateOfEvent>curdate() GROUP BY (f.id.pageId) ORDER BY COUNT(f.id.pageId) DESC";
 
 		// JPQL QUERY that get most followed and upcomong event
-		 query = entityManager.createQuery(jpql);
+		query = entityManager.createQuery(jpql);
 
 		try {
 			// get the event
-			event = (Event) query.getSingleResult();
+			event = (Event) query.getResultList().get(0);
 
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -246,30 +250,32 @@ public class EventServices implements EventServicesRemote, EventServicesLocal {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Event> eventsIHaveMissedInTheLastWeek(String idUser) {
-		
-//		// JPQL QUERY
-//		jpql = "SELECT e FROM Event e INNER JOIN e.followers f WHERE f.id.userId !=:param AND (e.dateOfEvent <?1 AND e.dateOfEvent >?2) GROUP BY f.id.pageId ORDER BY (e.dateOfEvent) DESC";
-//		query = entityManager.createQuery(jpql);
-//
-//		// get the date i want with calendar
-//		calendar.setTime(searchedDate);
-//		calendar.add(Calendar.DATE, -1);
-//
-//		// get the date i want with calendar
-//		calendar2.setTime(searchedDate2);
-//		calendar2.add(Calendar.DATE, -8);
-//
-//		// send as a parameter, the current date + week
-//		query.setParameter("param", idUser);
-//		query.setParameter(1, calendar.getTime());
-//		query.setParameter(2, calendar2.getTime());
-//				
-//		try {
-//
-//			events = query.getResultList();
-//		} catch (Exception e) {
-//			// TODO: handle exception
-//		}
+
+		// // JPQL QUERY
+		// jpql = "SELECT e FROM Event e INNER JOIN e.followers f WHERE
+		// f.id.userId !=:param AND (e.dateOfEvent <?1 AND e.dateOfEvent >?2)
+		// GROUP BY f.id.pageId ORDER BY (e.dateOfEvent) DESC";
+		// query = entityManager.createQuery(jpql);
+		//
+		// // get the date i want with calendar
+		// calendar.setTime(searchedDate);
+		// calendar.add(Calendar.DATE, -1);
+		//
+		// // get the date i want with calendar
+		// calendar2.setTime(searchedDate2);
+		// calendar2.add(Calendar.DATE, -8);
+		//
+		// // send as a parameter, the current date + week
+		// query.setParameter("param", idUser);
+		// query.setParameter(1, calendar.getTime());
+		// query.setParameter(2, calendar2.getTime());
+		//
+		// try {
+		//
+		// events = query.getResultList();
+		// } catch (Exception e) {
+		// // TODO: handle exception
+		// }
 
 		return null;
 	}
@@ -303,26 +309,44 @@ public class EventServices implements EventServicesRemote, EventServicesLocal {
 		return response;
 	}
 
+
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Event> availableOrUpcomingEventsIMightLike(String idUser, String place) {
+	public List<Event> availableOrUpcomingEventsInMyArea(String idUser, String place) {
+
 		// JPQL QUERY
-		String sql = "SELECT DISTINCT e FROM Event e INNER JOIN e.followers f INNER JOIN f.user u WHERE e.dateOfEvent>=curdate() AND f.id.userId !=:param AND e.place =:param1 ORDER BY (f.id.pageId)";
+		// String sql = "SELECT DISTINCT e FROM Event e INNER JOIN e.followers f
+		// INNER JOIN f.user u WHERE e.dateOfEvent>=curdate() AND f.id.userId
+		// !=:param AND e.place =:param1 ORDER BY (e.pageId)";
+		//
+		// // JPQL QUERY that get most followed and upcomong event
+		// Query query = entityManager.createQuery(sql);
+		// query.setParameter("param", idUser);
+		// query.setParameter("param1", place);
 
-		// JPQL QUERY that get most followed and upcomong event
-		Query query = entityManager.createQuery(sql);
-		query.setParameter("param", "5");
-		query.setParameter("param1", "ariana");
-
-		try {
-			// get the event
+		    jpql = "SELECT e FROM Event e WHERE e.place=:param AND e.dateOfEvent>=curdate()";
+			Query query = entityManager.createQuery(jpql);
+			query.setParameter("param", place);
 			events = query.getResultList();
 
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
+			jpql1 = "SELECT DISTINCT e FROM Event e INNER JOIN e.followers f WHERE e.dateOfEvent>=curdate() AND f.id.userId!=:param AND e.place=:param1";
+			query1 = entityManager.createQuery(jpql1);
+			query1.setParameter("param", idUser);
+			query1.setParameter("param1", place);
+			events1 = query1.getResultList();
 
-		return events;
+			for (Event event : events) {
+				for (Event event1 : events1) {
+
+					if (event != event1) {
+						events2.add(event);
+					}
+				}
+
+			}
+
+			return events2;
+
 	}
 
 }

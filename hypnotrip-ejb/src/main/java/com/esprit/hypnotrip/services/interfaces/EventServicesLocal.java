@@ -27,6 +27,6 @@ public interface EventServicesLocal {
 
 	boolean eventIsAvailaible(Integer idPage);
 
-	List<Event> availableOrUpcomingEventsIMightLike(String idUser, String place);
+	List<Event> availableOrUpcomingEventsInMyArea(String idUser, String place);
 
 }
