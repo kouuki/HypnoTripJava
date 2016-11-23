@@ -1,0 +1,119 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/template/template.xhtml">
+
+	<h:head>
+	</h:head>
+
+	<ui:define name="content">
+		<center>
+			<H1>Check out our events by period</H1>
+			<br /> <br />
+			<h:form>
+				<h:commandButton action="#{eventsBean.selectThisWeekEventsToShow()}"
+					value="This Week" />
+				<h:commandButton action="#{eventsBean.selectNextWeekEventsToShow()}"
+					value="Next Week" />
+				<h:commandButton
+					action="#{eventsBean.selectNextMonthEventsToShow()}"
+					value="Next Month" />
+			</h:form>
+
+
+			<h:form id="formEvenetsThisWeek"
+				rendered="#{eventsBean.displayFormThisWeek}">
+				<h:dataTable value="#{eventsBean.eventsThisWeek}" var="event"
+					border="3">
+
+					<h:column id="eventDate">
+						<f:facet name="header">
+							<h:outputText value="DateOfEvent" />
+						</f:facet>
+						<h:outputText value="#{event.dateOfEvent}" />
+					</h:column>
+
+					<h:column id="eventPlace">
+						<f:facet name="header">
+							<h:outputText value="Place" />
+						</f:facet>
+						<h:outputText value="#{event.place}" />
+					</h:column>
+
+					<h:column id="id">
+						<f:facet name="header">
+							<h:outputText value="Id" />
+						</f:facet>
+						<h:outputText value="#{event.pageId}" />
+					</h:column>
+				</h:dataTable>
+			</h:form>
+
+
+			<h:form id="formEvenetsNextWeek"
+				rendered="#{eventsBean.displayFormNextWeek}">
+				<h:dataTable value="#{eventsBean.eventsNextWeek}" var="event"
+					border="3">
+
+					<h:column id="eventDate">
+						<f:facet name="header">
+							<h:outputText value="DateOfEvent" />
+						</f:facet>
+						<h:outputText value="#{event.dateOfEvent}" />
+					</h:column>
+
+					<h:column id="eventPlace">
+						<f:facet name="header">
+							<h:outputText value="Place" />
+						</f:facet>
+						<h:outputText value="#{event.place}" />
+					</h:column>
+
+					<h:column id="id">
+						<f:facet name="header">
+							<h:outputText value="Id" />
+						</f:facet>
+						<h:outputText value="#{event.pageId}" />
+					</h:column>
+				</h:dataTable>
+			</h:form>
+
+
+			<h:form id="formEvenetsThisMonth"
+				rendered="#{eventsBean.displayFormThisMonth}">
+				<h:dataTable value="#{eventsBean.eventsThisMonth}" var="event"
+					border="3">
+
+					<h:column id="eventDate">
+						<f:facet name="header">
+							<h:outputText value="DateOfEvent" />
+						</f:facet>
+						<h:outputText value="#{event.dateOfEvent}" />
+					</h:column>
+
+					<h:column id="eventPlace">
+						<f:facet name="header">
+							<h:outputText value="Place" />
+						</f:facet>
+						<h:outputText value="#{event.place}" />
+					</h:column>
+
+					<h:column id="id">
+						<f:facet name="header">
+							<h:outputText value="Id" />
+						</f:facet>
+						<h:outputText value="#{event.pageId}" />
+					</h:column>
+				</h:dataTable>
+			</h:form>
+
+
+		</center>
+
+	</ui:define>
+
+</ui:composition>

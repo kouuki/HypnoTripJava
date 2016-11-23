@@ -20,7 +20,7 @@ public class EventTest {
 
 			
 			//period test
-			List<Event> events = eventServicesRemote.eventsIHaveMissedInTheLastWeek("3");
+			List<Event> events = eventServicesRemote.getAllNextWeekEvents();
 
 			for (Event event : events) {
 				System.out.println(event.toString());
