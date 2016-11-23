@@ -13,7 +13,7 @@ public interface EventServicesRemote {
 
 	List<Event> getAllNextWeekEvents();
 
-	List<String> getAllEventMonths();
+	List<Integer> getAllEventMonths();
 
 	List<Event> getAllThisMonthEvents();
 
@@ -21,7 +21,7 @@ public interface EventServicesRemote {
 
 	List<Event> getMonthlyEventsByMonth();
 
-	List<Event> eventsIHaveMissedInTheLastWeek(Integer idUser);
+	List<Event> eventsIHaveMissedInTheLastWeek(String idUser);
 
 	Event mostFollowedEventToCome();
 

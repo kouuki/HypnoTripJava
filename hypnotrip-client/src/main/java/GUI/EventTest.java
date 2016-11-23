@@ -20,16 +20,16 @@ public class EventTest {
 
 			
 			//period test
-//			List<Event> events = eventServicesRemote.eventsIHaveMissedInTheLastWeek(5);
-//
-//			for (Event event : events) {
-//				System.out.println(event.toString());
-//			}
+			List<Event> events = eventServicesRemote.eventsIHaveMissedInTheLastWeek("3");
+
+			for (Event event : events) {
+				System.out.println(event.toString());
+			}
 
 			//months test
-//			 List<String> months = eventServicesRemote.getAllEventMonths();
+//			 List<Integer> months = eventServicesRemote.getAllEventMonths();
 //			
-//			 for (String integer : months) {
+//			 for (Integer integer : months) {
 //			 System.out.println(integer);
 //			 }
 
@@ -43,11 +43,11 @@ public class EventTest {
 //			System.out.println(response);
 			
 			//events i might like test
-			List<Event> events = eventServicesRemote.availableOrUpcomingEventsIMightLike("5","tunis");
-
-			for (Event event : events) {
-				System.out.println(event.toString());
-			}
+//			List<Event> events = eventServicesRemote.availableOrUpcomingEventsIMightLike("5","tunis");
+//
+//			for (Event event : events) {
+//				System.out.println(event.toString());
+//			}
 
 		} catch (NamingException e) {
 			// TODO Auto-generated catch block

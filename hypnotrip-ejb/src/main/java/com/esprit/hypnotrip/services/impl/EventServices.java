@@ -1,6 +1,8 @@
 package com.esprit.hypnotrip.services.impl;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -25,27 +27,39 @@ public class EventServices implements EventServicesRemote, EventServicesLocal {
 	@PersistenceContext
 	EntityManager entityManager;
 
-	private List<String> months = new ArrayList<String>();
+	private String jpql;
+	private Query query;
+	private List<Integer> months = new ArrayList<Integer>();
 	private List<Event> events = new ArrayList<Event>();
 	private Event event = new Event();
+	private Calendar calendar = Calendar.getInstance();
+	private Calendar calendar2 = Calendar.getInstance();
+	private Date searchedDate = calendar.getTime();
+	private Date searchedDate2 = calendar.getTime();
 
 	public EventServices() {
 		// TODO Auto-generated constructor stub
 	}
 
 	// get events in this week
+	@SuppressWarnings({ "unchecked", "static-access" })
 	@Override
 	public List<Event> getAllThisWeekEvents() {
 
-		// SQL QUERY
-		String query = "SELECT * FROM Pages WHERE dateofevent BETWEEN curdate() AND DATE_ADD(curdate(),INTERVAL 7 DAY) AND Discriminator = 'Event';";
+		// JPQL QUERY
+		jpql = "SELECT e FROM Event e WHERE e.dateOfEvent BETWEEN CURRENT_DATE AND ?1";
+		query = entityManager.createQuery(jpql);
 
-		// native SQL QUERY with EM
-		Query q = entityManager.createNativeQuery(query, Event.class);
+		// get the date i want with calendar
+		calendar.setTime(searchedDate);
+		calendar.add(Calendar.DATE, 7);
+
+		// send as a parameter, the current date + week
+		query.setParameter(1, calendar.getTime());
 
 		try {
 
-			events = q.getResultList();
+			events = query.getResultList();
 
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -59,16 +73,25 @@ public class EventServices implements EventServicesRemote, EventServicesLocal {
 	@Override
 	public List<Event> getAllNextWeekEvents() {
 
-		// SQL QUERY
-		String query = "SELECT * FROM Pages WHERE dateofevent BETWEEN DATE_ADD(curdate(),INTERVAL 7 DAY) AND DATE_ADD(curdate(),INTERVAL 14 DAY)AND Discriminator = 'Event'";
+		// JPQL QUERY
+		jpql = "SELECT e FROM Event e WHERE e.dateOfEvent BETWEEN ?1 AND ?2";
+		query = entityManager.createQuery(jpql);
 
-		// native SQL QUERY with EM
-		Query q = entityManager.createNativeQuery(query, Event.class);
+		// get the date i want with calendar
+		calendar.setTime(searchedDate);
+		calendar.add(Calendar.DATE, 7);
+
+		// get the date i want with calendar
+		calendar2.setTime(searchedDate2);
+		calendar2.add(Calendar.DATE, 14);
+
+		// send as a parameter, the current date + week
+		query.setParameter(1, calendar.getTime());
+		query.setParameter(2, calendar2.getTime());
 
 		try {
 
-			events = q.getResultList();
-
+			events = query.getResultList();
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
@@ -79,18 +102,14 @@ public class EventServices implements EventServicesRemote, EventServicesLocal {
 	// get all months from event
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<String> getAllEventMonths() {
+	public List<Integer> getAllEventMonths() {
 
-		// SQL QUERY
-		String queryMonths = "SELECT DISTINCT DATE_FORMAT(dateofevent, '%M') FROM Pages WHERE discriminator ='Event'";
-
-		// native SQL QUERY with EM
-		Query queryM = entityManager.createNativeQuery(queryMonths);
+		String queryMonths = "SELECT DISTINCT MONTH(e.dateOfEvent) FROM Event e";
+		query = entityManager.createQuery(queryMonths);
 
 		try {
 
-			months = queryM.getResultList();
-
+			months = query.getResultList();
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
@@ -103,11 +122,16 @@ public class EventServices implements EventServicesRemote, EventServicesLocal {
 	@Override
 	public List<Event> getAllThisMonthEvents() {
 
-		// SQL QUERY
-		String sql = "SELECT * FROM Pages WHERE dateofevent BETWEEN curdate() AND DATE_ADD(curdate(),INTERVAL 30 DAY)AND Discriminator = 'Event'";
+		// JPQL QUERY
+		jpql = "SELECT e FROM Event e WHERE e.dateOfEvent BETWEEN CURRENT_DATE AND ?1";
+		query = entityManager.createQuery(jpql);
 
-		// native SQL QUERY with EM
-		Query query = entityManager.createNativeQuery(sql, Event.class);
+		// get the date i want with calendar
+		calendar.setTime(searchedDate);
+		calendar.add(Calendar.DATE, 30);
+
+		// send as a parameter, the current date + week
+		query.setParameter(1, calendar.getTime());
 
 		try {
 
@@ -125,11 +149,16 @@ public class EventServices implements EventServicesRemote, EventServicesLocal {
 	@Override
 	public List<Event> getAllThisMonthEvents2() {
 
-		// SQL QUERY
-		String sql = "SELECT * FROM Pages WHERE dateofevent BETWEEN curdate() AND DATE_ADD(curdate(),INTERVAL 31 DAY)AND Discriminator = 'Event'";
+		// JPQL QUERY
+		jpql = "SELECT e FROM Event e WHERE e.dateOfEvent BETWEEN CURRENT_DATE AND ?1";
+		query = entityManager.createQuery(jpql);
 
-		// native SQL QUERY with EM
-		Query query = entityManager.createNativeQuery(sql, Event.class);
+		// get the date i want with calendar
+		calendar.setTime(searchedDate);
+		calendar.add(Calendar.DATE, 31);
+
+		// send as a parameter, the current date + week
+		query.setParameter(1, calendar.getTime());
 
 		try {
 
@@ -145,49 +174,48 @@ public class EventServices implements EventServicesRemote, EventServicesLocal {
 	@Override
 	public List<Event> getMonthlyEventsByMonth() {
 
-		// List<Event> events = new ArrayList<Event>();
+		try {
 
-		// try {
-		// months = getAllEventMonths();
-		// } catch (Exception e) {
-		// System.out.println("no months");
-		// }
-		// for (String month : months) ;ùmm
-		{
-			// switch (month) {
-			// case "January":
-			// case "March":
-			// case "May":
-			// case "July":
-			// case "August":
-			// case "October":
-			// case "December": {
-			//
-			// events = getAllThisMonthEevents();
-			//
-			// break;
-			// }
-			//
-			// case "April":
-			// case "June":
-			// case "September":
-			// case "November": {
-			//
-			// events = getAllThisMonthEevents2();
-			//
-			// break;
-			// }
-			//
-			// default:
-			// System.out.println("error");
-			// break;
-			// }
-			// }
-			//
+			months = getAllEventMonths();
 
-			return null;
-
+		} catch (Exception e) {
+			System.out.println("no months");
 		}
+
+		for (Integer month : months) {
+
+			switch (month) {
+			case 1:
+			case 3:
+			case 5:
+			case 7:
+			case 8:
+			case 10:
+			case 12: {
+
+				events = getAllThisMonthEvents();
+
+				break;
+			}
+
+			case 4:
+			case 6:
+			case 9:
+			case 11: {
+
+				events = getAllThisMonthEvents2();
+
+				break;
+			}
+
+			default:
+				System.out.println("error");
+				break;
+			}
+		}
+
+		return events;
+
 	}
 
 	// get most followed event
@@ -197,10 +225,10 @@ public class EventServices implements EventServicesRemote, EventServicesLocal {
 	public Event mostFollowedEventToCome() {
 
 		// JPQL QUERY
-		String sql = "SELECT e FROM Event e INNER JOIN e.followers f WHERE f.followStat = true AND e.dateOfEvent>curdate() ORDER BY COUNT(f.id.pageId) DESC";
+		 jpql = "SELECT e FROM Event e INNER JOIN e.followers f WHERE f.followStat = true AND e.dateOfEvent>curdate() ORDER BY COUNT(f.id.pageId) DESC";
 
 		// JPQL QUERY that get most followed and upcomong event
-		Query query = entityManager.createQuery(sql);
+		 query = entityManager.createQuery(jpql);
 
 		try {
 			// get the event
@@ -217,26 +245,36 @@ public class EventServices implements EventServicesRemote, EventServicesLocal {
 	// that are only in the past week
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Event> eventsIHaveMissedInTheLastWeek(Integer idUser) {
+	public List<Event> eventsIHaveMissedInTheLastWeek(String idUser) {
+		
+//		// JPQL QUERY
+//		jpql = "SELECT e FROM Event e INNER JOIN e.followers f WHERE f.id.userId !=:param AND (e.dateOfEvent <?1 AND e.dateOfEvent >?2) GROUP BY f.id.pageId ORDER BY (e.dateOfEvent) DESC";
+//		query = entityManager.createQuery(jpql);
+//
+//		// get the date i want with calendar
+//		calendar.setTime(searchedDate);
+//		calendar.add(Calendar.DATE, -1);
+//
+//		// get the date i want with calendar
+//		calendar2.setTime(searchedDate2);
+//		calendar2.add(Calendar.DATE, -8);
+//
+//		// send as a parameter, the current date + week
+//		query.setParameter("param", idUser);
+//		query.setParameter(1, calendar.getTime());
+//		query.setParameter(2, calendar2.getTime());
+//				
+//		try {
+//
+//			events = query.getResultList();
+//		} catch (Exception e) {
+//			// TODO: handle exception
+//		}
 
-		// SQL QUERY
-		String query = "SELECT * FROM Pages p INNER JOIN Follows f ON f.pageid =p.pageid WHERE p.discriminator='Event' AND f.userid !=:param AND p.dateofevent < DATE_ADD(curdate(),INTERVAL -1 DAY) AND p.dateofevent > DATE_ADD(curdate(),INTERVAL -8 DAY) GROUP BY (p.pageid) ORDER BY (p.dateofevent) DESC;";
-
-		// native SQL QUERY with EM
-		Query q = entityManager.createNativeQuery(query, Event.class);
-		q.setParameter("param", 5);
-		try {
-
-			events = q.getResultList();
-
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-
-		return events;
+		return null;
 	}
 
-	//test if event is still available or not
+	// test if event is still available or not
 	// dateofevent must be equals or larger than the current date
 	@Override
 	public boolean eventIsAvailaible(Integer idPage) {
@@ -249,26 +287,25 @@ public class EventServices implements EventServicesRemote, EventServicesLocal {
 		// JPQL QUERY that get most followed and upcomong event
 		Query query = entityManager.createQuery(sql);
 		query.setParameter("param", 5);
-		
+
 		try {
 			// get the event
 			event = (Event) query.getSingleResult();
 			if (event != null) {
-		
+
 				response = true;
 			}
-				
+
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-		
 
 		return response;
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Event> availableOrUpcomingEventsIMightLike(String idUser,String place) {
+	public List<Event> availableOrUpcomingEventsIMightLike(String idUser, String place) {
 		// JPQL QUERY
 		String sql = "SELECT DISTINCT e FROM Event e INNER JOIN e.followers f INNER JOIN f.user u WHERE e.dateOfEvent>=curdate() AND f.id.userId !=:param AND e.place =:param1 ORDER BY (f.id.pageId)";
 
@@ -276,16 +313,16 @@ public class EventServices implements EventServicesRemote, EventServicesLocal {
 		Query query = entityManager.createQuery(sql);
 		query.setParameter("param", "5");
 		query.setParameter("param1", "ariana");
-		
-			try {
-					// get the event
-					events =  query.getResultList();
 
-			} catch (Exception e) {
-					// TODO: handle exception
-				}
+		try {
+			// get the event
+			events = query.getResultList();
 
-				return events;
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
+		return events;
 	}
 
 }

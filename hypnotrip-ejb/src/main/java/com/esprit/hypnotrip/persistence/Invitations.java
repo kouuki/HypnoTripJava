@@ -22,8 +22,9 @@ public class Invitations implements java.io.Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private InvitationsId id;
-	private String description;
 	private int pageId;
+	private String description;
+	private int invitationStatus;
 
 	private User sender;
 
@@ -32,16 +33,20 @@ public class Invitations implements java.io.Serializable {
 	public Invitations() {
 	}
 
-	public Invitations(String description, User sender, User reciever) {
+	public Invitations(int pageId, String description, int invitationStatus, User sender, User reciever) {
 		super();
 		this.description = description;
+		this.pageId = pageId;
+		this.invitationStatus = invitationStatus;
 		this.sender = sender;
 		this.reciever = reciever;
 		this.id = new InvitationsId(reciever.getId(), sender.getId());
 	}
 
-	public Invitations(User sender, User reciever) {
+	public Invitations(int pageId, int invitationStatus, User sender, User reciever) {
 		super();
+		this.pageId = pageId;
+		this.invitationStatus = invitationStatus;
 		this.sender = sender;
 		this.reciever = reciever;
 		this.id = new InvitationsId(reciever.getId(), sender.getId());
@@ -102,6 +107,45 @@ public class Invitations implements java.io.Serializable {
 
 	public void setReciever(User reciever) {
 		this.reciever = reciever;
+	}
+
+	public int getInvitationStatus() {
+		return invitationStatus;
+	}
+
+	public void setInvitationStatus(int invitationStatus) {
+		this.invitationStatus = invitationStatus;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Invitations other = (Invitations) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Invitations [pageId=" + pageId + ", description=" + description + ", invitationStatus="
+				+ invitationStatus + ", sender=" + sender.getId() + ", reciever=" + reciever.getId() + "]";
 	}
 
 }

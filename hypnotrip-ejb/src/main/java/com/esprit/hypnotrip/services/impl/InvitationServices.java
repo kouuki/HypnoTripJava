@@ -1,12 +1,17 @@
 package com.esprit.hypnotrip.services.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import com.esprit.hypnotrip.persistence.Invitations;
 import com.esprit.hypnotrip.persistence.User;
+import com.esprit.hypnotrip.services.exceptions.SenderIsRecieverException;
 import com.esprit.hypnotrip.services.interfaces.InvitationServicesLocal;
 import com.esprit.hypnotrip.services.interfaces.InvitationServicesRemote;
 import com.esprit.hypnotrip.services.interfaces.UserServicesLocal;
@@ -28,6 +33,9 @@ public class InvitationServices implements InvitationServicesRemote, InvitationS
 	@EJB
 	UserServicesLocal userServicesLocal;
 
+	private List<Invitations> invitations = new ArrayList<Invitations>();
+	private Integer response;
+
 	// @EJB
 	// service de jihen ;
 
@@ -35,15 +43,109 @@ public class InvitationServices implements InvitationServicesRemote, InvitationS
 		// TODO Auto-generated constructor stub
 	}
 
+	// save or upadte an invitation on a page
 	@Override
-	public void saveOrUpdateInvitation(String idSender, String idReciever, int idPage) {
+	public void saveOrUpdateInvitation(int idPage, int invitationStatus, String idSender, String idReciever)
+			throws SenderIsRecieverException {
 
+		// since it's an associative class, than we need to verify some things
+		// sender exists
 		User sender = userServicesLocal.findUserById(idSender);
+
+		// reciever exists
 		User reciever = userServicesLocal.findUserById(idReciever);
+
+		// page exists
 		// Pages page = service de jihen;
 
-		Invitations invitation = new Invitations(sender, reciever);
-		entityManager.merge(invitation);
+		// the sender musn't be the reciever
+		// we need to verify
+		if (!sender.equals(reciever)) {
+
+			// if this condition is correct, than the invitation will be created
+			Invitations invitation = new Invitations(idPage, invitationStatus, sender, reciever);
+			entityManager.merge(invitation);
+
+		} else {
+
+			// if not, than this exception will be thrown
+			throw new SenderIsRecieverException(
+					"You can't invite yourself to follow any page, please select a valid user");
+		}
+
+	}
+
+	@Override
+	public Invitations findInvitationById(Integer idInvitation) {
+
+		return entityManager.find(Invitations.class, idInvitation);
+	}
+
+	@Override
+	public void deleteInvitation(Invitations invitation) {
+		entityManager.remove(entityManager.merge(invitation));
+
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Invitations> getAllInvitationsByRecieverId(String idReciever) {
+
+		String jpql = "SELECT i FROM Invitations i WHERE i.id.receiverUserId =:param AND i.invitationStatus=:param1";
+		Query query = entityManager.createQuery(jpql);
+		query.setParameter("param", idReciever);
+		query.setParameter("param1", 0);
+
+		try {
+
+			invitations = query.getResultList();
+
+		} catch (Exception e) {
+			System.out.println("aaaaaaa");
+		}
+
+		return invitations;
+	}
+
+	@Override
+	public Integer acceptInvitationToFollowAPage(String idReciever, String idSender) {
+
+		String jpql = "UPDATE Invitations i SET i.invitationStatus=:param WHERE i.id.receiverUserId =:param1 AND i.id.senderUserId =:param2";
+		Query query = entityManager.createQuery(jpql);
+		query.setParameter("param", 1);
+		query.setParameter("param1", idReciever);
+		query.setParameter("param2", idSender);
+
+		try {
+
+			response = query.executeUpdate();
+
+		} catch (Exception e) {
+			System.out.println("aaaaaaa");
+		}
+
+		return response;
+	}
+
+	@Override
+	public Integer declineInvitationToFollowAPage(String idReciever, String idSender) {
+
+		String jpql = "UPDATE Invitations i SET i.invitationStatus=:param WHERE i.id.receiverUserId =:param1 AND i.id.senderUserId =:param2";
+		Query query = entityManager.createQuery(jpql);
+		query.setParameter("param1", -1);
+		query.setParameter("param1", idReciever);
+		query.setParameter("param2", idSender);
+
+		try {
+
+			response = query.executeUpdate();
+
+		} catch (Exception e) {
+			System.out.println("aaaaaaa");
+		}
+
+		return response;
+
 	}
 
 }
