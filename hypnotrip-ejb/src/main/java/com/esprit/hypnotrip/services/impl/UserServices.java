@@ -48,7 +48,7 @@ public class UserServices implements UserServicesRemote, UserServicesLocal {
 	@Override
 	public void bookATicket(Tickets ticket, User user)
 			throws NoMoreTicketsException, LimitOfBookingRechedException, EventOverException {
-		if (!eventServices.eventIsAvailaible(ticket.getEvent().getPageId())) {
+		if (eventServices.eventIsAvailaible(ticket.getEvent().getPageId())) {
 			throw new EventOverException("You can not book a ticket for a finished event");
 		} else if (ticket.getNumberOfPlaces() == null) {
 			throw new NoMoreTicketsException("No more tickets avalible");
@@ -56,20 +56,18 @@ public class UserServices implements UserServicesRemote, UserServicesLocal {
 			throw new LimitOfBookingRechedException("Limit of booking reached");
 		} else {
 			BookDescription bookDescription = new BookDescription(true, user, ticket);
-			entityManager.merge(bookDescription);
-
+			ticket.getBookDescriptions().add(bookDescription);
 			ticket.setNumberOfPlaces(ticket.getNumberOfPlaces() - 1);
 			if (ticket.getNumberOfPlaces() == 0) {
 				ticket.setNumberOfPlaces(null);
 			}
-			try {
-				ticketServicesLocal.createOrUpdateTicket(ticket);
-			} catch (TicketAlreadyBookedException ex) {
-
+			
+			entityManager.merge(ticket);
+			
 			}
 		}
 
-	}
+	
 
 	@Override
 	public void cancelBooking(Tickets ticket, User user, Integer numberOfTicketsToCancel)
@@ -94,11 +92,11 @@ public class UserServices implements UserServicesRemote, UserServicesLocal {
 
 			}
 			ticket.setNumberOfPlaces(ticket.getNumberOfPlaces() + numberOfTicketsToCancel);
-			try {
-				ticketServicesLocal.createOrUpdateTicket(ticket);
-			} catch (TicketAlreadyBookedException ex) {
+			
+				entityManager.merge(ticket);
 
-			}
+
+			
 		}
 
 	}

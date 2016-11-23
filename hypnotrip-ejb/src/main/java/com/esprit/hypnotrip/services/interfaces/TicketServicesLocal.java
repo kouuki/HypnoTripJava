@@ -12,7 +12,7 @@ import com.esprit.hypnotrip.services.exceptions.TicketAlreadyBookedException;
 @Local
 public interface TicketServicesLocal {
 
-	void createOrUpdateTicket(Tickets ticket) throws EventOverException, TicketAlreadyBookedException;
+	void  createOrUpdateTicket(Tickets ticket,Integer idEvent) throws EventOverException, TicketAlreadyBookedException;
 
 	void deleteTicket(Tickets ticket) throws EventOverException, TicketAlreadyBookedException;
 

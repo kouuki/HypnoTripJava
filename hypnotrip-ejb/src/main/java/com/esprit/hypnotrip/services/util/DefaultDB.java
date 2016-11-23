@@ -12,10 +12,14 @@ import com.esprit.hypnotrip.persistence.Buy;
 import com.esprit.hypnotrip.persistence.BuyId;
 import com.esprit.hypnotrip.persistence.Offer;
 import com.esprit.hypnotrip.persistence.Pages;
+import com.esprit.hypnotrip.persistence.Tickets;
 import com.esprit.hypnotrip.persistence.Touristicplace;
 import com.esprit.hypnotrip.persistence.User;
+import com.esprit.hypnotrip.services.exceptions.EventOverException;
+import com.esprit.hypnotrip.services.exceptions.TicketAlreadyBookedException;
 import com.esprit.hypnotrip.services.interfaces.OfferServiceLocal;
 import com.esprit.hypnotrip.services.interfaces.PageServiceLocal;
+import com.esprit.hypnotrip.services.interfaces.TicketServicesLocal;
 import com.esprit.hypnotrip.services.interfaces.ToursiticPlaceServiceLocal;
 import com.esprit.hypnotrip.services.interfaces.UserServicesLocal;
 
@@ -32,13 +36,15 @@ public class DefaultDB {
 	private OfferServiceLocal offerServiceLocal;
 	@EJB
 	ToursiticPlaceServiceLocal toursiticPlaceServiceLocal;
+	@EJB
+	TicketServicesLocal ticketServicesLocal;
 
 	public DefaultDB() {
 		// TODO Auto-generated constructor stub
 	}
 
 	@PostConstruct
-	public void init() {
+	public void init() throws EventOverException, TicketAlreadyBookedException {
 
 		Pages pages = new Pages("My first page");
 
@@ -47,13 +53,13 @@ public class DefaultDB {
 		Pages offre = new Offer("My first offer", 2.5, 1.1);
 
 		pageServiceLocal.saveOrUpdatePage(offre, "b38f3299-6949-42c7-9a6c-f998c66f485d");
-		
-		Pages ts1 = new Touristicplace(new Date(),"logo1","Paris");
+
+		Pages ts1 = new Touristicplace(new Date(), "logo1", "Paris");
 		pageServiceLocal.saveOrUpdatePage(ts1, "b38f3299-6949-42c7-9a6c-f998c66f485d");
-		
-		Pages ts2 = new Touristicplace(new Date(),"logo2","Tunis");
+
+		Pages ts2 = new Touristicplace(new Date(), "logo2", "Tunis");
 		pageServiceLocal.saveOrUpdatePage(ts2, "b38f3299-6949-42c7-9a6c-f998c66f485d");
-		
+
 		Pages offre2 = new Offer("My second offer", 2.5, 1.1);
 		pageServiceLocal.saveOrUpdatePage(offre2, "b38f3299-6949-42c7-9a6c-f998c66f485d");
 
@@ -70,8 +76,6 @@ public class DefaultDB {
 		offerServiceLocal.addBuy(buy2);
 		offerServiceLocal.addBuy(buy3);
 
-		
-		
 		User user = new User();
 		user.setAddress("tunis");
 		user.setAccessFailedCount(0);
@@ -87,7 +91,7 @@ public class DefaultDB {
 		user.setUserName("daouesd");
 		user.setRole("0");
 		user.setId("b38f3299-6949-42c7-9a6c-f998c66f485d");
-		
+
 		User user2 = new User();
 		user2.setAddress("tunis");
 		user2.setAccessFailedCount(0);
@@ -103,10 +107,18 @@ public class DefaultDB {
 		user2.setUserName("daouesd");
 		user2.setRole("1");
 		user2.setId("b38f3299-6949-42c7-9a6c-f998c66f4852");
-		
-		
+
 		userServicesLocal.saveOrUpdate(user);
 		userServicesLocal.saveOrUpdate(user2);
+
+		Tickets ticket = new Tickets();
+		ticket.setEvent(pages);
+		ticket.setNumberOfPlaces(15);
+		ticket.setPrice(15);
+		ticket.setType("Best Ticket");
+		
+		ticketServicesLocal.createOrUpdateTicket(ticket,1);
+		
 
 	}
 
