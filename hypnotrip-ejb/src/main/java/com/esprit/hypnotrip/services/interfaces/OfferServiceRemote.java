@@ -14,4 +14,6 @@ public interface OfferServiceRemote {
 	Offer bestOffer();
 
 	List<Offer> SortOfferByDatePrice();
+	
+	void OfferForMostBuyer();
 }

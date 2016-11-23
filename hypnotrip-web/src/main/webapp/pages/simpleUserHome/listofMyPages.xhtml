@@ -6,139 +6,400 @@
 	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
 	xmlns:p="http://primefaces.org/ui"
 	template="/WEB-INF/template/template.xhtml">
+	<h:head>
+			<style>
+body {
+	font-family: 'trebuchet MS', 'Lucida sans', Arial;
+	font-size: 14px;
+	color: #444;
+}
+
+table {
+	*border-collapse: collapse; /* IE7 and lower */
+	border-spacing: 0;
+	width: 90%;
+}
+
+.bordered {
+	border: solid #ccc 1px;
+	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+	border-radius: 6px;
+	-webkit-box-shadow: 0 1px 1px #ccc;
+	-moz-box-shadow: 0 1px 1px #ccc;
+	box-shadow: 0 1px 1px #ccc;
+}
+
+.bordered tr:hover {
+	background: #fbf8e9;
+	-o-transition: all 0.1s ease-in-out;
+	-webkit-transition: all 0.1s ease-in-out;
+	-moz-transition: all 0.1s ease-in-out;
+	-ms-transition: all 0.1s ease-in-out;
+	transition: all 0.1s ease-in-out;
+}
+
+.bordered td, .bordered th {
+	border-left: 1px solid #ccc;
+	border-top: 1px solid #ccc;
+	padding: 10px;
+	text-align: left;
+}
+
+.bordered th {
+	background-color: #dce9f9;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#ebf3fc),
+		to(#dce9f9));
+	background-image: -webkit-linear-gradient(top, #ebf3fc, #dce9f9);
+	background-image: -moz-linear-gradient(top, #ebf3fc, #dce9f9);
+	background-image: -ms-linear-gradient(top, #ebf3fc, #dce9f9);
+	background-image: -o-linear-gradient(top, #ebf3fc, #dce9f9);
+	background-image: linear-gradient(top, #ebf3fc, #dce9f9);
+	-webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, .8) inset;
+	-moz-box-shadow: 0 1px 0 rgba(255, 255, 255, .8) inset;
+	box-shadow: 0 1px 0 rgba(255, 255, 255, .8) inset;
+	border-top: none;
+	text-shadow: 0 1px 0 rgba(255, 255, 255, .5);
+}
+
+.bordered td:first-child, .bordered th:first-child {
+	border-left: none;
+}
+
+.bordered th:first-child {
+	-moz-border-radius: 6px 0 0 0;
+	-webkit-border-radius: 6px 0 0 0;
+	border-radius: 6px 0 0 0;
+}
+
+.bordered th:last-child {
+	-moz-border-radius: 0 6px 0 0;
+	-webkit-border-radius: 0 6px 0 0;
+	border-radius: 0 6px 0 0;
+}
+
+.bordered th:only-child {
+	-moz-border-radius: 6px 6px 0 0;
+	-webkit-border-radius: 6px 6px 0 0;
+	border-radius: 6px 6px 0 0;
+}
+
+.bordered tr:last-child td:first-child {
+	-moz-border-radius: 0 0 0 6px;
+	-webkit-border-radius: 0 0 0 6px;
+	border-radius: 0 0 0 6px;
+}
+
+.bordered tr:last-child td:last-child {
+	-moz-border-radius: 0 0 6px 0;
+	-webkit-border-radius: 0 0 6px 0;
+	border-radius: 0 0 6px 0;
+}
+
+/*----------------------*/
+.zebra td, .zebra th {
+	padding: 10px;
+	border-bottom: 1px solid #f2f2f2;
+}
+
+.zebra tbody tr:nth-child(even) {
+	background: #f5f5f5;
+	-webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, .8) inset;
+	-moz-box-shadow: 0 1px 0 rgba(255, 255, 255, .8) inset;
+	box-shadow: 0 1px 0 rgba(255, 255, 255, .8) inset;
+}
+
+.zebra th {
+	text-align: left;
+	text-shadow: 0 1px 0 rgba(255, 255, 255, .5);
+	border-bottom: 1px solid #ccc;
+	background-color: #eee;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#f5f5f5),
+		to(#eee));
+	background-image: -webkit-linear-gradient(top, #f5f5f5, #eee);
+	background-image: -moz-linear-gradient(top, #f5f5f5, #eee);
+	background-image: -ms-linear-gradient(top, #f5f5f5, #eee);
+	background-image: -o-linear-gradient(top, #f5f5f5, #eee);
+	background-image: linear-gradient(top, #f5f5f5, #eee);
+}
+
+.zebra th:first-child {
+	-moz-border-radius: 6px 0 0 0;
+	-webkit-border-radius: 6px 0 0 0;
+	border-radius: 6px 0 0 0;
+}
+
+.zebra th:last-child {
+	-moz-border-radius: 0 6px 0 0;
+	-webkit-border-radius: 0 6px 0 0;
+	border-radius: 0 6px 0 0;
+}
+
+.zebra th:only-child {
+	-moz-border-radius: 6px 6px 0 0;
+	-webkit-border-radius: 6px 6px 0 0;
+	border-radius: 6px 6px 0 0;
+}
+
+.zebra tfoot td {
+	border-bottom: 0;
+	border-top: 1px solid #fff;
+	background-color: #f1f1f1;
+}
+
+.zebra tfoot td:first-child {
+	-moz-border-radius: 0 0 0 6px;
+	-webkit-border-radius: 0 0 0 6px;
+	border-radius: 0 0 0 6px;
+}
+
+.zebra tfoot td:last-child {
+	-moz-border-radius: 0 0 6px 0;
+	-webkit-border-radius: 0 0 6px 0;
+	border-radius: 0 0 6px 0;
+}
+
+.zebra tfoot td:only-child {
+	-moz-border-radius: 0 0 6px 6px;
+	-webkit-border-radius: 0 0 6px 6px border-radius: 0 0 6px 6px
+}
+</style>
+		</h:head>
 	<ui:define name="content">
-	
-<h:head>
-</h:head>
-<h:body>
-	<h1>My Pages</h1>
-	<h:form id="formListOfPages" rendered="#{pagesBean.displayForm1}">
 
-		<h:dataTable value="#{pagesBean.myPages}" var="p" border="2">
-			<h:column id="c1">
-				<f:facet name="header">
-					<h:outputText value="Name" />
-				</f:facet>
-				<h:outputText value="#{p.pageId}" />
-			</h:column>
-			<h:column id="c2">
-				<f:facet name="header">
-					<h:outputText value="Description" />
-				</f:facet>
-				<h:outputText value="#{p.description}" />
-			</h:column>
-			
-			<!-- Start Rating Column -->
-			<h:column id="c4">
-			<f:facet name="header">
-					<h:outputText value="Rate Level" />
-				</f:facet>
-				<p:rating value="#{pagesBean.ratingLevels(p.pageId)}" readonly="true" />
-			</h:column>
-			<!-- End Rating Column -->
-			
-			<h:column id="c3">
-				<f:facet name="header">
-					<h:outputText value="#" />
-				</f:facet>
-				<h:commandButton action="#{pagesBean.selectPage()}" value="select">
-					<f:setPropertyActionListener value="#{p}"
-						target="#{pagesBean.pageSelected}"></f:setPropertyActionListener>
-					<f:setPropertyActionListener value="#{p}"
-						target="#{pagesBean.offerSelected}"></f:setPropertyActionListener>
-				</h:commandButton>
-			</h:column>
-			<h:column id="c5">
-				<f:facet name="header">
-					<h:outputText value="" />
-				</f:facet>
-				<h:commandButton value="Rate" action="#{pagesBean.ratePage()}" >
-					<f:setPropertyActionListener value="#{p}"
-						target="#{pagesBean.pageSelected}"></f:setPropertyActionListener>
 		
-				</h:commandButton>
-			</h:column>
-		</h:dataTable>
-		<h:commandButton action="#{pagesBean.selectTypeOfPage()}" value="NEW" />
 
-	</h:form>
-	<h:form id="formUpdate" rendered="#{pagesBean.displayForm2}">
-		<h:panelGrid columns="2">
-			<h:outputText value="Description" />
-			<h:inputText value="#{pagesBean.pageSelected.description}"
-				required="true" requiredMessage="field required" />
-
-			<h:commandButton action="#{pagesBean.doAddPage()}"
-				value="save or update" />
-			<h:commandButton action="#{pagesBean.doDeletePage()}" value="delete" />
-			<h:commandButton action="#{pagesBean.cancel}" value="cancel" />
-		</h:panelGrid>
-	</h:form>
-
-
-
-
-	<h:form id="formSavePage" rendered="#{pagesBean.displayForm3}">
-		<h:panelGrid columns="2">
-
-
-			<h:selectOneRadio value="#{pagesBean.selectedType}">
-				<f:selectItem itemValue="1" itemLabel="Offer" />
-				<f:selectItem itemValue="2" itemLabel="Event" />
-				<f:selectItem itemValue="3" itemLabel="Touristic Page" />
-			</h:selectOneRadio>
+		<center>
+			<H1>My Pages</H1>
 			<br />
-			<h:commandButton action="#{pagesBean.RedirectTypeOfPage()}"
-				value="Next" />
-			<h:commandButton action="#{pagesBean.cancel}" value="cancel" />
-		</h:panelGrid>
-	</h:form>
+			<br />
+			<!-- ************************************************************************************************************ -->
+			<!-- ************************************************************************************************************ -->
+			<!-- ************************************************************************************************************ -->
+			<h:form id="formListOfPages" rendered="#{pagesBean.displayForm1}">
 
-	<h:form id="formForOffer" rendered="#{pagesBean.displayFormOffer}">
-		<h:panelGrid columns="2">
-			<h:outputText value="Description" />
-			<h:inputText value="#{pagesBean.offerSelected.description}"
-				required="true" requiredMessage="field required" />
-			<h:outputText value="Start date" />
+				<h:dataTable class="bordered" value="#{pagesBean.myPages}" var="p"
+					border="2">
+					<h:column id="c1">
+						<f:facet name="header">
+							<h:outputText value="Name" />
+						</f:facet>
+						<h:outputText value="#{p.pageId}" />
+					</h:column>
+					<h:column id="c2">
+						<f:facet name="header">
+							<h:outputText value="Description" />
+						</f:facet>
+						<h:outputText value="#{p.description}" />
+					</h:column>
 
-			<h:outputText value="End date" />
-			<h:outputText value="Price" />
-			<h:inputText value="#{pagesBean.offerSelected.price}" required="true"
-				requiredMessage="field required" />
-			<h:outputText value="Discount" />
-			<h:inputText value="#{pagesBean.offerSelected.discount}"
-				required="true" requiredMessage="field required" />
-			<h:commandButton action="#{pagesBean.doAddOffer()}" value="save" />
-			<h:commandButton action="#{pagesBean.doDeletePage()}" value="delete" />
-		</h:panelGrid>
-	</h:form>
-	<h:form id="formForEvent" rendered="#{pagesBean.displayFormEvent}">
-		<h:panelGrid columns="2">
-			<h:outputText value="Event" />
-			<h:commandButton action="#{pagesBean.doAddEvent()}" value="save" />
-			<h:commandButton action="#{pagesBean.doDeletePage()}" value="delete" />
-		</h:panelGrid>
-	</h:form>
+					<!-- Start Rating Column -->
+					<h:column id="c4">
+						<f:facet name="header">
+							<h:outputText value="Rate Level" />
+						</f:facet>
+						<p:rating value="#{pagesBean.ratingLevels(p.pageId)}"
+							readonly="true" />
+					</h:column>
+					<!-- End Rating Column -->
 
-	<h:form id="formForTouristic"
-		rendered="#{pagesBean.displayFormTouristicPage}">
-		<h:panelGrid columns="2">
-			<h:outputText value="touristic" />
-			<h:commandButton action="#{pagesBean.doAddTouristic()}" value="save" />
-			<h:commandButton action="#{pagesBean.doDeletePage()}" value="delete" />
-		</h:panelGrid>
-	</h:form>
+					<h:column id="c3">
+						<f:facet name="header">
+							<h:outputText value="#" />
+						</f:facet>
+						<h:commandButton action="#{pagesBean.selectPage()}" value="select">
+							<f:setPropertyActionListener value="#{p}"
+								target="#{pagesBean.pageSelected}"></f:setPropertyActionListener>
+							<f:setPropertyActionListener value="#{p}"
+								target="#{pagesBean.offerSelected}"></f:setPropertyActionListener>
+						</h:commandButton>
+					</h:column>
+					<h:column id="c5">
+						<f:facet name="header">
+							<h:outputText value="" />
+						</f:facet>
+						<h:commandButton value="Rate" action="#{pagesBean.ratePage()}">
+							<f:setPropertyActionListener value="#{p}"
+								target="#{pagesBean.pageSelected}"></f:setPropertyActionListener>
 
-	<!-- FORM RATING -->
-	<h:form id="formForRatePages"
-		rendered="#{pagesBean.displayFormTouristicPage}">
-		<h:panelGrid columns="2">
-			<h:outputText value="touristic" />
-			<h:commandButton action="#{pagesBean.doAddTouristic()}" value="save" />
-			<h:commandButton action="#{pagesBean.doDeletePage()}" value="delete" />
-		</h:panelGrid>
-	</h:form>
-</h:body>
+						</h:commandButton>
+					</h:column>
+				</h:dataTable>
+				<h:commandButton action="#{pagesBean.selectTypeOfPage()}"
+					value="NEW" />
+
+			</h:form>
+
+			<!-- ************************************************************************************************************ -->
+			<!-- ************************************************************************************************************ -->
+			<!-- ************************************************************************************************************ -->
+
+			<h:form id="formUpdate" rendered="#{pagesBean.displayForm2}">
+				<h:panelGrid columns="2">
+					<h:outputText value="Description" />
+					<h:inputText value="#{pagesBean.pageSelected.description}"
+						required="true" requiredMessage="field required" />
+
+					<h:commandButton action="#{pagesBean.doAddPage()}"
+						value="save or update" />
+					<h:commandButton action="#{pagesBean.doDeletePage()}"
+						value="delete" />
+					<h:commandButton action="#{pagesBean.cancel}" value="cancel" />
+				</h:panelGrid>
+			</h:form>
+
+			<!-- ************************************************************************************************************ -->
+			<!-- ************************************************************************************************************ -->
+			<!-- ************************************************************************************************************ -->
+
+			<h:form id="formSavePage" rendered="#{pagesBean.displayForm3}">
+				<h:panelGrid columns="2">
+
+
+					<h:selectOneRadio value="#{pagesBean.selectedType}">
+						<f:selectItem itemValue="1" itemLabel="Offer" />
+						<f:selectItem itemValue="2" itemLabel="Event" />
+						<f:selectItem itemValue="3" itemLabel="Touristic Page" />
+					</h:selectOneRadio>
+					<br />
+					<h:commandButton action="#{pagesBean.RedirectTypeOfPage()}"
+						value="Next" />
+					<h:commandButton action="#{pagesBean.cancel}" value="cancel" />
+				</h:panelGrid>
+			</h:form>
+
+			<!-- ************************************************************************************************************ -->
+			<!-- ************************************************************************************************************ -->
+			<!-- ************************************************************************************************************ -->
+
+			<h:form id="formForOffer" rendered="#{pagesBean.displayFormOffer}"
+				enctype="multipart/form-data">
+
+				<table border="1">
+
+					<tr>
+						<TH>Picture</TH>
+						<td><h:inputFile id="file" value="#{pagesBean.file}" /></td>
+
+						<td><h:commandButton value="Upload"
+								action="#{pagesBean.upload}" /></td>
+
+					</tr>
+
+					<tr>
+						<TH>Description</TH>
+						<TD><h:inputText
+								value="#{pagesBean.offerSelected.description}" required="true"
+								requiredMessage="field required" /></TD>
+						<TD></TD>
+					</tr>
+					<tr>
+						<TH>Start date</TH>
+						<TD><p:growl id="msgs" showDetail="true" /> <p:calendar
+								id="Start" value="#{pagesBean.offerSelected.beginDate}"
+								mode="inline" /></TD>
+						<TD></TD>
+						
+					</tr>
+					<tr>
+						<TH>End date</TH>
+						<TD><p:calendar id="End"
+								value="#{pagesBean.offerSelected.finishDate}" mode="inline" /></TD>
+						<TD></TD>
+					</tr>
+					<tr>
+						<TH>Price</TH>
+						<TD><h:inputText value="#{pagesBean.offerSelected.price}"
+								required="true" requiredMessage="field required" /></TD>
+						<TD></TD>
+					</tr>
+					<tr>
+						<TH>Discount</TH>
+						<TD><h:inputText value="#{pagesBean.offerSelected.discount}"
+								required="true" requiredMessage="field required" /></TD>
+						<TD></TD>
+					</tr>
+					<tr>
+						<TH>Actions</TH>
+						<TD><h:commandButton action="#{pagesBean.doAddOffer()}"
+								value="save" /></TD>
+						<TD><h:commandButton action="#{pagesBean.doDeletePage()}"
+								value="delete" /></TD>
+					</tr>
+				</table>
+
+			</h:form>
+			<!-- ************************************************************************************************************ -->
+			<!-- ************************************************************************************************************ -->
+			<!-- ************************************************************************************************************ -->
+			<h:form id="formForEvent" rendered="#{pagesBean.displayFormEvent}">
+				<table border="1">
+
+					<tr>
+						<TH>Picture</TH>
+						<td><h:inputFile id="file" value="#{pagesBean.file}" /></td>
+
+						<td><h:commandButton value="Upload"
+								action="#{pagesBean.upload}" /></td>
+
+					</tr>
+
+					<tr>
+						<TH>Description</TH>
+						<TD><h:inputText
+								value="#{pagesBean.eventSelected.description}" required="true"
+								requiredMessage="field required" /></TD>
+						<TD></TD>
+					</tr>
+					<tr>
+						<TH>Start date</TH>
+						<TD><p:growl id="msgs1" showDetail="true" /> <h:panelGrid
+								columns="2" cellpadding="5">
+								<p:calendar id="Start"
+									value="#{pagesBean.eventSelected.dateOfEvent}" mode="inline" />
+							</h:panelGrid></TD>
+						<TD></TD>
+					</tr>
+
+					<tr>
+						<TH>Place</TH>
+						<TD><h:inputText value="#{pagesBean.eventSelected.place}"
+								required="true" requiredMessage="field required" /></TD>
+						<TD></TD>
+					</tr>
+
+					<tr>
+						<TH>Actions</TH>
+						<TD><h:commandButton action="#{pagesBean.doAddEvent()}"
+								value="save" /></TD>
+						<TD><h:commandButton action="#{pagesBean.doDeletePage()}"
+								value="delete" /></TD>
+					</tr>
+				</table>
+
+
+			</h:form>
+
+			<!-- ************************************************************************************************************ -->
+			<!-- ************************************************************************************************************ -->
+			<!-- ************************************************************************************************************ -->
+
+			<h:form id="formForTouristic"
+				rendered="#{pagesBean.displayFormTouristicPage}">
+				<h:panelGrid columns="2">
+					<h:outputText value="touristic" />
+					<h:commandButton action="#{pagesBean.doAddTouristic()}"
+						value="save" />
+					<h:commandButton action="#{pagesBean.doDeletePage()}"
+						value="delete" />
+				</h:panelGrid>
+			</h:form>
+
+			<!-- ************************************************************************************************************ -->
+			<!-- ************************************************************************************************************ -->
+			<!-- ************************************************************************************************************ -->
+		</center>
+
 	</ui:define>
 
 

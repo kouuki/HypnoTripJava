@@ -67,4 +67,10 @@ public class OfferService implements OfferServiceRemote, OfferServiceLocal {
 
 	}
 
+	@Override
+	public void OfferForMostBuyer() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
