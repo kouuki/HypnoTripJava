@@ -30,7 +30,7 @@ public class RateBean {
 		FacesContext.getCurrentInstance().addMessage(null, message);
 		// here we will add the connected User & the selected Page
 		
-		String user_id="2e1002bb-57b6-4838-8f8f-e762bae52f7f";
+		String user_id="b38f3299-6949-42c7-9a6c-f998c66f4852";
 		//adding the id of the page
 		RatesId rateId = new RatesId();
 		rateId.setId(user_id);
