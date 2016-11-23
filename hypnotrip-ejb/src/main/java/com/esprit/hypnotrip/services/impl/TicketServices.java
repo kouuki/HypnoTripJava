@@ -30,19 +30,24 @@ public class TicketServices implements TicketServicesRemote, TicketServicesLocal
 	private EntityManager entityManager;
 	@EJB
 	EventServicesLocal eventServices;
+	
 
 	public TicketServices() {
 
 	}
 
 	@Override
-	public void createOrUpdateTicket(Tickets ticket) throws EventOverException, TicketAlreadyBookedException {
+	public void createOrUpdateTicket(Tickets ticket,Integer idEvent) throws EventOverException, TicketAlreadyBookedException {
 
-		if (!eventServices.eventIsAvailaible(ticket.getEvent().getPageId())) {
+		if (eventServices.eventIsAvailaible(idEvent)) {
 			throw new EventOverException("You can not create or update a ticket for a finished event");
 		} else {
 			if (ticket.getTicketId() != null) {
+				System.out.println("---------ticket-----------");
+				System.out.println("---------ticket-----------");
+				
 				Tickets ticketFound = findTicketById(ticket.getTicketId());
+				System.out.println(ticketFound);
 				if (ticketFound != null) {
 					Long numberOfTicketBooked = numberOfTicketsBookedByIdTicket(ticketFound.getTicketId());
 					if (numberOfTicketBooked != 0) {
@@ -52,9 +57,9 @@ public class TicketServices implements TicketServicesRemote, TicketServicesLocal
 					}
 				}
 			}
-
-			Pages e = entityManager.find(Pages.class, 1);
-			ticket.setEvent(e);
+			
+			Pages event=	entityManager.find(Pages.class, idEvent);
+			ticket.setEvent(event);
 			entityManager.merge(ticket);
 
 		}
@@ -66,7 +71,7 @@ public class TicketServices implements TicketServicesRemote, TicketServicesLocal
 	@Override
 	public void deleteTicket(Tickets ticket) throws EventOverException, TicketAlreadyBookedException {
 		Tickets mergedTicket = entityManager.merge(ticket);
-		if (!eventServices.eventIsAvailaible(ticket.getEvent().getPageId())) {
+		if (eventServices.eventIsAvailaible(ticket.getEvent().getPageId())) {
 			throw new EventOverException("You can not delete a ticket for a finished event");
 			// TODO test if the user want to delete a ticket of a finished event
 		} else {
