@@ -27,6 +27,7 @@ public class Touristicplace extends Pages implements java.io.Serializable {
 	private Date dateOfCreation;
 	private String logo;
 	private String name;
+	private int etat=0;
 	
 	
 	private List<Rates> rates;
@@ -88,6 +89,16 @@ public class Touristicplace extends Pages implements java.io.Serializable {
 
 	public void setRates(List<Rates> rates) {
 		this.rates = rates;
+	}
+
+
+	public int getEtat() {
+		return etat;
+	}
+
+
+	public void setEtat(int etat) {
+		this.etat = etat;
 	}
 
 }

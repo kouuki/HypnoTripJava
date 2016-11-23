@@ -7,36 +7,35 @@
 	xmlns:p="http://primefaces.org/ui"
 	template="/WEB-INF/template/template.xhtml">
 	<ui:define name="content">
-<h:head>
-</h:head>
-<h:body>
+		<h:head>
+		</h:head>
+		<h:body>
 
-	<h1>Rating Area</h1>
+			<h1>Rating Area</h1>
 
-	<h:form>
-		<p:growl id="messages" showDetail="true" />
+			<h:form>
+				<p:growl id="messages" showDetail="true" />
 
 
-		<h:outputText value="Ajax Rate:" />
-		<p:rating value="#{rateBean.rating1}">
-			<p:ajax event="rate" listener="#{rateBean.onrate}" update="messages" />
-			<p:ajax event="cancel" listener="#{rateBean.oncancel}"
-				update="messages" />
-		</p:rating>
-		<h:commandButton action="#{rateBean.ReturnList()}"
-			value="Back To List" />
+				<h:outputText value="Ajax Rate:" />
+				<p:rating value="#{rateBean.rating1}">
+					<p:ajax event="rate" listener="#{rateBean.onrate}"
+						update="messages" />
+					<p:ajax event="cancel" listener="#{rateBean.oncancel}"
+						update="messages" />
+				</p:rating>
+				<h:commandButton action="#{rateBean.ReturnList()}"
+					value="Back To List" />
 
-		<p:dialog header="Values" widgetVar="dlg" showEffect="fade"
-			hideEffect="fade">
-			<h:panelGrid id="display" columns="2" cellpadding="5">
-				<h:outputText value="Rating 3:" />
-				<h:outputText value="#{rateBean.rating1}" />
-			</h:panelGrid>
-		</p:dialog>
-	</h:form>
+				<p:dialog header="Values" widgetVar="dlg" showEffect="fade"
+					hideEffect="fade">
+					<h:panelGrid id="display" columns="2" cellpadding="5">
+						<h:outputText value="Rating 3:" />
+						<h:outputText value="#{rateBean.rating1}" />
+					</h:panelGrid>
+				</p:dialog>
+			</h:form>
 
-</h:body>
+		</h:body>
 	</ui:define>
-
-
 </ui:composition>

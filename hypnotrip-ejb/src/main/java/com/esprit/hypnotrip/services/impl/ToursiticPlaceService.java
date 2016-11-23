@@ -1,7 +1,6 @@
 package com.esprit.hypnotrip.services.impl;
 
 import com.esprit.hypnotrip.persistence.Touristicplace;
-import com.esprit.hypnotrip.persistence.Offer;
 import com.esprit.hypnotrip.services.interfaces.ToursiticPlaceServiceLocal;
 import com.esprit.hypnotrip.services.interfaces.ToursiticPlaceServiceRemote;
 
@@ -41,4 +40,26 @@ public class ToursiticPlaceService implements ToursiticPlaceServiceRemote, Tours
 		List<Touristicplace> Tp = query.getResultList();
 		return Tp;
 	}
+
+	@Override
+	public List<Touristicplace> getAllTouristicPlaceNotAccepted() {
+		String jpql = "select  t from Touristicplace t WHERE t.etat=0";
+		Query query = entityManager.createQuery(jpql);
+		List<Touristicplace> Tp = query.getResultList();
+		return Tp;
+	}
+
+	@Override
+	public void acceptTouristicPlace(int idPage) {
+		Touristicplace ts = findTouristicPlaceById(idPage);
+		ts.setEtat(1);
+		entityManager.merge(ts);
+		
+	}
+
+	@Override
+	public Touristicplace findTouristicPlaceById(int idPage) {
+		return entityManager.find(Touristicplace.class, idPage);
+	}
+	
 }

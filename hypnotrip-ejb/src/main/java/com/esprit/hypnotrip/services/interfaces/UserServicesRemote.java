@@ -18,6 +18,8 @@ public interface UserServicesRemote {
 
 	User findUserByLoginAndPassword(String email, String password);
 
+	User getUserbyId(String idUser);
+
 	void bookATicket(Tickets ticket, User user)
 			throws NoMoreTicketsException, LimitOfBookingRechedException, EventOverException;
 
@@ -31,6 +33,15 @@ public interface UserServicesRemote {
 	List<BookDescription> listOfBookingByUser(User user, Tickets ticket);
 
 	List<User> getAllFriendsWhoAreGoingToTheSameEvent(Pages enent, String userId);
+
+	void blocUser(String idUser);
+	void deblocUser(String idUser);
+
+	List<User> listBlockedUser();
+
+	List<User> listNotBlockedUser();
+
+	void saveOrUpdate(User user);
 
 	// services for yasmine
 	User findUserById(String idUser);

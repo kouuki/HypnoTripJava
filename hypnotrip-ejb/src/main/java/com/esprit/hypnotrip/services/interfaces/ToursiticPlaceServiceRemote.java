@@ -11,4 +11,11 @@ public interface ToursiticPlaceServiceRemote {
 	List<Touristicplace> getAllTouristicPlaces();
 
 	List<Touristicplace> mostRatedTouristicPlaces();
+
+	List<Touristicplace> getAllTouristicPlaceNotAccepted();
+
+	void acceptTouristicPlace(int idPage);
+
+	Touristicplace findTouristicPlaceById(int idPage);
+
 }

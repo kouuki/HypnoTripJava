@@ -35,6 +35,7 @@ public interface UserServicesLocal {
 	List<User> getAllFriendsWhoAreGoingToTheSameEvent(Pages enent, String userId);
 
 	void blocUser(String idUser);
+	void deblocUser(String idUser);
 
 	List<User> listBlockedUser();
 

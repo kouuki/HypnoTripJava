@@ -167,22 +167,28 @@ public class UserServices implements UserServicesRemote, UserServicesLocal {
 
 	@Override
 	public void blocUser(String idUser) {
-		User user = getUserbyId(idUser);
-		user.setEtat(-1);
+		User user = findUserById(idUser);
+		user.setEtat(0);
+		entityManager.merge(user);
+
+	}
+	public void deblocUser(String idUser) {
+		User user = findUserById(idUser);
+		user.setEtat(1);
 		entityManager.merge(user);
 
 	}
 
 	@Override
 	public List<User> listBlockedUser() {
-		Query query = entityManager.createQuery("SELECT u FROM User WHERE Etat=0 ");
+		Query query = entityManager.createQuery("SELECT u FROM User u WHERE Etat=0 ");
 		List<User> lr = query.getResultList();
 		return lr;
 	}
 
 	@Override
 	public List<User> listNotBlockedUser() {
-		Query query = entityManager.createQuery("SELECT u FROM User WHERE Etat= 1 ");
+		Query query = entityManager.createQuery("SELECT u FROM User u WHERE Etat= 1 ");
 		List<User> lr = query.getResultList();
 		return lr;
 	}
