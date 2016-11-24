@@ -5,13 +5,20 @@
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
 	xmlns:p="http://primefaces.org/ui"
-	template="/WEB-INF/template/template.xhtml">
+	template="/WEB-INF/template2/template.xhtml">
 	<ui:define name="content">
 
 		<h:head>
 		</h:head>
 		<h:body>
+			<h1>Statistics About Most Rated Touristic Places</h1>
 
+			<h:form>
+				<p:chart type="bar" model="#{statBeanTouristicPlaceRate.barModel}"
+					style="height:300px" />
+			</h:form><br />
+			<br />
+			<br />
 			<h1 align="center">Statistics About Most Offer Bought</h1>
 			<br />
 			<br />
