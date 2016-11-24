@@ -68,6 +68,21 @@ public class ManageListEventsBean {
 	}
 
 	// ********************************************************************************
+	// ********************************************************************************
+	public String doAddEventForPro() {
+		pageServiceLocal.saveOrUpdatePage(eventSelected, idOwner);
+		return "/pages/proUserHome/listMyEvents?faces-redirect=true";
+	}
+
+	// ********************************************************************************
+	// ********************************************************************************
+		// Suppression de la page
+		public String doDeletePageforPro() {
+			pageServiceLocal.deletePage(eventSelected);
+			return "/pages/proUserHome/listMyEvents?faces-redirect=true";
+		}
+
+		// ********************************************************************************
 	// Passer a La Page Rate
 	public String ratePage() {
 
