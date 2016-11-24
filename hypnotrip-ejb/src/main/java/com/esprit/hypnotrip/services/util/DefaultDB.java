@@ -99,7 +99,7 @@ public class DefaultDB {
 		user.setDateOfBirth(new Date());
 		user.setEmail("daouesd@hotmail.com");
 		user.setEmailConfirmed(false);
-		user.setEtat(0);
+		user.setEtat(1);
 		user.setFirstName("dhafer");
 		user.setSecondName("daoues");
 		user.setPassword("123456789Azerty");

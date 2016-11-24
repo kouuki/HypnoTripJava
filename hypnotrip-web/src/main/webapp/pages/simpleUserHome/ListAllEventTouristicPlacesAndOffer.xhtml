@@ -1,0 +1,357 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/template/template.xhtml">
+	<ui:define name="content">
+		<div class="container-fluid custom-container">
+			<div class="row">
+				<div class="col-md-2 left-feild">
+					<div class="creative_filds_block">
+						<div class="ul">
+							<h:form>
+								<h:commandLink
+									action="#{allEventTouristicPlacesAndOfferBean.DisplayOffer()}"
+									value="Display All Offer" class="filter active" />
+								<h:commandLink
+									action="#{allEventTouristicPlacesAndOfferBean.DisplayPages()}"
+									value="Display All Pages" class="filter active" />
+								<h:commandLink
+									action="#{allEventTouristicPlacesAndOfferBean.DisplayEvent()}"
+									value="Display All Events" class="filter active" />
+								<h:commandLink
+									action="#{allEventTouristicPlacesAndOfferBean.DisplayTouristicPlaces()}"
+									value="Display All Touristic Places" class="filter active" />
+							</h:form>
+
+						</div>
+					</div>
+				</div>
+				<!-- *************************************************************************************************************************** -->
+				<!-- *********************************************************** ALL OFFER ***************************************************** -->
+				<!-- *************************************************************************************************************************** -->
+
+
+				<ui:repeat
+					value="#{allEventTouristicPlacesAndOfferBean.listAllOffers}"
+					var="p"
+					rendered="#{allEventTouristicPlacesAndOfferBean.displayAllOffer}">
+
+
+					<div class="category-1 mix custom-column-5"
+						style="display: inline-block;">
+						<div class="be-post">
+							<a href="page1.html" class="be-img-block"> <h:graphicImage
+									value="http://localhost:18080/hypnotrip-web/resources/img/p1.jpg"
+									alt="" />
+							</a> <a href="page1.html" class="be-post-title"><h:outputText
+									value="#{p.description}" /></a> <span>
+								<center>
+									<a href="#" class="be-post-tag"><h:outputText
+											value="#{p.categoriePage.toUpperCase()}" /> </a>
+								</center>
+							</span>
+							<div class="author-post">
+								<h:graphicImage
+									value="http://localhost:18080/hypnotrip-web/resources/img/a1.png"
+									alt="" />
+								<span>by <a href="page1.html">HypnoTrip</a>
+								</span>
+							</div>
+							<center>
+								<h:form id="f1" rendered="#{!empty loginBean.identifiedUser}">
+									<h:commandButton class="btn color-1 size-2 hover-1"
+										action="#{allEventTouristicPlacesAndOfferBean.follow()}"
+										value="Follow">
+										<f:setPropertyActionListener value="#{p}"
+											target="#{allEventTouristicPlacesAndOfferBean.pagesSelected}"></f:setPropertyActionListener>
+									</h:commandButton>
+
+									<h:commandButton
+										class="btn color-1 size-2 hover-1 fa fa-thumbs-o-up"
+										style="background: green"
+										action="#{allEventTouristicPlacesAndOfferBean.WishDirect()}"
+										value="Wish">
+										<f:setPropertyActionListener value="#{p}"
+											target="#{allEventTouristicPlacesAndOfferBean.pagesSelected}"></f:setPropertyActionListener>
+									</h:commandButton>
+								</h:form>
+							</center>
+						</div>
+					</div>
+				</ui:repeat>
+
+				<!-- *************************************************************************************************************************** -->
+				<!-- *********************************************************** ALL Event ***************************************************** -->
+				<!-- *************************************************************************************************************************** -->
+
+
+				<ui:repeat
+					value="#{allEventTouristicPlacesAndOfferBean.listAllEvent}" var="p"
+					rendered="#{allEventTouristicPlacesAndOfferBean.displayAllEvent}">
+
+
+					<div class="category-1 mix custom-column-5"
+						style="display: inline-block;">
+						<div class="be-post">
+							<a href="page1.html" class="be-img-block"> <h:graphicImage
+									value="http://localhost:18080/hypnotrip-web/resources/img/p1.jpg"
+									alt="" />
+							</a> <a href="page1.html" class="be-post-title"><h:outputText
+									value="#{p.description}" /></a> <span>
+								<center>
+									<a href="#" class="be-post-tag"><h:outputText
+											value="#{p.categoriePage.toUpperCase()}" /> </a>
+								</center>
+							</span>
+							<div class="author-post">
+								<h:graphicImage
+									value="http://localhost:18080/hypnotrip-web/resources/img/a1.png"
+									alt="" />
+								<span>by <a href="page1.html">HypnoTrip</a>
+								</span>
+							</div>
+							<center>
+								<h:form id="f1" rendered="#{!empty loginBean.identifiedUser}">
+									<h:commandButton class="btn color-1 size-2 hover-1"
+										action="#{allEventTouristicPlacesAndOfferBean.follow()}"
+										value="Follow">
+										<f:setPropertyActionListener value="#{p}"
+											target="#{allEventTouristicPlacesAndOfferBean.pagesSelected}"></f:setPropertyActionListener>
+									</h:commandButton>
+
+									<h:commandButton
+										class="btn color-1 size-2 hover-1 fa fa-thumbs-o-up"
+										style="background: green"
+										action="#{allEventTouristicPlacesAndOfferBean.WishDirect()}"
+										value="Wish">
+										<f:setPropertyActionListener value="#{p}"
+											target="#{allEventTouristicPlacesAndOfferBean.pagesSelected}"></f:setPropertyActionListener>
+									</h:commandButton>
+								</h:form>
+							</center>
+						</div>
+					</div>
+				</ui:repeat>
+
+				<!-- *************************************************************************************************************************** -->
+				<!-- ***************************************************** ALL Touristic places ************************************************ -->
+				<!-- *************************************************************************************************************************** -->
+
+
+				<ui:repeat
+					value="#{allEventTouristicPlacesAndOfferBean.listAllTouristicPlace}"
+					var="p"
+					rendered="#{allEventTouristicPlacesAndOfferBean.displayAllTouristicPlaces}">
+
+
+					<div class="category-1 mix custom-column-5"
+						style="display: inline-block;">
+						<div class="be-post">
+							<a href="page1.html" class="be-img-block"> <h:graphicImage
+									value="http://localhost:18080/hypnotrip-web/resources/img/p1.jpg"
+									alt="" />
+							</a> <a href="page1.html" class="be-post-title"><h:outputText
+									value="#{p.description}" /></a> <span>
+								<center>
+									<a href="#" class="be-post-tag"><h:outputText
+											value="#{p.categoriePage.toUpperCase()}" /> </a>
+								</center>
+							</span>
+							<div class="author-post">
+								<h:graphicImage
+									value="http://localhost:18080/hypnotrip-web/resources/img/a1.png"
+									alt="" />
+								<span>by <a href="page1.html">HypnoTrip</a>
+								</span>
+							</div>
+							<center>
+								<h:form id="f1" rendered="#{!empty loginBean.identifiedUser}">
+									<h:commandButton class="btn color-1 size-2 hover-1"
+										action="#{allEventTouristicPlacesAndOfferBean.follow()}"
+										value="Follow">
+										<f:setPropertyActionListener value="#{p}"
+											target="#{allEventTouristicPlacesAndOfferBean.pagesSelected}"></f:setPropertyActionListener>
+									</h:commandButton>
+
+									<h:commandButton
+										class="btn color-1 size-2 hover-1 fa fa-thumbs-o-up"
+										style="background: green"
+										action="#{allEventTouristicPlacesAndOfferBean.WishDirect()}"
+										value="Wish">
+										<f:setPropertyActionListener value="#{p}"
+											target="#{allEventTouristicPlacesAndOfferBean.pagesSelected}"></f:setPropertyActionListener>
+									</h:commandButton>
+								</h:form>
+							</center>
+						</div>
+					</div>
+				</ui:repeat>
+
+
+
+				<!-- *************************************************************************************************************************** -->
+				<!-- *********************************************************** ALL PAGES ***************************************************** -->
+				<!-- *************************************************************************************************************************** -->
+
+
+				<ui:repeat
+					value="#{allEventTouristicPlacesAndOfferBean.listAllPages}" var="p"
+					rendered="#{allEventTouristicPlacesAndOfferBean.displayAllPages}">
+
+
+					<div class="category-1 mix custom-column-5"
+						style="display: inline-block;">
+						<div class="be-post">
+							<a href="page1.html" class="be-img-block"> <h:graphicImage
+									value="http://localhost:18080/hypnotrip-web/resources/img/p1.jpg"
+									alt="" />
+							</a> <a href="page1.html" class="be-post-title"><h:outputText
+									value="#{p.description}" /></a> <span>
+								<center>
+									<a href="#" class="be-post-tag"><h:outputText
+											value="#{p.categoriePage.toUpperCase()}" /> </a>
+								</center>
+							</span>
+							<div class="author-post">
+								<h:graphicImage
+									value="http://localhost:18080/hypnotrip-web/resources/img/a1.png"
+									alt="" />
+								<span>by <a href="page1.html">HypnoTrip</a>
+								</span>
+							</div>
+							<center>
+								<h:form id="f1" rendered="#{!empty loginBean.identifiedUser}">
+									<h:commandButton class="btn color-1 size-2 hover-1"
+										action="#{allEventTouristicPlacesAndOfferBean.follow()}"
+										value="Follow">
+										<f:setPropertyActionListener value="#{p}"
+											target="#{allEventTouristicPlacesAndOfferBean.pagesSelected}"></f:setPropertyActionListener>
+									</h:commandButton>
+
+									<h:commandButton
+										class="btn color-1 size-2 hover-1 fa fa-thumbs-o-up"
+										style="background: green"
+										action="#{allEventTouristicPlacesAndOfferBean.WishDirect()}"
+										value="Wish">
+										<f:setPropertyActionListener value="#{p}"
+											target="#{allEventTouristicPlacesAndOfferBean.pagesSelected}"></f:setPropertyActionListener>
+									</h:commandButton>
+								</h:form>
+							</center>
+						</div>
+					</div>
+				</ui:repeat>
+
+
+				<!-- *************************************************************************************************************************** -->
+				<!-- *************************************************************************************************************************** -->
+				<!-- *************************************************************************************************************************** -->
+			
+				<ui:repeat
+					value="#{allEventTouristicPlacesAndOfferBean.listAllPagesToDisplay}"
+					var="p"
+					rendered="#{allEventTouristicPlacesAndOfferBean.displayForm1}">
+
+
+					<div class="category-1 mix custom-column-5"
+						style="display: inline-block;">
+						<div class="be-post">
+							<a href="page1.html" class="be-img-block"> <h:graphicImage
+									value="http://localhost:18080/hypnotrip-web/resources/img/p1.jpg"
+									alt="" />
+							</a> <a href="page1.html" class="be-post-title"><h:outputText
+									value="#{p.description}" /></a> <span>
+								<center>
+									<a href="#" class="be-post-tag"><h:outputText
+											value="#{p.categoriePage.toUpperCase()}" /> </a>
+								</center>
+							</span>
+							<div class="author-post">
+								<h:graphicImage
+									value="http://localhost:18080/hypnotrip-web/resources/img/a1.png"
+									alt="" />
+								<span>by <a href="page1.html">HypnoTrip</a>
+								</span>
+							</div>
+							<center>
+								<h:form id="f1" rendered="#{!empty loginBean.identifiedUser}">
+									<h:commandButton class="btn color-1 size-2 hover-1"
+										action="#{allEventTouristicPlacesAndOfferBean.follow()}"
+										value="Follow">
+										<f:setPropertyActionListener value="#{p}"
+											target="#{allEventTouristicPlacesAndOfferBean.pagesSelected}"></f:setPropertyActionListener>
+									</h:commandButton>
+
+									<h:commandButton
+										class="btn color-1 size-2 hover-1 fa fa-thumbs-o-up"
+										style="background: green"
+										action="#{allEventTouristicPlacesAndOfferBean.WishDirect()}"
+										value="Wish">
+										<f:setPropertyActionListener value="#{p}"
+											target="#{allEventTouristicPlacesAndOfferBean.pagesSelected}"></f:setPropertyActionListener>
+									</h:commandButton>
+								</h:form>
+							</center>
+						</div>
+					</div>
+				</ui:repeat>
+
+				<!-- *************************************************************************************************************************** -->
+				<!-- *************************************************************************************************************************** -->
+				<!-- *************************************************************************************************************************** -->
+				<center>
+					<h:form id="formWish"
+						rendered="#{allEventTouristicPlacesAndOfferBean.displayForm2}">
+						<br />
+						<h1>Do You Want Add This In Your WishList</h1>
+						<br />
+						<div class="category-1 mix " style="display: inline-block;">
+							<div class="be-post">
+								<a href="page1.html" class="be-img-block"> <h:graphicImage
+										value="http://localhost:18080/hypnotrip-web/resources/img/p1.jpg"
+										alt="" />
+								</a> <a href="page1.html" class="be-post-title"><h:outputText
+										value="#{allEventTouristicPlacesAndOfferBean.pagesSelected.description}" /></a>
+								<span>
+									<center>
+										<a href="#" class="be-post-tag"><h:outputText
+												value="#{allEventTouristicPlacesAndOfferBean.pagesSelected.categoriePage.toUpperCase()}" />
+										</a>
+									</center>
+								</span>
+								<div class="author-post">
+									<h:graphicImage
+										value="http://localhost:18080/hypnotrip-web/resources/img/a1.png"
+										alt="" />
+									<span>by <a href="page1.html">HypnoTrip</a>
+									</span>
+								</div>
+								<center>
+									<h:form id="f1" rendered="#{!empty loginBean.identifiedUser}">
+										<h:commandButton
+											class="btn color-1 size-2 hover-1 fa fa-thumbs-o-up"
+											style="background: green"
+											action="#{allEventTouristicPlacesAndOfferBean.Wish()}"
+											value="Wish">
+										</h:commandButton>
+										<h:commandButton
+											class="btn color-1 size-2 hover-1 fa fa-thumbs-o-up"
+											style="background: red"
+											action="#{allEventTouristicPlacesAndOfferBean.cancel()}"
+											value="NO">
+
+										</h:commandButton>
+									</h:form>
+								</center>
+							</div>
+						</div>
+					</h:form>
+				</center>
+			</div>
+		</div>
+	</ui:define>
+</ui:composition>
