@@ -167,15 +167,19 @@ public class UserServices implements UserServicesRemote, UserServicesLocal {
 
 	@Override
 	public void blocUser(String idUser) {
-		User user = findUserById(idUser);
-		user.setEtat(0);
-		entityManager.merge(user);
+		Client client = ClientBuilder.newClient();
+		WebTarget target = client.target("http://localhost:63784/api/UserWS");
+		WebTarget userFriends = target.path("blockUser").path(idUser);
+		Response response = userFriends.request().get();
+		response.close();
 
 	}
 	public void deblocUser(String idUser) {
-		User user = findUserById(idUser);
-		user.setEtat(1);
-		entityManager.merge(user);
+		Client client = ClientBuilder.newClient();
+		WebTarget target = client.target("http://localhost:63784/api/UserWS");
+		WebTarget userFriends = target.path("DeblockUser").path(idUser);
+		Response response = userFriends.request().get();
+		response.close();
 
 	}
 
