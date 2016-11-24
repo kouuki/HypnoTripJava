@@ -7,7 +7,12 @@
 	xmlns:p="http://primefaces.org/ui"
 	template="/WEB-INF/template/template.xhtml">
 	<h:head>
-
+		<style type="text/css">
+.ui-fileupload {
+	width: 800px;
+	margin: 0 auto;
+}
+</style>
 	</h:head>
 	<ui:define name="content">
 		<center>
@@ -69,7 +74,7 @@
 					</div>
 
 				</ui:repeat>
-				
+
 				<h:commandButton action="#{manageListEventsBean.selectPage()}"
 					class="be-popup-sign-button" value="Add New Event" />
 
@@ -86,17 +91,18 @@
 			<h:form id="formForEvent"
 				rendered="#{manageListEventsBean.displayFormEvent}"
 				enctype="multipart/form-data">
+				Picture
+				<p:fileUpload
+					fileUploadListener="#{manageListEventsBean.handleFileUpload}"
+					mode="advanced" update="messages" label="Choose a file"
+					sizeLimit="1048576" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
+					invalidSizeMessage="The maximum file size allowed is 1 Megabyte !"
+					invalidFileMessage="You are allowed to upload only images !" />
+				<p:growl id="messages" showDetail="true" sticky="true" />
+
 				<table width="80%">
 
-					<tr>
-						<TH width="20%">Picture</TH>
-						<td width="60%"><h:inputFile id="file"
-								value="#{manageListEventsBean.file}" /> <h:commandButton
-								value="Upload" action="#{manageListEventsBean.upload}" /></td>
 
-
-
-					</tr>
 
 					<tr>
 						<TH>Title</TH>
@@ -177,7 +183,7 @@
 		<br />
 		<br />
 		<br />
-		
+
 		<br />
 		<br />
 		<br />

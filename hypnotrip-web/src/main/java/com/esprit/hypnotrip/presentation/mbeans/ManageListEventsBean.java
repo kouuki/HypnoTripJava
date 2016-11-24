@@ -1,20 +1,23 @@
 package com.esprit.hypnotrip.presentation.mbeans;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
-import javax.servlet.http.Part;
 
 import org.primefaces.context.RequestContext;
+import org.primefaces.event.FileUploadEvent;
 import org.primefaces.event.SelectEvent;
 
 import com.esprit.hypnotrip.persistence.Event;
@@ -44,9 +47,9 @@ public class ManageListEventsBean {
 	private String idOwner;
 	private List<Event> myPages = new ArrayList<>();
 
-	// Image
-	private Part file;
-	private String fileContent;
+	// Primitives
+	private static final int BUFFER_SIZE = 6124;
+	String res = "";
 
 	@PostConstruct
 	public void init() {
@@ -63,6 +66,10 @@ public class ManageListEventsBean {
 
 	// ********************************************************************************
 	public String doAddEvent() {
+		if (res != "") {
+			System.out.println(res);
+			eventSelected.setImageURL(res);
+		}
 		pageServiceLocal.saveOrUpdatePage(eventSelected, idOwner);
 		return "/pages/simpleUserHome/listMyEvents?faces-redirect=true";
 	}
@@ -70,19 +77,23 @@ public class ManageListEventsBean {
 	// ********************************************************************************
 	// ********************************************************************************
 	public String doAddEventForPro() {
+		if (res != "") {
+			System.out.println(res);
+			eventSelected.setImageURL(res);
+		}
 		pageServiceLocal.saveOrUpdatePage(eventSelected, idOwner);
 		return "/pages/proUserHome/listMyEvents?faces-redirect=true";
 	}
 
 	// ********************************************************************************
 	// ********************************************************************************
-		// Suppression de la page
-		public String doDeletePageforPro() {
-			pageServiceLocal.deletePage(eventSelected);
-			return "/pages/proUserHome/listMyEvents?faces-redirect=true";
-		}
+	// Suppression de la page
+	public String doDeletePageforPro() {
+		pageServiceLocal.deletePage(eventSelected);
+		return "/pages/proUserHome/listMyEvents?faces-redirect=true";
+	}
 
-		// ********************************************************************************
+	// ********************************************************************************
 	// Passer a La Page Rate
 	public String ratePage() {
 
@@ -131,15 +142,43 @@ public class ManageListEventsBean {
 	}
 
 	// **********************************************************************************
-	@SuppressWarnings("resource")
-	public void upload() {
-		try {
-			fileContent = new Scanner(file.getInputStream()).useDelimiter("\\A").next();
+	public void handleFileUpload(FileUploadEvent event) {
 
-			eventSelected.setImageURL(fileContent);
+		ExternalContext extContext = FacesContext.getCurrentInstance().getExternalContext();
+		File result = new File(extContext.getRealPath("//WEB-INF//files//" + event.getFile().getFileName()));
+		res = extContext.getRealPath("//WEB-INF//files//" + event.getFile().getFileName());
+		System.out.println(res);
+
+		try {
+			FileOutputStream fileOutputStream = new FileOutputStream(result);
+
+			byte[] buffer = new byte[BUFFER_SIZE];
+
+			int bulk;
+			InputStream inputStream = event.getFile().getInputstream();
+			while (true) {
+				bulk = inputStream.read(buffer);
+				if (bulk < 0) {
+					break;
+				}
+				fileOutputStream.write(buffer, 0, bulk);
+				fileOutputStream.flush();
+			}
+
+			fileOutputStream.close();
+			inputStream.close();
+
+			FacesMessage msg = new FacesMessage("File Description",
+					"file name: " + event.getFile().getFileName() + "<br/>file size: "
+							+ event.getFile().getSize() / 1024 + " Kb<br/>content type: "
+							+ event.getFile().getContentType() + "<br/><br/>The file was uploaded.");
+			FacesContext.getCurrentInstance().addMessage(null, msg);
 
 		} catch (IOException e) {
-			// Error handling
+			e.printStackTrace();
+
+			FacesMessage error = new FacesMessage(FacesMessage.SEVERITY_ERROR, "The files were not uploaded!", "");
+			FacesContext.getCurrentInstance().addMessage(null, error);
 		}
 	}
 
@@ -198,22 +237,6 @@ public class ManageListEventsBean {
 
 	public void setEventSelected(Event eventSelected) {
 		this.eventSelected = eventSelected;
-	}
-
-	public Part getFile() {
-		return file;
-	}
-
-	public void setFile(Part file) {
-		this.file = file;
-	}
-
-	public String getFileContent() {
-		return fileContent;
-	}
-
-	public void setFileContent(String fileContent) {
-		this.fileContent = fileContent;
 	}
 
 }
