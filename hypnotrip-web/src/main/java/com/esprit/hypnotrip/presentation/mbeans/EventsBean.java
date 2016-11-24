@@ -8,6 +8,11 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
+import org.primefaces.model.map.DefaultMapModel;
+import org.primefaces.model.map.LatLng;
+import org.primefaces.model.map.MapModel;
+import org.primefaces.model.map.Marker;
+
 import com.esprit.hypnotrip.persistence.Event;
 import com.esprit.hypnotrip.services.interfaces.EventServicesLocal;
 
@@ -21,11 +26,19 @@ public class EventsBean {
 	private List<Event> eventsThisMonth = new ArrayList<Event>();
 	private List<Event> eventsInMyArea = new ArrayList<Event>();
 
+	private List<Event> missedEvents = new ArrayList<Event>();
+	private Event mostFollowedUpcoming = new Event();
+
 	// Forms to show in this page
 	private Boolean displayFormThisWeek = true;
 	private Boolean displayFormNextWeek = false;
 	private Boolean displayFormThisMonth = false;
 	private Boolean displayFormMyArea = false;
+
+	private Boolean displayFormMostFollowedEvent = true;
+	private Boolean displayFormMissedEvents = false;
+
+	private MapModel simpleModel;
 
 	// inject event services bean
 	@EJB
@@ -33,10 +46,24 @@ public class EventsBean {
 
 	@PostConstruct
 	public void init() {
+
+		simpleModel = new DefaultMapModel();
+
 		eventsThisWeek = eventServicesLocal.getAllThisWeekEvents();
 		eventsNextWeek = eventServicesLocal.getAllNextWeekEvents();
 		eventsThisMonth = eventServicesLocal.getMonthlyEventsByMonth();
 		eventsInMyArea = eventServicesLocal.availableOrUpcomingEventsInMyArea("5", "tunis");
+		mostFollowedUpcoming = eventServicesLocal.mostFollowedEventToCome();
+		missedEvents = eventServicesLocal.eventsIHaveMissedInTheLastWeek("5");
+
+		for (Event event : eventsThisMonth) {
+			// Shared coordinates
+			LatLng coord = new LatLng(event.getLatitude(), event.getLongitude());
+
+			// Basic marker
+			simpleModel.addOverlay(new Marker(coord, event.getPlace()));
+
+		}
 	}
 
 	public String selectThisWeekEventsToShow() {
@@ -54,7 +81,7 @@ public class EventsBean {
 		displayFormMyArea = false;
 		return null;
 	}
-	
+
 	public String selectNextMonthEventsToShow() {
 		displayFormThisWeek = false;
 		displayFormNextWeek = false;
@@ -62,7 +89,7 @@ public class EventsBean {
 		displayFormMyArea = false;
 		return null;
 	}
-	
+
 	public String selectEventsInMyAreaToShow() {
 		displayFormThisWeek = false;
 		displayFormNextWeek = false;
@@ -70,7 +97,23 @@ public class EventsBean {
 		displayFormMyArea = true;
 		return null;
 	}
-	
+
+	public String selectMostFollowedUpcomingEvent() {
+		displayFormMostFollowedEvent = true;
+		displayFormMissedEvents = false;
+		return null;
+	}
+
+	public String selectMissedEvents() {
+		displayFormMostFollowedEvent = false;
+		displayFormMissedEvents = true;
+		return null;
+	}
+
+	public MapModel getSimpleModel() {
+		return simpleModel;
+	}
+
 	// recall of wanted methods/services
 
 	public List<Event> getEventsThisWeek() {
@@ -135,6 +178,38 @@ public class EventsBean {
 
 	public void setEventsInMyArea(List<Event> eventsInMyArea) {
 		this.eventsInMyArea = eventsInMyArea;
+	}
+
+	public Event getMostFollowedUpcoming() {
+		return mostFollowedUpcoming;
+	}
+
+	public void setMostFollowedUpcoming(Event mostFollowedUpcoming) {
+		this.mostFollowedUpcoming = mostFollowedUpcoming;
+	}
+
+	public Boolean getDisplayFormMostFollowedEvent() {
+		return displayFormMostFollowedEvent;
+	}
+
+	public void setDisplayFormMostFollowedEvent(Boolean displayFormMostFollowedEvent) {
+		this.displayFormMostFollowedEvent = displayFormMostFollowedEvent;
+	}
+
+	public Boolean getDisplayFormMissedEvents() {
+		return displayFormMissedEvents;
+	}
+
+	public void setDisplayFormMissedEvents(Boolean displayFormMissedEvents) {
+		this.displayFormMissedEvents = displayFormMissedEvents;
+	}
+
+	public List<Event> getMissedEvents() {
+		return missedEvents;
+	}
+
+	public void setMissedEvents(List<Event> missedEvents) {
+		this.missedEvents = missedEvents;
 	}
 
 }

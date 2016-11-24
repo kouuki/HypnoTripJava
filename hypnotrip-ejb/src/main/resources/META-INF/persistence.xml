@@ -41,7 +41,7 @@
 		<class>com.esprit.hypnotrip.persistence.User</class>
 		<class>com.esprit.hypnotrip.persistence.Userconnections</class>
 		<properties>
-			<property name="hibernate.hbm2ddl.auto" value="create-drop"/>
+			<property name="hibernate.hbm2ddl.auto" value="create-drop"/>			
 		</properties>
 	</persistence-unit>
 </persistence>

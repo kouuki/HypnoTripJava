@@ -19,11 +19,11 @@ public class EventTest {
 			EventServicesRemote eventServicesRemote = (EventServicesRemote) context.lookup(jndiName);
 
 			// period test
-			// List<Event> events = eventServicesRemote.getAllThisWeekEvents();
-			//
-			// for (Event event : events) {
-			// System.out.println(event.toString());
-			// }
+			List<Event> events = eventServicesRemote.eventsIHaveMissedInTheLastWeek("5");
+
+			for (Event event : events) {
+				System.out.println(event.toString());
+			}
 
 			// months test
 			// List<Integer> months = eventServicesRemote.getAllEventMonths();
@@ -41,10 +41,12 @@ public class EventTest {
 			// System.out.println(response);
 
 			// events i might like test
-			List<Event> events = eventServicesRemote.availableOrUpcomingEventsInMyArea("5", "tunis");
-			for (Event event : events) {
-				System.out.println(event.toString());
-			}
+			// List<Event> events =
+			// eventServicesRemote.availableOrUpcomingEventsInMyArea("5",
+			// "tunis");
+			// for (Event event : events) {
+			// System.out.println(event.toString());
+			// }
 
 		} catch (NamingException e) {
 			// TODO Auto-generated catch block
