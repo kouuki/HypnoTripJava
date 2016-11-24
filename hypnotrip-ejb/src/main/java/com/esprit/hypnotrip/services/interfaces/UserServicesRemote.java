@@ -45,5 +45,7 @@ public interface UserServicesRemote {
 
 	// services for yasmine
 	User findUserById(String idUser);
+	
+	int numberOfConnexion();
 
 }

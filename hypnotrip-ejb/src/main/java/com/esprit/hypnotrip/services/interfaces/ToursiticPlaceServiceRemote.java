@@ -18,4 +18,8 @@ public interface ToursiticPlaceServiceRemote {
 
 	Touristicplace findTouristicPlaceById(int idPage);
 
+	int numberOfTouristicPLaces();
+
+	int numberOfTouristicPLacesNotAccepted();
+
 }

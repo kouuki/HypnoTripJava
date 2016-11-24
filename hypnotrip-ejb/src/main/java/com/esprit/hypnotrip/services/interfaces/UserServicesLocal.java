@@ -15,7 +15,7 @@ import com.esprit.hypnotrip.services.exceptions.WrongNumberOfCancelingException;
 
 @Local
 public interface UserServicesLocal {
-	
+
 	User findUserByLoginAndPassword(String email, String password);
 
 	User getUserbyId(String idUser);
@@ -35,6 +35,7 @@ public interface UserServicesLocal {
 	List<User> getAllFriendsWhoAreGoingToTheSameEvent(Pages enent, String userId);
 
 	void blocUser(String idUser);
+
 	void deblocUser(String idUser);
 
 	List<User> listBlockedUser();
@@ -45,5 +46,7 @@ public interface UserServicesLocal {
 
 	// services for yasmine
 	User findUserById(String idUser);
+
+	int numberOfConnexion();
 
 }

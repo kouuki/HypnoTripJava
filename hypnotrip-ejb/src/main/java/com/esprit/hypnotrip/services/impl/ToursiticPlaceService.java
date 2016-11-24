@@ -61,5 +61,15 @@ public class ToursiticPlaceService implements ToursiticPlaceServiceRemote, Tours
 	public Touristicplace findTouristicPlaceById(int idPage) {
 		return entityManager.find(Touristicplace.class, idPage);
 	}
+
+	@Override
+	public int numberOfTouristicPLaces() {
+		List<Touristicplace> ls = getAllTouristicPlaces();
+		return ls.size();
+	}
+	public int numberOfTouristicPLacesNotAccepted() {
+		List<Touristicplace> ls = getAllTouristicPlaceNotAccepted();
+		return ls.size();
+	}
 	
 }

@@ -13,11 +13,51 @@
 		<h:body>
 
 
-			<h:form id="formAdminManageUsers" rendered="true" class="text-center">
+			<h:form id="formAdminManageUsers" rendered="true">
 				<div class="Card ShadowEffect HeiAutoOnMobile">
-					
-				</div>
+					<div class="Container100 Responsive50">
+						<div class="ContainerIndent">
+							<div class="Card ShadowEffect HeiAutoOnMobile OvHidden">
+								<div class="Container100"
+									style="margin: 0px 10px 10px -10px; padding: 0px 10px;">
+									<div class="SoftGreenBack DispInlBlock Fleft"
+										style="margin: -10px 10px -10px -10px; padding: 20px 10px;">
+										<i class="icon-man459 Green Fs100"></i>
+									</div>
+									<p></p>
+									<span class="Gray FontRobotoLight Fs20">Number Of Visits</span><br />
+									<span class="Green Fs30 FontRobotoBold">#{adminBean.numberOfconnectedUser}</span>
+								</div>
+								<div class="CardFooter">
+									<span class="Red Fleft Fs18"></span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="Container100 Responsive50">
+						<div class="ContainerIndent">
+							<div class="Card ShadowEffect HeiAutoOnMobile OvHidden">
+								<div class="Container100"
+									style="margin: 0px 10px 10px -10px; padding: 0px 10px;">
+									<div class="SoftRedBack DispInlBlock Fleft"
+										style="margin: -10px 10px -10px -10px; padding: 20px 10px;">
+										<i class="icon-airplane106 Red Fs100"></i>
+									</div>
+									<p></p>
+									<span class="Gray FontRobotoLight Fs20">Number Of Touristic Places</span><br /> <span class="Red Fs30 FontRobotoBold">#{adminBean.numberOfTouristicPlaces}</span>
+								</div>
+								<div class="CardFooter">
+									<span class="Fleft Gray Fs18">#{adminBean.numberOfTouristicPlacesNotAccepted}
+										Not Confirmed</span> <a
+										href="/hypnotrip-web/pages/Admin/AdminTouristicPlaces.xhtml"
+										class="CardFooterBtn Gray BorderLeft Fright ripplelink"><i
+										class="icon-add180"></i></a>
 
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 			</h:form>
 
 		</h:body>

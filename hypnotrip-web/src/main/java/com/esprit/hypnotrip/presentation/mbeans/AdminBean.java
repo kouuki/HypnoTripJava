@@ -20,7 +20,9 @@ public class AdminBean {
 	UserServicesLocal userservicelocal;
 	@EJB
 	ToursiticPlaceServiceLocal toursiticPlaceServiceLocal;
-
+    int numberOfconnectedUser;
+    int numberOfTouristicPlaces;
+    int numberOfTouristicPlacesNotAccepted;
 	private List<User> usersNotBlocked = new ArrayList<>();
 	private List<User> usersBlocked = new ArrayList<>();
 	private List<Touristicplace> touristicPlaceNotAccepted = new ArrayList<>();
@@ -30,6 +32,9 @@ public class AdminBean {
 		setUsersNotBlocked(userservicelocal.listNotBlockedUser());
 		setUsersBlocked(userservicelocal.listBlockedUser());
 		setTouristicPlaceNotAccepted(toursiticPlaceServiceLocal.getAllTouristicPlaceNotAccepted());
+		numberOfTouristicPlaces=toursiticPlaceServiceLocal.numberOfTouristicPLaces();
+		numberOfTouristicPlacesNotAccepted=toursiticPlaceServiceLocal.numberOfTouristicPLacesNotAccepted();
+		numberOfconnectedUser=userservicelocal.numberOfConnexion();
 	}
 
 	public List<User> getUsersNotBlocked() {
@@ -80,7 +85,7 @@ public class AdminBean {
 // ACCEPT TOURISTIC PLACE 
 	public String AcceptTouristicPlace(int idPage){
 		toursiticPlaceServiceLocal.acceptTouristicPlace(idPage);
-		return "/pages/Admin/AdminPage?faces-redirect=true";
+		return "/pages/Admin/AdminTouristicPlaces?faces-redirect=true";
 	}
 	public List<Touristicplace> getTouristicPlaceNotAccepted() {
 		return touristicPlaceNotAccepted;
@@ -88,6 +93,30 @@ public class AdminBean {
 
 	public void setTouristicPlaceNotAccepted(List<Touristicplace> touristicPlaceNotAccepted) {
 		this.touristicPlaceNotAccepted = touristicPlaceNotAccepted;
+	}
+
+	public int getNumberOfconnectedUser() {
+		return numberOfconnectedUser;
+	}
+
+	public void setNumberOfconnectedUser(int numberOfconnectedUser) {
+		this.numberOfconnectedUser = numberOfconnectedUser;
+	}
+
+	public int getNumberOfTouristicPlaces() {
+		return numberOfTouristicPlaces;
+	}
+
+	public void setNumberOfTouristicPlaces(int numberOfTouristicPlaces) {
+		this.numberOfTouristicPlaces = numberOfTouristicPlaces;
+	}
+
+	public int getNumberOfTouristicPlacesNotAccepted() {
+		return numberOfTouristicPlacesNotAccepted;
+	}
+
+	public void setNumberOfTouristicPlacesNotAccepted(int numberOfTouristicPlacesNotAccepted) {
+		this.numberOfTouristicPlacesNotAccepted = numberOfTouristicPlacesNotAccepted;
 	}
 
 }

@@ -227,4 +227,11 @@ public class UserServices implements UserServicesRemote, UserServicesLocal {
 
 	}
 
+	@Override
+	public int numberOfConnexion() {
+		Query query = entityManager.createQuery("SELECT u FROM Userconnections u ");
+		List<User> lr = query.getResultList();
+		return lr.size();
+	}
+
 }

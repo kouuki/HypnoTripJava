@@ -13,9 +13,13 @@ public interface ToursiticPlaceServiceLocal {
 	List<Touristicplace> mostRatedTouristicPlaces();
 
 	List<Touristicplace> getAllTouristicPlaceNotAccepted();
-	
+
 	void acceptTouristicPlace(int idPage);
-	
+
 	Touristicplace findTouristicPlaceById(int idPage);
+
+	int numberOfTouristicPLaces();
+
+	int numberOfTouristicPLacesNotAccepted();
 
 }

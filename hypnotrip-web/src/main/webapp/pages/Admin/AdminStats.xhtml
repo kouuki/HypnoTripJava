@@ -11,23 +11,32 @@
 		<h:head>
 		</h:head>
 		<h:body>
-			<h1>Statistics About Most Rated Touristic Places</h1>
+		<div class="Card ShadowEffect HeiAutoOnMobile">
+		<h:panelGrid columns="2" columnClasses="left,right" style="width:100%">
+			
 
 			<h:form>
+			
+			<h4 align="center">Statistics About Most Rated Touristic Places</h4>
+			<br/>
+			<br/>
+			<br/>
 				<p:chart type="bar" model="#{statBeanTouristicPlaceRate.barModel}"
 					style="height:300px" />
-			</h:form><br />
-			<br />
-			<br />
-			<h1 align="center">Statistics About Most Offer Bought</h1>
-			<br />
-			<br />
-			<br />
-			<h:form>
+			</h:form>
+		    <h:form>
+			<h4 align="center">Statistics About Most Offer Bought</h4>
+			<br/>
+			<br/>
+			<br/>
 				<p:chart type="pie"
 					model="#{statisticsForMostOfferBought.pieModel2}"
 					style="height:500px" />
 			</h:form>
+			</h:panelGrid>
+			</div>
+			
 		</h:body>
+		
 	</ui:define>
 </ui:composition>
