@@ -145,8 +145,9 @@ public class ManageListEventsBean {
 	public void handleFileUpload(FileUploadEvent event) {
 
 		ExternalContext extContext = FacesContext.getCurrentInstance().getExternalContext();
-		File result = new File(extContext.getRealPath("//WEB-INF//files//" + event.getFile().getFileName()));
-		res = extContext.getRealPath("//WEB-INF//files//" + event.getFile().getFileName());
+		File result = new File(extContext.getRealPath("//uploads//" + event.getFile().getFileName()));
+		//res = extContext.getRealPath("//uploads//" + event.getFile().getFileName());
+		res = "//uploads//" + event.getFile().getFileName();
 		System.out.println(res);
 
 		try {
