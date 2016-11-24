@@ -11,10 +11,200 @@
 	</h:head>
 	<ui:define name="content">
 		<center>
-			
 
+			<H1>My Offers</H1>
+			<br /> <br /> <br /> <br />
+			<!-- ************************************************************************************************************ -->
+			<!-- ************************************************************************************************************ -->
+			<!-- ************************************************************************************************************ -->
+			<h:form id="formListOfPages"
+				rendered="#{manageOffersBean.displayForm1}">
+
+
+				<ui:repeat var="p" value="#{manageOffersBean.myPages}">
+
+					<div class="category-1 mix custom-column-5"
+						style="display: inline-block;">
+						<div class="be-post">
+							<a href="page1.html" class="be-img-block"> <h:graphicImage
+									value="#{p.imageURL}" alt="" />
+							</a> <b>Title :</b>
+							<h:outputText value="#{p.title}" />
+							<br /> <br /> <b>Description :</b>
+
+							<h:outputText value="#{p.description}" />
+
+							<br /> <br /> <b>Date of start :</b>
+
+
+							<h:outputText value="#{p.beginDate}" />
+							<br /> <br /> <b>Date of finish :</b>
+
+
+							<h:outputText value="#{p.finishDate}" />
+
+
+							<br /> <br /> <b>Price :</b>
+
+
+							<h:outputText value="#{p.price}" />
+
+							<br /> <br /> <b>Discount :</b>
+
+							<h:outputText value="#{p.discount}" />
+
+							<p:rating value="#{manageOffersBean.ratingLevels(p.pageId)}"
+								readonly="true" />
+
+						</div>
+						<div class="info-block">
+							<span> <h:commandButton
+									action="#{manageOffersBean.selectPage()}" value="select">
+
+									<f:setPropertyActionListener value="#{p}"
+										target="#{manageOffersBean.offerSelected}"></f:setPropertyActionListener>
+								</h:commandButton>
+							</span><span><h:commandButton value="Rate"
+									action="#{manageOffersBean.ratePage()}">
+									<f:setPropertyActionListener value="#{p}"
+										target="#{manageOffersBean.offerSelected}"></f:setPropertyActionListener>
+
+								</h:commandButton> </span>
+						</div>
+					</div>
+
+				</ui:repeat>
+
+
+				<h:commandButton action="#{manageOffersBean.selectPage()}"
+					class="be-popup-sign-button" value="Add New Offer" align="left" />
+
+
+
+
+			</h:form>
+
+			<!-- ************************************************************************************************************ -->
+			<!-- ************************************************************************************************************ -->
+			<!-- ************************************************************************************************************ -->
+			<h:form id="formForOffer"
+				rendered="#{manageOffersBean.displayFormOffer}"
+				enctype="multipart/form-data">
+				<table width="80%">
+
+					<tr>
+						<TH width="20%">Picture</TH>
+						<td width="60%"><h:inputFile id="file"
+								value="#{manageOffersBean.file}" /> <h:commandButton
+								value="Upload" action="#{manageOffersBean.upload}" /></td>
+
+
+
+					</tr>
+
+					<tr>
+						<TH>Title</TH>
+						<TD><h:inputText
+								value="#{manageOffersBean.offerSelected.title}" required="true"
+								requiredMessage="field required" /></TD>
+
+					</tr>
+					<tr>
+						<TH>Description</TH>
+						<TD><h:inputText
+								value="#{manageOffersBean.offerSelected.description}"
+								required="true" requiredMessage="field required" /></TD>
+
+					</tr>
+					<tr>
+						<TH>Start date</TH>
+						<TD><p:growl id="msgs1" showDetail="true" /> <h:panelGrid
+								columns="2" cellpadding="5">
+								<p:calendar id="Start"
+									value="#{manageOffersBean.offerSelected.beginDate}"
+									mode="inline" />
+							</h:panelGrid></TD>
+
+					</tr>
+					<tr>
+						<TH>Finish date</TH>
+						<TD><p:growl id="msgs2" showDetail="true" /> <h:panelGrid
+								columns="2" cellpadding="5">
+								<p:calendar id="finish"
+									value="#{manageOffersBean.offerSelected.finishDate}"
+									mode="inline" />
+							</h:panelGrid></TD>
+
+					</tr>
+					<tr>
+						<TH>Price</TH>
+						<TD><h:inputText
+								value="#{manageOffersBean.offerSelected.price}" required="true"
+								requiredMessage="field required" /></TD>
+
+					</tr>
+					<tr>
+						<TH>Discount</TH>
+						<TD><h:inputText
+								value="#{manageOffersBean.offerSelected.discount}"
+								required="true" requiredMessage="field required" /></TD>
+
+					</tr>
+					<tr>
+						<TH>Actions</TH>
+						<TD><h:commandButton
+								action="#{manageOffersBean.doAddOffer()}" value="save" /> <h:commandButton
+								action="#{manageOffersBean.doDeletePage()}" value="delete" /></TD>
+					</tr>
+				</table>
+
+
+			</h:form>
+
+			<!-- ************************************************************************************************************ -->
+			<!-- ************************************************************************************************************ -->
+			<!-- ************************************************************************************************************ -->
 
 		</center>
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+
+
+		<br />
+		<br />
+		<br />
+		<br />
 
 	</ui:define>
 

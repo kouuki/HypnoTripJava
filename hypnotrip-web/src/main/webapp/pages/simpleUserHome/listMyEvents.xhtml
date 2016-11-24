@@ -19,8 +19,7 @@
 			<!-- ************************************************************************************************************ -->
 			<h:form id="formListOfPages"
 				rendered="#{manageListEventsBean.displayForm1}">
-				<h:commandButton action="#{manageListEventsBean.selectPage()}"
-					class="be-popup-sign-button" value="Add New Event" align="left" />
+
 
 				<ui:repeat var="p" value="#{manageListEventsBean.myPages}">
 
@@ -67,7 +66,8 @@
 				</ui:repeat>
 
 
-
+				<h:commandButton action="#{manageListEventsBean.selectPage()}"
+					class="be-popup-sign-button" value="Add New Event" align="left" />
 
 
 

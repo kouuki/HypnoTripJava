@@ -49,21 +49,32 @@ public class DefaultDB {
 		// ********************************************************************************************************************
 		// ********************************************************************************************************************
 		// ********************************************************************************************************************
-		Pages offre = new Offer("My first offer", "Titre du 1er offre", 2.5, 1.1);
-
+		Pages offre = new Offer("My first offer", "Titre du 1er offre", 20, 10);
+		offre.setImageURL(
+				"http://imalbum.aufeminin.com/album/D20120821/874136_8U6IQUUQOIMFXZLJOO4CCYL22D7B6I_petit-dejeuner_H125650_L.jpg");
 		pageServiceLocal.saveOrUpdatePage(offre, "b38f3299-6949-42c7-9a6c-f998c66f485d");
-		Pages offre2 = new Offer("My second offer", "Titre du 2eme offre", 2.5, 1.1);
+		Pages offre2 = new Offer("My second offer", "Titre du 2eme offre", 1000, 15);
+		offre2.setImageURL("http://je-voyage.net/wp-content/uploads/2014/11/thailande.jpg");
 		pageServiceLocal.saveOrUpdatePage(offre2, "b38f3299-6949-42c7-9a6c-f998c66f485d");
+
+		Pages offre3 = new Offer("My third offer", "Titre du 3eme offre", 40, 15);
+		offre3.setImageURL("https://i.ytimg.com/vi/r2g4vQR_1i8/maxresdefault.jpg");
+		pageServiceLocal.saveOrUpdatePage(offre3, "b38f3299-6949-42c7-9a6c-f998c66f485d");
 		// ********************************************************************************************************************
 		// ********************************************************************************************************************
 		// ********************************************************************************************************************
 		Pages ts1 = new Touristicplace("First Touristic page", "Titre de la 1ere page", new Date(), "logo1", "Paris");
-
+		ts1.setImageURL(
+				"http://www.telegraph.co.uk/content/dam/Travel/Destinations/Europe/France/Paris/paris-attractions-xlarge.jpg");
 		pageServiceLocal.saveOrUpdatePage(ts1, "b38f3299-6949-42c7-9a6c-f998c66f485d");
 
-		Pages ts2 = new Touristicplace("Second Touristic page", "Titre de la 2eme page", new Date(), "logo2", "Tunis");
-
+		Pages ts2 = new Touristicplace("Second Touristic page", "Titre de la 2eme page", new Date(), "logo2", "US");
+		ts2.setImageURL("http://www.horizon-virtuel.com/amerique/new-york/statue-liberty.jpg");
 		pageServiceLocal.saveOrUpdatePage(ts2, "b38f3299-6949-42c7-9a6c-f998c66f485d");
+
+		Pages ts3 = new Touristicplace("Third Touristic page", "Titre de la 3eme page", new Date(), "logo2", "London");
+		ts3.setImageURL("http://cms.inspirato.com/media/5682444/London_Dest_16531610X.jpg");
+		pageServiceLocal.saveOrUpdatePage(ts3, "b38f3299-6949-42c7-9a6c-f998c66f485d");
 		// ********************************************************************************************************************
 		// ********************************************************************************************************************
 		// ********************************************************************************************************************
@@ -137,10 +148,15 @@ public class DefaultDB {
 				"http://www.ville-senlis.fr/var/www/storage/images/mediatheque/site-de-developpement/images/tests/evenements/1509-1-fre-FR/Evenements.jpg");
 		pageServiceLocal.saveOrUpdatePage(event, "b38f3299-6949-42c7-9a6c-f998c66f485d");
 
-		Pages event2 = new Event("MySecond Event", "Titre du 2éme evenement", new Date(), "Tunis");
+		Pages event2 = new Event("MySecond Event", "Titre du 2éme evenement", new Date(), "Bardo");
 
 		event2.setImageURL("http://productionsalterego.com/media/decorsdesalle.jpg");
 		pageServiceLocal.saveOrUpdatePage(event2, "b38f3299-6949-42c7-9a6c-f998c66f485d");
+
+		Pages event3 = new Event("My third Event", "Titre du 3éme evenement", new Date(), "Hammamet");
+
+		event3.setImageURL("http://www.birthday-party-ideas-101.com/images/BeachParty1.jpg");
+		pageServiceLocal.saveOrUpdatePage(event3, "b38f3299-6949-42c7-9a6c-f998c66f485d");
 	}
 
 }
