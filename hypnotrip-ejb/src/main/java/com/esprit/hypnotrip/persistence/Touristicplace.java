@@ -4,10 +4,8 @@ package com.esprit.hypnotrip.persistence;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -27,18 +25,16 @@ public class Touristicplace extends Pages implements java.io.Serializable {
 	private Date dateOfCreation;
 	private String logo;
 	private String name;
-	private int etat=0;
-	
-	
+	private int etat = 0;
+
 	private List<Rates> rates;
 
-	public Touristicplace(Date dateOfCreation, String logo, String name) {
-		super();
+	public Touristicplace(String description, String title, Date dateOfCreation, String logo, String name) {
+		super(description, title);
 		this.dateOfCreation = dateOfCreation;
 		this.logo = logo;
 		this.name = name;
 	}
-
 
 	public String getLogo() {
 		return logo;
@@ -49,13 +45,8 @@ public class Touristicplace extends Pages implements java.io.Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Touristicplace(String description, String userId) {
-		super(description, userId);
-		// TODO Auto-generated constructor stub
-	}
-
-	public Touristicplace(String description) {
-		super(description);
+	public Touristicplace(String description, String title) {
+		super(description, title);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -80,26 +71,21 @@ public class Touristicplace extends Pages implements java.io.Serializable {
 		this.name = name;
 	}
 
-
-	@OneToMany(mappedBy = "page",fetch=FetchType.EAGER)
+	@OneToMany(mappedBy = "page", fetch = FetchType.EAGER)
 	public List<Rates> getRates() {
 		return rates;
 	}
-
 
 	public void setRates(List<Rates> rates) {
 		this.rates = rates;
 	}
 
-
 	public int getEtat() {
 		return etat;
 	}
-
 
 	public void setEtat(int etat) {
 		this.etat = etat;
 	}
 
 }
-

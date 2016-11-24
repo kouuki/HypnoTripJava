@@ -29,11 +29,10 @@ public class Event extends Pages implements java.io.Serializable {
 
 	private String place;
 
+	private float price;
 
-	
 	private List<Follows> followers;
 
-	
 	public Event() {
 		super();
 	}
@@ -43,6 +42,13 @@ public class Event extends Pages implements java.io.Serializable {
 		this.dateOfEvent = new Date();
 		this.latitude = latitude;
 		this.longitude = longitude;
+		this.place = place;
+	}
+
+	public Event(String description, String title, Date dateOfEvent, String place) {
+		super(description, title);
+		this.dateOfEvent = new Date();
+
 		this.place = place;
 	}
 
@@ -81,9 +87,8 @@ public class Event extends Pages implements java.io.Serializable {
 	public void setPlace(String place) {
 		this.place = place;
 	}
-	
-	
-	@OneToMany(mappedBy="pages",fetch=FetchType.EAGER)
+
+	@OneToMany(mappedBy = "pages", fetch = FetchType.EAGER)
 	public List<Follows> getFollowers() {
 		return followers;
 	}
@@ -92,11 +97,18 @@ public class Event extends Pages implements java.io.Serializable {
 		this.followers = followers;
 	}
 
-
 	@Override
 	public String toString() {
 		return super.toString() + "Event [dateOfEvent=" + dateOfEvent + ", latitude=" + latitude + ", longitude="
 				+ longitude + ", place=" + place + "]";
+	}
+
+	public float getPrice() {
+		return price;
+	}
+
+	public void setPrice(float price) {
+		this.price = price;
 	}
 
 }

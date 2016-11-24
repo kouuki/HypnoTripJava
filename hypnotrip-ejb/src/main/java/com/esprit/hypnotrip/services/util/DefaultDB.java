@@ -10,6 +10,7 @@ import javax.ejb.Startup;
 
 import com.esprit.hypnotrip.persistence.Buy;
 import com.esprit.hypnotrip.persistence.BuyId;
+import com.esprit.hypnotrip.persistence.Event;
 import com.esprit.hypnotrip.persistence.Offer;
 import com.esprit.hypnotrip.persistence.Pages;
 import com.esprit.hypnotrip.persistence.Tickets;
@@ -45,24 +46,27 @@ public class DefaultDB {
 
 	@PostConstruct
 	public void init() throws EventOverException, TicketAlreadyBookedException {
-
-		Pages pages = new Pages("My first page");
-
-		pageServiceLocal.saveOrUpdatePage(pages, "b38f3299-6949-42c7-9a6c-f998c66f485d");
-
-		Pages offre = new Offer("My first offer", 2.5, 1.1);
+		// ********************************************************************************************************************
+		// ********************************************************************************************************************
+		// ********************************************************************************************************************
+		Pages offre = new Offer("My first offer", "Titre du 1er offre", 2.5, 1.1);
 
 		pageServiceLocal.saveOrUpdatePage(offre, "b38f3299-6949-42c7-9a6c-f998c66f485d");
+		Pages offre2 = new Offer("My second offer", "Titre du 2eme offre", 2.5, 1.1);
+		pageServiceLocal.saveOrUpdatePage(offre2, "b38f3299-6949-42c7-9a6c-f998c66f485d");
+		// ********************************************************************************************************************
+		// ********************************************************************************************************************
+		// ********************************************************************************************************************
+		Pages ts1 = new Touristicplace("First Touristic page", "Titre de la 1ere page", new Date(), "logo1", "Paris");
 
-		Pages ts1 = new Touristicplace(new Date(), "logo1", "Paris");
 		pageServiceLocal.saveOrUpdatePage(ts1, "b38f3299-6949-42c7-9a6c-f998c66f485d");
 
-		Pages ts2 = new Touristicplace(new Date(), "logo2", "Tunis");
+		Pages ts2 = new Touristicplace("Second Touristic page", "Titre de la 2eme page", new Date(), "logo2", "Tunis");
+
 		pageServiceLocal.saveOrUpdatePage(ts2, "b38f3299-6949-42c7-9a6c-f998c66f485d");
-
-		Pages offre2 = new Offer("My second offer", 2.5, 1.1);
-		pageServiceLocal.saveOrUpdatePage(offre2, "b38f3299-6949-42c7-9a6c-f998c66f485d");
-
+		// ********************************************************************************************************************
+		// ********************************************************************************************************************
+		// ********************************************************************************************************************
 		BuyId buyId1 = new BuyId(2, "b38f3299-6949-42c7-9a6c-f998c66f485d");
 
 		BuyId buyId2 = new BuyId(3, "b38f3299-6949-42c7-9a6c-f998c66f485d");
@@ -75,7 +79,9 @@ public class DefaultDB {
 		offerServiceLocal.addBuy(buy1);
 		offerServiceLocal.addBuy(buy2);
 		offerServiceLocal.addBuy(buy3);
-
+		// ********************************************************************************************************************
+		// ********************************************************************************************************************
+		// ********************************************************************************************************************
 		User user = new User();
 		user.setAddress("tunis");
 		user.setAccessFailedCount(0);
@@ -111,15 +117,30 @@ public class DefaultDB {
 		userServicesLocal.saveOrUpdate(user);
 		userServicesLocal.saveOrUpdate(user2);
 
+		// ********************************************************************************************************************
+		// ********************************************************************************************************************
+		// ********************************************************************************************************************
+
 		Tickets ticket = new Tickets();
-		ticket.setEvent(pages);
+		ticket.setEvent(offre);
 		ticket.setNumberOfPlaces(15);
 		ticket.setPrice(15);
 		ticket.setType("Best Ticket");
-		
-		ticketServicesLocal.createOrUpdateTicket(ticket,1);
-		
 
+		ticketServicesLocal.createOrUpdateTicket(ticket, 1);
+
+		// ********************************************************************************************************************
+		// ********************************************************************************************************************
+		// ********************************************************************************************************************
+		Pages event = new Event("MyFirst Event", "Titre du 1er evenement", new Date(), "Tunis");
+		event.setImageURL(
+				"http://www.ville-senlis.fr/var/www/storage/images/mediatheque/site-de-developpement/images/tests/evenements/1509-1-fre-FR/Evenements.jpg");
+		pageServiceLocal.saveOrUpdatePage(event, "b38f3299-6949-42c7-9a6c-f998c66f485d");
+
+		Pages event2 = new Event("MySecond Event", "Titre du 2éme evenement", new Date(), "Tunis");
+
+		event2.setImageURL("http://productionsalterego.com/media/decorsdesalle.jpg");
+		pageServiceLocal.saveOrUpdatePage(event2, "b38f3299-6949-42c7-9a6c-f998c66f485d");
 	}
 
 }

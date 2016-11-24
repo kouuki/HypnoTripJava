@@ -36,8 +36,8 @@ public class Offer extends Pages implements java.io.Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Offer(String description, double price, double discount) {
-		super(description);
+	public Offer(String description, String title, double price, double discount) {
+		super(description, title);
 		this.beginDate = new Date();
 		this.finishDate = new Date();
 		this.price = price;

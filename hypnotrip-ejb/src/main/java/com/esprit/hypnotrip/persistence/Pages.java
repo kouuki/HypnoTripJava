@@ -5,6 +5,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
@@ -26,20 +27,19 @@ public class Pages implements java.io.Serializable {
 	/**
 	 * 
 	 */
-	
+
 	private static final long serialVersionUID = 1L;
 	private Integer pageId;
 	private String description;
+	private String title;
 	private String userId;
-	
-//	@OneToMany(mappedBy = "page",fetch=FetchType.EAGER)
-//	private List<Rates> rates;
-	
-	private List<Tickets> tickets ; 
-	
+
+	// @OneToMany(mappedBy = "page",fetch=FetchType.EAGER)
+	// private List<Rates> rates;
+
+	private List<Tickets> tickets;
+
 	private String ImageURL;
-
-
 
 	public String getImageURL() {
 		return ImageURL;
@@ -52,13 +52,9 @@ public class Pages implements java.io.Serializable {
 	public Pages() {
 	}
 
-	public Pages(String description) {
+	public Pages(String description, String title) {
 		this.description = description;
-	}
-
-	public Pages(String description, String userId) {
-		this.description = description;
-		this.userId = userId;
+		this.title = title;
 	}
 
 	@Id
@@ -121,8 +117,7 @@ public class Pages implements java.io.Serializable {
 		return "Pages [pageId=" + pageId + ", description=" + description + ", userId=" + userId + "]";
 	}
 
-	
-	@OneToMany(mappedBy="event" , fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "event", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
 	public List<Tickets> getTickets() {
 		return tickets;
 	}
@@ -131,5 +126,12 @@ public class Pages implements java.io.Serializable {
 		this.tickets = tickets;
 	}
 
-	
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
 }
