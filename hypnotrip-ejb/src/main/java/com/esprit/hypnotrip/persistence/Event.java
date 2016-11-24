@@ -52,7 +52,7 @@ public class Event extends Pages implements java.io.Serializable {
 		this.place = place;
 	}
 
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
 	@Column(name = "DateOfEvent", nullable = true, length = 0)
 	public Date getDateOfEvent() {
 		return this.dateOfEvent;
