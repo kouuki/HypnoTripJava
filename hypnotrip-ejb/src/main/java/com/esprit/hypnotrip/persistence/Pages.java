@@ -33,7 +33,7 @@ public class Pages implements java.io.Serializable {
 	private String description;
 	private String title;
 	private String userId;
-
+	private String categoriePage;
 	// @OneToMany(mappedBy = "page",fetch=FetchType.EAGER)
 	// private List<Rates> rates;
 
@@ -132,6 +132,14 @@ public class Pages implements java.io.Serializable {
 
 	public void setTitle(String title) {
 		this.title = title;
+	}
+
+	public String getCategoriePage() {
+		return categoriePage;
+	}
+
+	public void setCategoriePage(String categoriePage) {
+		this.categoriePage = categoriePage;
 	}
 
 }
