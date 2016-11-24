@@ -1,7 +1,9 @@
 package com.esprit.hypnotrip.services.impl;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -47,7 +49,7 @@ public class OfferService implements OfferServiceRemote, OfferServiceLocal {
 		String jpql = "select  b from Offer b where :dateC BETWEEN b.beginDate AND b.finishDate ORDER BY b.price";
 		Query query1 = entityManager.createQuery(jpql);
 		query1.setParameter("dateC", dateItem);
-		
+
 		Offer offer = (Offer) query1.getResultList().get(0);
 		return offer;
 	}
@@ -70,7 +72,27 @@ public class OfferService implements OfferServiceRemote, OfferServiceLocal {
 	@Override
 	public void OfferForMostBuyer() {
 		// TODO Auto-generated method stub
-		
+
+	}
+
+	@Override
+	public Map<Offer, Long> sortBoughtOffer() {
+		String jpql = "select  b from Buy b GROUP BY b.id.offerId ORDER BY Count(b.id.offerId) DESC";
+		Query query = entityManager.createQuery(jpql);
+		List<Buy> buys = (List<Buy>) query.getResultList();
+		Map<Offer, Long> map = new HashMap<Offer, Long>();
+		String jpql1 = "select Count(b) from Buy b GROUP BY b.id.offerId ORDER BY Count(b.id.offerId) DESC";
+		Query query1 = entityManager.createQuery(jpql1);
+		List<Long> list =  query1.getResultList();
+		int i = 0;
+		for (Buy buy : buys) {
+
+			map.put(entityManager.find(Offer.class, buy.getId().getOfferId()), list.get(i));
+			i++;
+		}
+		System.out.println(map);
+		return map;
+
 	}
 
 }

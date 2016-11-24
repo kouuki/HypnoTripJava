@@ -81,17 +81,18 @@
 			<h:form id="formForEvent"
 				rendered="#{manageTouristicBean.displayFormTouristicPage}"
 				enctype="multipart/form-data">
+				Picture
+				<p:fileUpload
+					fileUploadListener="#{manageTouristicBean.handleFileUpload}"
+					mode="advanced" update="messages" label="Choose a file"
+					sizeLimit="1048576" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
+					invalidSizeMessage="The maximum file size allowed is 1 Megabyte !"
+					invalidFileMessage="You are allowed to upload only images !" />
+				<p:growl id="messages" showDetail="true" sticky="true" />
 				<table width="80%">
 
-					<tr>
-						<TH width="20%">Picture</TH>
-						<td width="60%"><h:inputFile id="file"
-								value="#{manageTouristicBean.file}" /> <h:commandButton
-								value="Upload" action="#{manageTouristicBean.upload}" /></td>
 
 
-
-					</tr>
 
 					<tr>
 						<TH>Title</TH>
@@ -125,8 +126,6 @@
 								action="#{manageTouristicBean.cancel()}" value="cancel" /></TD>
 					</tr>
 				</table>
-
-
 			</h:form>
 
 			<!-- ************************************************************************************************************ -->

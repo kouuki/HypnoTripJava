@@ -1,6 +1,7 @@
 package com.esprit.hypnotrip.services.interfaces;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.ejb.Remote;
 
@@ -16,4 +17,5 @@ public interface OfferServiceRemote {
 	List<Offer> SortOfferByDatePrice();
 	
 	void OfferForMostBuyer();
+	Map<Offer,Long> sortBoughtOffer();
 }

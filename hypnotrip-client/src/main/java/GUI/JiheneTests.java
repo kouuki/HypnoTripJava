@@ -20,7 +20,7 @@ public class JiheneTests {
 		String jndi = "hypnotrip-ear/hypnotrip-ejb/OfferService!com.esprit.hypnotrip.services.interfaces.OfferServiceRemote";
 		OfferServiceRemote offerServiceRemote = (OfferServiceRemote) context.lookup(jndi);
 
-		System.out.println(offerServiceRemote.bestOffer());
+		System.out.println(offerServiceRemote.sortBoughtOffer());
 	}
 
 }

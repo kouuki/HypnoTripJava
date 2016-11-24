@@ -1,6 +1,7 @@
 package com.esprit.hypnotrip.services.interfaces;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.ejb.Local;
 
@@ -16,4 +17,6 @@ public interface OfferServiceLocal {
 	Offer bestOffer();
 
 	List<Offer> SortOfferByDatePrice();
+	
+	Map<Offer,Long> sortBoughtOffer();
 }
