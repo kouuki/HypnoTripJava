@@ -70,12 +70,12 @@ public class AdminBean {
 // BLOCK DEBLOCK USER ===> WEB API LATER
 	public String blockUser(String userId) {
 		userservicelocal.blocUser(userId);
-		return "/pages/Admin/AdminPage?faces-redirect=true";
+		return "/pages/Admin/AdminManageUser?faces-redirect=true";
 	}
 
 	public String DeblockUser(String userId) {
 		userservicelocal.deblocUser(userId);
-		return "/pages/Admin/AdminPage?faces-redirect=true";
+		return "/pages/Admin/AdminManageUser?faces-redirect=true";
 	}
 // ACCEPT TOURISTIC PLACE 
 	public String AcceptTouristicPlace(int idPage){
