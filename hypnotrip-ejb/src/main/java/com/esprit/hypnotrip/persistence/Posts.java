@@ -124,4 +124,11 @@ public class Posts implements java.io.Serializable {
 		this.tag = tag;
 	}
 
+	@Override
+	public String toString() {
+		return "Posts [postId=" + postId + ", content=" + content + ", description=" + description + ", idOwner="
+				+ idOwner + ", pageId=" + pageId + ", publicationPost=" + publicationPost + ", tagId=" + tagId
+				+ ", tag=" + tag + "]";
+	}
+
 }

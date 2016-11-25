@@ -1,11 +1,16 @@
 package com.esprit.hypnotrip.services.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.Response;
 
 import com.esprit.hypnotrip.persistence.Posts;
 import com.esprit.hypnotrip.services.interfaces.PostServicesLocal;
@@ -54,6 +59,22 @@ public class PostServices implements PostServicesRemote, PostServicesLocal {
 			nbrTags++;
 		}
 		return nbrTags;
+	}
+
+	@Override
+	public List<Posts> listMyPost(String idUser) {
+		List<Posts> listOfpost = new ArrayList<>();
+
+		Client client = ClientBuilder.newClient();
+		WebTarget target = client.target("http://localhost:63784/api/PostWS");
+		WebTarget myPosts = target.path("ListMessages").path(idUser);
+		Response response = myPosts.request().get();
+		listOfpost = response.readEntity(listOfpost.getClass());
+
+		response.close();
+
+		return listOfpost;
+
 	}
 
 }

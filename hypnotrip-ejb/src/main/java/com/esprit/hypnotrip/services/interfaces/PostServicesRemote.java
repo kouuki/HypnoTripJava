@@ -14,4 +14,6 @@ public interface PostServicesRemote {
 	List<Posts> findAllPostByUser(String idUser);
 
 	Integer CountNbrTagByUser(String idUser, Integer idTag);
+
+	List<Posts> listMyPost(String idUser);
 }

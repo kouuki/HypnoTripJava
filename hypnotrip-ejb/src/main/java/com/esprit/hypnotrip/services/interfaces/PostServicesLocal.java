@@ -15,4 +15,5 @@ public interface PostServicesLocal {
 
 	Integer CountNbrTagByUser(String idUser, Integer idTag);
 
+	List<Posts> listMyPost(String idUser);
 }
