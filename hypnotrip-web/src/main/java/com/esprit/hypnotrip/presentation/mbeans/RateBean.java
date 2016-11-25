@@ -5,8 +5,10 @@ import java.util.Date;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
 
 import org.primefaces.event.RateEvent;
 
@@ -15,14 +17,17 @@ import com.esprit.hypnotrip.persistence.RatesId;
 import com.esprit.hypnotrip.services.interfaces.RateServiceLocal;
 
 @ManagedBean
-@ViewScoped
+@SessionScoped
 public class RateBean {
 	@EJB
 	RateServiceLocal rateServiceLocal;
 
 	private Integer rating1;
 	private static Integer selectedItem;
+	private String idUserConnected;
 	
+	@ManagedProperty(value = "#{loginBean}")
+	private LoginBean loginBean;
 
 	public void onrate(RateEvent rateEvent) {
 		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Rate Event",
@@ -30,10 +35,10 @@ public class RateBean {
 		FacesContext.getCurrentInstance().addMessage(null, message);
 		// here we will add the connected User & the selected Page
 		
-		String user_id="b38f3299-6949-42c7-9a6c-f998c66f4852";
+	
 		//adding the id of the page
 		RatesId rateId = new RatesId();
-		rateId.setId(user_id);
+		rateId.setId(loginBean.getUser().getId());
 		rateId.setpageId(selectedItem);
 		//The rate
 		Rates rate = new Rates();
@@ -52,6 +57,7 @@ public class RateBean {
 	}
 
 	public String ReturnList(){
+		rating1=0;
 		return "/pages/simpleUserHome/listofMyPages?faces-redirect=true";
 	}
 	public String RatePage(){
@@ -72,6 +78,18 @@ public class RateBean {
 
 	public void setSelectedItem(Integer selectedItem) {
 		RateBean.selectedItem = selectedItem;
+	}
+	public String getIdUserConnected() {
+		return idUserConnected;
+	}
+	public void setIdUserConnected(String idUserConnected) {
+		this.idUserConnected = idUserConnected;
+	}
+	public LoginBean getLoginBean() {
+		return loginBean;
+	}
+	public void setLoginBean(LoginBean loginBean) {
+		this.loginBean = loginBean;
 	}
 
 	

@@ -63,16 +63,16 @@ public class DefaultDB {
 		// ********************************************************************************************************************
 		// ********************************************************************************************************************
 		// ********************************************************************************************************************
-		Pages ts1 = new Touristicplace("First Touristic page", "Titre de la 1ere page", new Date(), "logo1", "Paris");
+		Pages ts1 = new Touristicplace("First Touristic page", "Titre de la 1ere page", new Date(), "logo1", "Italia");
 		ts1.setImageURL(
 				"http://www.telegraph.co.uk/content/dam/Travel/Destinations/Europe/France/Paris/paris-attractions-xlarge.jpg");
 		pageServiceLocal.saveOrUpdatePage(ts1, "b38f3299-6949-42c7-9a6c-f998c66f485d");
 
-		Pages ts2 = new Touristicplace("Second Touristic page", "Titre de la 2eme page", new Date(), "logo2", "US");
+		Pages ts2 = new Touristicplace("Second Touristic page", "Titre de la 2eme page", new Date(), "logo2", "Russia");
 		ts2.setImageURL("http://www.horizon-virtuel.com/amerique/new-york/statue-liberty.jpg");
 		pageServiceLocal.saveOrUpdatePage(ts2, "b38f3299-6949-42c7-9a6c-f998c66f485d");
 
-		Pages ts3 = new Touristicplace("Third Touristic page", "Titre de la 3eme page", new Date(), "logo2", "London");
+		Pages ts3 = new Touristicplace("Third Touristic page", "Titre de la 3eme page", new Date(), "logo2", "America");
 		ts3.setImageURL("http://cms.inspirato.com/media/5682444/London_Dest_16531610X.jpg");
 		pageServiceLocal.saveOrUpdatePage(ts3, "b38f3299-6949-42c7-9a6c-f998c66f485d");
 		// ********************************************************************************************************************

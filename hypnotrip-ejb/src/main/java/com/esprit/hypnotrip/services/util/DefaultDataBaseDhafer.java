@@ -68,6 +68,7 @@ public class DefaultDataBaseDhafer {
 		// Touristicplace
 		Touristicplace page1 = new Touristicplace();
 		page1.setCategoriePage("sport");
+		page1.setName("Paris");
 		page1.setDescription("sport");
 		page1.setTitle("page pour le sport");
 		page1.setUserId("b38f3299-6949-42c7-9a6c-f998c66f485d");
@@ -76,12 +77,14 @@ public class DefaultDataBaseDhafer {
 		pageServiceLocal.saveOrUpdatePage(page1, "b38f3299-6949-42c7-9a6c-f998c66f485d");
 		Touristicplace page2 = new Touristicplace();
 		page2.setCategoriePage("nature");
+		page2.setName("London");
 		page2.setDescription("nature");
 		page2.setTitle("page pour le nature");
 		page2.setUserId("b38f3299-6949-42c7-9a6c-f998c66f485d");
 		page2.setImageURL("http://winsdesktop.com/wp-content/uploads/2016/09/Cool-Nature-Wallpaper-HD-1024x576.jpg");
 		pageServiceLocal.saveOrUpdatePage(page2, "b38f3299-6949-42c7-9a6c-f998c66f485d");
 		Touristicplace page3 = new Touristicplace();
+		page3.setName("hawaria");
 		page3.setCategoriePage("plage");
 		page3.setDescription("plage");
 		page3.setTitle("page pour le plage");
@@ -89,6 +92,7 @@ public class DefaultDataBaseDhafer {
 		page3.setImageURL("https://www.voyageavecnous.fr/wp-content/uploads/2015/01/plage-paradisiaque-maldives.jpg");
 		pageServiceLocal.saveOrUpdatePage(page3, "b38f3299-6949-42c7-9a6c-f998c66f485d");
 		Touristicplace page4 = new Touristicplace();
+		page4.setName("Berneville");
 		page4.setCategoriePage("compagne");
 		page4.setDescription("compagne");
 		page4.setTitle("page pour le compagne");

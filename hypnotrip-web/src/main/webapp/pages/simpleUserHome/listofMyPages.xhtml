@@ -7,21 +7,61 @@
 	xmlns:p="http://primefaces.org/ui"
 	template="/WEB-INF/template/template.xhtml">
 	<h:head>
-		
-		</h:head>
+
+	</h:head>
 	<ui:define name="content">
 
 
 
 		<center>
 			<H1>My Pages</H1>
-			<br />
-			<br />
+			<br /> <br />
 			<!-- ************************************************************************************************************ -->
 			<!-- ************************************************************************************************************ -->
 			<!-- ************************************************************************************************************ -->
 			<h:form id="formListOfPages" rendered="#{pagesBean.displayForm1}">
+				<div class="container">
+					<h2>Small Modal</h2>
+					<!-- Trigger the modal with a button -->
+					<button type="button" class="btn btn-info btn-lg"
+						data-toggle="modal" data-target="#myModal">Open Small
+						Modal</button>
 
+					<!-- Modal -->
+					<div class="modal fade" id="myModal" role="dialog">
+						<div class="modal-dialog modal-sm">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h4 class="modal-title">Rating Area</h4>
+								</div>
+								<div class="modal-body">
+										<h:form>
+										<p:growl id="messages" showDetail="true" />
+										<p:rating value="#{rateBean.rating1}">
+											<p:ajax event="rate" listener="#{rateBean.onrate}"
+												update="messages" />
+											<p:ajax event="cancel" listener="#{rateBean.oncancel}"
+												update="messages" />
+										</p:rating>
+
+
+										<p:dialog header="Values" widgetVar="dlg" showEffect="fade"
+											hideEffect="fade">
+											<h:panelGrid id="display" columns="2" cellpadding="5">
+												<h:outputText value="Rating 3:" />
+												<h:outputText value="#{rateBean.rating1}" />
+											</h:panelGrid>
+										</p:dialog>
+									</h:form>
+								</div>
+								<div class="modal-footer">
+									<h:commandButton action="#{rateBean.ReturnList()}"
+										value="Close" />
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 				<h:dataTable class="bordered" value="#{pagesBean.myPages}" var="p"
 					border="2">
 					<h:column id="c1">
@@ -62,9 +102,11 @@
 						<f:facet name="header">
 							<h:outputText value="" />
 						</f:facet>
-						<h:commandButton value="Rate" action="#{pagesBean.ratePage()}">
-							<f:setPropertyActionListener value="#{p}"
-								target="#{pagesBean.pageSelected}"></f:setPropertyActionListener>
+						<h:commandButton value="Rate"
+							action="#{rateBean.getSelectedItemFromPage(p.pageId)}"
+							onclick="$('#myModal').modal('show');">
+
+							<f:ajax execute="@form" render="@none" />
 
 						</h:commandButton>
 					</h:column>
@@ -143,7 +185,7 @@
 								id="Start" value="#{pagesBean.offerSelected.beginDate}"
 								mode="inline" /></TD>
 						<TD></TD>
-						
+
 					</tr>
 					<tr>
 						<TH>End date</TH>

@@ -7,6 +7,7 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 
 import com.esprit.hypnotrip.persistence.Touristicplace;
 import com.esprit.hypnotrip.persistence.User;
@@ -61,7 +62,10 @@ public class AdminBean {
 			return "Blocked";
 		}
 	}
-
+public String logout(){
+	FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+	return "/Home?faces-redirect=true";
+}
 	// to change the displayed Stat from int to String
 	public String getStateTouristicPlace(int etat) {
 		if (etat == 1) {
