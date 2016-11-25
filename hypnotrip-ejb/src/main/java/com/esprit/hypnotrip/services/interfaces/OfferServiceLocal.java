@@ -17,6 +17,14 @@ public interface OfferServiceLocal {
 	Offer bestOffer();
 
 	List<Offer> SortOfferByDatePrice();
-	
-	Map<Offer,Long> sortBoughtOffer();
+
+	Map<Offer, Long> sortBoughtOffer();
+
+	List<Offer> listOffers();
+
+	void buyAnOffer(String idUser, Integer idOffer);
+
+	List<Offer> SearchOfferByTitleDescription(String world);
+
+	List<Offer> SearchOfferByPriceDiscount(Double prix);
 }

@@ -1,6 +1,8 @@
 package com.esprit.hypnotrip.persistence;
 // Generated 19 nov. 2016 19:30:02 by Hibernate Tools 4.3.1.Final
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
@@ -16,6 +18,7 @@ public class BuyId implements java.io.Serializable {
 	private static final long serialVersionUID = 1L;
 	private int offerId;
 	private String userId;
+	private Date date;
 
 	public BuyId() {
 	}
@@ -23,6 +26,7 @@ public class BuyId implements java.io.Serializable {
 	public BuyId(int offerId, String userId) {
 		this.offerId = offerId;
 		this.userId = userId;
+		this.date = new Date();
 	}
 
 	@Column(name = "OfferId", nullable = false)
@@ -63,6 +67,14 @@ public class BuyId implements java.io.Serializable {
 		result = 37 * result + this.getOfferId();
 		result = 37 * result + (getUserId() == null ? 0 : this.getUserId().hashCode());
 		return result;
+	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
 	}
 
 }

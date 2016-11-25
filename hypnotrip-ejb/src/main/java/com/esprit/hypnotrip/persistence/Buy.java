@@ -15,6 +15,10 @@ import javax.persistence.Table;
 @Table(name = "buy", catalog = "hypnodb")
 public class Buy implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private BuyId id;
 
 	public Buy() {

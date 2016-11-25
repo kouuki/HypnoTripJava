@@ -44,18 +44,19 @@ public class User implements java.io.Serializable {
 	private String securityStamp;
 	private boolean twoFactorEnabled;
 	private String userName;
-	
 
 	private List<Rates> rates;
-	
+
 	private List<BookDescription> bookDescriptions;
 
 	private List<Follows> pagesFollowed;
-	
+
 	private List<Invitations> pagesSendInvitation;
-	
+
 	private List<Invitations> pagesRecieveInvitation;
-	
+
+	private List<Offer> listOffers;
+
 	public User() {
 	}
 
@@ -291,9 +292,8 @@ public class User implements java.io.Serializable {
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-    
-	
-	@OneToMany(mappedBy="user", fetch=FetchType.EAGER)
+
+	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
 	public List<BookDescription> getBookDescriptions() {
 		return bookDescriptions;
 	}
@@ -302,7 +302,7 @@ public class User implements java.io.Serializable {
 		this.bookDescriptions = bookDescriptions;
 	}
 
-	@OneToMany(mappedBy="user", fetch=FetchType.EAGER)
+	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
 	public List<Follows> getPagesFollowed() {
 		return pagesFollowed;
 	}
@@ -310,8 +310,8 @@ public class User implements java.io.Serializable {
 	public void setPagesFollowed(List<Follows> pagesFollowed) {
 		this.pagesFollowed = pagesFollowed;
 	}
-	
-	@OneToMany(mappedBy = "user",fetch=FetchType.EAGER)
+
+	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
 	public List<Rates> getRates() {
 		return rates;
 	}
@@ -319,9 +319,6 @@ public class User implements java.io.Serializable {
 	public void setRates(List<Rates> rates) {
 		this.rates = rates;
 	}
-
-	
-	
 
 	@Override
 	public int hashCode() {
@@ -348,7 +345,7 @@ public class User implements java.io.Serializable {
 		return true;
 	}
 
-	@OneToMany(mappedBy="sender", fetch=FetchType.EAGER)
+	@OneToMany(mappedBy = "sender", fetch = FetchType.EAGER)
 	public List<Invitations> getPagesSendInvitation() {
 		return pagesSendInvitation;
 	}
@@ -357,7 +354,7 @@ public class User implements java.io.Serializable {
 		this.pagesSendInvitation = pagesSendInvitation;
 	}
 
-	@OneToMany(mappedBy="reciever", fetch=FetchType.EAGER)
+	@OneToMany(mappedBy = "reciever", fetch = FetchType.EAGER)
 	public List<Invitations> getPagesRecieveInvitation() {
 		return pagesRecieveInvitation;
 	}
@@ -379,6 +376,14 @@ public class User implements java.io.Serializable {
 				+ ", pagesSendInvitation=" + pagesSendInvitation + ", pagesRecieveInvitation=" + pagesRecieveInvitation
 				+ "]";
 	}
-	
+
+	@OneToMany(mappedBy = "user")
+	public List<Offer> getListOffers() {
+		return listOffers;
+	}
+
+	public void setListOffers(List<Offer> listOffers) {
+		this.listOffers = listOffers;
+	}
 
 }

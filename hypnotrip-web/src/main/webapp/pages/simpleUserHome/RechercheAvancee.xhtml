@@ -1,0 +1,175 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/template/template.xhtml">
+	<h:head>
+
+	</h:head>
+	<ui:define name="content">
+		<center>
+			<!-- ************************************************************************************************************ -->
+			<!-- ************************************************************************************************************ -->
+			<!-- ************************************************************************************************************ -->
+			<div class="col-md-3">
+				<div class="footer-block">
+					<form action="http://demo.nrgthemes.com/projects/nrgnetwork/"
+						class="subscribe-form">
+						.
+						<h:inputText value="" />
+						<div class="submit-block">
+							<i class="fa fa-envelope-o"></i>
+							<h:commandButton value="login" />
+						</div>
+					</form>
+				</div>
+			</div>
+			<!-- ************************************************************************************************************ -->
+			<!-- ************************************************************************************************************ -->
+			<!-- ************************************************************************************************************ -->
+			<H1>Offers</H1>
+			<br /> <br /> <br /> <br />
+			<!-- ************************************************************************************************************ -->
+			<!-- ************************************************************************************************************ -->
+			<!-- ************************************************************************************************************ -->
+			<div class="container-fluid custom-container">
+				<div class="row">
+					<h:form id="formListOfPages"
+						rendered="#{payementBean.displayForm1}">
+
+
+						<ui:repeat var="p" value="#{payementBean.myPages}">
+
+							<div class="category-1 mix custom-column-5"
+								style="display: inline-block;">
+								<div class="be-post">
+									<a href="page1.html" class="be-img-block"> <h:graphicImage
+											value="#{p.imageURL}" alt="" />
+									</a> <b>Title :</b>
+									<h:outputText value="#{p.title}" />
+									<br /> <br /> <b>Description :</b>
+
+									<h:outputText value="#{p.description}" />
+
+									<br /> <br /> <b>Date of start :</b>
+
+
+									<h:outputText value="#{p.beginDate}" />
+									<br /> <br /> <b>Date of finish :</b>
+
+
+									<h:outputText value="#{p.finishDate}" />
+
+
+									<br /> <br /> <b>Price :</b>
+
+
+									<h:outputText value="#{p.price}" />
+
+									<br /> <br /> <b>Discount :</b>
+
+									<h:outputText value="#{p.discount}" />
+
+									<p:rating value="#{payementBean.ratingLevels(p.pageId)}"
+										readonly="true" />
+
+								</div>
+								<div class="info-block">
+									<span> <h:commandButton
+											action="#{payementBean.selectPage()}" value="Buy">
+
+											<f:setPropertyActionListener value="#{p}"
+												target="#{payementBean.offerSelected}"></f:setPropertyActionListener>
+										</h:commandButton>
+									</span><span><h:commandButton value="Rate"
+											action="#{payementBean.ratePage()}">
+											<f:setPropertyActionListener value="#{p}"
+												target="#{payementBean.offerSelected}"></f:setPropertyActionListener>
+
+										</h:commandButton> </span>
+								</div>
+							</div>
+
+						</ui:repeat>
+
+
+					</h:form>
+
+					<!-- ************************************************************************************************************ -->
+					<!-- ************************************************************************************************************ -->
+					<!-- ************************************************************************************************************ -->
+					<h:form id="formForOffer"
+						rendered="#{payementBean.displayFormOffer}">
+
+						<div class="category-1 mix custom-column-5"
+							style="display: inline-block;">
+							<div class="be-post">
+								<a href="page1.html" class="be-img-block"> <h:graphicImage
+										value="#{payementBean.offerSelected.imageURL}" alt="" />
+								</a> <b>Title :</b>
+								<h:outputText value="#{payementBean.offerSelected.title}" />
+								<br /> <br /> <b>Description :</b>
+
+								<h:outputText value="#{payementBean.offerSelected.description}" />
+
+								<br /> <br /> <b>Date of start :</b>
+
+
+								<h:outputText value="#{payementBean.offerSelected.beginDate}" />
+								<br /> <br /> <b>Date of finish :</b>
+
+
+								<h:outputText value="#{payementBean.offerSelected.finishDate}" />
+
+
+								<br /> <br /> <b>Price :</b>
+
+
+								<h:outputText value="#{payementBean.offerSelected.price}" />
+
+								<br /> <br /> <b>Discount :</b>
+
+								<h:outputText value="#{payementBean.offerSelected.discount}" />
+
+								<p:rating
+									value="#{payementBean.ratingLevels(manageOffersBean.offerSelected.pageId)}"
+									readonly="true" />
+
+							</div>
+							<div class="info-block">
+								<span><table>
+										<tr>
+											<td>compte :</td>
+											<td><h:inputText value="#{payementBean.numCompte}"
+													required="true" requiredMessage="field required" /></td>
+										</tr>
+										<tr>
+											<td>Mot de passe :</td>
+											<td><h:inputText value="#{payementBean.password}"
+													required="true" requiredMessage="field required" /></td>
+										</tr>
+									</table></span><br /> <span> <h:commandButton
+										action="#{payementBean.doBuyOffer()}" value="Buy" />
+
+
+								</span>
+							</div>
+						</div>
+
+					</h:form>
+
+					<!-- ************************************************************************************************************ -->
+					<!-- ************************************************************************************************************ -->
+					<!-- ************************************************************************************************************ -->
+
+				</div>
+			</div>
+		</center>
+
+	</ui:define>
+
+
+</ui:composition>

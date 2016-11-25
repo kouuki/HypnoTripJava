@@ -5,6 +5,8 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -24,6 +26,8 @@ public class Offer extends Pages implements java.io.Serializable {
 	private Date finishDate;
 	private double price;
 	private double discount;
+
+	private User user;
 
 	public Offer() {
 
@@ -91,6 +95,15 @@ public class Offer extends Pages implements java.io.Serializable {
 	public String toString() {
 		return "Offer [beginDate=" + beginDate + ", finishDate=" + finishDate + ", price=" + price + ", discount="
 				+ discount + "]";
+	}
+
+	@ManyToOne
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 }

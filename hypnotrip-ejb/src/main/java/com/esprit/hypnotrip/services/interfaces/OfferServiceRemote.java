@@ -15,7 +15,16 @@ public interface OfferServiceRemote {
 	Offer bestOffer();
 
 	List<Offer> SortOfferByDatePrice();
-	
+
 	void OfferForMostBuyer();
-	Map<Offer,Long> sortBoughtOffer();
+
+	Map<Offer, Long> sortBoughtOffer();
+
+	List<Offer> listOffers();
+
+	void buyAnOffer(String idUser, Integer idOffer);
+
+	List<Offer> SearchOfferByTitleDescription(String world);
+
+	List<Offer> SearchOfferByPriceDiscount(Double prix);
 }
