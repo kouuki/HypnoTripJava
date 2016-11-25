@@ -3,8 +3,10 @@ package com.esprit.hypnotrip.presentation.mbeans;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 import com.esprit.hypnotrip.persistence.User;
+import com.esprit.hypnotrip.services.interfaces.FollowersServicesLocal;
 import com.esprit.hypnotrip.services.interfaces.UserServicesLocal;
 
 @ManagedBean
@@ -15,32 +17,46 @@ public class LoginBean {
 	private Boolean loggedInAsSimpleUser = false;
 	private Boolean loggedInAsProUser = false;
 	private Boolean loggedInAsAdmin = false;
-	private Boolean identifiedUser = false;
+	private Boolean notification = false;
+	private Boolean identifiedUser;
 
 	@EJB
 	private UserServicesLocal userServicesLocal;
+	@EJB
+	private FollowersServicesLocal followersServicesLocal;
+
+	public String logout() {
+		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+		return "/Home?faces-redirect=true";
+	}
+
+	public String notificationSenn() {
+		notification = false;
+		return "/pages/simpleUserHome/RecallEventForToDay.jsf?faces-redirect=true";
+	}
 
 	public String doLogin() {
 		String navaigateTo = "";
 		User userLoggedIn = userServicesLocal.findUserByLoginAndPassword(user.getEmail(), user.getPassword());
+		System.out.println(userLoggedIn.toString());
 		if (userLoggedIn != null) {
 			System.out.println("userFounded");
 			user = userLoggedIn;
 			setIdentifiedUser(true);
 			if (userLoggedIn.getRole().equals("1")) {
 				setLoggedInAsSimpleUser(true);
-				navaigateTo = "/pages/customerHome/home?faces-redirect=true";
+				notification = followersServicesLocal.MyEventForToDay(userLoggedIn.getId());
+				navaigateTo = "/pages/simpleUserHome/home?faces-redirect=true";
 			} else if (userLoggedIn.getRole().equals("0")) {
 				loggedInAsProUser = true;
-				navaigateTo = "/pages/companyHome/home?faces-redirect=true";
-			} else if (userLoggedIn.getRole().equals("2")) {
+				navaigateTo = "/pages/proUserHome/home?faces-redirect=true";
+			} else {
 				loggedInAsAdmin = true;
-				navaigateTo = "/pages/companyHome/home?faces-redirect=true";
+				navaigateTo = "/pages/Admin/AdminHome?faces-redirect=true";
 			}
-		} else {
-			System.out.println("userNotFounded");
-			navaigateTo = "/horreur?faces-redirect=true";
-		}
+		} else
+			navaigateTo = "/LoginFailed?faces-redirect=true";
+
 		return navaigateTo;
 
 	}
@@ -91,6 +107,14 @@ public class LoginBean {
 
 	public void setLoggedInAsAdmin(Boolean loggedInAsAdmin) {
 		this.loggedInAsAdmin = loggedInAsAdmin;
+	}
+
+	public Boolean getNotification() {
+		return notification;
+	}
+
+	public void setNotification(Boolean notification) {
+		this.notification = notification;
 	}
 
 }

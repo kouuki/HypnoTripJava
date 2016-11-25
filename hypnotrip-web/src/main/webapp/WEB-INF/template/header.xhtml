@@ -5,91 +5,119 @@
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 <h:head>
-	
+
 </h:head>
 <h:body>
-<header>
-	<div class="container-fluid custom-container">
-		<div class="row no_row row-header">
-			<div class="brand-be">
-				<a href="index-2.html"> <h:graphicImage
-						value="http://localhost:18080/hypnotrip-web/resources/img/logo.png" alt="" />
-				</a>
-			</div>
-			<div class="header-menu-block">
-				<button class="cmn-toggle-switch cmn-toggle-switch__htx">
-					<span></span>
-				</button>
-				<ul class="header-menu" id="one" style="max-height: 292px;">
-					<li><a href="activity.html">Activity</a></li>
-					<li><a href="search.html">Discover</a>
-						<ul>
-							<li><a href="search.html">Explore</a></li>
-							<li><a href="people.html">People</a></li>
-							<li><a href="gallery.html">Galleries</a></li>
-						</ul></li>
-					<h:form rendered="#{not empty identity.identifidUser}">
-						<li><a href="author-login.html">My Portfolio</a></li>
-						<li><a href="site-map.html">Site Map</a></li>
-						<li><a href="organization.html">Organization</a></li>
-						<li id="ad-work-li"><a id="add-work-btn" class="btn color-1"
-							href="work.html">Add Work </a></li>
-					</h:form>
-				</ul>
-			</div>
-			<h:form rendered="#{empty identity.identifidUser}">
-				<div class="login-header-block">
-					<div class="login_block">
-						<a class="btn-login btn color-1 size-2 hover-2" href="page1.html">
-							<i class="fa fa-user"></i> Log in
-						</a> <a class="be-register btn color-3 size-1 hover-6"><i
-							class="fa fa-lock"></i>sign up now</a>
-					</div>
+	<header>
+		<div class="container-fluid custom-container">
+			<div class="row no_row row-header">
+				<div class="brand-be">
+					<a href="index-2.html"> <h:graphicImage
+							value="http://localhost:18080/hypnotrip-web/resources/img/logo.png"
+							alt="" />
+					</a>
 				</div>
-			</h:form>
-			<h:form rendered="#{not empty identity.identifidUser}">
-				<div class="login-header-block">
-					<div class="login_block">
-						<a class="notofications-popup" href="page1.html"> <i
-							class="fa fa-bell-o"></i> <span class="noto-count">23</span>
-						</a>
-						<div class="noto-popup notofications-block" style="display: none;">
-							<div class="m-close">
-								<i class="fa fa-times"></i>
-							</div>
-							<div class="noto-label">Your Notification</div>
-							<div class="noto-body" style="max-height: 212px;"></div>
-						</div>
-						<a class="messages-popup" href="page1.html"> <i
-							class="fa fa-envelope-o"></i> <span class="noto-count">4</span>
-						</a>
-						<div class="noto-popup messages-block" style="display: block;">
-							<div class="m-close">
-								<i class="fa fa-times"></i>
-							</div>
-							<div class="noto-label">
-								Your Messages <span class="noto-label-links"><a
-									href="messages-2.html">compose</a><a href="messages.html">View
-										all messages</a></span>
-							</div>
-							<div class="noto-body" style="max-height: 212px;"></div>
-						</div>
-						<div class="be-drop-down login-user-down">
-							<h:graphicImage class="login-user"
-								value="resources/img/login.jpg" alt="" />
-							<span class="be-dropdown-content">Hi, <span>Taylor</span></span>
-							<div class="drop-down-list a-list">
-								<a href="activity.html">My Portfolio</a> <a
-									href="statictics.html">Statistics </a> <a href="about-us.html">Work
-									Experience</a> <a href="author-edit.html">Account Settings</a> <a
-									href="login.html">Logout</a>
-							</div>
+				<div class="header-menu-block">
+					<button class="cmn-toggle-switch cmn-toggle-switch__htx">
+						<span></span>
+					</button>
+					<ul class="header-menu" id="one" style="max-height: 292px;">
+						<li><a href="activity.html">Activity</a></li>
+						<li><a href="search.html">Discover</a>
+							<ul>
+								<li><a
+									href="http://localhost:18080/hypnotrip-web/pages/simpleUserHome/ListAllEventTouristicPlacesAndOffer.jsf">Explore</a></li>
+
+								<li><a href="people.html">People</a></li>
+								<li><a href="gallery.html">Galleries</a></li>
+								<h:form rendered="#{not empty loginBean.identifiedUser}">
+									<li><a
+										href="http://localhost:18080/hypnotrip-web/pages/simpleUserHome/RecommendedPages.jsf">Recommended
+											Pages</a></li>
+									<li><a
+										href="http://localhost:18080/hypnotrip-web/pages/simpleUserHome/RecommendedEvent.jsf">Recommended
+											Event</a></li>
+
+								</h:form>
+							</ul></li>
+						<h:column rendered="#{not empty loginBean.identifiedUser}">
+							<li><a href="author-login.html">My Portfolio</a></li>
+							<li id="ad-work-li"><a id="add-work-btn" class="btn color-1"
+								href="work.html">Add Work </a></li>
+
+						</h:column>
+					</ul>
+				</div>
+				<h:form rendered="#{empty loginBean.identifiedUser}">
+					<div class="login-header-block">
+						<div class="login_block">
+							<a class="btn-login btn color-1 size-2 hover-2" href="page1.html">
+								<i class="fa fa-user"></i> Log in
+							</a> <a class="be-register btn color-3 size-1 hover-6"><i
+								class="fa fa-lock"></i>sign up now</a>
 						</div>
 					</div>
-				</div>
-			</h:form>
+				</h:form>
+				<h:form rendered="#{not empty loginBean.identifiedUser}">
+
+					<div class="login-header-block">
+						<div class="login_block">
+							<a class="notofications-popup" href="page1.html"> <i
+								class="fa fa-bell-o"></i> <span class="noto-count"><h:column
+										rendered="#{loginBean.notification}">
+										<h4>&#8734;</h4>
+									</h:column> <h:column rendered="#{not loginBean.notification}">
+								0</h:column></span>
+							</a>
+							<div class="noto-popup notofications-block"
+								style="display: none;">
+								<div class="m-close">
+									<i class="fa fa-times"></i>
+								</div>
+								<div class="noto-label">
+									Your Notification
+									<h:column rendered="#{loginBean.notification}">
+										<li id="ad-work-li"><center>
+												<h:commandButton class="btn color-1 size-2 hover-1"
+													style="background: green"
+													action="#{loginBean.notificationSenn()}"
+													value="Recall
+													Event">
+
+												</h:commandButton>
+
+											</center></li>
+
+									</h:column>
+								</div>
+								<div class="noto-body" style="max-height: 212px;"></div>
+							</div>
+							<a class="messages-popup" href="page1.html"> <i
+								class="fa fa-envelope-o"></i> <span class="noto-count">0</span>
+							</a>
+
+							<div class="be-drop-down login-user-down">
+								<h:graphicImage class="login-user"
+									value="http://localhost:18080/hypnotrip-web/resources/img/login.jpg"
+									alt="" />
+								<span class="be-dropdown-content">Hi, <span><h:outputText
+											value="#{loginBean.user.firstName}" /></span></span>
+								<div class="drop-down-list a-list">
+									<a href="activity.html">My Portfolio</a> <a
+										href="statictics.html">Statistics </a> <a
+										href="http://localhost:18080/hypnotrip-web/pages/simpleUserHome/MyFollowersPages.jsf">Work
+										Experience</a> <a href="author-edit.html">Account Settings</a>
+
+									<h:commandLink action="#{loginBean.logout()}" ajax="false"
+										value="Logout" />
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</h:form>
+			</div>
 		</div>
-	</div>
-</header>
+	</header>
 </h:body>
 </html>

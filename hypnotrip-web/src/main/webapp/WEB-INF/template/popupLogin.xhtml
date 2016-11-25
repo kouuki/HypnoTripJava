@@ -22,11 +22,11 @@
 						<h:form class="popup-input-search">
 							<div class="col-md-6">
 								<h:outputText value="E-Mail" />
-								<h:inputSecret value="#{loginBean.user.email}" />
+								<h:inputText value="#{loginBean.user.email}" />
 							</div>
 							<div class="col-md-6">
 								<h:outputText value="Password" />
-								<h:inputText value="#{loginBean.user.password}" />
+								<h:inputSecret value="#{loginBean.user.password}" />
 							</div>
 							<div class="col-md-6">
 								<h:commandButton action="#{loginBean.doLogin()}"
