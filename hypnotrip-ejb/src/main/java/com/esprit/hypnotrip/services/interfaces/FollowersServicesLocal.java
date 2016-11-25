@@ -21,4 +21,8 @@ public interface FollowersServicesLocal {
 
 	List<Pages> ListAllPages();
 
+	Integer MostUsedTag(String idUser);
+
+	List<Pages> ListAllPagesByTags(Integer IdTag);
+
 }

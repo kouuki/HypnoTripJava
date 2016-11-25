@@ -16,9 +16,13 @@ public interface FollowersServicesRemote {
 	List<Follows> findAllFollowByUserId(String idUser);
 
 	Integer nbrFollowers(Integer idPages);
-	
-	Integer nbrPostsByUser(Integer idPages,String idUser);
-	
+
+	Integer nbrPostsByUser(Integer idPages, String idUser);
+
 	List<Pages> ListAllPages();
+
+	Integer MostUsedTag(String idUser);
+
+	List<Pages> ListAllPagesByTags(Integer IdTag);
 
 }

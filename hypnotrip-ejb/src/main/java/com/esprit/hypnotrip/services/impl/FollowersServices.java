@@ -12,9 +12,11 @@ import com.esprit.hypnotrip.persistence.Follows;
 import com.esprit.hypnotrip.persistence.FollowsId;
 import com.esprit.hypnotrip.persistence.Pages;
 import com.esprit.hypnotrip.persistence.Posts;
+import com.esprit.hypnotrip.persistence.Tags;
 import com.esprit.hypnotrip.persistence.User;
 import com.esprit.hypnotrip.services.interfaces.FollowersServicesLocal;
 import com.esprit.hypnotrip.services.interfaces.FollowersServicesRemote;
+import com.esprit.hypnotrip.services.interfaces.PostServicesLocal;
 import com.esprit.hypnotrip.services.interfaces.UserServicesLocal;
 
 /**
@@ -28,6 +30,8 @@ public class FollowersServices implements FollowersServicesRemote, FollowersServ
 
 	@EJB
 	UserServicesLocal userServicesLocal;
+	@EJB
+	PostServicesLocal postServiceLocal;
 
 	User user = new User();
 	Follows follows = new Follows();
@@ -101,6 +105,33 @@ public class FollowersServices implements FollowersServicesRemote, FollowersServ
 		String jpql = "SELECT p FROM Pages p";
 		Query query = entityManager.createQuery(jpql);
 		return query.getResultList();
+
+	}
+
+	@Override
+	public Integer MostUsedTag(String idUser) {
+		String jpql = "SELECT p FROM Posts p " + "WHERE IdOwner=:param GROUP BY p.tagId "
+				+ "having count(p.tagId) >= ALL ( " + "select po.tagId FROM Posts po "
+				+ "WHERE IdOwner=:param group by po.tagId)";
+		Query query = entityManager.createQuery(jpql);
+		query.setParameter("param", idUser);
+		@SuppressWarnings("unchecked")
+		List<Posts> mostTagUsed = query.getResultList();
+		return mostTagUsed.get(0).getTagId();
+	}
+
+	@Override
+	public List<Pages> ListAllPagesByTags(Integer IdTag) {
+		String jpql = "SELECT t FROM Tags t WHERE t.tagId=:param";
+		Query query = entityManager.createQuery(jpql);
+		query.setParameter("param", IdTag);
+		Tags tags = (Tags) query.getResultList().get(0);
+		String CategoriePageToFind = tags.getName();
+		String jpql1 = "SELECT p FROM Pages p where p.categoriePage=:param";
+		Query query1 = entityManager.createQuery(jpql1);
+		query1.setParameter("param", CategoriePageToFind);
+
+		return query1.getResultList();
 
 	}
 
