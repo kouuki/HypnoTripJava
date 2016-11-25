@@ -7,6 +7,7 @@ import javax.faces.context.FacesContext;
 
 import com.esprit.hypnotrip.persistence.User;
 import com.esprit.hypnotrip.services.interfaces.FollowersServicesLocal;
+import com.esprit.hypnotrip.services.interfaces.UserConnectionServicesLocal;
 import com.esprit.hypnotrip.services.interfaces.UserServicesLocal;
 
 @ManagedBean
@@ -24,6 +25,9 @@ public class LoginBean {
 	private UserServicesLocal userServicesLocal;
 	@EJB
 	private FollowersServicesLocal followersServicesLocal;
+
+	@EJB
+	private UserConnectionServicesLocal connectionServicesLocal;
 
 	public String logout() {
 		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
@@ -44,11 +48,13 @@ public class LoginBean {
 			user = userLoggedIn;
 			setIdentifiedUser(true);
 			if (userLoggedIn.getRole().equals("1")) {
+				connectionServicesLocal.SaveConnection(userLoggedIn.getId());
 				setLoggedInAsSimpleUser(true);
 				notification = followersServicesLocal.MyEventForToDay(userLoggedIn.getId());
 				navaigateTo = "/pages/simpleUserHome/home?faces-redirect=true";
 			} else if (userLoggedIn.getRole().equals("0")) {
 				loggedInAsProUser = true;
+				connectionServicesLocal.SaveConnection(userLoggedIn.getId());
 				navaigateTo = "/pages/proUserHome/home?faces-redirect=true";
 			} else {
 				loggedInAsAdmin = true;
