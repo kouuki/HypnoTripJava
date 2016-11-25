@@ -9,11 +9,13 @@ import javax.ejb.Singleton;
 import javax.ejb.Startup;
 
 import com.esprit.hypnotrip.persistence.Event;
-import com.esprit.hypnotrip.persistence.Pages;
+import com.esprit.hypnotrip.persistence.FollowsId;
 import com.esprit.hypnotrip.persistence.Posts;
+import com.esprit.hypnotrip.persistence.Touristicplace;
 import com.esprit.hypnotrip.persistence.User;
 import com.esprit.hypnotrip.services.exceptions.EventOverException;
 import com.esprit.hypnotrip.services.exceptions.TicketAlreadyBookedException;
+import com.esprit.hypnotrip.services.interfaces.FollowersServicesLocal;
 import com.esprit.hypnotrip.services.interfaces.PageServiceLocal;
 import com.esprit.hypnotrip.services.interfaces.PostServicesLocal;
 import com.esprit.hypnotrip.services.interfaces.TagServicesLocal;
@@ -36,6 +38,8 @@ public class DefaultDataBaseDhafer {
 
 	@EJB
 	private PostServicesLocal postServicesLocal;
+	@EJB
+	private FollowersServicesLocal followersServicesLocal;
 
 	@PostConstruct
 	public void init() throws EventOverException, TicketAlreadyBookedException {
@@ -61,8 +65,8 @@ public class DefaultDataBaseDhafer {
 		tagServicesLocal.SaveOrUpdateTage("nature");
 		tagServicesLocal.SaveOrUpdateTage("plage");
 		tagServicesLocal.SaveOrUpdateTage("compagne");
-		// Pages
-		Pages page1 = new Pages();
+		// Touristicplace
+		Touristicplace page1 = new Touristicplace();
 		page1.setCategoriePage("sport");
 		page1.setDescription("sport");
 		page1.setTitle("page pour le sport");
@@ -70,21 +74,21 @@ public class DefaultDataBaseDhafer {
 		page1.setImageURL(
 				"https://travel.jumia.com/blog/ng/wp-content/uploads/2016/01/bigstock-Four-Sports-a-lot-of-balls-an-50626115.jpg");
 		pageServiceLocal.saveOrUpdatePage(page1, "b38f3299-6949-42c7-9a6c-f998c66f485d");
-		Pages page2 = new Pages();
+		Touristicplace page2 = new Touristicplace();
 		page2.setCategoriePage("nature");
 		page2.setDescription("nature");
 		page2.setTitle("page pour le nature");
 		page2.setUserId("b38f3299-6949-42c7-9a6c-f998c66f485d");
 		page2.setImageURL("http://winsdesktop.com/wp-content/uploads/2016/09/Cool-Nature-Wallpaper-HD-1024x576.jpg");
 		pageServiceLocal.saveOrUpdatePage(page2, "b38f3299-6949-42c7-9a6c-f998c66f485d");
-		Pages page3 = new Pages();
+		Touristicplace page3 = new Touristicplace();
 		page3.setCategoriePage("plage");
 		page3.setDescription("plage");
 		page3.setTitle("page pour le plage");
 		page3.setUserId("b38f3299-6949-42c7-9a6c-f998c66f485d");
 		page3.setImageURL("https://www.voyageavecnous.fr/wp-content/uploads/2015/01/plage-paradisiaque-maldives.jpg");
 		pageServiceLocal.saveOrUpdatePage(page3, "b38f3299-6949-42c7-9a6c-f998c66f485d");
-		Pages page4 = new Pages();
+		Touristicplace page4 = new Touristicplace();
 		page4.setCategoriePage("compagne");
 		page4.setDescription("compagne");
 		page4.setTitle("page pour le compagne");
@@ -162,6 +166,15 @@ public class DefaultDataBaseDhafer {
 		envent3.setTitle("page pour le compagne");
 		envent3.setUserId("b38f3299-6949-42c7-9a6c-f998c66f485d");
 		pageServiceLocal.saveOrUpdatePage(envent3, "b38f3299-6949-42c7-9a6c-f998c66f485d");
+
+		// follow
+		String IdUser = "b38f3299-6949-42c7-9a6c-f998c66f4852";
+		FollowsId followsId = new FollowsId();
+		followsId.setDateFollow(new Date());
+		followsId.setPageId(17);
+		followsId.setUserId(IdUser);
+
+		followersServicesLocal.SaveOrUpdate(followsId, true, true);
 
 	}
 

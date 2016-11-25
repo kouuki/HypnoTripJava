@@ -96,14 +96,13 @@ public class AllEventTouristicPlacesAndOfferBean {
 			}
 		}
 		for (Pages pages : ListAllPagesToDisplay) {
-			if (pages instanceof Event) {
-				ListAllEvent.add(pages);
-			} else if (pages instanceof Offer) {
+			ListAllPages.add(pages);
+			if (pages instanceof Offer) {
 				ListAllOffers.add(pages);
 			} else if (pages instanceof Touristicplace) {
 				ListAllTouristicPlace.add(pages);
-			} else if (pages instanceof Pages) {
-				ListAllPages.add(pages);
+			} else if (pages instanceof Event) {
+				ListAllEvent.add(pages);
 			}
 		}
 

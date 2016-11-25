@@ -7,6 +7,7 @@ import javax.ejb.Local;
 import com.esprit.hypnotrip.persistence.Follows;
 import com.esprit.hypnotrip.persistence.FollowsId;
 import com.esprit.hypnotrip.persistence.Pages;
+import com.esprit.hypnotrip.persistence.Posts;
 
 @Local
 public interface FollowersServicesLocal {
@@ -21,9 +22,9 @@ public interface FollowersServicesLocal {
 
 	List<Pages> ListAllPages();
 
-	Integer MostUsedTag(String idUser);
+	List<Posts> findListOfTagsOrdredByUsing(String idUser);
 
-	List<Pages> ListAllPagesByTags(Integer IdTag);
+	List<Pages> ListAllPagesByTags(List<Posts> posts);
 
 	boolean MyEventForToDay(String idUser);
 

@@ -14,11 +14,11 @@
 						<div class="ul">
 							<h:form>
 								<h:commandLink
-									action="#{allEventTouristicPlacesAndOfferBean.DisplayOffer()}"
-									value="Display All Offer" class="filter active" />
-								<h:commandLink
 									action="#{allEventTouristicPlacesAndOfferBean.DisplayPages()}"
 									value="Display All Pages" class="filter active" />
+								<h:commandLink
+									action="#{allEventTouristicPlacesAndOfferBean.DisplayOffer()}"
+									value="Display All Offer" class="filter active" />
 								<h:commandLink
 									action="#{allEventTouristicPlacesAndOfferBean.DisplayEvent()}"
 									value="Display All Events" class="filter active" />
@@ -250,7 +250,7 @@
 				<!-- *************************************************************************************************************************** -->
 				<!-- *************************************************************************************************************************** -->
 				<!-- *************************************************************************************************************************** -->
-			
+
 				<ui:repeat
 					value="#{allEventTouristicPlacesAndOfferBean.listAllPagesToDisplay}"
 					var="p"

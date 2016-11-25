@@ -11,11 +11,10 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
-import com.esprit.hypnotrip.persistence.Event;
 import com.esprit.hypnotrip.persistence.Follows;
 import com.esprit.hypnotrip.persistence.FollowsId;
-import com.esprit.hypnotrip.persistence.Offer;
 import com.esprit.hypnotrip.persistence.Pages;
+import com.esprit.hypnotrip.persistence.Posts;
 import com.esprit.hypnotrip.persistence.Touristicplace;
 import com.esprit.hypnotrip.services.interfaces.FollowersServicesLocal;
 
@@ -29,6 +28,7 @@ public class RecommendedPagesBean {
 
 	private boolean displayForm1 = true;
 	private boolean displayForm2 = false;
+	private boolean displayTouristicPlaces = false;
 
 	private Follows follows = new Follows();
 	private FollowsId followsId = new FollowsId();
@@ -47,17 +47,18 @@ public class RecommendedPagesBean {
 	@PostConstruct
 	public void init() {
 		idUserConnected = loginBean.getUser().getId();
-		Integer mostTagUsedByConnectedUser = followersServicesLocal.MostUsedTag(idUserConnected);
-		ListAllPagesInDataBase = followersServicesLocal.ListAllPagesByTags(mostTagUsedByConnectedUser);
+		List<Posts> OrderByTagUsed = followersServicesLocal.findListOfTagsOrdredByUsing(idUserConnected);
+		ListAllPagesInDataBase = followersServicesLocal.ListAllPagesByTags(OrderByTagUsed);
 		ListAllMyFollowAndWish = followersServicesLocal.findAllFollowByUserId(idUserConnected);
-		ListAllPagesToDisplay = followersServicesLocal.ListAllPagesByTags(mostTagUsedByConnectedUser);
+		ListAllPagesToDisplay = followersServicesLocal.ListAllPagesByTags(OrderByTagUsed);
 		for (Follows follows : ListAllMyFollowAndWish) {
 			if (ListAllPagesInDataBase.contains(follows.getPages())) {
 				ListAllPagesToDisplay.remove(follows.getPages());
 			}
 		}
 		for (Pages pages : ListAllPagesToDisplay) {
-			if (!(pages instanceof Event) && !(pages instanceof Offer) && !(pages instanceof Touristicplace)) {
+			if (pages instanceof Touristicplace) {
+				displayTouristicPlaces = true;
 				ListAllPagesToDisplayAsAPages.add(pages);
 			}
 		}
@@ -216,6 +217,14 @@ public class RecommendedPagesBean {
 
 	public void setListAllPagesToDisplayAsAPages(List<Pages> listAllPagesToDisplayAsAPages) {
 		ListAllPagesToDisplayAsAPages = listAllPagesToDisplayAsAPages;
+	}
+
+	public boolean isDisplayTouristicPlaces() {
+		return displayTouristicPlaces;
+	}
+
+	public void setDisplayTouristicPlaces(boolean displayTouristicPlaces) {
+		this.displayTouristicPlaces = displayTouristicPlaces;
 	}
 
 }

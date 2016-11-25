@@ -114,31 +114,39 @@ public class FollowersServices implements FollowersServicesRemote, FollowersServ
 	}
 
 	@Override
-	public Integer MostUsedTag(String idUser) {
-		String jpql = "SELECT p FROM Posts p " + "WHERE IdOwner=:param GROUP BY p.tagId "
-				+ "having count(p.tagId) >= ALL ( " + "select po.tagId FROM Posts po "
-				+ "WHERE IdOwner=:param group by po.tagId)";
+	public List<Posts> findListOfTagsOrdredByUsing(String idUser) {
+		String jpql = "Select p from Posts p where p.idOwner=:param GROUP BY p.tagId ORDER BY Count(p.tagId) DESC";
 		Query query = entityManager.createQuery(jpql);
 		query.setParameter("param", idUser);
 		@SuppressWarnings("unchecked")
-		List<Posts> mostTagUsed = query.getResultList();
-		return mostTagUsed.get(0).getTagId();
+		List<Posts> OrderByTagUsed = query.getResultList();
+		return OrderByTagUsed;
 	}
 
 	@Override
-	public List<Pages> ListAllPagesByTags(Integer IdTag) {
-		String jpql = "SELECT t FROM Tags t WHERE t.tagId=:param";
-		Query query = entityManager.createQuery(jpql);
-		query.setParameter("param", IdTag);
-		Tags tags = (Tags) query.getResultList().get(0);
-		String CategoriePageToFind = tags.getName();
-		String jpql1 = "SELECT p FROM Pages p where p.categoriePage=:param";
-		Query query1 = entityManager.createQuery(jpql1);
-		query1.setParameter("param", CategoriePageToFind);
-
-		return query1.getResultList();
+	public List<Pages> ListAllPagesByTags(List<Posts> posts) {
+		List<Pages> listPageToReturn = new ArrayList<>();
+		List<Pages> listPageToRecuperer = new ArrayList<>();
+		for (Posts post : posts) {
+			String jpql = "SELECT t FROM Tags t WHERE t.tagId=:param";
+			Query query = entityManager.createQuery(jpql);
+			query.setParameter("param", post.getTagId());
+			Tags tags = (Tags) query.getResultList().get(0);
+			String CategoriePageToFind = tags.getName();
+			String jpql1 = "SELECT p FROM Pages p where p.categoriePage=:param";
+			Query query1 = entityManager.createQuery(jpql1);
+			query1.setParameter("param", CategoriePageToFind);
+			listPageToRecuperer = query1.getResultList();
+			for (Pages pages : listPageToRecuperer) {
+				listPageToReturn.add(pages);
+			}
+		}
+		return listPageToReturn;
 
 	}
+
+	
+	
 
 	@Override
 	public boolean MyEventForToDay(String idUser) {
