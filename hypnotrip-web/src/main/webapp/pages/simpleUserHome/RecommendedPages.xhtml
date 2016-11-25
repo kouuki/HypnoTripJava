@@ -9,107 +9,120 @@
 	<ui:define name="content">
 		<div class="container-fluid custom-container">
 			<div class="row">
-				<center>
-					<H1>Recommended Pages</H1>
-				</center>
-				<BR />
-				<ui:repeat
-					value="#{recommendedPagesBean.listAllPagesToDisplayAsAPages}"
-					var="p" rendered="#{recommendedPagesBean.displayForm1}">
+				<h:column rendered="#{!recommendedPagesBean.displayTouristicPlaces}">
+					<center>
+						<BR /> <BR />
+						<H1>NO MORE TOURISTIC PLAVES TO FOLLOW</H1>
+						<h:graphicImage
+							value="data:image/jpeg;base64,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"
+							alt="" />
+						<BR /> <BR /> <BR />
+					</center>
+				</h:column>
+				<h:column rendered="#{recommendedPagesBean.displayTouristicPlaces}">
 
-					<div class="category-1 mix custom-column-5"
-						style="display: inline-block;">
-						<div class="be-post">
-							<a href="page1.html" class="be-img-block"> <h:graphicImage
-									value="http://localhost:18080/hypnotrip-web/resources/img/p1.jpg"
-									alt="" />
-							</a> <a href="page1.html" class="be-post-title"><h:outputText
-									value="#{p.description}" /></a> <span>
-								<center>
-									<a href="#" class="be-post-tag"><h:outputText
-											value="#{p.categoriePage.toUpperCase()}" /> </a>
-								</center>
-							</span>
-							<div class="author-post">
-								<h:graphicImage
-									value="http://localhost:18080/hypnotrip-web/resources/img/a1.png"
-									alt="" />
-								<span>by <a href="page1.html">HypnoTrip</a>
-								</span>
-							</div>
-							<center>
-								<h:form id="f1" rendered="#{!empty loginBean.identifiedUser}">
-									<h:commandButton class="btn color-1 size-2 hover-1"
-										action="#{recommendedPagesBean.follow()}" value="Follow">
-										<f:setPropertyActionListener value="#{p}"
-											target="#{recommendedPagesBean.pagesSelected}"></f:setPropertyActionListener>
-									</h:commandButton>
+					<center>
+						<H1>RECOMMENDED TOURISTIC PLACES</H1>
+					</center>
+					<BR />
+					<center>
 
-									<h:commandButton
-										class="btn color-1 size-2 hover-1 fa fa-thumbs-o-up"
-										style="background: green"
-										action="#{recommendedPagesBean.WishDirect()}" value="Wish">
-										<f:setPropertyActionListener value="#{p}"
-											target="#{recommendedPagesBean.pagesSelected}"></f:setPropertyActionListener>
-									</h:commandButton>
-								</h:form>
-							</center>
-						</div>
-					</div>
-				</ui:repeat>
+						<ui:repeat
+							value="#{recommendedPagesBean.listAllPagesToDisplayAsAPages}"
+							var="p" rendered="#{recommendedPagesBean.displayForm1}">
 
-
-				<!-- *************************************************************************************************************************** -->
-				<!-- *************************************************************************************************************************** -->
-				<!-- *************************************************************************************************************************** -->
-				<center>
-					<h:form id="formWish"
-						rendered="#{recommendedPagesBean.displayForm2}">
-						<br />
-						<h1>Do You Want Add This In Your WishList</h1>
-						<br />
-						<div class="category-1 mix " style="display: inline-block;">
-							<div class="be-post">
-								<a href="page1.html" class="be-img-block"> <h:graphicImage
-										value="http://localhost:18080/hypnotrip-web/resources/img/p1.jpg"
-										alt="" />
-								</a> <a href="page1.html" class="be-post-title"><h:outputText
-										value="#{recommendedPagesBean.pagesSelected.description}" /></a>
-								<span>
-									<center>
-										<a href="#" class="be-post-tag"><h:outputText
-												value="#{recommendedPagesBean.pagesSelected.categoriePage.toUpperCase()}" />
-										</a>
-									</center>
-								</span>
-								<div class="author-post">
-									<h:graphicImage
-										value="http://localhost:18080/hypnotrip-web/resources/img/a1.png"
-										alt="" />
-									<span>by <a href="page1.html">HypnoTrip</a>
+							<div class="category-1 mix custom-column-5"
+								style="display: inline-block;">
+								<div class="be-post">
+									<a href="page1.html" class="be-img-block"> <h:graphicImage
+											value="http://localhost:18080/hypnotrip-web/resources/img/p1.jpg"
+											alt="" />
+									</a> <a href="page1.html" class="be-post-title"><h:outputText
+											value="#{p.description}" /></a> <span>
+										<center>
+											<a href="#" class="be-post-tag"><h:outputText
+													value="#{p.categoriePage.toUpperCase()}" /> </a>
+										</center>
 									</span>
+									<div class="author-post">
+										<h:graphicImage
+											value="http://localhost:18080/hypnotrip-web/resources/img/a1.png"
+											alt="" />
+										<span>by <a href="page1.html">HypnoTrip</a>
+										</span>
+									</div>
+									<center>
+										<h:form id="f1" rendered="#{!empty loginBean.identifiedUser}">
+											<h:commandButton class="btn color-1 size-2 hover-1"
+												action="#{recommendedPagesBean.follow()}" value="Follow">
+												<f:setPropertyActionListener value="#{p}"
+													target="#{recommendedPagesBean.pagesSelected}"></f:setPropertyActionListener>
+											</h:commandButton>
+
+											<h:commandButton
+												class="btn color-1 size-2 hover-1 fa fa-thumbs-o-up"
+												style="background: green"
+												action="#{recommendedPagesBean.WishDirect()}" value="Wish">
+												<f:setPropertyActionListener value="#{p}"
+													target="#{recommendedPagesBean.pagesSelected}"></f:setPropertyActionListener>
+											</h:commandButton>
+										</h:form>
+									</center>
 								</div>
-								<center>
-									<h:form id="f1" rendered="#{!empty loginBean.identifiedUser}">
-										<h:commandButton
-											class="btn color-1 size-2 hover-1 fa fa-thumbs-o-up"
-											style="background: green"
-											action="#{recommendedPagesBean.Wish()}" value="Wish">
-										</h:commandButton>
-										<h:commandButton
-											class="btn color-1 size-2 hover-1 fa fa-thumbs-o-up"
-											style="background: red"
-											action="#{recommendedPagesBean.cancel()}" value="NO">
-
-										</h:commandButton>
-									</h:form>
-								</center>
 							</div>
-						</div>
-					</h:form>
-				</center>
+						</ui:repeat>
+					</center>
 
+					<!-- *************************************************************************************************************************** -->
+					<!-- *************************************************************************************************************************** -->
+					<!-- *************************************************************************************************************************** -->
+					<center>
+						<h:form id="formWish"
+							rendered="#{recommendedPagesBean.displayForm2}">
+							<br />
+							<h1>Do You Want Add This In Your WishList</h1>
+							<br />
+							<div class="category-1 mix " style="display: inline-block;">
+								<div class="be-post">
+									<a href="page1.html" class="be-img-block"> <h:graphicImage
+											value="http://localhost:18080/hypnotrip-web/resources/img/p1.jpg"
+											alt="" />
+									</a> <a href="page1.html" class="be-post-title"><h:outputText
+											value="#{recommendedPagesBean.pagesSelected.description}" /></a>
+									<span>
+										<center>
+											<a href="#" class="be-post-tag"><h:outputText
+													value="#{recommendedPagesBean.pagesSelected.categoriePage.toUpperCase()}" />
+											</a>
+										</center>
+									</span>
+									<div class="author-post">
+										<h:graphicImage
+											value="http://localhost:18080/hypnotrip-web/resources/img/a1.png"
+											alt="" />
+										<span>by <a href="page1.html">HypnoTrip</a>
+										</span>
+									</div>
+									<center>
+										<h:form id="f1" rendered="#{!empty loginBean.identifiedUser}">
+											<h:commandButton
+												class="btn color-1 size-2 hover-1 fa fa-thumbs-o-up"
+												style="background: green"
+												action="#{recommendedPagesBean.Wish()}" value="Wish">
+											</h:commandButton>
+											<h:commandButton
+												class="btn color-1 size-2 hover-1 fa fa-thumbs-o-up"
+												style="background: red"
+												action="#{recommendedPagesBean.cancel()}" value="NO">
 
+											</h:commandButton>
+										</h:form>
+									</center>
+								</div>
+							</div>
+						</h:form>
+					</center>
+				</h:column>
 			</div>
 		</div>
 	</ui:define>

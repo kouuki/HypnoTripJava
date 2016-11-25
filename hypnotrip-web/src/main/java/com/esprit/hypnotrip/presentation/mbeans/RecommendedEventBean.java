@@ -15,6 +15,7 @@ import com.esprit.hypnotrip.persistence.Event;
 import com.esprit.hypnotrip.persistence.Follows;
 import com.esprit.hypnotrip.persistence.FollowsId;
 import com.esprit.hypnotrip.persistence.Pages;
+import com.esprit.hypnotrip.persistence.Posts;
 import com.esprit.hypnotrip.services.interfaces.FollowersServicesLocal;
 
 @ManagedBean
@@ -27,6 +28,7 @@ public class RecommendedEventBean {
 
 	private boolean displayForm1 = true;
 	private boolean displayForm2 = false;
+	private boolean displayEvent = false;
 
 	private Follows follows = new Follows();
 	private FollowsId followsId = new FollowsId();
@@ -45,10 +47,10 @@ public class RecommendedEventBean {
 	@PostConstruct
 	public void init() {
 		idUserConnected = loginBean.getUser().getId();
-		Integer mostTagUsedByConnectedUser = followersServicesLocal.MostUsedTag(idUserConnected);
-		ListAllPagesInDataBase = followersServicesLocal.ListAllPagesByTags(mostTagUsedByConnectedUser);
+		List<Posts> OrderByTagUsed = followersServicesLocal.findListOfTagsOrdredByUsing(idUserConnected);
+		ListAllPagesInDataBase = followersServicesLocal.ListAllPagesByTags(OrderByTagUsed);
 		ListAllMyFollowAndWish = followersServicesLocal.findAllFollowByUserId(idUserConnected);
-		ListAllPagesToDisplay = followersServicesLocal.ListAllPagesByTags(mostTagUsedByConnectedUser);
+		ListAllPagesToDisplay = followersServicesLocal.ListAllPagesByTags(OrderByTagUsed);
 		for (Follows follows : ListAllMyFollowAndWish) {
 			if (ListAllPagesInDataBase.contains(follows.getPages())) {
 				ListAllPagesToDisplay.remove(follows.getPages());
@@ -56,6 +58,8 @@ public class RecommendedEventBean {
 		}
 		for (Pages pages : ListAllPagesToDisplay) {
 			if (pages instanceof Event) {
+				displayEvent = true;
+
 				ListAllPagesToDisplayAsAEvents.add((Event) pages);
 			}
 		}
@@ -216,6 +220,12 @@ public class RecommendedEventBean {
 		ListAllPagesToDisplayAsAEvents = listAllPagesToDisplayAsAEvents;
 	}
 
-	
+	public boolean isDisplayEvent() {
+		return displayEvent;
+	}
+
+	public void setDisplayEvent(boolean displayEvent) {
+		this.displayEvent = displayEvent;
+	}
 
 }

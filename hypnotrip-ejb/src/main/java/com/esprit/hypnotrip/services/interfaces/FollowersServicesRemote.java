@@ -8,6 +8,7 @@ import com.esprit.hypnotrip.persistence.Event;
 import com.esprit.hypnotrip.persistence.Follows;
 import com.esprit.hypnotrip.persistence.FollowsId;
 import com.esprit.hypnotrip.persistence.Pages;
+import com.esprit.hypnotrip.persistence.Posts;
 
 @Remote
 public interface FollowersServicesRemote {
@@ -22,9 +23,9 @@ public interface FollowersServicesRemote {
 
 	List<Pages> ListAllPages();
 
-	Integer MostUsedTag(String idUser);
+	List<Posts> findListOfTagsOrdredByUsing(String idUser);
 
-	List<Pages> ListAllPagesByTags(Integer IdTag);
+	List<Pages> ListAllPagesByTags(List<Posts> posts);;
 
 	boolean MyEventForToDay(String idUser);
 
