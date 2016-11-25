@@ -44,6 +44,7 @@
 							<li><a href="author-login.html">My Portfolio</a></li>
 							<li id="ad-work-li"><a id="add-work-btn" class="btn color-1"
 								href="work.html">Add Work </a></li>
+
 						</h:column>
 					</ul>
 				</div>
@@ -58,17 +59,37 @@
 					</div>
 				</h:form>
 				<h:form rendered="#{not empty loginBean.identifiedUser}">
+
 					<div class="login-header-block">
 						<div class="login_block">
 							<a class="notofications-popup" href="page1.html"> <i
-								class="fa fa-bell-o"></i> <span class="noto-count">0</span>
+								class="fa fa-bell-o"></i> <span class="noto-count"><h:column
+										rendered="#{loginBean.notification}">
+										<h4>&#8734;</h4>
+									</h:column> <h:column rendered="#{not loginBean.notification}">
+								0</h:column></span>
 							</a>
 							<div class="noto-popup notofications-block"
 								style="display: none;">
 								<div class="m-close">
 									<i class="fa fa-times"></i>
 								</div>
-								<div class="noto-label">Your Notification</div>
+								<div class="noto-label">
+									Your Notification
+									<h:column rendered="#{loginBean.notification}">
+										<li id="ad-work-li"><center>
+												<h:commandButton class="btn color-1 size-2 hover-1"
+													style="background: green"
+													action="#{loginBean.notificationSenn()}"
+													value="Recall
+													Event">
+
+												</h:commandButton>
+
+											</center></li>
+
+									</h:column>
+								</div>
 								<div class="noto-body" style="max-height: 212px;"></div>
 							</div>
 							<a class="messages-popup" href="page1.html"> <i
@@ -86,6 +107,7 @@
 										href="statictics.html">Statistics </a> <a
 										href="http://localhost:18080/hypnotrip-web/pages/simpleUserHome/MyFollowersPages.jsf">Work
 										Experience</a> <a href="author-edit.html">Account Settings</a>
+
 									<h:commandLink action="#{loginBean.logout()}" ajax="false"
 										value="Logout" />
 

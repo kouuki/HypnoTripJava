@@ -15,7 +15,6 @@ import com.esprit.hypnotrip.persistence.Follows;
 import com.esprit.hypnotrip.persistence.Offer;
 import com.esprit.hypnotrip.persistence.Pages;
 import com.esprit.hypnotrip.persistence.Touristicplace;
-import com.esprit.hypnotrip.persistence.User;
 import com.esprit.hypnotrip.services.interfaces.FollowersServicesLocal;
 import com.esprit.hypnotrip.services.interfaces.UserServicesLocal;
 
@@ -33,7 +32,6 @@ public class MyFollowersPagesBean {
 	private LoginBean loginBean;
 
 	private List<Follows> follows = new ArrayList<>();
-	private List<User> OwnerPage = new ArrayList<>();
 	private Follows followSelected = new Follows();
 	private String idUserConnected;
 
@@ -156,14 +154,6 @@ public class MyFollowersPagesBean {
 
 	public void setIdUserConnected(String idUserConnected) {
 		this.idUserConnected = idUserConnected;
-	}
-
-	public List<User> getOwnerPage() {
-		return OwnerPage;
-	}
-
-	public void setOwnerPage(List<User> ownerPage) {
-		OwnerPage = ownerPage;
 	}
 
 	public Follows getFollowSelected() {

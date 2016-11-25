@@ -1,5 +1,9 @@
 package com.esprit.hypnotrip.services.impl;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -8,6 +12,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import com.esprit.hypnotrip.persistence.Event;
 import com.esprit.hypnotrip.persistence.Follows;
 import com.esprit.hypnotrip.persistence.FollowsId;
 import com.esprit.hypnotrip.persistence.Pages;
@@ -133,6 +138,41 @@ public class FollowersServices implements FollowersServicesRemote, FollowersServ
 
 		return query1.getResultList();
 
+	}
+
+	@Override
+	public boolean MyEventForToDay(String idUser) {
+		List<Follows> listAllMyFollow = this.findAllFollowByUserId(idUser);
+		for (Follows follows : listAllMyFollow) {
+			Event event = (Event) follows.getPages();
+			Date actuelle = new Date();
+			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+			String dateNow = dateFormat.format(actuelle);
+			if (dateNow.equals(event.getDateOfEvent().toString())) {
+				return true;
+			}
+		}
+		System.out.println("compare not Set");
+
+		return false;
+	}
+
+	@Override
+	public List<Follows> ListMyEventForToDay(String idUser) {
+		List<Follows> listMyEventForToDay = new ArrayList<>();
+		List<Follows> listAllMyFollow = this.findAllFollowByUserId(idUser);
+		for (Follows follows : listAllMyFollow) {
+			Date actuelle = new Date();
+			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+			String dateNow = dateFormat.format(actuelle);
+			if (follows.getPages() instanceof Event) {
+				if (dateNow.equals(((Event) follows.getPages()).getDateOfEvent().toString())) {
+					listMyEventForToDay.add(follows);
+				}
+			}
+		}
+
+		return listMyEventForToDay;
 	}
 
 }

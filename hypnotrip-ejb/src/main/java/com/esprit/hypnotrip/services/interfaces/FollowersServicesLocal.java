@@ -25,4 +25,8 @@ public interface FollowersServicesLocal {
 
 	List<Pages> ListAllPagesByTags(Integer IdTag);
 
+	boolean MyEventForToDay(String idUser);
+
+	List<Follows> ListMyEventForToDay(String idUser);
+
 }

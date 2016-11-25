@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.ejb.Remote;
 
+import com.esprit.hypnotrip.persistence.Event;
 import com.esprit.hypnotrip.persistence.Follows;
 import com.esprit.hypnotrip.persistence.FollowsId;
 import com.esprit.hypnotrip.persistence.Pages;
@@ -24,5 +25,9 @@ public interface FollowersServicesRemote {
 	Integer MostUsedTag(String idUser);
 
 	List<Pages> ListAllPagesByTags(Integer IdTag);
+
+	boolean MyEventForToDay(String idUser);
+
+	List<Follows> ListMyEventForToDay(String idUser);
 
 }

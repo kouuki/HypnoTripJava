@@ -34,7 +34,7 @@ public class RecommendedEventBean {
 	private List<Pages> ListAllPagesInDataBase = new ArrayList<>();
 	private List<Pages> ListAllPages = new ArrayList<>();
 	private List<Pages> ListAllPagesToDisplay = new ArrayList<>();
-	private List<Pages> ListAllPagesToDisplayAsAEvents = new ArrayList<>();
+	private List<Event> ListAllPagesToDisplayAsAEvents = new ArrayList<>();
 	private List<Follows> ListAllMyFollowAndWish = new ArrayList<>();
 	private String idUserConnected;
 
@@ -56,7 +56,7 @@ public class RecommendedEventBean {
 		}
 		for (Pages pages : ListAllPagesToDisplay) {
 			if (pages instanceof Event) {
-				ListAllPagesToDisplayAsAEvents.add(pages);
+				ListAllPagesToDisplayAsAEvents.add((Event) pages);
 			}
 		}
 
@@ -208,11 +208,11 @@ public class RecommendedEventBean {
 		this.pagesSelected = pagesSelected;
 	}
 
-	public List<Pages> getListAllPagesToDisplayAsAEvents() {
+	public List<Event> getListAllPagesToDisplayAsAEvents() {
 		return ListAllPagesToDisplayAsAEvents;
 	}
 
-	public void setListAllPagesToDisplayAsAEvents(List<Pages> listAllPagesToDisplayAsAEvents) {
+	public void setListAllPagesToDisplayAsAEvents(List<Event> listAllPagesToDisplayAsAEvents) {
 		ListAllPagesToDisplayAsAEvents = listAllPagesToDisplayAsAEvents;
 	}
 

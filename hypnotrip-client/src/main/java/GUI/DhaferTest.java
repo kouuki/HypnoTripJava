@@ -21,8 +21,28 @@ public class DhaferTest {
 		FollowersServicesRemote followersServicesRemote = (FollowersServicesRemote) context.lookup(jndi);
 
 		// Test Insert
+		String IdUser = "b38f3299-6949-42c7-9a6c-f998c66f4852";
+		FollowsId followsId = new FollowsId();
+		followsId.setDateFollow(new Date());
+		followsId.setPageId(17);
+		followsId.setUserId(IdUser);
+		// followersServicesRemote.SaveOrUpdate(IdUser, IdPage, true);
+		// followersServicesRemote.SaveOrUpdate(IdUser, IdPage, false);
+		followersServicesRemote.SaveOrUpdate(followsId, true, true);
 
-		System.out.println(followersServicesRemote.ListAllPagesByTags(4).toString());
+		// Test List
+		System.out.println(followersServicesRemote.findAllFollowByUserId(IdUser).toString());
+
+		// Test LoginUSer
+		Context context1 = new InitialContext();
+
+		String jndiUserService = "hypnotrip-ear/hypnotrip-ejb/UserServices!com.esprit.hypnotrip.services.interfaces.UserServicesRemote";
+		UserServicesRemote userServicesRemote = (UserServicesRemote) context1.lookup(jndiUserService);
+		User user = userServicesRemote.findUserByLoginAndPassword("daouesd@gmail.com", "123456789Azerty");
+		if (!(user == null)) {
+			System.out.println(user.toString());
+		} else
+			System.out.println("no ");
 
 	}
 
