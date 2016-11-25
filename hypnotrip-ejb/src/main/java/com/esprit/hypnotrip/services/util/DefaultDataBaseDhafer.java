@@ -67,24 +67,29 @@ public class DefaultDataBaseDhafer {
 		page1.setDescription("sport");
 		page1.setTitle("page pour le sport");
 		page1.setUserId("b38f3299-6949-42c7-9a6c-f998c66f485d");
+		page1.setImageURL(
+				"https://travel.jumia.com/blog/ng/wp-content/uploads/2016/01/bigstock-Four-Sports-a-lot-of-balls-an-50626115.jpg");
 		pageServiceLocal.saveOrUpdatePage(page1, "b38f3299-6949-42c7-9a6c-f998c66f485d");
 		Pages page2 = new Pages();
 		page2.setCategoriePage("nature");
 		page2.setDescription("nature");
 		page2.setTitle("page pour le nature");
 		page2.setUserId("b38f3299-6949-42c7-9a6c-f998c66f485d");
+		page2.setImageURL("http://winsdesktop.com/wp-content/uploads/2016/09/Cool-Nature-Wallpaper-HD-1024x576.jpg");
 		pageServiceLocal.saveOrUpdatePage(page2, "b38f3299-6949-42c7-9a6c-f998c66f485d");
 		Pages page3 = new Pages();
 		page3.setCategoriePage("plage");
 		page3.setDescription("plage");
 		page3.setTitle("page pour le plage");
 		page3.setUserId("b38f3299-6949-42c7-9a6c-f998c66f485d");
+		page3.setImageURL("https://www.voyageavecnous.fr/wp-content/uploads/2015/01/plage-paradisiaque-maldives.jpg");
 		pageServiceLocal.saveOrUpdatePage(page3, "b38f3299-6949-42c7-9a6c-f998c66f485d");
 		Pages page4 = new Pages();
 		page4.setCategoriePage("compagne");
 		page4.setDescription("compagne");
 		page4.setTitle("page pour le compagne");
 		page4.setUserId("b38f3299-6949-42c7-9a6c-f998c66f485d");
+		page4.setImageURL("http://img1.gtsstatic.com/wallpapers/27023ecf75d7373f40d69bf71c270c39_large.jpeg");
 		pageServiceLocal.saveOrUpdatePage(page4, "b38f3299-6949-42c7-9a6c-f998c66f485d");
 
 		// Posts
