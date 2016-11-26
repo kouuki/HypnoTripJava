@@ -25,4 +25,6 @@ public interface InvitationServicesLocal {
 
 	boolean isInvitedToLikeApage(String idReciever, int pageId);
 
+	String getPageTitleById(int pageId);
+
 }

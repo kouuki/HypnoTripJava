@@ -20,7 +20,7 @@
 					<h1></h1>
 					<p:dataTable var="p" value="#{adminBean.touristicPlaceNotAccepted}"
 						widgetVar="tpTable"
-						emptyMessage="No cars found with given criteria"
+						emptyMessage="No Touristic Places found with given criteria"
 						filteredValue="#{adminBean.filteredPlaces}">
 
 						<f:facet name="header">
@@ -55,10 +55,10 @@
 							<f:facet name="header">
 								<h:outputText value="Accept" />
 							</f:facet>
-							<h:commandButton
+							<p:commandButton
 								action="#{adminBean.AcceptTouristicPlace(p.pageId)}"
-								value="Accept Page" class="btn btn-primary btn-lg">
-							</h:commandButton>
+								value="Accept Page" class="btn btn-primary btn-lg" oncomplete="PF('tpTable').filter()"/>
+
 						</p:column>
 					</p:dataTable>
 				</h:form>

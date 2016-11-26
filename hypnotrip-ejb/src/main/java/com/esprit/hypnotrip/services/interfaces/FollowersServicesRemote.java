@@ -40,6 +40,8 @@ public interface FollowersServicesRemote {
 	String TitlePageById(Integer idPage);
 	
 	Integer nbrWish(Integer idPages);
+	
+	Follows GetLastFollowForPageByIdUser(Integer idPage, String userId);
 
 
 }

@@ -35,6 +35,12 @@
 					model="#{statisticsForMostOfferBought.pieModel2}"
 					style="height:500px" />
 			</h:form>
+				<h:form id="formStatistics"
+				rendered="#{eventsBean.displayFormStatistics}">
+				<p:poll interval="3" update="votes" />
+				<p:chart id="votes" type="pie" model="#{eventsBean.pieChartModel}"
+					style="width:800px;height:300px" />
+			</h:form>
 			</h:panelGrid>
 			</div>
 			

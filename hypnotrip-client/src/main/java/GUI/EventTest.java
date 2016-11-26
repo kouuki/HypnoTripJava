@@ -1,6 +1,7 @@
 package GUI;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -54,19 +55,28 @@ public class EventTest {
 
 			// is followed test
 
-			List<Event> events = eventServicesRemote.getAllThisWeekEvents();
-			boolean response = false;
-			for (Event event : events) {
-				response = eventServicesRemote.isFollowedByUser("b38f3299-6949-42c7-9a6c-f998c66f4852",
-						event.getPageId());
-				if (response == false) {
-					System.out.println("rahi mech mawjouda");
-				} else {
-					System.out.println("rahi mawjouda");
 
-				}
-			}
+//			List<Event> events = eventServicesRemote.getAllThisWeekEvents();
+//			boolean response = false;
+//			for (Event event : events) {
+//				response = eventServicesRemote.isFollowedByUser("b38f3299-6949-42c7-9a6c-f998c66f4852",
+//						event.getPageId());
+//				if (response == false) {
+//					System.out.println("rahi mech mawjouda");
+//				} else {
+//					System.out.println("rahi mawjouda");
+//
+//				}
+//			}
+
+			Map<Event,Long> events = eventServicesRemote.statisticsEvent();
+			System.out.println(events);
+
+
 			
+			
+			 eventServicesRemote.followPage("b38f3299-6949-42c7-9a6c-f998c66f4853", 11);
+
 			
 			
 

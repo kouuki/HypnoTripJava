@@ -52,6 +52,7 @@ public class AllEventTouristicPlacesAndOfferBean {
 	private Pages pagesSelected = new Pages();
 
 	public void DisplayOffer() {
+		displayForm2 = false;
 		displayForm1 = false;
 		displayAllOffer = true;
 		displayAllEvent = false;
@@ -60,6 +61,7 @@ public class AllEventTouristicPlacesAndOfferBean {
 	}
 
 	public void DisplayPages() {
+		displayForm2 = false;
 		displayForm1 = false;
 		displayAllPages = true;
 		displayAllOffer = false;
@@ -68,6 +70,7 @@ public class AllEventTouristicPlacesAndOfferBean {
 	}
 
 	public void DisplayEvent() {
+		displayForm2 = false;
 		displayForm1 = false;
 		displayAllEvent = true;
 		displayAllPages = false;
@@ -76,6 +79,7 @@ public class AllEventTouristicPlacesAndOfferBean {
 	}
 
 	public void DisplayTouristicPlaces() {
+		displayForm2 = false;
 		displayForm1 = false;
 		displayAllTouristicPlaces = true;
 		displayAllPages = false;
@@ -91,6 +95,7 @@ public class AllEventTouristicPlacesAndOfferBean {
 		ListAllMyFollowAndWish = followersServicesLocal.findAllFollowByUserId(idUserConnected);
 		ListAllPagesToDisplay = followersServicesLocal.ListAllPages();
 		for (Follows follows : ListAllMyFollowAndWish) {
+			
 			if (ListAllPagesInDataBase.contains(follows.getPages())) {
 				ListAllPagesToDisplay.remove(follows.getPages());
 			}
@@ -123,6 +128,10 @@ public class AllEventTouristicPlacesAndOfferBean {
 		return "";
 		// FacesContext.getCurrentInstance().getViewRoot().getViewMap().clear();
 
+	}
+
+	public Integer nbrFollowers(Integer idPage) {
+		return followersServicesLocal.nbrFollowers(idPage);
 	}
 
 	public void Wish() {

@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -14,8 +15,12 @@ import javax.persistence.Query;
 
 import com.esprit.hypnotrip.persistence.Event;
 import com.esprit.hypnotrip.persistence.Follows;
+import com.esprit.hypnotrip.persistence.Pages;
+import com.esprit.hypnotrip.persistence.User;
 import com.esprit.hypnotrip.services.interfaces.EventServicesLocal;
 import com.esprit.hypnotrip.services.interfaces.EventServicesRemote;
+import com.esprit.hypnotrip.services.interfaces.PageServiceLocal;
+import com.esprit.hypnotrip.services.interfaces.UserServicesLocal;
 
 /**
  * Session Bean implementation class EventServices
@@ -29,6 +34,12 @@ public class EventServices implements EventServicesRemote, EventServicesLocal {
 
 	@PersistenceContext
 	EntityManager entityManager;
+
+	@EJB
+	UserServicesLocal userServicesLocal;
+
+	@EJB
+	PageServiceLocal pageServiceLocal;
 
 	private String jpql, jpql1;
 	private Query query, query1;
@@ -300,13 +311,13 @@ public class EventServices implements EventServicesRemote, EventServicesLocal {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Event> availableOrUpcomingEventsInMyArea(String idUser, String place) {
-		
-		//JPQL QUERY
+
+		// JPQL QUERY
 		jpql = "SELECT e FROM Event e WHERE e.place=:param AND e.dateOfEvent>=curdate()";
-		
+
 		// JPQL QUERY that gets available or upcoming events
 		Query query = entityManager.createQuery(jpql);
-	
+
 		query.setParameter("param", place);
 		events = query.getResultList();
 
@@ -316,24 +327,24 @@ public class EventServices implements EventServicesRemote, EventServicesLocal {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public Map<Event, Long> statisticsEvent() {
+		public Map<Event, Long> statisticsEvent() {
 
-		jpql = "SELECT  e FROM Event e INNER JOIN e.followers f WHERE e.dateOfEvent>=curdate() GROUP BY f.id.pageId ORDER BY Count(f.id.pageId) DESC";
-		query = entityManager.createQuery(jpql);
-		events = query.getResultList();
-		Map<Event, Long> map = new HashMap<Event, Long>();
-		jpql1 = "SELECT  COUNT(e) FROM Event e INNER JOIN e.followers f WHERE e.dateOfEvent>=curdate() GROUP BY f.id.pageId ORDER BY Count(f.id.pageId) DESC";
-		query1 = entityManager.createQuery(jpql1);
-		List<Long> list = query1.getResultList();
-		int i = 0;
-		for (Event event : events) {
+			jpql = "SELECT  e FROM Event e INNER JOIN e.followers f WHERE e.dateOfEvent>=curdate() GROUP BY f.id.pageId ORDER BY Count(f.id.pageId) DESC";
+			query = entityManager.createQuery(jpql);
+			events = query.getResultList();
+			Map<Event, Long> map = new HashMap<Event, Long>();
+			jpql1 = "SELECT  COUNT(e) FROM Event e INNER JOIN e.followers f WHERE e.dateOfEvent>=curdate() GROUP BY f.id.pageId ORDER BY Count(f.id.pageId) DESC";
+			query1 = entityManager.createQuery(jpql1);
+			List<Long> list = query1.getResultList();
+			int i = 0;
+			for (Event event : events) {
 
-			map.put(entityManager.find(Event.class, event.getPageId()), list.get(i));
-			i++;
+				map.put(entityManager.find(Event.class, event.getPageId()), list.get(i));
+				i++;
+			}
+			System.out.println(map);
+			return map;
 		}
-		System.out.println(map);
-		return map;
-	}
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -368,117 +379,58 @@ public class EventServices implements EventServicesRemote, EventServicesLocal {
 	@Override
 	public List<Event> getAllEventsFollowedByUser(String idUser) {
 		// JPQL QUERY
-		jpql = "SELECT e FROM Event e INNER JOIN e.followers f WHERE f.id.userId =:param AND f.followStat=true";
+		jpql = "SELECT e FROM Event e INNER JOIN e.followers f WHERE f.id.userId =:param AND f.followStat=true and e.dateOfEvent>=curdate()";
 		query = entityManager.createQuery(jpql);
 		query.setParameter("param", idUser);
 
-			try {
-					events = query.getResultList();
-			} catch (Exception e) {
-					// TODO: handle exception
-				}
-
-		return events;
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	public List<Event> getAllEvents(){
-		String jpql="SELECT e FROM Event e ";
-		Query query = entityManager.createQuery(jpql);
-		try{
+		try {
 			events = query.getResultList();
-		}catch(Exception e) {
-			
+		} catch (Exception e) {
+			// TODO: handle exception
 		}
-		
+
 		return events;
 	}
-	
-	
 
+	public List<Event> getAllEvents() {
+		String jpql = "SELECT e FROM Event e ";
+		Query query = entityManager.createQuery(jpql);
+		try {
+			events = query.getResultList();
+		} catch (Exception e) {
+
+		}
+
+		return events;
+	}
+
+
+	
+	
+	
+	@Override
+	public void followPage(String idUser, int idPage) {
+		// user exists
+		User userFound = userServicesLocal.findUserById(idUser);
+
+		// page exists
+		Pages page = pageServiceLocal.findPageById(idPage);
+		
+		Follows follows = new Follows(true, false, userFound, page);
+		entityManager.merge(follows);
+
+	}
+
+	@Override
+	public void unfollowPage(String idUser, int idPage) {
+		// user exists
+		User userFound = userServicesLocal.findUserById(idUser);
+
+		// page exists
+		Pages page = pageServiceLocal.findPageById(idPage);
+		
+		Follows follows = new Follows(false, false, userFound, page);
+		entityManager.merge(follows);
+	}
 
 }

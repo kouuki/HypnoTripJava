@@ -90,7 +90,7 @@ public class FollowersServices implements FollowersServicesRemote, FollowersServ
 		Follows follow : follows) {
 			nbrfollowrs++;
 		}
-		System.out.println(nbrfollowrs + "   nbr foloooooooo");
+		
 		return nbrfollowrs;
 	}
 
@@ -265,4 +265,26 @@ public class FollowersServices implements FollowersServicesRemote, FollowersServ
 		return nbrWish;
 	}
 
+	public Follows GetLastFollowForPageByIdUser(Integer idPage, String userId) {
+
+		// String jpql = "UPDATE Follows f SET f.followStat=false,
+		// f.wishStat=false WHERE f.id.pageId=(SELECT "
+		// + "fo.id.pageId FROM Follows fo WHERE fo.id.pageId=:param ORDER BY
+		// fo.id.dateFollow DESC LIMIT 1) AND f.id.userId=(SELECT "
+		// + "fo.id.userId FROM Follows fo WHERE fo.id.userId=:param1 ORDER BY
+		// fo.id.dateFollow DESC LIMIT 1)";
+		// Query query = entityManager.createQuery(jpql);
+		// query.setParameter("param", idPage);
+		// query.setParameter("param1", userId);
+		// query.executeUpdate();
+
+		String jpql = "SELECT f FROM Follows f WHERE f.id.pageId=:param AND f.id.userId=:param1";
+		Query query = entityManager.createQuery(jpql);
+		query.setParameter("param", idPage);
+		query.setParameter("param1", userId);
+		@SuppressWarnings("unchecked")
+		List<Follows> follows = query.getResultList();
+		return follows.get(follows.size()-1);
+
+	}
 }

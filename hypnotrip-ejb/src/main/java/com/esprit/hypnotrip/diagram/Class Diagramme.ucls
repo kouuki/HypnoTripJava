@@ -1,0 +1,653 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.1.11" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
+  associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
+  <class id="1" language="java" name="com.esprit.hypnotrip.persistence.BookDescription" project="hypnotrip-ejb" 
+    file="/hypnotrip-ejb/src/main/java/com/esprit/hypnotrip/persistence/BookDescription.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="333" width="213" x="3940" y="3122"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="2" language="java" name="com.esprit.hypnotrip.persistence.InvitationsId" project="hypnotrip-ejb" 
+    file="/hypnotrip-ejb/src/main/java/com/esprit/hypnotrip/persistence/InvitationsId.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="315" width="174" x="3980" y="1543"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="com.esprit.hypnotrip.persistence.Migrationhistory" project="hypnotrip-ejb" 
+    file="/hypnotrip-ejb/src/main/java/com/esprit/hypnotrip/persistence/Migrationhistory.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="315" width="230" x="602" y="-62"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="com.esprit.hypnotrip.persistence.ComplainsId" project="hypnotrip-ejb" 
+    file="/hypnotrip-ejb/src/main/java/com/esprit/hypnotrip/persistence/ComplainsId.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="351" width="189" x="3495" y="527"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="5" language="java" name="com.esprit.hypnotrip.persistence.FollowsId" project="hypnotrip-ejb" 
+    file="/hypnotrip-ejb/src/main/java/com/esprit/hypnotrip/persistence/FollowsId.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="315" width="148" x="5120" y="1543"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="com.esprit.hypnotrip.persistence.Belongs" project="hypnotrip-ejb" 
+    file="/hypnotrip-ejb/src/main/java/com/esprit/hypnotrip/persistence/Belongs.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="189" width="147" x="872" y="-62"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="com.esprit.hypnotrip.persistence.Touristicplace" project="hypnotrip-ejb" 
+    file="/hypnotrip-ejb/src/main/java/com/esprit/hypnotrip/persistence/Touristicplace.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="387" width="246" x="4243" y="527"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="com.esprit.hypnotrip.persistence.Aspnetroles" project="hypnotrip-ejb" 
+    file="/hypnotrip-ejb/src/main/java/com/esprit/hypnotrip/persistence/Aspnetroles.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="207" width="152" x="1059" y="-62"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="9" language="java" name="com.esprit.hypnotrip.persistence.Aspnetuserlogins" project="hypnotrip-ejb" 
+    file="/hypnotrip-ejb/src/main/java/com/esprit/hypnotrip/persistence/Aspnetuserlogins.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="135" width="212" x="1438" y="-62"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="10" language="java" name="com.esprit.hypnotrip.persistence.Posts" project="hypnotrip-ejb" 
+    file="/hypnotrip-ejb/src/main/java/com/esprit/hypnotrip/persistence/Posts.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="549" width="247" x="2329" y="-62"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="11" language="java" name="com.esprit.hypnotrip.persistence.BelongsId" project="hypnotrip-ejb" 
+    file="/hypnotrip-ejb/src/main/java/com/esprit/hypnotrip/persistence/BelongsId.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="297" width="148" x="872" y="527"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="12" language="java" name="com.esprit.hypnotrip.persistence.BookId" project="hypnotrip-ejb" 
+    file="/hypnotrip-ejb/src/main/java/com/esprit/hypnotrip/persistence/BookId.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="333" width="166" x="3940" y="3495"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="13" language="java" name="com.esprit.hypnotrip.persistence.Todo" project="hypnotrip-ejb" 
+    file="/hypnotrip-ejb/src/main/java/com/esprit/hypnotrip/persistence/Todo.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="225" width="147" x="1251" y="-62"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="14" language="java" name="com.esprit.hypnotrip.persistence.Comments" project="hypnotrip-ejb" 
+    file="/hypnotrip-ejb/src/main/java/com/esprit/hypnotrip/persistence/Comments.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="261" width="198" x="3013" y="-62"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="15" language="java" name="com.esprit.hypnotrip.persistence.User" project="hypnotrip-ejb" 
+    file="/hypnotrip-ejb/src/main/java/com/esprit/hypnotrip/persistence/User.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="1539" width="699" x="4194" y="1543"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="16" language="java" name="com.esprit.hypnotrip.persistence.Tickets" project="hypnotrip-ejb" 
+    file="/hypnotrip-ejb/src/main/java/com/esprit/hypnotrip/persistence/Tickets.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="441" width="263" x="3940" y="527"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="17" language="java" name="com.esprit.hypnotrip.persistence.Aspnetuserroles" project="hypnotrip-ejb" 
+    file="/hypnotrip-ejb/src/main/java/com/esprit/hypnotrip/persistence/Aspnetuserroles.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="135" width="204" x="3251" y="-62"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="18" language="java" name="com.esprit.hypnotrip.persistence.Invitations" project="hypnotrip-ejb" 
+    file="/hypnotrip-ejb/src/main/java/com/esprit/hypnotrip/persistence/Invitations.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="477" width="189" x="4190" y="1026"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="19" language="java" name="com.esprit.hypnotrip.persistence.BuyId" project="hypnotrip-ejb" 
+    file="/hypnotrip-ejb/src/main/java/com/esprit/hypnotrip/persistence/BuyId.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="315" width="147" x="4888" y="527"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="20" language="java" name="com.esprit.hypnotrip.persistence.Follows" project="hypnotrip-ejb" 
+    file="/hypnotrip-ejb/src/main/java/com/esprit/hypnotrip/persistence/Follows.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="459" width="170" x="4606" y="1026"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="21" language="java" name="com.esprit.hypnotrip.persistence.Complains" project="hypnotrip-ejb" 
+    file="/hypnotrip-ejb/src/main/java/com/esprit/hypnotrip/persistence/Complains.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="261" width="202" x="3495" y="-62"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="22" language="java" name="com.esprit.hypnotrip.persistence.Aspnetuserclaims" project="hypnotrip-ejb" 
+    file="/hypnotrip-ejb/src/main/java/com/esprit/hypnotrip/persistence/Aspnetuserclaims.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="315" width="211" x="1690" y="-62"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="23" language="java" name="com.esprit.hypnotrip.persistence.Tags" project="hypnotrip-ejb" 
+    file="/hypnotrip-ejb/src/main/java/com/esprit/hypnotrip/persistence/Tags.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="279" width="147" x="2329" y="527"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="24" language="java" name="com.esprit.hypnotrip.persistence.Rates" project="hypnotrip-ejb" 
+    file="/hypnotrip-ejb/src/main/java/com/esprit/hypnotrip/persistence/Rates.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="333" width="147" x="4419" y="1026"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="25" language="java" name="com.esprit.hypnotrip.persistence.Messages" project="hypnotrip-ejb" 
+    file="/hypnotrip-ejb/src/main/java/com/esprit/hypnotrip/persistence/Messages.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="207" width="173" x="3737" y="-62"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="26" language="java" name="com.esprit.hypnotrip.persistence.Cercles" project="hypnotrip-ejb" 
+    file="/hypnotrip-ejb/src/main/java/com/esprit/hypnotrip/persistence/Cercles.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="315" width="161" x="1941" y="-62"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="27" language="java" name="com.esprit.hypnotrip.persistence.Event" project="hypnotrip-ejb" 
+    file="/hypnotrip-ejb/src/main/java/com/esprit/hypnotrip/persistence/Event.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="459" width="224" x="4550" y="527"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="28" language="java" name="com.esprit.hypnotrip.persistence.Buy" project="hypnotrip-ejb" 
+    file="/hypnotrip-ejb/src/main/java/com/esprit/hypnotrip/persistence/Buy.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="147" x="4888" y="-62"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="29" language="java" name="com.esprit.hypnotrip.persistence.Media" project="hypnotrip-ejb" 
+    file="/hypnotrip-ejb/src/main/java/com/esprit/hypnotrip/persistence/Media.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="279" width="147" x="2142" y="-62"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="30" language="java" name="com.esprit.hypnotrip.persistence.MessagesId" project="hypnotrip-ejb" 
+    file="/hypnotrip-ejb/src/main/java/com/esprit/hypnotrip/persistence/MessagesId.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="297" width="176" x="3724" y="527"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="31" language="java" name="com.esprit.hypnotrip.persistence.Userconnections" project="hypnotrip-ejb" 
+    file="/hypnotrip-ejb/src/main/java/com/esprit/hypnotrip/persistence/Userconnections.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="279" width="170" x="2616" y="-62"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="32" language="java" name="com.esprit.hypnotrip.persistence.Offer" project="hypnotrip-ejb" 
+    file="/hypnotrip-ejb/src/main/java/com/esprit/hypnotrip/persistence/Offer.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="423" width="189" x="4816" y="1026"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="33" language="java" name="com.esprit.hypnotrip.persistence.AspnetuserrolesId" project="hypnotrip-ejb" 
+    file="/hypnotrip-ejb/src/main/java/com/esprit/hypnotrip/persistence/AspnetuserrolesId.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="243" width="182" x="3251" y="527"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="34" language="java" name="com.esprit.hypnotrip.persistence.TTodo" project="hypnotrip-ejb" 
+    file="/hypnotrip-ejb/src/main/java/com/esprit/hypnotrip/persistence/TTodo.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="207" width="147" x="2826" y="-62"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="35" language="java" name="com.esprit.hypnotrip.persistence.CommentsId" project="hypnotrip-ejb" 
+    file="/hypnotrip-ejb/src/main/java/com/esprit/hypnotrip/persistence/CommentsId.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="297" width="160" x="3013" y="527"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="36" language="java" name="com.esprit.hypnotrip.persistence.Pages" project="hypnotrip-ejb" 
+    file="/hypnotrip-ejb/src/main/java/com/esprit/hypnotrip/persistence/Pages.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="531" width="170" x="4510" y="-62"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="37" language="java" name="com.esprit.hypnotrip.persistence.RatesId" project="hypnotrip-ejb" 
+    file="/hypnotrip-ejb/src/main/java/com/esprit/hypnotrip/persistence/RatesId.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="261" width="147" x="4933" y="1543"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="38" language="java" name="com.esprit.hypnotrip.persistence.AspnetuserloginsId" project="hypnotrip-ejb" 
+    file="/hypnotrip-ejb/src/main/java/com/esprit/hypnotrip/persistence/AspnetuserloginsId.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="297" width="217" x="1438" y="527"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <association id="39">    
+    <end type="SOURCE" refId="36" navigable="false">      
+      <attribute id="40" name="tickets"/>      
+      <multiplicity id="41" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="16" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="42">    
+    <bendpoint x="4825" y="527"/>    
+    <end type="SOURCE" refId="32"/>    
+    <end type="TARGET" refId="36"/>  
+  </generalization>  
+  <association id="43">    
+    <end type="SOURCE" refId="32" navigable="false">      
+      <attribute id="44" name="user"/>      
+      <multiplicity id="45" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="15" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="46">    
+    <end type="SOURCE" refId="20" navigable="false">      
+      <attribute id="47" name="user"/>      
+      <multiplicity id="48" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="15" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="49">    
+    <end type="SOURCE" refId="15" navigable="false">      
+      <attribute id="50" name="pagesRecieveInvitation"/>      
+      <multiplicity id="51" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="18" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="52">    
+    <end type="SOURCE" refId="15" navigable="false">      
+      <attribute id="53" name="listOffers"/>      
+      <multiplicity id="54" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="32" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="55">    
+    <end type="SOURCE" refId="20" navigable="false">      
+      <attribute id="56" name="id"/>      
+      <multiplicity id="57" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="58">    
+    <bendpoint x="4804" y="527"/>    
+    <end type="SOURCE" refId="20" navigable="false">      
+      <attribute id="59" name="pages"/>      
+      <multiplicity id="60" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="36" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="61">    
+    <end type="SOURCE" refId="24" navigable="false">      
+      <attribute id="62" name="user"/>      
+      <multiplicity id="63" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="15" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="64">    
+    <bendpoint x="4519" y="527"/>    
+    <end type="SOURCE" refId="24" navigable="false">      
+      <attribute id="65" name="page"/>      
+      <multiplicity id="66" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="36" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="67">    
+    <end type="SOURCE" refId="18" navigable="false">      
+      <attribute id="68" name="id"/>      
+      <multiplicity id="69" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="70">    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="71" name="id"/>      
+      <multiplicity id="72" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="73">    
+    <end type="SOURCE" refId="21" navigable="false">      
+      <attribute id="74" name="id"/>      
+      <multiplicity id="75" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="76">    
+    <end type="SOURCE" refId="15" navigable="false">      
+      <attribute id="77" name="pagesSendInvitation"/>      
+      <multiplicity id="78" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="18" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="79">    
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="80" name="id"/>      
+      <multiplicity id="81" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="35" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="82">    
+    <bendpoint x="3949" y="1543"/>    
+    <bendpoint x="3949" y="1026"/>    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="83" name="ticket"/>      
+      <multiplicity id="84" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="16" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="85">    
+    <end type="SOURCE" refId="27" navigable="false">      
+      <attribute id="86" name="followers"/>      
+      <multiplicity id="87" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="20" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="88">    
+    <end type="SOURCE" refId="16" navigable="false">      
+      <attribute id="89" name="event"/>      
+      <multiplicity id="90" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="36" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="91">    
+    <end type="SOURCE" refId="27"/>    
+    <end type="TARGET" refId="36"/>  
+  </generalization>  
+  <association id="92">    
+    <end type="SOURCE" refId="15" navigable="false">      
+      <attribute id="93" name="rates"/>      
+      <multiplicity id="94" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="24" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="95">    
+    <end type="SOURCE" refId="28" navigable="false">      
+      <attribute id="96" name="id"/>      
+      <multiplicity id="97" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="19" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="98">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="99" name="user"/>      
+      <multiplicity id="100" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="15" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="101">    
+    <bendpoint x="3928" y="1026"/>    
+    <bendpoint x="3928" y="1543"/>    
+    <end type="SOURCE" refId="16" navigable="false">      
+      <attribute id="102" name="bookDescriptions"/>      
+      <multiplicity id="103" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="104">    
+    <end type="SOURCE" refId="18" navigable="false">      
+      <attribute id="105" name="sender"/>      
+      <multiplicity id="106" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="15" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="107">    
+    <end type="SOURCE" refId="15" navigable="false">      
+      <attribute id="108" name="bookDescriptions"/>      
+      <multiplicity id="109" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="110">    
+    <end type="SOURCE" refId="25" navigable="false">      
+      <attribute id="111" name="id"/>      
+      <multiplicity id="112" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="30" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="113">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="36"/>  
+  </generalization>  
+  <association id="114">    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="115" name="rates"/>      
+      <multiplicity id="116" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="24" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="117">    
+    <end type="SOURCE" refId="17" navigable="false">      
+      <attribute id="118" name="id"/>      
+      <multiplicity id="119" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="33" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="120">    
+    <end type="SOURCE" refId="15" navigable="false">      
+      <attribute id="121" name="pagesFollowed"/>      
+      <multiplicity id="122" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="20" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="123">    
+    <end type="SOURCE" refId="24" navigable="false">      
+      <attribute id="124" name="id"/>      
+      <multiplicity id="125" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="37" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="126">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="127" name="bookId"/>      
+      <multiplicity id="128" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="12" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="129">    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="130" name="id"/>      
+      <multiplicity id="131" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="38" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="132">    
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="133" name="tag"/>      
+      <multiplicity id="134" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="23" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="135">    
+    <end type="SOURCE" refId="18" navigable="false">      
+      <attribute id="136" name="reciever"/>      
+      <multiplicity id="137" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="15" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>

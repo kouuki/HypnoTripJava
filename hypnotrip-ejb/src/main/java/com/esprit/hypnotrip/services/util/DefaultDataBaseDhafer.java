@@ -171,6 +171,7 @@ public class DefaultDataBaseDhafer {
 		page3.setImageURL("https://www.voyageavecnous.fr/wp-content/uploads/2015/01/plage-paradisiaque-maldives.jpg");
 		pageServiceLocal.saveOrUpdatePage(page3, "b38f3299-6949-42c7-9a6c-f998c66f4852");
 
+
 		Touristicplace page4 = new Touristicplace();
 		page4.setName("Berneville");
 		page4.setDateOfCreation(new Date());
