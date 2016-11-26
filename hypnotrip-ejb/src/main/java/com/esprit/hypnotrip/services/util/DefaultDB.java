@@ -69,6 +69,7 @@ public class DefaultDB {
 		ts1.setCategoriePage("sport");
 		pageServiceLocal.saveOrUpdatePage(ts1, "b38f3299-6949-42c7-9a6c-f998c66f4855");
 
+
 		Pages ts2 = new Touristicplace("Second Touristic page", "Titre de la 2eme page", new Date(), "logo2", "Russia");
 		ts2.setImageURL("http://www.horizon-virtuel.com/amerique/new-york/statue-liberty.jpg");
 		ts2.setCategoriePage("nature");
@@ -111,7 +112,7 @@ public class DefaultDB {
 		user.setUserName("daouesd");
 		user.setRole("0");
 		user.setId("b38f3299-6949-42c7-9a6c-f998c66f485d");
-
+		
 		User user4 = new User();
 		user4.setAddress("tunis");
 		user4.setAccessFailedCount(0);
@@ -126,7 +127,9 @@ public class DefaultDB {
 		user4.setLogin("Amin");
 		user4.setUserName("ghorbel");
 		user4.setRole("0");
-		user4.setId("c25c4e23-1275-45d8-b327-c6fb06d90455");
+		user4.setId("b38f3299-6949-42c7-9a6c-f998c66f4855");
+
+
 
 		User user2 = new User();
 		user2.setAddress("tunis");
@@ -143,7 +146,7 @@ public class DefaultDB {
 		user2.setUserName("daouesd");
 		user2.setRole("1");
 		user2.setId("b38f3299-6949-42c7-9a6c-f998c66f4852");
-
+		
 		User user3 = new User();
 		user3.setAddress("tunis");
 		user3.setAccessFailedCount(0);
@@ -160,10 +163,14 @@ public class DefaultDB {
 		user3.setRole("1");
 		user3.setId("b38f3299-6949-42c7-9a6c-f998c66f4853");
 
+	
+
+
 		userServicesLocal.saveOrUpdate(user);
 		userServicesLocal.saveOrUpdate(user2);
 		userServicesLocal.saveOrUpdate(user3);
 		userServicesLocal.saveOrUpdate(user4);
+
 
 		// ********************************************************************************************************************
 		// ********************************************************************************************************************

@@ -48,7 +48,12 @@
 									value="http://localhost:18080/hypnotrip-web/resources/img/p1.jpg"
 									alt="" />
 							</a> <a href="page1.html" class="be-post-title"><h:outputText
-									value="#{p.description}" /></a> <span>
+									value="#{p.description}" /></a> <a href="page1.html"
+								class="be-post-title"><center>
+									<h:outputText value="Bengin Date: #{p.beginDate}" />
+									<BR />
+									<h:outputText value="End Date: #{p.finishDate}" />
+								</center></a> <span>
 								<center>
 									<a href="#" class="be-post-tag"><h:outputText
 											value="#{p.categoriePage.toUpperCase()}" /> </a>
@@ -101,7 +106,10 @@
 									value="http://localhost:18080/hypnotrip-web/resources/img/p1.jpg"
 									alt="" />
 							</a> <a href="page1.html" class="be-post-title"><h:outputText
-									value="#{p.description}" /></a> <span>
+									value="#{p.description}" /></a><a href="page1.html"
+								class="be-post-title"><center>
+									<h:outputText value="Date of Event: #{p.dateOfEvent}" />
+								</center> </a> <span>
 								<center>
 									<a href="#" class="be-post-tag"><h:outputText
 											value="#{p.categoriePage.toUpperCase()}" /> </a>

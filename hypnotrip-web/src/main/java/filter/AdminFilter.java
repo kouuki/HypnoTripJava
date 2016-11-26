@@ -29,6 +29,9 @@ public class AdminFilter implements Filter {
 		HttpServletRequest request = (HttpServletRequest) servletRequest;
 		HttpServletResponse response = (HttpServletResponse) servletResponse;
 		LoginBean loginBean = (LoginBean) request.getSession().getAttribute("loginBean");
+		if (loginBean == null) {
+			response.sendRedirect("http://localhost:18080/hypnotrip-web/Home.jsf");
+		}
 		if (loginBean != null && loginBean.getLoggedInAsAdmin()) {
 			filterChain.doFilter(request, response);
 		} else {
