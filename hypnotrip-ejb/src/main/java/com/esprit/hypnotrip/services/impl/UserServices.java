@@ -138,8 +138,10 @@ public class UserServices implements UserServicesRemote, UserServicesLocal {
 
 	@Override
 	public List<User> getAllFriendsWhoAreGoingToTheSameEvent(Pages event, String userId) {
+		
+		try{
 		List<String> listOfIds = new ArrayList<>();
-
+       
 		Client client = ClientBuilder.newClient();
 		WebTarget target = client.target("http://localhost:63784/api/BelongWS");
 		WebTarget userFriends = target.path("UserFriends").path(userId);
@@ -162,7 +164,10 @@ public class UserServices implements UserServicesRemote, UserServicesLocal {
 			}
 		}
 
-		return usersGoingToTheEnvent;
+		return usersGoingToTheEnvent; } 
+		catch(Exception e ) {
+			return null ; 
+		}
 	}
 
 	@Override
