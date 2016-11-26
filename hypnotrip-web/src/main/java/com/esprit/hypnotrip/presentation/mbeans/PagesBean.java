@@ -98,10 +98,8 @@ public class PagesBean {
 
 	// ********************************************************************************
 	// Passer a La Page Rate
-	public String ratePage() {
-
-		RateBean.getSelectedItemFromPage(pageSelected.getPageId());
-		return "/pages/simpleUserHome/ratePages?faces-redirect=true";
+	public void ratePage(int pageId) {
+		RateBean.getSelectedItemFromPage(pageId);
 	}
 
 	// ********************************************************************************

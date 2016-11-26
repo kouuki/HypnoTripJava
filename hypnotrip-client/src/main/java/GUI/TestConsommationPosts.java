@@ -19,7 +19,6 @@ public class TestConsommationPosts {
 
 		String jndi = "hypnotrip-ear/hypnotrip-ejb/PostServices!com.esprit.hypnotrip.services.interfaces.PostServicesRemote";
 		PostServicesRemote postServicesRemote = (PostServicesRemote) context.lookup(jndi);
-
 		System.out.println(postServicesRemote.findAllPostByUser("b38f3299-6949-42c7-9a6c-f998c66f4852"));
 
 	}

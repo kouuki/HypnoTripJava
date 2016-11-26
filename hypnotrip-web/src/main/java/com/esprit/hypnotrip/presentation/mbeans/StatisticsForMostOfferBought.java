@@ -7,6 +7,7 @@ import java.util.Map.Entry;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 
 import org.primefaces.model.chart.PieChartModel;
 
@@ -52,6 +53,7 @@ public class StatisticsForMostOfferBought implements Serializable {
 			Long valeur = entry.getValue();
 
 			pieModel2.set(cle.getTitle(), valeur);
+			
 
 		}
 
