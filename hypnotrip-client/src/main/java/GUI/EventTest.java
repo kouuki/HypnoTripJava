@@ -19,11 +19,12 @@ public class EventTest {
 			EventServicesRemote eventServicesRemote = (EventServicesRemote) context.lookup(jndiName);
 
 			// period test
-			List<Event> events = eventServicesRemote.eventsIHaveMissedInTheLastWeek("5");
-
-			for (Event event : events) {
-				System.out.println(event.toString());
-			}
+//			 List<Event> events =
+//			 eventServicesRemote.getAllThisWeekEvents();
+//			
+//			 for (Event event : events) {
+//			 System.out.println(event.toString());
+//			 }
 
 			// months test
 			// List<Integer> months = eventServicesRemote.getAllEventMonths();
@@ -37,7 +38,7 @@ public class EventTest {
 			// System.out.println(event.toString());
 
 			// is avialable test
-			// boolean response = eventServicesRemote.eventIsAvailaible(5);
+			// boolean response = eventServicesRemote.eventIsAvailaible(21);
 			// System.out.println(response);
 
 			// events i might like test
@@ -47,6 +48,27 @@ public class EventTest {
 			// for (Event event : events) {
 			// System.out.println(event.toString());
 			// }
+
+			// stat test
+			// eventServicesRemote.statisticsEvent();
+
+			// is followed test
+
+			List<Event> events = eventServicesRemote.getAllThisWeekEvents();
+			boolean response = false;
+			for (Event event : events) {
+				response = eventServicesRemote.isFollowedByUser("b38f3299-6949-42c7-9a6c-f998c66f4852",
+						event.getPageId());
+				if (response == false) {
+					System.out.println("rahi mech mawjouda");
+				} else {
+					System.out.println("rahi mawjouda");
+
+				}
+			}
+			
+			
+			
 
 		} catch (NamingException e) {
 			// TODO Auto-generated catch block

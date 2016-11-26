@@ -40,4 +40,5 @@ public interface FollowersServicesLocal {
 
 	Integer nbrWish(Integer idPages);
 
+
 }

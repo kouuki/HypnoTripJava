@@ -16,10 +16,15 @@
 			<br /> <br />
 
 			<h:form>
-				<h:commandButton action="#{eventsBean.selectMostFollowedUpcomingEvent()}" value="Stay
+				<h:commandButton
+					action="#{eventsBean.selectMostFollowedUpcomingEvent()}"
+					value="Stay
 					up to date ! click here to see most followed upcoming event" />
-				<h:commandButton action="#{eventsBean.selectMissedEvents()}" value="Events I have missed" />
+				<h:commandButton action="#{eventsBean.selectMissedEvents()}"
+					value="Past Events" />
 			</h:form>
+
+
 
 			<h:form id="formMostFollowedUpcomingEvent"
 				rendered="#{eventsBean.displayFormMostFollowedEvent}">
@@ -33,31 +38,55 @@
 			<h:form id="formMissedEvents"
 				rendered="#{eventsBean.displayFormMissedEvents}">
 
-				<h:dataTable value="#{eventsBean.missedEvents}" var="event"
-					border="3">
+				<div class="container-fluid custom-container">
+					<div class="row">
+						<ui:repeat var="event" value="#{eventsBean.missedEvents}">
+							<div class="category-1 mix custom-column-5"
+								style="display: inline-block;">
+								<div class="be-post">
+									<a href="page1.html" class="be-img-block"> <h:graphicImage
+											value="#{event.imageURL}" alt="" /> <!-- 									</a> <b>Title :</b> -->
+										<!-- 									<h:outputText value="#{event.title}" /> --> <!-- 									<br /> <br /> <b>Description :</b> -->
 
-					<h:column id="eventDate">
-						<f:facet name="header">
-							<h:outputText value="DateOfEvent" />
-						</f:facet>
-						<h:outputText value="#{event.dateOfEvent}" />
-					</h:column>
+									</a> <b>Title :</b>
+									<h:outputText value="#{event.pageId}" />
+									<br /> <br /> <b>Description :</b>
 
-					<h:column id="eventPlace">
-						<f:facet name="header">
-							<h:outputText value="Place" />
-						</f:facet>
-						<h:outputText value="#{event.place}" />
-					</h:column>
+									<h:outputText value="#{event.description}" />
 
-					<h:column id="id">
-						<f:facet name="header">
-							<h:outputText value="Id" />
-						</f:facet>
-						<h:outputText value="#{event.pageId}" />
-					</h:column>
-				</h:dataTable>
+									<br /> <br /> <b>Date of start :</b>
+
+
+									<h:outputText value="#{event.dateOfEvent}" />
+
+									<br /> <br /> <b>Place :</b>
+
+									<h:outputText value="#{event.place}" />
+
+
+									<p:rating
+										value="#{manageListEventsBean.ratingLevels(event.pageId)}"
+										readonly="true" />
+
+								</div>
+								<div class="info-block">
+									<span><h:commandButton value="Rate"
+											action="#{manageListEventsBean.ratePage()}">
+											<f:setPropertyActionListener value="#{event}"
+												target="#{manageListEventsBean.eventSelected}"></f:setPropertyActionListener>
+
+										</h:commandButton> <h:commandButton
+											value="#{eventsBean.followedORUnfollowedEvents(event.pageId)}" />
+									</span>
+								</div>
+
+							</div>
+						</ui:repeat>
+					</div>
+				</div>
 			</h:form>
+
+
 
 		</center>
 

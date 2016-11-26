@@ -22,4 +22,7 @@ public interface InvitationServicesRemote {
 	Integer acceptInvitationToFollowAPage(String idReciever,String idSender);
 
 	Integer declineInvitationToFollowAPage(String idReciever,String idSender);
+	
+	boolean isInvitedToLikeApage(String idReciever, int pageId);
+	
 }

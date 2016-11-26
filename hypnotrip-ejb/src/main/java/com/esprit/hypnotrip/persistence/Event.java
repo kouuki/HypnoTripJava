@@ -97,10 +97,11 @@ public class Event extends Pages implements java.io.Serializable {
 		this.followers = followers;
 	}
 
+	
 	@Override
 	public String toString() {
-		return super.toString() + "Event [dateOfEvent=" + dateOfEvent + ", latitude=" + latitude + ", longitude="
-				+ longitude + ", place=" + place + "]";
+		return super.toString() + "Event [dateOfEvent=" + dateOfEvent + ", latitude=" + latitude + ", longitude=" + longitude + ", place="
+				+ place + ", price=" + price + "]";
 	}
 
 	public float getPrice() {

@@ -49,4 +49,8 @@ public interface UserServicesLocal {
 
 	int numberOfConnexion();
 
+	
+	
+	// service for yasmine
+	List<User> getAllFriendsByUserId(String idUser);
 }

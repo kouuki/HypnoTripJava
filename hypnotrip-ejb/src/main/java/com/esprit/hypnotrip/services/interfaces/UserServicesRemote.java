@@ -48,4 +48,9 @@ public interface UserServicesRemote {
 	
 	int numberOfConnexion();
 
+	
+	
+	
+	// service for yasmine
+		List<User> getAllFriendsByUserId(String idUser);
 }

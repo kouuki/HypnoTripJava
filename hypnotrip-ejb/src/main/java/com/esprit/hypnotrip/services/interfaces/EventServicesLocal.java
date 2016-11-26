@@ -1,6 +1,7 @@
 package com.esprit.hypnotrip.services.interfaces;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.ejb.Local;
 
@@ -21,7 +22,7 @@ public interface EventServicesLocal {
 
 	List<Event> getMonthlyEventsByMonth();
 
-	List<Event> eventsIHaveMissedInTheLastWeek(String idUser);
+	List<Event> eventsIHaveMissed(String idUser);
 
 	Event mostFollowedEventToCome();
 
@@ -65,5 +66,11 @@ public interface EventServicesLocal {
 	
 	
 	 List<Event> getAllEvents();
+
+	Map<Event, Long> statisticsEvent();
+
+	boolean isFollowedByUser(String idUser, Integer idPage);
+
+	List<Event> getAllEventsFollowedByUser(String idUser);
 
 }

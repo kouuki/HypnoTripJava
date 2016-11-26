@@ -20,7 +20,6 @@ import com.esprit.hypnotrip.persistence.User;
 import com.esprit.hypnotrip.services.exceptions.EventOverException;
 import com.esprit.hypnotrip.services.exceptions.LimitOfBookingRechedException;
 import com.esprit.hypnotrip.services.exceptions.NoMoreTicketsException;
-import com.esprit.hypnotrip.services.exceptions.TicketAlreadyBookedException;
 import com.esprit.hypnotrip.services.exceptions.WrongNumberOfCancelingException;
 import com.esprit.hypnotrip.services.interfaces.EventServicesLocal;
 import com.esprit.hypnotrip.services.interfaces.TicketServicesLocal;
@@ -61,13 +60,11 @@ public class UserServices implements UserServicesRemote, UserServicesLocal {
 			if (ticket.getNumberOfPlaces() == 0) {
 				ticket.setNumberOfPlaces(null);
 			}
-			
-			entityManager.merge(ticket);
-			
-			}
-		}
 
-	
+			entityManager.merge(ticket);
+
+		}
+	}
 
 	@Override
 	public void cancelBooking(Tickets ticket, User user, Integer numberOfTicketsToCancel)
@@ -92,11 +89,9 @@ public class UserServices implements UserServicesRemote, UserServicesLocal {
 
 			}
 			ticket.setNumberOfPlaces(ticket.getNumberOfPlaces() + numberOfTicketsToCancel);
-			
-				entityManager.merge(ticket);
 
+			entityManager.merge(ticket);
 
-			
 		}
 
 	}
@@ -179,6 +174,7 @@ public class UserServices implements UserServicesRemote, UserServicesLocal {
 		response.close();
 
 	}
+
 	public void deblocUser(String idUser) {
 		Client client = ClientBuilder.newClient();
 		WebTarget target = client.target("http://localhost:63784/api/UserWS");
@@ -241,6 +237,57 @@ public class UserServices implements UserServicesRemote, UserServicesLocal {
 		Query query = entityManager.createQuery("SELECT u FROM Userconnections u ");
 		List<User> lr = query.getResultList();
 		return lr.size();
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	// service for yasmine
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<User> getAllFriendsByUserId(String idUser) {
+
+		List<String> friendsId = new ArrayList<String>();
+		List<User> friends = new ArrayList<User>();
+
+		Client client = ClientBuilder.newClient();
+		WebTarget target = client.target("http://localhost:63784/api/BelongWS");
+		WebTarget userFriends = target.path("UserFriends").path(idUser);
+		Response response = userFriends.request().get();
+		friendsId = response.readEntity(friendsId.getClass());
+
+		String jqpl = "SELECT u FROM User u WHERE u.id=:param";
+		Query query = entityManager.createQuery(jqpl);
+
+		for (String id : friendsId) {
+			query.setParameter("param", id);
+
+			try {
+
+				friends.add((User) query.getSingleResult());
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+		}
+
+		response.close();
+
+		return friends;
 	}
 
 }

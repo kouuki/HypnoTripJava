@@ -23,67 +23,144 @@
 					value="Next Week" />
 				<h:commandButton
 					action="#{eventsBean.selectNextMonthEventsToShow()}"
-					value="Next Month" />
+					value="This Month" />
 				<h:commandButton action="#{eventsBean.selectEventsInMyAreaToShow()}"
 					value="My Area" />
+				<h:commandButton action="#{eventsBean.selectStatistics()}"
+					value="Statistics On Upcoming Events" />
 			</h:form>
 
+			<br />
 
 			<h:form id="formEvenetsThisWeek"
 				rendered="#{eventsBean.displayFormThisWeek}">
-				<h:dataTable value="#{eventsBean.eventsThisWeek}" var="event"
-					border="3">
 
-					<h:column id="eventDate">
-						<f:facet name="header">
-							<h:outputText value="DateOfEvent" />
-						</f:facet>
-						<h:outputText value="#{event.dateOfEvent}" />
-					</h:column>
+				<p:commandButton id="btn" type="button" icon="ui-icon-pin-s"
+					value="More directions?" onclick="PF('dlg').show();" />
 
-					<h:column id="eventPlace">
-						<f:facet name="header">
-							<h:outputText value="Place" />
-						</f:facet>
-						<h:outputText value="#{event.place}" />
-					</h:column>
+				<p:dialog id="gmapDialog" widgetVar="dlg" width="625" height="400"
+					modal="true">
+					<p:growl id="messages" showDetail="true" life="2000" />
+					<p:gmap id="gmap" center="36.806495, 10.181532" zoom="15"
+						type="ROADMAP" style="width:100%;height:400px"
+						model="#{eventsBean.simpleModelThisWeek}" />
+				</p:dialog>
 
-					<h:column id="id">
-						<f:facet name="header">
-							<h:outputText value="Id" />
-						</f:facet>
-						<h:outputText value="#{event.pageId}" />
-					</h:column>
-				</h:dataTable>
+				<div class="container-fluid custom-container">
+					<div class="row">
+						<ui:repeat var="event" value="#{eventsBean.eventsThisWeek}">
+							<div class="category-1 mix custom-column-5"
+								style="display: inline-block;">
+								<div class="be-post">
+									<a href="page1.html" class="be-img-block"> <h:graphicImage
+											value="#{event.imageURL}" alt="" /> <!-- 									</a> <b>Title :</b> -->
+										<!-- 									<h:outputText value="#{event.title}" /> --> <!-- 									<br /> <br /> <b>Description :</b> -->
+
+									</a> <b>Title :</b>
+									<h:outputText value="#{event.pageId}" />
+									<br /> <br /> <b>Description :</b>
+
+									<h:outputText value="#{event.description}" />
+
+									<br /> <br /> <b>Date of start :</b>
+
+
+									<h:outputText value="#{event.dateOfEvent}" />
+
+									<br /> <br /> <b>Place :</b>
+
+									<h:outputText value="#{event.place}" />
+
+
+									<p:rating
+										value="#{manageListEventsBean.ratingLevels(event.pageId)}"
+										readonly="true" />
+
+								</div>
+								<div class="info-block">
+									<span><h:commandButton value="Rate"
+											action="#{manageListEventsBean.ratePage()}">
+											<f:setPropertyActionListener value="#{event}"
+												target="#{manageListEventsBean.eventSelected}"></f:setPropertyActionListener>
+
+										</h:commandButton> <h:commandButton
+											value="#{eventsBean.followORUnfollowEvents(event.pageId)}" />
+									</span>
+								</div>
+
+							</div>
+						</ui:repeat>
+					</div>
+				</div>
+
+
+
 			</h:form>
+
 
 
 			<h:form id="formEvenetsNextWeek"
 				rendered="#{eventsBean.displayFormNextWeek}">
-				<h:dataTable value="#{eventsBean.eventsNextWeek}" var="event"
-					border="3">
 
-					<h:column id="eventDate">
-						<f:facet name="header">
-							<h:outputText value="DateOfEvent" />
-						</f:facet>
-						<h:outputText value="#{event.dateOfEvent}" />
-					</h:column>
+				<p:commandButton id="btn" type="button" icon="ui-icon-pin-s"
+					value="More directions?" onclick="PF('dlg').show();" />
 
-					<h:column id="eventPlace">
-						<f:facet name="header">
-							<h:outputText value="Place" />
-						</f:facet>
-						<h:outputText value="#{event.place}" />
-					</h:column>
+				<p:dialog id="gmapDialog" widgetVar="dlg" width="625" height="400"
+					modal="true">
+					<p:growl id="messages" showDetail="true" life="2000" />
+					<p:gmap id="gmap" center="36.806495, 10.181532" zoom="15"
+						type="ROADMAP" style="width:100%;height:400px"
+						model="#{eventsBean.simpleModelNextWeek}" />
+				</p:dialog>
 
-					<h:column id="id">
-						<f:facet name="header">
-							<h:outputText value="Id" />
-						</f:facet>
-						<h:outputText value="#{event.pageId}" />
-					</h:column>
-				</h:dataTable>
+				<div class="container-fluid custom-container">
+					<div class="row">
+						<ui:repeat var="event" value="#{eventsBean.eventsNextWeek}">
+							<div class="category-1 mix custom-column-5"
+								style="display: inline-block;">
+								<div class="be-post">
+									<a href="page1.html" class="be-img-block"> <h:graphicImage
+											value="#{event.imageURL}" alt="" /> <!-- 									</a> <b>Title :</b> -->
+										<!-- 									<h:outputText value="#{event.title}" /> --> <!-- 									<br /> <br /> <b>Description :</b> -->
+
+									</a> <b>Title :</b>
+									<h:outputText value="#{event.pageId}" />
+									<br /> <br /> <b>Description :</b>
+
+									<h:outputText value="#{event.description}" />
+
+									<h:outputText value="#{event.description}" />
+
+									<br /> <br /> <b>Date of start :</b>
+
+
+									<h:outputText value="#{event.dateOfEvent}" />
+
+									<br /> <br /> <b>Place :</b>
+
+									<h:outputText value="#{event.place}" />
+
+
+									<p:rating
+										value="#{manageListEventsBean.ratingLevels(event.pageId)}"
+										readonly="true" />
+
+								</div>
+								<div class="info-block">
+									<span><h:commandButton value="Rate"
+											action="#{manageListEventsBean.ratePage()}">
+											<f:setPropertyActionListener value="#{event}"
+												target="#{manageListEventsBean.eventSelected}"></f:setPropertyActionListener>
+
+										</h:commandButton> <h:commandButton
+											value="#{eventsBean.followORUnfollowEvents(event.pageId)}" />
+									</span>
+								</div>
+
+							</div>
+						</ui:repeat>
+					</div>
+				</div>
 			</h:form>
 
 
@@ -91,70 +168,143 @@
 				rendered="#{eventsBean.displayFormThisMonth}">
 
 				<p:commandButton id="btn" type="button" icon="ui-icon-pin-s"
-					value="Show Map" onclick="PF('dlg').show();" />
+					value="More directions?" onclick="PF('dlg').show();" />
 
 				<p:dialog id="gmapDialog" widgetVar="dlg" width="625" height="400"
 					modal="true">
 					<p:growl id="messages" showDetail="true" life="2000" />
 					<p:gmap id="gmap" center="36.806495, 10.181532" zoom="15"
 						type="ROADMAP" style="width:100%;height:400px"
-						model="#{eventsBean.simpleModel}" />
-
+						model="#{eventsBean.simpleModelThisMonth}" />
 				</p:dialog>
 
-				<h:dataTable value="#{eventsBean.eventsThisMonth}" var="event"
-					border="3">
+				<div class="container-fluid custom-container">
+					<div class="row">
+						<ui:repeat var="event" value="#{eventsBean.eventsThisMonth}">
+							<div class="category-1 mix custom-column-5"
+								style="display: inline-block;">
+								<div class="be-post">
+									<a href="page1.html" class="be-img-block"> <h:graphicImage
+											value="#{event.imageURL}" alt="" /> <!-- 									</a> <b>Title :</b> -->
+										<!-- 									<h:outputText value="#{event.title}" /> --> <!-- 									<br /> <br /> <b>Description :</b> -->
 
-					<h:column id="eventDate">
-						<f:facet name="header">
-							<h:outputText value="DateOfEvent" />
-						</f:facet>
-						<h:outputText value="#{event.dateOfEvent}" />
-					</h:column>
+									</a> <b>Title :</b>
+									<h:outputText value="#{event.pageId}" />
+									<br /> <br /> <b>Description :</b>
 
-					<h:column id="eventPlace">
-						<f:facet name="header">
-							<h:outputText value="Place" />
-						</f:facet>
-						<h:outputText value="#{event.place}" />
-					</h:column>
+									<h:outputText value="#{event.description}" />
 
-					<h:column id="id">
-						<f:facet name="header">
-							<h:outputText value="Id" />
-						</f:facet>
-						<h:outputText value="#{event.pageId}" />
-					</h:column>
-				</h:dataTable>
+									<h:outputText value="#{event.description}" />
+
+									<br /> <br /> <b>Date of start :</b>
+
+
+									<h:outputText value="#{event.dateOfEvent}" />
+
+									<br /> <br /> <b>Place :</b>
+
+									<h:outputText value="#{event.place}" />
+
+
+									<p:rating
+										value="#{manageListEventsBean.ratingLevels(event.pageId)}"
+										readonly="true" />
+
+								</div>
+								<div class="info-block">
+									<span><h:commandButton value="Rate"
+											action="#{manageListEventsBean.ratePage()}">
+											<f:setPropertyActionListener value="#{event}"
+												target="#{manageListEventsBean.eventSelected}"></f:setPropertyActionListener>
+
+										</h:commandButton> <h:commandButton
+											value="#{eventsBean.followORUnfollowEvents(event.pageId)}" />
+									</span>
+								</div>
+
+							</div>
+						</ui:repeat>
+					</div>
+				</div>
 			</h:form>
 
 			<h:form id="formEvenetsInMyArea"
 				rendered="#{eventsBean.displayFormMyArea}">
-				<h:dataTable value="#{eventsBean.eventsInMyArea}" var="event"
-					border="3">
 
-					<h:column id="eventDate">
-						<f:facet name="header">
-							<h:outputText value="DateOfEvent" />
-						</f:facet>
-						<h:outputText value="#{event.dateOfEvent}" />
-					</h:column>
+				<p:commandButton id="btn" type="button" icon="ui-icon-pin-s"
+					value="More directions?" onclick="PF('dlg').show();" />
 
-					<h:column id="eventPlace">
-						<f:facet name="header">
-							<h:outputText value="Place" />
-						</f:facet>
-						<h:outputText value="#{event.place}" />
-					</h:column>
+				<p:dialog id="gmapDialog" widgetVar="dlg" width="625" height="400"
+					modal="true">
+					<p:growl id="messages" showDetail="true" life="2000" />
+					<p:gmap id="gmap" center="36.806495, 10.181532" zoom="15"
+						type="ROADMAP" style="width:100%;height:400px"
+						model="#{eventsBean.simpleModelMyArea}" />
+				</p:dialog>
 
-					<h:column id="id">
-						<f:facet name="header">
-							<h:outputText value="Id" />
-						</f:facet>
-						<h:outputText value="#{event.pageId}" />
-					</h:column>
-				</h:dataTable>
+				<div class="container-fluid custom-container">
+					<div class="row">
+						<ui:repeat var="event" value="#{eventsBean.eventsInMyArea}">
+							<div class="category-1 mix custom-column-5"
+								style="display: inline-block;">
+								<div class="be-post">
+									<a href="page1.html" class="be-img-block"> <h:graphicImage
+											value="#{event.imageURL}" alt="" /> <!-- 									</a> <b>Title :</b> -->
+										<!-- 									<h:outputText value="#{event.title}" /> --> <!-- 									<br /> <br /> <b>Description :</b> -->
+
+										<!-- 									<h:outputText value="#{event.description}" /> -->
+
+										<!-- 									</a> <b>Title :</b> --> <!-- 									<h:outputText value="#{event.title}" /> -->
+										<!-- 									<br /> <br /> <b>Description :</b> -->
+
+									</a> <b>Title :</b>
+									<h:outputText value="#{event.pageId}" />
+									<br /> <br /> <b>Description :</b>
+
+
+									<h:outputText value="#{event.description}" />
+
+									<br /> <br /> <b>Date of start :</b>
+
+
+									<h:outputText value="#{event.dateOfEvent}" />
+
+									<br /> <br /> <b>Place :</b>
+
+									<h:outputText value="#{event.place}" />
+
+
+									<p:rating
+										value="#{manageListEventsBean.ratingLevels(event.pageId)}"
+										readonly="true" />
+
+								</div>
+								<div class="info-block">
+									<span><h:commandButton value="Rate"
+											action="#{manageListEventsBean.ratePage()}">
+											<f:setPropertyActionListener value="#{event}"
+												target="#{manageListEventsBean.eventSelected}"></f:setPropertyActionListener>
+
+										</h:commandButton>
+										<h:commandButton
+											value="#{eventsBean.followORUnfollowEvents(event.pageId)}" />
+									</span>
+								</div>
+
+							</div>
+						</ui:repeat>
+					</div>
+				</div>
 			</h:form>
+
+
+			<h:form id="formStatistics"
+				rendered="#{eventsBean.displayFormStatistics}">
+				<p:poll interval="3" update="votes" />
+				<p:chart id="votes" type="pie" model="#{eventsBean.pieChartModel}"
+					style="width:800px;height:300px" />
+			</h:form>
+
 
 		</center>
 

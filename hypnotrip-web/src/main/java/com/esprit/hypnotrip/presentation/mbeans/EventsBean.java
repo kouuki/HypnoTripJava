@@ -1,13 +1,18 @@
 package com.esprit.hypnotrip.presentation.mbeans;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
+import org.primefaces.model.chart.PieChartModel;
 import org.primefaces.model.map.DefaultMapModel;
 import org.primefaces.model.map.LatLng;
 import org.primefaces.model.map.MapModel;
@@ -26,44 +31,72 @@ public class EventsBean {
 	private List<Event> eventsThisMonth = new ArrayList<Event>();
 	private List<Event> eventsInMyArea = new ArrayList<Event>();
 
+	private Boolean response = false;
+
 	private List<Event> missedEvents = new ArrayList<Event>();
 	private Event mostFollowedUpcoming = new Event();
+
+	private Map<Event, Long> map = new HashMap<Event, Long>();
 
 	// Forms to show in this page
 	private Boolean displayFormThisWeek = true;
 	private Boolean displayFormNextWeek = false;
 	private Boolean displayFormThisMonth = false;
 	private Boolean displayFormMyArea = false;
+	private Boolean displayFormStatistics = false;
 
 	private Boolean displayFormMostFollowedEvent = true;
 	private Boolean displayFormMissedEvents = false;
 
-	private MapModel simpleModel;
+	private MapModel simpleModelThisWeek = new DefaultMapModel();
+	private MapModel simpleModelNextWeek = new DefaultMapModel();
+	private MapModel simpleModelThisMonth = new DefaultMapModel();
+	private MapModel simpleModelMyArea = new DefaultMapModel();
+
+	// user id
+	private String idUser;
+	private String address;
+
+	private PieChartModel pieChartModel = new PieChartModel();
+
+	private String selectedMenu;
+	private String chaine;
 
 	// inject event services bean
 	@EJB
 	EventServicesLocal eventServicesLocal;
 
+	@ManagedProperty(value = "#{manageListEventsBean}")
+	private ManageListEventsBean manageListEventsBean;
+
+	@ManagedProperty(value = "#{loginBean}")
+	private LoginBean loginBean;
+
+	//methode qui charge les events lors de la creation du bean
 	@PostConstruct
 	public void init() {
 
-		simpleModel = new DefaultMapModel();
+		idUser = loginBean.getUser().getId();
+		address = loginBean.getUser().getAddress();
+		System.out.println(idUser);
+		System.out.println(address);
 
+		// get all lists for events
 		eventsThisWeek = eventServicesLocal.getAllThisWeekEvents();
 		eventsNextWeek = eventServicesLocal.getAllNextWeekEvents();
 		eventsThisMonth = eventServicesLocal.getMonthlyEventsByMonth();
-		eventsInMyArea = eventServicesLocal.availableOrUpcomingEventsInMyArea("5", "tunis");
+		eventsInMyArea = eventServicesLocal.availableOrUpcomingEventsInMyArea(idUser, address);
 		mostFollowedUpcoming = eventServicesLocal.mostFollowedEventToCome();
-		missedEvents = eventServicesLocal.eventsIHaveMissedInTheLastWeek("5");
+		missedEvents = eventServicesLocal.eventsIHaveMissed(idUser);
+		map = eventServicesLocal.statisticsEvent();
 
-		for (Event event : eventsThisMonth) {
-			// Shared coordinates
-			LatLng coord = new LatLng(event.getLatitude(), event.getLongitude());
+		showMapForThisWeekEvents();
+		showMapForNextWeekEvents();
+		showMapForThisMonthEvents();
+		showMapForMyAreaEvents();
 
-			// Basic marker
-			simpleModel.addOverlay(new Marker(coord, event.getPlace()));
+		createStatisticsPie();
 
-		}
 	}
 
 	public String selectThisWeekEventsToShow() {
@@ -71,6 +104,7 @@ public class EventsBean {
 		displayFormNextWeek = false;
 		displayFormThisMonth = false;
 		displayFormMyArea = false;
+		displayFormStatistics = false;
 		return null;
 	}
 
@@ -79,6 +113,7 @@ public class EventsBean {
 		displayFormNextWeek = true;
 		displayFormThisMonth = false;
 		displayFormMyArea = false;
+		displayFormStatistics = false;
 		return null;
 	}
 
@@ -87,6 +122,7 @@ public class EventsBean {
 		displayFormNextWeek = false;
 		displayFormThisMonth = true;
 		displayFormMyArea = false;
+		displayFormStatistics = false;
 		return null;
 	}
 
@@ -95,6 +131,16 @@ public class EventsBean {
 		displayFormNextWeek = false;
 		displayFormThisMonth = false;
 		displayFormMyArea = true;
+		displayFormStatistics = false;
+		return null;
+	}
+
+	public String selectStatistics() {
+		displayFormThisWeek = false;
+		displayFormNextWeek = false;
+		displayFormThisMonth = false;
+		displayFormMyArea = false;
+		displayFormStatistics = true;
 		return null;
 	}
 
@@ -110,8 +156,106 @@ public class EventsBean {
 		return null;
 	}
 
-	public MapModel getSimpleModel() {
-		return simpleModel;
+	// map for this week's events
+	public void showMapForThisWeekEvents() {
+
+		for (Event event : eventsThisWeek) {
+			// Shared coordinates
+			LatLng coord = new LatLng(event.getLatitude(), event.getLongitude());
+
+			// Basic marker
+			simpleModelThisWeek.addOverlay(new Marker(coord, event.getPlace()));
+
+		}
+	}
+
+	// show map for next week events
+	public void showMapForNextWeekEvents() {
+
+		for (Event event : eventsNextWeek) {
+			// Shared coordinates
+			LatLng coord = new LatLng(event.getLatitude(), event.getLongitude());
+
+			// Basic marker
+			simpleModelNextWeek.addOverlay(new Marker(coord, event.getPlace()));
+
+		}
+	}
+
+	// show map for this month events
+	public void showMapForThisMonthEvents() {
+
+		for (Event event : eventsThisMonth) {
+			// Shared coordinates
+			LatLng coord = new LatLng(event.getLatitude(), event.getLongitude());
+
+			// Basic marker
+			simpleModelThisMonth.addOverlay(new Marker(coord, event.getPlace()));
+
+		}
+	}
+
+	// show map for events in my area
+	public void showMapForMyAreaEvents() {
+
+		for (Event event : eventsInMyArea) {
+			// Shared coordinates
+			LatLng coord = new LatLng(event.getLatitude(), event.getLongitude());
+
+			// Basic marker
+			simpleModelMyArea.addOverlay(new Marker(coord, event.getPlace()));
+
+		}
+	}
+
+
+	public String followORUnfollowEvents(int pageId) {
+
+		response = eventServicesLocal.isFollowedByUser(idUser, pageId);
+		if (response == false) {
+
+			System.out.println("rahi mech mawjouda");
+			chaine = "Follow";
+
+		} else {
+			System.out.println("rahi mawjouda");
+			chaine = "Unfollow";
+		}
+
+		return chaine;
+	}
+	
+	public String followedORUnfollowedEvents(int pageId) {
+
+		response = eventServicesLocal.isFollowedByUser(idUser, pageId);
+		if (response == false) {
+
+			System.out.println("rahi mech mawjouda");
+			chaine = "Not Followed";
+
+		} else {
+			System.out.println("rahi mawjouda");
+			chaine = "Followed";
+		}
+
+		return chaine;
+	}
+
+
+	// create statistics for events
+	public void createStatisticsPie() {
+
+		pieChartModel.setTitle("Most followed event");
+		pieChartModel.setLegendPosition("w");
+
+		pieChartModel.setDiameter(300);
+		for (Entry<Event, Long> entry : map.entrySet()) {
+			Event cle = entry.getKey();
+			Long valeur = entry.getValue();
+
+			pieChartModel.set(cle.getTitle(), valeur);
+
+		}
 	}
 
 	// recall of wanted methods/services
@@ -210,6 +354,118 @@ public class EventsBean {
 
 	public void setMissedEvents(List<Event> missedEvents) {
 		this.missedEvents = missedEvents;
+	}
+
+	public Boolean getDisplayFormStatistics() {
+		return displayFormStatistics;
+	}
+
+	public void setDisplayFormStatistics(Boolean displayFormStatistics) {
+		this.displayFormStatistics = displayFormStatistics;
+	}
+
+	public PieChartModel getPieChartModel() {
+		return pieChartModel;
+	}
+
+	public void setPieChartModel(PieChartModel pieChartModel) {
+		this.pieChartModel = pieChartModel;
+	}
+
+	public Map<Event, Long> getMap() {
+		return map;
+	}
+
+	public void setMap(Map<Event, Long> map) {
+		this.map = map;
+	}
+
+	public ManageListEventsBean getManageListEventsBean() {
+		return manageListEventsBean;
+	}
+
+	public void setManageListEventsBean(ManageListEventsBean manageListEventsBean) {
+		this.manageListEventsBean = manageListEventsBean;
+	}
+
+	public LoginBean getLoginBean() {
+		return loginBean;
+	}
+
+	public void setLoginBean(LoginBean loginBean) {
+		this.loginBean = loginBean;
+	}
+
+	public MapModel getSimpleModelThisWeek() {
+		return simpleModelThisWeek;
+	}
+
+	public void setSimpleModelThisWeek(MapModel simpleModelThisWeek) {
+		this.simpleModelThisWeek = simpleModelThisWeek;
+	}
+
+	public MapModel getSimpleModelNextWeek() {
+		return simpleModelNextWeek;
+	}
+
+	public void setSimpleModelNextWeek(MapModel simpleModelNextWeek) {
+		this.simpleModelNextWeek = simpleModelNextWeek;
+	}
+
+	public MapModel getSimpleModelThisMonth() {
+		return simpleModelThisMonth;
+	}
+
+	public void setSimpleModelThisMonth(MapModel simpleModelThisMonth) {
+		this.simpleModelThisMonth = simpleModelThisMonth;
+	}
+
+	public MapModel getSimpleModelMyArea() {
+		return simpleModelMyArea;
+	}
+
+	public void setSimpleModelMyArea(MapModel simpleModelMyArea) {
+		this.simpleModelMyArea = simpleModelMyArea;
+	}
+
+	public Boolean getResponse() {
+		return response;
+	}
+
+	public void setResponse(Boolean response) {
+		this.response = response;
+	}
+
+	public String getIdUser() {
+		return idUser;
+	}
+
+	public void setIdUser(String idUser) {
+		this.idUser = idUser;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getSelectedMenu() {
+		return selectedMenu;
+	}
+
+	public void setSelectedMenu(String selectedMenu) {
+		this.selectedMenu = selectedMenu;
+	}
+
+	public String getChaine() {
+		return chaine;
+	}
+
+	public void setChaine(String chaine) {
+		this.chaine = chaine;
 	}
 
 }
