@@ -146,7 +146,7 @@ public class DefaultDataBaseDhafer {
 		page1.setDateOfCreation(new Date());
 		page1.setDescription("sport");
 		page1.setTitle("page pour le sport");
-		page1.setUserId("b38f3299-6949-42c7-9a6c-f998c66f485d");
+		page1.setUserId("b38f3299-6949-42c7-9a6c-f998c66f4852");
 		page1.setImageURL(
 				"https://travel.jumia.com/blog/ng/wp-content/uploads/2016/01/bigstock-Four-Sports-a-lot-of-balls-an-50626115.jpg");
 		pageServiceLocal.saveOrUpdatePage(page1, "b38f3299-6949-42c7-9a6c-f998c66f485d");
@@ -169,7 +169,7 @@ public class DefaultDataBaseDhafer {
 		page3.setTitle("page pour le plage");
 		page3.setUserId("b38f3299-6949-42c7-9a6c-f998c66f485d");
 		page3.setImageURL("https://www.voyageavecnous.fr/wp-content/uploads/2015/01/plage-paradisiaque-maldives.jpg");
-		pageServiceLocal.saveOrUpdatePage(page3, "b38f3299-6949-42c7-9a6c-f998c66f4855");
+		pageServiceLocal.saveOrUpdatePage(page3, "b38f3299-6949-42c7-9a6c-f998c66f4852");
 
 		Touristicplace page4 = new Touristicplace();
 		page4.setName("Berneville");

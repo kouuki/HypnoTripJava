@@ -23,12 +23,10 @@ public class test {
 		// "hypnotrip-ear/hypnotrip-ejb/RateService!com.esprit.hypnotrip.services.interfaces.RateServiceRemote");
 		// int x =remote.getRateLevel(1);
 		// System.out.println(x);
-		ToursiticPlaceServiceRemote remote = (ToursiticPlaceServiceRemote) context.lookup(
-				"hypnotrip-ear/hypnotrip-ejb/ToursiticPlaceService!com.esprit.hypnotrip.services.interfaces.ToursiticPlaceServiceRemote");
-		List<Touristicplace> ls = remote.getAllTouristicPlaces();
-		for (Touristicplace touristicplace : ls) {
-			System.out.println(touristicplace);
-			System.out.println(remote.numberOfTouristicPLaces());
-		}
+		UserServicesRemote remote = (UserServicesRemote) context.lookup(
+				"hypnotrip-ear/hypnotrip-ejb/UserServices!com.esprit.hypnotrip.services.interfaces.UserServicesRemote");
+		User u = remote.findUserById("b38f3299-6949-42c7-9a6c-f998c66f485d");
+		System.out.println(u);
+		
 	}
 }

@@ -41,4 +41,5 @@ public interface FollowersServicesRemote {
 	
 	Integer nbrWish(Integer idPages);
 
+
 }

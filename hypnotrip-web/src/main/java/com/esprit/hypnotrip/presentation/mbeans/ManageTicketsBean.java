@@ -5,6 +5,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
 import com.esprit.hypnotrip.persistence.Pages;
@@ -25,10 +26,14 @@ public class ManageTicketsBean {
 	private TicketServicesLocal ticketServicesLocal;
 	@EJB
 	private UserServicesLocal userServicesLocal;
+	@ManagedProperty(value="#{loginBean}")
+	private LoginBean loginBean ;
+	
+	private User user; 
 
 	private boolean showListForm = true;
 	private boolean showListOfFriends = false;
-	private String userID = "c25c4e23-1275-45d8-b327-c6fb06d90455";
+
 
 	private Pages event;
 	private List<Tickets> tickets;
@@ -39,8 +44,6 @@ public class ManageTicketsBean {
 	private List<User> friendWhoAreGoingToThisEvent;
 
 	public String doCancelBooking() {
-		User user = new User();
-		user.setId(this.userID);
 		try {
 			userServicesLocal.cancelBooking(selectedTicket, user,1);
 		} catch (EventOverException | WrongNumberOfCancelingException e) {
@@ -52,7 +55,7 @@ public class ManageTicketsBean {
 
 	public Long numberOfReserverTicket(Tickets ticket) {
 
-		return userServicesLocal.numberOfTicketsReservedByIdUser(ticket, this.userID);
+		return userServicesLocal.numberOfTicketsReservedByIdUser(ticket, this.user.getId());
 	}
 
 	public TicketServicesLocal getTicketServicesLocal() {
@@ -84,21 +87,22 @@ public class ManageTicketsBean {
 	}
 
 	public List<Tickets> doFindAllBookedtickets() {
-		User user = new User();
-		user.setId(this.userID);
+
 		return userServicesLocal.listTicketsBookedByUserEvent(user);
 	}
 
 	@PostConstruct
 	public void init() {
-
+		
+		this.user = loginBean.getUser();
+		
 		this.event = new Pages();
 		event.setPageId(11);
 
 		this.tickets = ticketServicesLocal.selectAllTicketsByIdEvent(event.getPageId());
 		this.mostBookedTicket = ticketServicesLocal.mostBookedTicketByEvent(event);
 		this.friendWhoAreGoingToThisEvent = userServicesLocal.getAllFriendsWhoAreGoingToTheSameEvent(event,
-				this.userID);
+				this.user.getId());
 
 	}
 
@@ -117,7 +121,7 @@ public class ManageTicketsBean {
 
 	public String doBook() {
 		User user = new User();
-		user.setId(this.userID);
+		user.setId(this.user.getId());
 		try {
 			userServicesLocal.bookATicket(selectedTicket, user);
 		} catch (NoMoreTicketsException | LimitOfBookingRechedException | EventOverException e) {
@@ -181,6 +185,22 @@ public class ManageTicketsBean {
 
 	public void setTickesBooked(List<Tickets> tickesBooked) {
 		this.tickesBooked = tickesBooked;
+	}
+
+	public LoginBean getLoginBean() {
+		return loginBean;
+	}
+
+	public void setLoginBean(LoginBean loginBean) {
+		this.loginBean = loginBean;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 }
