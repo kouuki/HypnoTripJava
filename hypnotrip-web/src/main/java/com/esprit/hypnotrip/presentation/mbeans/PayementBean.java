@@ -51,7 +51,7 @@ public class PayementBean {
 
 	@PostConstruct
 	public void init() {
-		this.setUser(loginBean.getUser());
+		user = loginBean.getUser();
 		myPages = offerServiceLocal.listOffers();
 	}
 
@@ -170,4 +170,13 @@ public class PayementBean {
 	public void setUser(User user) {
 		this.user = user;
 	}
+
+	public LoginBean getLoginBean() {
+		return loginBean;
+	}
+
+	public void setLoginBean(LoginBean loginBean) {
+		this.loginBean = loginBean;
+	}
+
 }

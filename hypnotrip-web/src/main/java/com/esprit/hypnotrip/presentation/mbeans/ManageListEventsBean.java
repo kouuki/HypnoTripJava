@@ -38,11 +38,19 @@ public class ManageListEventsBean {
 
 	@ManagedProperty(value = "#{loginBean}")
 	private LoginBean loginBean;
-
+	
 	private User user;
 
 	// Controle sur le chargement des form
 	private Boolean displayForm2 = false;
+	public LoginBean getLoginBean() {
+		return loginBean;
+	}
+
+	public void setLoginBean(LoginBean loginBean) {
+		this.loginBean = loginBean;
+	}
+
 	private Boolean displayForm1 = true;
 	private Boolean displayForm3 = false;
 
@@ -60,7 +68,7 @@ public class ManageListEventsBean {
 
 	@PostConstruct
 	public void init() {
-		this.setUser(loginBean.getUser());
+		user=loginBean.getUser();
 
 		myPages = pageServiceLocal.ListMyEvents(user.getId());
 	}

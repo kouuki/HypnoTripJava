@@ -46,7 +46,6 @@ public class ManageOffersBean {
 
 	private User user;
 
-	
 	// la page séléctionnée
 	private Pages offerSelected = new Offer();
 
@@ -54,12 +53,11 @@ public class ManageOffersBean {
 	private static final int BUFFER_SIZE = 6124;
 	String res = "";
 
-	
 	private List<Offer> myPages = new ArrayList<>();
 
 	@PostConstruct
 	public void init() {
-		this.setUser(loginBean.getUser());
+		user = loginBean.getUser();
 		myPages = pageServiceLocal.ListMyOffers(user.getId());
 	}
 
@@ -221,8 +219,6 @@ public class ManageOffersBean {
 		this.offerSelected = offerSelected;
 	}
 
-
-
 	public List<Offer> getMyPages() {
 		return myPages;
 	}
@@ -237,6 +233,14 @@ public class ManageOffersBean {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public LoginBean getLoginBean() {
+		return loginBean;
+	}
+
+	public void setLoginBean(LoginBean loginBean) {
+		this.loginBean = loginBean;
 	}
 
 	// **********************************************************************************

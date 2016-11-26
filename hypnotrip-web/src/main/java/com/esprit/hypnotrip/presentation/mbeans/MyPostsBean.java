@@ -28,7 +28,7 @@ public class MyPostsBean {
 
 	@PostConstruct
 	public void init() {
-		this.setUser(loginBean.getUser());
+		user = loginBean.getUser();
 		myPosts = postServicesLocal.listMyPost(user.getId());
 		for (Posts posts : myPosts) {
 			System.out.println("hné mel bean " + posts.getPostId());
@@ -49,6 +49,14 @@ public class MyPostsBean {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public LoginBean getLoginBean() {
+		return loginBean;
+	}
+
+	public void setLoginBean(LoginBean loginBean) {
+		this.loginBean = loginBean;
 	}
 
 }

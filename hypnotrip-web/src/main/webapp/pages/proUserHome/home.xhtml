@@ -29,44 +29,8 @@
 							</div>
 						</div>
 					</div>
-					<h:form id="formListOfPosts">
-
-
-						<ui:repeat var="p" value="#{myPostsBean.myPosts}">
-
-							<div class="category-1 mix custom-column-5"
-								style="display: inline-block;">
-								<div class="be-post">
-									<a href="page1.html" class="be-img-block"> <h:graphicImage
-											value="#{p.imageURL}" alt="" />
-									</a> <b>Description :</b>
-									<h:outputText value="#{p.description}" />
-									<br /> <br /> <b>Content :</b>
-
-									<h:outputText value="#{p.content}" />
-
-									<br /> <br /> <b>Publication Post :</b>
-
-
-									<h:outputText value="#{p.publicationPost}" />
-
-								</div>
-								<div class="info-block">
-									<span> <b>Publication Post :</b> <h:outputText
-											value="#{p.publicationPost}" />
-									</span>
-								</div>
-							</div>
-
-						</ui:repeat>
-
-
-
-
-
-
-
-					</h:form>
+				<!-- list posts -->
+				
 				</div>
 			</div>
 
