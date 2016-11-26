@@ -23,8 +23,9 @@ import javax.persistence.Table;
 public class Tickets implements java.io.Serializable {
 
 	private Integer ticketId;
+	private String label;
 	private float price;
-	private String type;
+	private String description;
 	private Integer numberOfPlaces;
 
 	private Pages event;
@@ -39,12 +40,7 @@ public class Tickets implements java.io.Serializable {
 
 	}
 
-	public Tickets(float price, String type) {
 
-		this.price = price;
-		this.type = type;
-
-	}
 
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
@@ -67,14 +63,9 @@ public class Tickets implements java.io.Serializable {
 		this.price = price;
 	}
 
-	@Column(name = "type")
-	public String getType() {
-		return this.type;
-	}
 
-	public void setType(String type) {
-		this.type = type;
-	}
+
+
 
 	@OneToMany(mappedBy = "ticket",  fetch = FetchType.EAGER,cascade= CascadeType.ALL)
 	public List<BookDescription> getBookDescriptions() {
@@ -100,6 +91,22 @@ public class Tickets implements java.io.Serializable {
 
 	public void setNumberOfPlaces(Integer numberOfPlaces) {
 		this.numberOfPlaces = numberOfPlaces;
+	}
+
+	public String getLabel() {
+		return label;
+	}
+
+	public void setLabel(String label) {
+		this.label = label;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 }

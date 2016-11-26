@@ -175,7 +175,8 @@ public class DefaultDB {
 		ticket.setEvent(offre);
 		ticket.setNumberOfPlaces(15);
 		ticket.setPrice(15);
-		ticket.setType("Best Ticket");
+		ticket.setLabel("Best Ticket");
+		ticket.setDescription("This is awsome");
 
 		ticketServicesLocal.createOrUpdateTicket(ticket, 1);
 
