@@ -151,7 +151,7 @@ public class DefaultDB {
 		user3.setAddress("tunis");
 		user3.setAccessFailedCount(0);
 		user3.setDateOfBirth(new Date());
-		user3.setEmail("Jihene@gmail.com");
+		user3.setEmail("Yasmine@gmail.com");
 		user3.setEmailConfirmed(false);
 		user3.setEtat(1);
 		user3.setFirstName("Yasmine");
