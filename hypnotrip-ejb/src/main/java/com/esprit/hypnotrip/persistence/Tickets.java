@@ -5,6 +5,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -75,7 +76,7 @@ public class Tickets implements java.io.Serializable {
 		this.type = type;
 	}
 
-	@OneToMany(mappedBy = "ticket", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "ticket",  fetch = FetchType.EAGER,cascade= CascadeType.ALL)
 	public List<BookDescription> getBookDescriptions() {
 		return bookDescriptions;
 	}
