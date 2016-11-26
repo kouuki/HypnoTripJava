@@ -42,7 +42,7 @@ public class ManageTicketsBean {
 		User user = new User();
 		user.setId(this.userID);
 		try {
-			userServicesLocal.cancelBooking(selectedTicket, user, 1);
+			userServicesLocal.cancelBooking(selectedTicket, user,event.getPageId());
 		} catch (EventOverException | WrongNumberOfCancelingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -93,9 +93,9 @@ public class ManageTicketsBean {
 	public void init() {
 
 		this.event = new Pages();
-		event.setPageId(1);
+		event.setPageId(11);
 
-		this.tickets = ticketServicesLocal.selectAllTicketsByIdEvent(1);
+		this.tickets = ticketServicesLocal.selectAllTicketsByIdEvent(event.getPageId());
 		this.mostBookedTicket = ticketServicesLocal.mostBookedTicketByEvent(event);
 		this.friendWhoAreGoingToThisEvent = userServicesLocal.getAllFriendsWhoAreGoingToTheSameEvent(event,
 				this.userID);

@@ -20,6 +20,7 @@ public class ProUserTicketManagementBean {
 	private List<Tickets> tickets;
 	private Tickets selectedTicket = new Tickets();
 	private Tickets bestBookedTicket = new Tickets();
+	private Pages event = new Pages() ; 
 
 	private boolean showCreateUpdateForm = false;
 	private boolean listAllTickets = true;
@@ -29,16 +30,16 @@ public class ProUserTicketManagementBean {
 
 	@PostConstruct
 	public void init() {
-		Pages event = new Pages();
-		event.setPageId(1);
-		tickets = ticketServicesLocal.selectAllTicketsByIdEvent(1);
+	
+		event.setPageId(11);
+		tickets = ticketServicesLocal.selectAllTicketsByIdEvent(event.getPageId());
 		bestBookedTicket = ticketServicesLocal.mostBookedTicketByEvent(event);
 	}
 
 	public String doAddOrUpdateTicket() {
 
 		try {
-			ticketServicesLocal.createOrUpdateTicket(selectedTicket, 1);
+			ticketServicesLocal.createOrUpdateTicket(selectedTicket, event.getPageId());
 		} catch (EventOverException | TicketAlreadyBookedException e) {
 			e.printStackTrace();
 		}
@@ -122,6 +123,14 @@ public class ProUserTicketManagementBean {
 
 	public void setBestBookedTicket(Tickets bestBookedTicket) {
 		this.bestBookedTicket = bestBookedTicket;
+	}
+
+	public Pages getEvent() {
+		return event;
+	}
+
+	public void setEvent(Pages event) {
+		this.event = event;
 	}
 
 }

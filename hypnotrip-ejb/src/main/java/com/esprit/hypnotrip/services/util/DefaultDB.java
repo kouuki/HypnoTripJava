@@ -68,8 +68,6 @@ public class DefaultDB {
 				"http://www.telegraph.co.uk/content/dam/Travel/Destinations/Europe/France/Paris/paris-attractions-xlarge.jpg");
 		ts1.setCategoriePage("sport");
 		pageServiceLocal.saveOrUpdatePage(ts1, "b38f3299-6949-42c7-9a6c-f998c66f4855");
-		
-		
 
 		Pages ts2 = new Touristicplace("Second Touristic page", "Titre de la 2eme page", new Date(), "logo2", "Russia");
 		ts2.setImageURL("http://www.horizon-virtuel.com/amerique/new-york/statue-liberty.jpg");
@@ -113,7 +111,7 @@ public class DefaultDB {
 		user.setUserName("daouesd");
 		user.setRole("0");
 		user.setId("b38f3299-6949-42c7-9a6c-f998c66f485d");
-		
+
 		User user4 = new User();
 		user4.setAddress("tunis");
 		user4.setAccessFailedCount(0);
@@ -145,7 +143,7 @@ public class DefaultDB {
 		user2.setUserName("daouesd");
 		user2.setRole("1");
 		user2.setId("b38f3299-6949-42c7-9a6c-f998c66f4852");
-		
+
 		User user3 = new User();
 		user3.setAddress("tunis");
 		user3.setAccessFailedCount(0);
@@ -170,19 +168,6 @@ public class DefaultDB {
 		// ********************************************************************************************************************
 		// ********************************************************************************************************************
 		// ********************************************************************************************************************
-
-		Tickets ticket = new Tickets();
-		ticket.setEvent(offre);
-		ticket.setNumberOfPlaces(15);
-		ticket.setPrice(15);
-		ticket.setLabel("Best Ticket");
-		ticket.setDescription("This is awsome");
-
-		ticketServicesLocal.createOrUpdateTicket(ticket, 1);
-
-		// ********************************************************************************************************************
-		// ********************************************************************************************************************
-		// ********************************************************************************************************************
 		Pages event = new Event("MyFirst Event", "Titre du 1er evenement", new Date(), "Tunis");
 		event.setImageURL(
 				"http://www.ville-senlis.fr/var/www/storage/images/mediatheque/site-de-developpement/images/tests/evenements/1509-1-fre-FR/Evenements.jpg");
@@ -197,6 +182,19 @@ public class DefaultDB {
 
 		event3.setImageURL("http://www.birthday-party-ideas-101.com/images/BeachParty1.jpg");
 		pageServiceLocal.saveOrUpdatePage(event3, "b38f3299-6949-42c7-9a6c-f998c66f485d");
+
+		// ********************************************************************************************************************
+		// ********************************************************************************************************************
+		// ********************************************************************************************************************
+
+		Tickets ticket = new Tickets();
+		ticket.setEvent(offre);
+		ticket.setNumberOfPlaces(15);
+		ticket.setPrice(15);
+		ticket.setLabel("Best Ticket");
+		ticket.setDescription("This is awsome");
+
+		ticketServicesLocal.createOrUpdateTicket(ticket, 11);
 	}
 
 }
