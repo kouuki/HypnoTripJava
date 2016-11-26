@@ -26,7 +26,7 @@ public interface UserServicesLocal {
 	void cancelBooking(Tickets ticket, User user, Integer numberOfTicketsToCancel)
 			throws EventOverException, WrongNumberOfCancelingException;
 
-	List<Tickets> listTicketsBookedByUserEvent(User user, Pages event);
+	List<Tickets> listTicketsBookedByUserEvent(User user);
 
 	Long numberOfTicketsReservedByIdUser(Tickets ticket, String idUser);
 

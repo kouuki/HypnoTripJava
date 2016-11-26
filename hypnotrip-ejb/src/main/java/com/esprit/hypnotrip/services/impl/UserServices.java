@@ -102,13 +102,13 @@ public class UserServices implements UserServicesRemote, UserServicesLocal {
 	}
 
 	@Override
-	public List<Tickets> listTicketsBookedByUserEvent(User user, Pages event) {
+	public List<Tickets> listTicketsBookedByUserEvent(User user) {
 
-		String jqpl = "SELECT tickets  FROM Tickets tickets INNER JOIN tickets.bookDescriptions db "
-				+ "WHERE db.user =:param1 " + "AND tickets.event =:param2 ";
+		String jqpl = "SELECT DISTINCT(tickets)  FROM Tickets tickets INNER JOIN tickets.bookDescriptions db "
+				+ "WHERE db.user =:param1 AND db.bookingStatus=true";
 		Query query = entityManager.createQuery(jqpl);
 		query.setParameter("param1", user);
-		query.setParameter("param2", event);
+	
 
 		return query.getResultList();
 	}
@@ -138,11 +138,13 @@ public class UserServices implements UserServicesRemote, UserServicesLocal {
 
 	@Override
 	public List<User> getAllFriendsWhoAreGoingToTheSameEvent(Pages event, String userId) {
+		
+		try{
 		List<String> listOfIds = new ArrayList<>();
-
+       
 		Client client = ClientBuilder.newClient();
 		WebTarget target = client.target("http://localhost:63784/api/BelongWS");
-		WebTarget userFriends = target.path("UserFriends").path("1224a95a-8fac-4974-bfa7-7a5e28282a38");
+		WebTarget userFriends = target.path("UserFriends").path(userId);
 		Response response = userFriends.request().get();
 		listOfIds = response.readEntity(listOfIds.getClass());
 
@@ -162,7 +164,10 @@ public class UserServices implements UserServicesRemote, UserServicesLocal {
 			}
 		}
 
-		return usersGoingToTheEnvent;
+		return usersGoingToTheEnvent; } 
+		catch(Exception e ) {
+			return null ; 
+		}
 	}
 
 	@Override

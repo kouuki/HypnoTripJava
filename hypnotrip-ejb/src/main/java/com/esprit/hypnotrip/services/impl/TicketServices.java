@@ -30,14 +30,14 @@ public class TicketServices implements TicketServicesRemote, TicketServicesLocal
 	private EntityManager entityManager;
 	@EJB
 	EventServicesLocal eventServices;
-	
 
 	public TicketServices() {
 
 	}
 
 	@Override
-	public void createOrUpdateTicket(Tickets ticket,Integer idEvent) throws EventOverException, TicketAlreadyBookedException {
+	public void createOrUpdateTicket(Tickets ticket, Integer idEvent)
+			throws EventOverException, TicketAlreadyBookedException {
 
 		if (eventServices.eventIsAvailaible(idEvent)) {
 			throw new EventOverException("You can not create or update a ticket for a finished event");
@@ -45,7 +45,7 @@ public class TicketServices implements TicketServicesRemote, TicketServicesLocal
 			if (ticket.getTicketId() != null) {
 				System.out.println("---------ticket-----------");
 				System.out.println("---------ticket-----------");
-				
+
 				Tickets ticketFound = findTicketById(ticket.getTicketId());
 				System.out.println(ticketFound);
 				if (ticketFound != null) {
@@ -57,8 +57,8 @@ public class TicketServices implements TicketServicesRemote, TicketServicesLocal
 					}
 				}
 			}
-			
-			Pages event=	entityManager.find(Pages.class, idEvent);
+
+			Pages event = entityManager.find(Pages.class, idEvent);
 			ticket.setEvent(event);
 			entityManager.merge(ticket);
 
@@ -112,28 +112,34 @@ public class TicketServices implements TicketServicesRemote, TicketServicesLocal
 
 	@Override
 	public Long numberOfTicketsBookedByIdTicket(Integer idTicket) {
+		try {
+			String jqpl = "SELECT COUNT(bd) FROM BookDescription bd " + "WHERE bd.bookingStatus=true "
+					+ "AND bd.ticket.ticketId =:param1 ";
+			Query query = entityManager.createQuery(jqpl);
+			query.setParameter("param1", idTicket);
+			return (Long) query.getSingleResult();
 
-		String jqpl = "SELECT COUNT(bd) FROM BookDescription bd " + "WHERE bd.bookingStatus=true "
-				+ "AND bd.ticket.ticketId =:param1 ";
-		Query query = entityManager.createQuery(jqpl);
-		query.setParameter("param1", idTicket);
+		} catch (Exception e) {
 
-		return (Long) query.getSingleResult();
+		}
+		return 0L;
+
 	}
 
 	@Override
 	public Tickets mostBookedTicket() {
+		try {
+			String jpql = "select ticket from Tickets ticket INNER JOIN ticket.bookDescriptions "
+					+ "book GROUP BY book.bookId.ticketId ORDER BY Count(book.bookId.ticketId) DESC";
 
-		String jpql = "select ticket from Tickets ticket INNER JOIN ticket.bookDescriptions "
-				+ "book GROUP BY book.bookId.ticketId ORDER BY Count(book.bookId.ticketId) DESC";
+			Query query = entityManager.createQuery(jpql);
 
-		Query query = entityManager.createQuery(jpql);
-
-		if (query.getResultList() != null) {
-			Tickets ticket = (Tickets) query.getResultList().get(0);
-			return ticket;
+			if (query.getResultList() != null) {
+				Tickets ticket = (Tickets) query.getResultList().get(0);
+				return ticket;
+			}
+		} catch (Exception e) {
 		}
-
 		return null;
 	}
 
@@ -143,21 +149,16 @@ public class TicketServices implements TicketServicesRemote, TicketServicesLocal
 		String jpql = "SELECT ticket FROM Tickets ticket INNER JOIN ticket.bookDescriptions book "
 				+ "WHERE ticket.event=:param1 "
 				+ "GROUP BY book.bookId.ticketId ORDER BY Count(book.bookId.ticketId) DESC ";
-		
 
 		Query query = entityManager.createQuery(jpql);
 		query.setParameter("param1", event);
 
-		if (query.getResultList() != null) {
+		if (query.getResultList().size() != 0) {
 			Tickets ticket = (Tickets) query.getResultList().get(0);
 			return ticket;
 		}
 
 		return null;
 	}
-	
-	
-	
-	
 
 }

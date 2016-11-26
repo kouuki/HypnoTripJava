@@ -28,5 +28,42 @@ public interface EventServicesLocal {
 	boolean eventIsAvailaible(Integer idPage);
 
 	List<Event> availableOrUpcomingEventsInMyArea(String idUser, String place);
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	 List<Event> getAllEvents();
 
 }

@@ -11,10 +11,15 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.Response;
 
 import com.esprit.hypnotrip.persistence.Event;
 import com.esprit.hypnotrip.persistence.Follows;
 import com.esprit.hypnotrip.persistence.FollowsId;
+import com.esprit.hypnotrip.persistence.Offer;
 import com.esprit.hypnotrip.persistence.Pages;
 import com.esprit.hypnotrip.persistence.Posts;
 import com.esprit.hypnotrip.persistence.Tags;
@@ -85,6 +90,7 @@ public class FollowersServices implements FollowersServicesRemote, FollowersServ
 		Follows follow : follows) {
 			nbrfollowrs++;
 		}
+		System.out.println(nbrfollowrs + "   nbr foloooooooo");
 		return nbrfollowrs;
 	}
 
@@ -145,24 +151,32 @@ public class FollowersServices implements FollowersServicesRemote, FollowersServ
 
 	}
 
-	
-	
-
 	@Override
 	public boolean MyEventForToDay(String idUser) {
 		List<Follows> listAllMyFollow = this.findAllFollowByUserId(idUser);
 		for (Follows follows : listAllMyFollow) {
-			Event event = (Event) follows.getPages();
-			Date actuelle = new Date();
-			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-			String dateNow = dateFormat.format(actuelle);
-			if (dateNow.equals(event.getDateOfEvent().toString())) {
-				return true;
+			Pages pages = follows.getPages();
+			if (pages instanceof Event) {
+				Date actuelle = new Date();
+				DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+				String dateNow = dateFormat.format(actuelle);
+				if (dateNow.equals(((Event) pages).getDateOfEvent().toString())) {
+					return true;
+				}
+			} else if (pages instanceof Offer) {
+				Date actuelle = new Date();
+				DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+				String dateNow = dateFormat.format(actuelle);
+				String dateEndOffer = dateFormat.format(((Offer) pages).getFinishDate());
+				if (dateNow.equals(dateEndOffer)) {
+					return true;
+				}
 			}
 		}
 		System.out.println("compare not Set");
 
 		return false;
+
 	}
 
 	@Override
@@ -173,14 +187,82 @@ public class FollowersServices implements FollowersServicesRemote, FollowersServ
 			Date actuelle = new Date();
 			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 			String dateNow = dateFormat.format(actuelle);
-			if (follows.getPages() instanceof Event) {
+			if (follows.getPages() instanceof Offer) {
+				String dateEndOffer = dateFormat.format(((Offer) follows.getPages()).getFinishDate());
+				if (dateNow.equals(dateEndOffer)) {
+					listMyEventForToDay.add(follows);
+					System.out.println("jit hné");
+				}
+			} else if (follows.getPages() instanceof Event) {
 				if (dateNow.equals(((Event) follows.getPages()).getDateOfEvent().toString())) {
 					listMyEventForToDay.add(follows);
 				}
 			}
 		}
-
+		System.out.println("5rajt men hné ");
 		return listMyEventForToDay;
+	}
+
+	@Override
+	public List<String> findNbrFollowByWS() {
+
+		List<String> nbrFollowers = new ArrayList<>();
+		Client client = ClientBuilder.newClient();
+
+		WebTarget nbrAllFollowers = client.target("http://localhost:63784/api/follows/followsPage");
+
+		Response response = nbrAllFollowers.request().get();
+
+		nbrFollowers = response.readEntity(nbrFollowers.getClass());
+
+		response.close();
+		return nbrFollowers;
+
+	}
+
+	@Override
+	public List<String> findNbrWishByWS() {
+		List<String> nbrWish = new ArrayList<>();
+		Client client = ClientBuilder.newClient();
+
+		WebTarget nbrAllWish = client.target("http://localhost:63784/api/follows/wishPage");
+
+		Response response = nbrAllWish.request().get();
+
+		nbrWish = response.readEntity(nbrWish.getClass());
+
+		response.close();
+		return nbrWish;
+	}
+
+	@Override
+	public List<Integer> listIdPagesInFollow() {
+		String jpql = "SELECT distinct(f.id.pageId) FROM Follows f ";
+		Query query = entityManager.createQuery(jpql);
+		return query.getResultList();
+	}
+
+	@Override
+	public String TitlePageById(Integer idPage) {
+		String jpql = "SELECT p.title FROM Pages p WHERE p.pageId=:param ";
+		Query query = entityManager.createQuery(jpql);
+		query.setParameter("param", idPage);
+		return (String) query.getResultList().get(0);
+	}
+
+	@Override
+	public Integer nbrWish(Integer idPages) {
+		String jpql = "SELECT f FROM Follows f WHERE f.id.pageId=:param AND f.wishStat=true";
+		Query query = entityManager.createQuery(jpql);
+		query.setParameter("param", idPages);
+		@SuppressWarnings("unchecked")
+		List<Follows> follows = query.getResultList();
+		Integer nbrWish = 0;
+		for (@SuppressWarnings("unused")
+		Follows follow : follows) {
+			nbrWish++;
+		}
+		return nbrWish;
 	}
 
 }

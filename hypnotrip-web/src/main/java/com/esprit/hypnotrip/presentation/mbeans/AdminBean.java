@@ -21,11 +21,13 @@ public class AdminBean {
 	UserServicesLocal userservicelocal;
 	@EJB
 	ToursiticPlaceServiceLocal toursiticPlaceServiceLocal;
-    int numberOfconnectedUser;
-    int numberOfTouristicPlaces;
-    int numberOfTouristicPlacesNotAccepted;
+	int numberOfconnectedUser;
+	int numberOfTouristicPlaces;
+	int numberOfTouristicPlacesNotAccepted;
 	private List<User> usersNotBlocked = new ArrayList<>();
 	private List<User> usersBlocked = new ArrayList<>();
+
+	private List<Touristicplace> filteredPlaces = new ArrayList<>();
 	private List<Touristicplace> touristicPlaceNotAccepted = new ArrayList<>();
 
 	@PostConstruct
@@ -33,9 +35,9 @@ public class AdminBean {
 		setUsersNotBlocked(userservicelocal.listNotBlockedUser());
 		setUsersBlocked(userservicelocal.listBlockedUser());
 		setTouristicPlaceNotAccepted(toursiticPlaceServiceLocal.getAllTouristicPlaceNotAccepted());
-		numberOfTouristicPlaces=toursiticPlaceServiceLocal.numberOfTouristicPLaces();
-		numberOfTouristicPlacesNotAccepted=toursiticPlaceServiceLocal.numberOfTouristicPLacesNotAccepted();
-		numberOfconnectedUser=userservicelocal.numberOfConnexion();
+		numberOfTouristicPlaces = toursiticPlaceServiceLocal.numberOfTouristicPLaces();
+		numberOfTouristicPlacesNotAccepted = toursiticPlaceServiceLocal.numberOfTouristicPLacesNotAccepted();
+		numberOfconnectedUser = userservicelocal.numberOfConnexion();
 	}
 
 	public List<User> getUsersNotBlocked() {
@@ -62,10 +64,12 @@ public class AdminBean {
 			return "Blocked";
 		}
 	}
-public String logout(){
-	FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-	return "/Home?faces-redirect=true";
-}
+
+	public String findUserName(String userid){
+		User u = userservicelocal.findUserById(userid);
+		return u.getFirstName()+" "+u.getSecondName();
+	}
+
 	// to change the displayed Stat from int to String
 	public String getStateTouristicPlace(int etat) {
 		if (etat == 1) {
@@ -76,7 +80,8 @@ public String logout(){
 			return "Pending";
 		}
 	}
-// BLOCK DEBLOCK USER ===> WEB API LATER
+
+	// BLOCK DEBLOCK USER ===> WEB API LATER
 	public String blockUser(String userId) {
 		userservicelocal.blocUser(userId);
 		return "/pages/Admin/AdminManageUser?faces-redirect=true";
@@ -86,11 +91,13 @@ public String logout(){
 		userservicelocal.deblocUser(userId);
 		return "/pages/Admin/AdminManageUser?faces-redirect=true";
 	}
-// ACCEPT TOURISTIC PLACE 
-	public String AcceptTouristicPlace(int idPage){
+
+	// ACCEPT TOURISTIC PLACE
+	public String AcceptTouristicPlace(int idPage) {
 		toursiticPlaceServiceLocal.acceptTouristicPlace(idPage);
 		return "/pages/Admin/AdminTouristicPlaces?faces-redirect=true";
 	}
+
 	public List<Touristicplace> getTouristicPlaceNotAccepted() {
 		return touristicPlaceNotAccepted;
 	}
@@ -121,6 +128,14 @@ public String logout(){
 
 	public void setNumberOfTouristicPlacesNotAccepted(int numberOfTouristicPlacesNotAccepted) {
 		this.numberOfTouristicPlacesNotAccepted = numberOfTouristicPlacesNotAccepted;
+	}
+
+	public List<Touristicplace> getFilteredPlaces() {
+		return filteredPlaces;
+	}
+
+	public void setFilteredPlaces(List<Touristicplace> filteredPlaces) {
+		this.filteredPlaces = filteredPlaces;
 	}
 
 }

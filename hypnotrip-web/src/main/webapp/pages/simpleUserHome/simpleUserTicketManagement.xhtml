@@ -1,0 +1,150 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/template/template.xhtml">
+
+	<h:head>
+		<ui:define name="title">Manage Tickets</ui:define>
+
+	</h:head>
+	<ui:define name="content">
+
+
+
+
+
+		<h:form id="friendsForm"
+			rendered="#{manageTicketsBean.showListOfFriends}">
+			<div id="content-block">
+				<div class="container-fluid custom-container">
+					<div class="row">
+	
+
+
+						<div class="col-md-10 col-md-push-2">
+							<div id="container-mix" class="be-user-wrapper row">
+
+
+
+					<ui:repeat var="friend" value="#{manageTicketsBean.friendWhoAreGoingToThisEvent}">
+								<div class="mix category-4 custom-column-5"
+									style="display: inline-block;">
+									<div class="be-user-block style-2">
+										<a class="be-ava-user style-2" href="blog-detail-2.html">
+											<h:graphicImage value="/resources/img/PNGLOGO.png" />
+										</a> <a href="" class="be-use-name"><h:outputLabel value="#{friend.firstName}" /> <h:outputLabel value="#{friend.secondName}" /></a>
+									</div>
+								</div>
+					</ui:repeat>
+
+
+
+
+
+							</div>
+						</div>
+
+
+
+					</div>
+				</div>
+			</div>
+			
+					<center>
+								<h:commandLink class="btn full color-1 size-1 hover-1"
+									action="#{manageTicketsBean.showTicketsForm()}">
+									<i class="fa fa-chevron-left"></i>Back to the list</h:commandLink>
+					</center>
+		</h:form>
+
+
+
+
+
+		<!-- begin dispaly all tickets is here -->
+		<!--                                   -->
+		<!--                                   -->
+		<!--                                   -->
+		<!--                                   -->
+		<!--                                   -->
+		<!--                                   -->
+
+
+		<h:form id="listAllTickets"
+			rendered="#{manageTicketsBean.showListForm}">
+			<div id="content-block" class="gallery-block">
+
+				<div class="head-bg">
+					<div class="head-bg-img"></div>
+					<div class="head-bg-content">
+						<h1>
+							The most booked ticket :
+							<h:outputLabel
+								value="#{manageTicketsBean.mostBookedTicket.label}" />
+
+						</h1>
+					</div>
+				</div>
+
+
+
+				<div class="custom-container gallery-container">
+					<div class="container">
+						<br /> <br />
+						<ui:repeat var="ticket" value="#{manageTicketsBean.tickets}">
+							<div class="gallery-box clearfix">
+								<div class="gallery-a gallery-info">
+									Price
+									<h:outputLabel value="#{ticket.price}" />
+									$<br />Places :
+									<h:outputLabel value="#{ticket.numberOfPlaces}" />
+
+								</div>
+								<div class="gallery-info">
+									<h3>
+										<h:outputLabel value="#{ticket.label}" />
+									</h3>
+									<p>
+										<h:outputLabel value="#{ticket.description}" />
+										<br /> Booked :
+										<h:outputLabel
+											value="#{manageTicketsBean.numberOfReserverTicket(ticket)}" />
+									</p>
+								</div>
+								<div class="gallery-btn">
+									<h:commandLink class="btn-login btn color-1 size-2 hover-2"
+										action="#{manageTicketsBean.doBook()}">
+										Book<f:setPropertyActionListener value="#{ticket}"
+											target="#{manageTicketsBean.selectedTicket}"></f:setPropertyActionListener>
+									</h:commandLink>
+
+
+									<p:commandLink class="btn-login btn color-1 size-2 hover-2"
+										action="#{manageTicketsBean.doCancelBooking()}">
+										Cancel <f:setPropertyActionListener value="#{ticket}"
+											target="#{manageTicketsBean.selectedTicket}"></f:setPropertyActionListener>
+									</p:commandLink>
+
+
+								</div>
+							</div>
+						</ui:repeat>
+						<br /> <br />
+					</div>
+				</div>
+
+			</div>
+			<center>
+				<h:commandLink action="#{manageTicketsBean.showFriendsForm()}"
+					value="Who is going to this event ?"
+					class="be-register btn color-3 size-1 hover-1" />
+			</center>
+		</h:form>
+
+	</ui:define>
+
+</ui:composition>

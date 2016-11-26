@@ -30,4 +30,14 @@ public interface FollowersServicesLocal {
 
 	List<Follows> ListMyEventForToDay(String idUser);
 
+	List<String> findNbrFollowByWS();
+
+	List<String> findNbrWishByWS();
+
+	List<Integer> listIdPagesInFollow();
+
+	String TitlePageById(Integer idPage);
+
+	Integer nbrWish(Integer idPages);
+
 }

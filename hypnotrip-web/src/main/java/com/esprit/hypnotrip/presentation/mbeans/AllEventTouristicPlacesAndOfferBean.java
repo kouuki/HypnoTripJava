@@ -26,9 +26,9 @@ public class AllEventTouristicPlacesAndOfferBean {
 	@EJB
 	private FollowersServicesLocal followersServicesLocal;
 	private List<Pages> ListAllPagesInDataBase = new ArrayList<>();
-	private List<Pages> ListAllEvent = new ArrayList<>();
-	private List<Pages> ListAllOffers = new ArrayList<>();
-	private List<Pages> ListAllTouristicPlace = new ArrayList<>();
+	private List<Event> ListAllEvent = new ArrayList<>();
+	private List<Offer> ListAllOffers = new ArrayList<>();
+	private List<Touristicplace> ListAllTouristicPlace = new ArrayList<>();
 	private List<Pages> ListAllPages = new ArrayList<>();
 	private List<Pages> ListAllPagesToDisplay = new ArrayList<>();
 	private List<Follows> ListAllMyFollowAndWish = new ArrayList<>();
@@ -98,11 +98,11 @@ public class AllEventTouristicPlacesAndOfferBean {
 		for (Pages pages : ListAllPagesToDisplay) {
 			ListAllPages.add(pages);
 			if (pages instanceof Offer) {
-				ListAllOffers.add(pages);
+				ListAllOffers.add((Offer) pages);
 			} else if (pages instanceof Touristicplace) {
-				ListAllTouristicPlace.add(pages);
+				ListAllTouristicPlace.add((Touristicplace) pages);
 			} else if (pages instanceof Event) {
-				ListAllEvent.add(pages);
+				ListAllEvent.add((Event) pages);
 			}
 		}
 
@@ -153,19 +153,19 @@ public class AllEventTouristicPlacesAndOfferBean {
 
 	}
 
-	public List<Pages> getListAllEvent() {
+	public List<Event> getListAllEvent() {
 		return ListAllEvent;
 	}
 
-	public void setListAllEvent(List<Pages> listAllEvent) {
+	public void setListAllEvent(List<Event> listAllEvent) {
 		ListAllEvent = listAllEvent;
 	}
 
-	public List<Pages> getListAllOffers() {
+	public List<Offer> getListAllOffers() {
 		return ListAllOffers;
 	}
 
-	public void setListAllOffer(List<Pages> listAllOffers) {
+	public void setListAllOffer(List<Offer> listAllOffers) {
 		ListAllOffers = listAllOffers;
 	}
 
@@ -297,15 +297,15 @@ public class AllEventTouristicPlacesAndOfferBean {
 		this.displayAllPages = displayAllPages;
 	}
 
-	public List<Pages> getListAllTouristicPlace() {
+	public List<Touristicplace> getListAllTouristicPlace() {
 		return ListAllTouristicPlace;
 	}
 
-	public void setListAllTouristicPlace(List<Pages> listAllTouristicPlace) {
+	public void setListAllTouristicPlace(List<Touristicplace> listAllTouristicPlace) {
 		ListAllTouristicPlace = listAllTouristicPlace;
 	}
 
-	public void setListAllOffers(List<Pages> listAllOffers) {
+	public void setListAllOffers(List<Offer> listAllOffers) {
 		ListAllOffers = listAllOffers;
 	}
 

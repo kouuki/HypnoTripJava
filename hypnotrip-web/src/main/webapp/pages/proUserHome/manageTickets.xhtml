@@ -1,0 +1,197 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/template/template.xhtml">
+
+	<h:head>
+		<ui:define name="title">Manage Tickets</ui:define>
+
+	</h:head>
+	<ui:define name="content">
+
+
+
+
+		<h:form id="CreateOrUpdateTicket"
+			rendered="#{proUserTicketManagementBean.showCreateUpdateForm}">
+			<div id="content-block">
+				<div class="container be-detail-container">
+					<div class="row">
+					
+						<div class="col-xs-12 col-md-3 left-feild">
+							<div class="be-vidget back-block">
+								<h:commandLink class="btn full color-1 size-1 hover-1"
+									action="#{proUserTicketManagementBean.backToList()}">
+									<i class="fa fa-chevron-left"></i>Back to the list</h:commandLink>
+							</div>
+						</div>
+
+
+						<div class="col-xs-12 col-md-9 _editor-content_">
+							<div class="sec" data-sec="about-me">
+								<div class="be-large-post">
+									<div class="info-block style-2">
+										<div class="be-large-post-align">
+											<h3 class="info-block-label">Manage tickets</h3>
+										</div>
+									</div>
+									<div class="be-large-post-align">
+										<div class="row">
+											<div class="input-col col-xs-12">
+												<div class="form-group focus-2">
+													<div class="form-label">Section label</div>
+													<h:inputText
+														value="#{proUserTicketManagementBean.selectedTicket.label}"
+														class="form-input" />
+												</div>
+											</div>
+											<div class="input-col col-xs-12">
+												<div class="form-group focus-2">
+													<div class="form-label">Description</div>
+													<h:inputTextarea
+														value="#{proUserTicketManagementBean.selectedTicket.description}"
+														class="form-input" />
+												</div>
+											</div>
+
+											<div class="input-col col-xs-12 col-sm-4">
+												<div class="form-group focus-2">
+													<div class="form-label">Number of places</div>
+													<h:inputText
+														value="#{proUserTicketManagementBean.selectedTicket.numberOfPlaces}"
+														class="form-input" />
+												</div>
+											</div>
+
+
+											<div class="input-col col-xs-12 col-sm-4">
+												<div class="form-group focus-2">
+													<div class="form-label">Price</div>
+													<h:inputText
+														value="#{proUserTicketManagementBean.selectedTicket.price}"
+														class="form-input" />
+												</div>
+											</div>
+
+											<div class="input-col col-xs-12 col-sm-4">
+												<div class="form-group focus-2">
+													<div class="form-label">Save changes</div>
+													<h:commandLink
+														action="#{proUserTicketManagementBean.doAddOrUpdateTicket()}"
+														value="Go" class="be-register btn color-1 size-1 hover-3" />
+												</div>
+											</div>
+
+										</div>
+
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</h:form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		<!-- begin dispaly all tickets is here -->
+		<!--                                   -->
+		<!--                                   -->
+		<!--                                   -->
+		<!--                                   -->
+		<!--                                   -->
+		<!--                                   -->
+
+
+
+
+		<h:form id="listAllTickets"
+			rendered="#{proUserTicketManagementBean.listAllTickets}">
+			<div id="content-block" class="gallery-block">
+
+				<div class="head-bg">
+					<div class="head-bg-img"></div>
+					<div class="head-bg-content">
+						<h:form id="mostBookedTicket" rendered="#{proUserTicketManagementBean.displayMostBookedTicket}">
+						<h1>The most booked ticket : <h:outputLabel value="#{proUserTicketManagementBean.bestBookedTicket.label}" />
+						 <br/>
+						 Number of booking : <h:outputLabel value="#{proUserTicketManagementBean.numberOfTicketsBooked(proUserTicketManagementBean.bestBookedTicket)}" />
+						 </h1>
+						 </h:form>
+					</div>
+				</div>
+
+
+
+				<div class="custom-container gallery-container">
+					<div class="container">
+						<br /> <br />
+						<ui:repeat var="ticket"
+							value="#{proUserTicketManagementBean.tickets}">
+							<div class="gallery-box clearfix">
+								<div class="gallery-a gallery-info">
+									Price
+									<h:outputLabel value="#{ticket.price}" />
+									$<br />Places :
+									<h:outputLabel value="#{ticket.numberOfPlaces}" />
+									 
+								</div>
+								<div class="gallery-info">
+									<h3>
+										<h:outputLabel value="#{ticket.label}" />
+									</h3>
+									<p>
+										<h:outputLabel value="#{ticket.description}" />
+										<br/> 
+										Booked : <h:outputLabel value="#{proUserTicketManagementBean.numberOfTicketsBooked(ticket)}" />
+									</p>
+								</div>
+								<div class="gallery-btn">
+									<h:commandLink class="btn-login btn color-1 size-2 hover-2"
+										action="#{proUserTicketManagementBean.selectTicket()}">
+										Update<f:setPropertyActionListener value="#{ticket}"
+											target="#{proUserTicketManagementBean.selectedTicket}"></f:setPropertyActionListener>
+									</h:commandLink>
+
+
+									<p:commandLink class="btn-login btn color-1 size-2 hover-2"
+										action="#{proUserTicketManagementBean.doDeleteTicket()}">
+										Delete <f:setPropertyActionListener value="#{ticket}"
+											target="#{proUserTicketManagementBean.selectedTicket}"></f:setPropertyActionListener>
+									</p:commandLink>
+
+
+								</div>
+							</div>
+						</ui:repeat>
+						<br /> <br />
+					</div>
+				</div>
+
+			</div>
+		 <center> <h:commandLink action="#{proUserTicketManagementBean.selectTicket()}" value="Create a ticket" class="be-register btn color-3 size-1 hover-1"/>
+		</center>
+		</h:form>
+
+	</ui:define>
+
+</ui:composition>

@@ -19,7 +19,7 @@ public class AminTests {
 
 		Tickets ticket = new Tickets();
 		ticket.setPrice(15);
-		ticket.setType("This is the best ticket ever");
+		//ticket.setType("This is the best ticket ever");
 	
 
 	}
