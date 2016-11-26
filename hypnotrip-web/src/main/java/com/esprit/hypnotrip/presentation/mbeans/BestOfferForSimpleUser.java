@@ -6,9 +6,11 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
 import com.esprit.hypnotrip.persistence.Offer;
+import com.esprit.hypnotrip.persistence.User;
 import com.esprit.hypnotrip.services.interfaces.OfferServiceLocal;
 import com.esprit.hypnotrip.services.interfaces.RateServiceLocal;
 
@@ -32,6 +34,19 @@ public class BestOfferForSimpleUser {
 
 	private Boolean displayFormOffer = false;
 
+	@ManagedProperty(value = "#{loginBean}")
+	private LoginBean loginBean;
+
+	public LoginBean getLoginBean() {
+		return loginBean;
+	}
+
+	public void setLoginBean(LoginBean loginBean) {
+		this.loginBean = loginBean;
+	}
+
+	private User user;
+
 	// la page séléctionnée
 
 	private Offer offerSelected = new Offer();
@@ -40,17 +55,16 @@ public class BestOfferForSimpleUser {
 	private String numCompte;
 	private String password;
 
-	private String idOwner;
 	private List<Offer> myPages = new ArrayList<>();
 
 	@PostConstruct
 	public void init() {
-		idOwner = "b38f3299-6949-42c7-9a6c-f998c66f485d";
+		user=loginBean.getUser();
 		myPages.add(offerServiceLocal.bestOffer());
 	}
 
 	public String doBuyOffer() {
-		offerServiceLocal.buyAnOffer(idOwner, offerSelected.getPageId());
+		offerServiceLocal.buyAnOffer(user.getId(), offerSelected.getPageId());
 		Double somme = (offerSelected.getPrice()) * ((100 - offerSelected.getDiscount()) / 100);
 		service.retraitArgent(numCompte, password, somme);
 		return "/pages/simpleUserHome/bestOffer?faces-redirect=true";
@@ -92,13 +106,6 @@ public class BestOfferForSimpleUser {
 	// **********************************************************************************
 
 	// **********************************************************************************
-	public String getIdOwner() {
-		return idOwner;
-	}
-
-	public void setIdOwner(String idOwner) {
-		this.idOwner = idOwner;
-	}
 
 	public List<Offer> getMyPages() {
 		return myPages;
@@ -163,4 +170,13 @@ public class BestOfferForSimpleUser {
 	public void setDisplayFormOffer(Boolean displayFormOffer) {
 		this.displayFormOffer = displayFormOffer;
 	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
 }

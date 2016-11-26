@@ -11,7 +11,7 @@
 	</h:head>
 	<ui:define name="content">
 		<center>
-<<<<<<< HEAD
+
 			<h:form>
 				<h:commandLink action="listMyEvents?faces-redirect=true"
 					value="manage My Events" />
@@ -28,14 +28,13 @@
 					value="Interesting!" />
 					<!-- yasmine -->
 			</h:form>
-=======
+
 			<div class="container-fluid custom-container">
 				<div class="row">
 					<div class="col-md-2 left-feild">
 						<div class="creative_filds_block">
 							<div class="ul">
 								<h:form>
->>>>>>> refs/remotes/origin/master
 
 
 									<h:commandLink action="listMyEvents?faces-redirect=true"
@@ -62,44 +61,7 @@
 							</div>
 						</div>
 					</div>
-					<h:form id="formListOfPosts">
-
-
-						<ui:repeat var="p" value="#{myPostsBean.myPosts}">
-
-							<div class="category-1 mix custom-column-5"
-								style="display: inline-block;">
-								<div class="be-post">
-									<a href="page1.html" class="be-img-block"> <h:graphicImage
-											value="#{p.imageURL}" alt="" />
-									</a> <b>Description :</b>
-									<h:outputText value="#{p.description}" />
-									<br /> <br /> <b>Content :</b>
-
-									<h:outputText value="#{p.content}" />
-
-									<br /> <br /> <b>Publication Post :</b>
-
-
-									<h:outputText value="#{p.publicationPost}" />
-
-								</div>
-								<div class="info-block">
-									<span> <b>Publication Post :</b> <h:outputText
-											value="#{p.publicationPost}" />
-									</span>
-								</div>
-							</div>
-
-						</ui:repeat>
-
-
-
-
-
-
-
-					</h:form>
+				<!-- list posts -->
 
 
 				</div>

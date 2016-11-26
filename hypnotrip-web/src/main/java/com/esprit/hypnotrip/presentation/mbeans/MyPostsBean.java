@@ -6,9 +6,11 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
 import com.esprit.hypnotrip.persistence.Posts;
+import com.esprit.hypnotrip.persistence.User;
 import com.esprit.hypnotrip.services.interfaces.PostServicesLocal;
 
 @ManagedBean
@@ -17,13 +19,17 @@ public class MyPostsBean {
 	@EJB
 	private PostServicesLocal postServicesLocal;
 
-	private String idOwner;
+	@ManagedProperty(value = "#{loginBean}")
+	private LoginBean loginBean;
+
+	private User user;
+
 	private List<Posts> myPosts = new ArrayList<Posts>();
 
 	@PostConstruct
 	public void init() {
-		idOwner = "b38f3299-6949-42c7-9a6c-f998c66f4852";
-		myPosts = postServicesLocal.listMyPost(idOwner);
+		user = loginBean.getUser();
+		myPosts = postServicesLocal.listMyPost(user.getId());
 		for (Posts posts : myPosts) {
 			System.out.println("hné mel bean " + posts.getPostId());
 		}
@@ -35,6 +41,22 @@ public class MyPostsBean {
 
 	public void setMyPosts(List<Posts> myPosts) {
 		this.myPosts = myPosts;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public LoginBean getLoginBean() {
+		return loginBean;
+	}
+
+	public void setLoginBean(LoginBean loginBean) {
+		this.loginBean = loginBean;
 	}
 
 }

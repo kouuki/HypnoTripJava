@@ -12,6 +12,7 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
@@ -22,6 +23,7 @@ import org.primefaces.event.SelectEvent;
 
 import com.esprit.hypnotrip.persistence.Offer;
 import com.esprit.hypnotrip.persistence.Pages;
+import com.esprit.hypnotrip.persistence.User;
 import com.esprit.hypnotrip.services.interfaces.PageServiceLocal;
 import com.esprit.hypnotrip.services.interfaces.RateServiceLocal;
 
@@ -39,6 +41,11 @@ public class ManageOffersBean {
 	private Boolean displayForm3 = false;
 	private Boolean displayFormOffer = false;
 
+	@ManagedProperty(value = "#{loginBean}")
+	private LoginBean loginBean;
+
+	private User user;
+
 	// la page séléctionnée
 	private Pages offerSelected = new Offer();
 
@@ -46,13 +53,12 @@ public class ManageOffersBean {
 	private static final int BUFFER_SIZE = 6124;
 	String res = "";
 
-	private String idOwner;
 	private List<Offer> myPages = new ArrayList<>();
 
 	@PostConstruct
 	public void init() {
-		idOwner = "b38f3299-6949-42c7-9a6c-f998c66f485d";
-		myPages = pageServiceLocal.ListMyOffers(idOwner);
+		user = loginBean.getUser();
+		myPages = pageServiceLocal.ListMyOffers(user.getId());
 	}
 
 	// ********************************************************************************
@@ -62,7 +68,7 @@ public class ManageOffersBean {
 			System.out.println(res);
 			offerSelected.setImageURL(res);
 		}
-		pageServiceLocal.saveOrUpdatePage(offerSelected, idOwner);
+		pageServiceLocal.saveOrUpdatePage(offerSelected, user.getId());
 		return "/pages/proUserHome/listMyOffers?faces-redirect=true";
 	}
 
@@ -213,20 +219,28 @@ public class ManageOffersBean {
 		this.offerSelected = offerSelected;
 	}
 
-	public String getIdOwner() {
-		return idOwner;
-	}
-
-	public void setIdOwner(String idOwner) {
-		this.idOwner = idOwner;
-	}
-
 	public List<Offer> getMyPages() {
 		return myPages;
 	}
 
 	public void setMyPages(List<Offer> myPages) {
 		this.myPages = myPages;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public LoginBean getLoginBean() {
+		return loginBean;
+	}
+
+	public void setLoginBean(LoginBean loginBean) {
+		this.loginBean = loginBean;
 	}
 
 	// **********************************************************************************

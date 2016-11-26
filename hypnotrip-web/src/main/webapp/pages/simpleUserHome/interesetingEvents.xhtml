@@ -64,18 +64,10 @@
 									<h:outputText value="#{event.place}" />
 
 
-									<p:rating
-										value="#{manageListEventsBean.ratingLevels(event.pageId)}"
-										readonly="true" />
 
 								</div>
 								<div class="info-block">
-									<span><h:commandButton value="Rate"
-											action="#{manageListEventsBean.ratePage()}">
-											<f:setPropertyActionListener value="#{event}"
-												target="#{manageListEventsBean.eventSelected}"></f:setPropertyActionListener>
-
-										</h:commandButton> <h:commandButton
+									<span> <h:commandButton
 											value="#{eventsBean.followedORUnfollowedEvents(event.pageId)}" />
 									</span>
 								</div>

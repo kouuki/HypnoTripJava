@@ -13,6 +13,7 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
@@ -23,6 +24,7 @@ import org.primefaces.event.SelectEvent;
 
 import com.esprit.hypnotrip.persistence.Event;
 import com.esprit.hypnotrip.persistence.Pages;
+import com.esprit.hypnotrip.persistence.User;
 import com.esprit.hypnotrip.services.interfaces.PageServiceLocal;
 import com.esprit.hypnotrip.services.interfaces.RateServiceLocal;
 
@@ -34,8 +36,21 @@ public class ManageListEventsBean {
 	@EJB
 	private RateServiceLocal rateServiceLocal;
 
+	@ManagedProperty(value = "#{loginBean}")
+	private LoginBean loginBean;
+	
+	private User user;
+
 	// Controle sur le chargement des form
 	private Boolean displayForm2 = false;
+	public LoginBean getLoginBean() {
+		return loginBean;
+	}
+
+	public void setLoginBean(LoginBean loginBean) {
+		this.loginBean = loginBean;
+	}
+
 	private Boolean displayForm1 = true;
 	private Boolean displayForm3 = false;
 
@@ -45,7 +60,6 @@ public class ManageListEventsBean {
 
 	private Pages eventSelected = new Event();
 
-	private String idOwner;
 	private List<Event> myPages = new ArrayList<>();
 
 	// Primitives
@@ -54,8 +68,9 @@ public class ManageListEventsBean {
 
 	@PostConstruct
 	public void init() {
-		idOwner = "b38f3299-6949-42c7-9a6c-f998c66f485d";
-		myPages = pageServiceLocal.ListMyEvents(idOwner);
+		user=loginBean.getUser();
+
+		myPages = pageServiceLocal.ListMyEvents(user.getId());
 	}
 
 	// ********************************************************************************
@@ -67,12 +82,12 @@ public class ManageListEventsBean {
 
 	// ********************************************************************************
 	public String doAddEvent() {
-	
+
 		if (res != "") {
 			System.out.println(res);
 			eventSelected.setImageURL(res);
 		}
-		pageServiceLocal.saveOrUpdatePage(eventSelected, idOwner);
+		pageServiceLocal.saveOrUpdatePage(eventSelected, user.getId());
 		return "/pages/simpleUserHome/listMyEvents?faces-redirect=true";
 	}
 
@@ -83,7 +98,7 @@ public class ManageListEventsBean {
 			System.out.println(res);
 			eventSelected.setImageURL(res);
 		}
-		pageServiceLocal.saveOrUpdatePage(eventSelected, idOwner);
+		pageServiceLocal.saveOrUpdatePage(eventSelected, user.getId());
 		return "/pages/proUserHome/listMyEvents?faces-redirect=true";
 	}
 
@@ -148,7 +163,8 @@ public class ManageListEventsBean {
 
 		ExternalContext extContext = FacesContext.getCurrentInstance().getExternalContext();
 		File result = new File(extContext.getRealPath("//uploads//" + event.getFile().getFileName()));
-		//res = extContext.getRealPath("//uploads//" + event.getFile().getFileName());
+		// res = extContext.getRealPath("//uploads//" +
+		// event.getFile().getFileName());
 		res = "//uploads//" + event.getFile().getFileName();
 		System.out.println(res);
 
@@ -186,13 +202,6 @@ public class ManageListEventsBean {
 	}
 
 	// **********************************************************************************
-	public String getIdOwner() {
-		return idOwner;
-	}
-
-	public void setIdOwner(String idOwner) {
-		this.idOwner = idOwner;
-	}
 
 	public List<Event> getMyPages() {
 		return myPages;
@@ -248,6 +257,14 @@ public class ManageListEventsBean {
 
 	public void setDateTime(Date dateTime) {
 		this.dateTime = dateTime;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 }
