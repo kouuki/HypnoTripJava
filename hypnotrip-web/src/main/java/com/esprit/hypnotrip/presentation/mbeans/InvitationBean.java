@@ -11,6 +11,7 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.model.DataModel;
 
 import com.esprit.hypnotrip.persistence.Event;
+import com.esprit.hypnotrip.persistence.Invitations;
 import com.esprit.hypnotrip.persistence.User;
 import com.esprit.hypnotrip.services.exceptions.SenderIsRecieverException;
 import com.esprit.hypnotrip.services.interfaces.EventServicesLocal;
@@ -36,6 +37,7 @@ public class InvitationBean {
 	private boolean displayFormEventsIFollow = true;
 	private boolean displayFormMyFriends = false;
 	private boolean displayFormInviteFriendToEvent = false;
+
 	private boolean response = false;
 	private String chaine;
 
@@ -50,8 +52,7 @@ public class InvitationBean {
 	InvitationServicesLocal invitationServicesLocal;
 
 	// injection des beans
-	@ManagedProperty(value = "#{manageListEventsBean}")
-	private ManageListEventsBean manageListEventsBean;
+
 
 	@ManagedProperty(value = "#{loginBean}")
 	private LoginBean loginBean;
@@ -69,7 +70,6 @@ public class InvitationBean {
 
 		eventsIFollow = eventServicesLocal.getAllEventsFollowedByUser(idUser);
 		myFriends = userServicesLocal.getAllFriendsByUserId(idUser);
-
 		// display forms
 		// selectEventsIFollowToShow();
 		// selectMyFriendsToShow();
@@ -97,9 +97,11 @@ public class InvitationBean {
 		return null;
 	}
 
+	
+	
 	public String inviteFriendToFollowEvent(String id) {
 
-		response = invitationServicesLocal.isInvitedToLikeApage(id,selectedEvent.getPageId());
+		response = invitationServicesLocal.isInvitedToLikeApage(id, selectedEvent.getPageId());
 		if (response == false) {
 
 			System.out.println("ma3andouch menha");
@@ -133,13 +135,6 @@ public class InvitationBean {
 		this.eventsIFollow = eventsIFollow;
 	}
 
-	public ManageListEventsBean getManageListEventsBean() {
-		return manageListEventsBean;
-	}
-
-	public void setManageListEventsBean(ManageListEventsBean manageListEventsBean) {
-		this.manageListEventsBean = manageListEventsBean;
-	}
 
 	public LoginBean getLoginBean() {
 		return loginBean;
@@ -222,5 +217,7 @@ public class InvitationBean {
 	public void setDisplayFormInviteFriendToEvent(boolean displayFormInviteFriendToEvent) {
 		this.displayFormInviteFriendToEvent = displayFormInviteFriendToEvent;
 	}
+
+
 
 }

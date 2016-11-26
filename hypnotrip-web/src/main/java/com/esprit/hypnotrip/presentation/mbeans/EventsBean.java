@@ -20,6 +20,7 @@ import org.primefaces.model.map.Marker;
 
 import com.esprit.hypnotrip.persistence.Event;
 import com.esprit.hypnotrip.services.interfaces.EventServicesLocal;
+import com.esprit.hypnotrip.services.interfaces.FollowersServicesLocal;
 
 @ManagedBean
 @ViewScoped
@@ -66,8 +67,10 @@ public class EventsBean {
 	@EJB
 	EventServicesLocal eventServicesLocal;
 
-	@ManagedProperty(value = "#{manageListEventsBean}")
-	private ManageListEventsBean manageListEventsBean;
+	@EJB
+	FollowersServicesLocal followersServicesLocal;
+	
+
 
 	@ManagedProperty(value = "#{loginBean}")
 	private LoginBean loginBean;
@@ -259,6 +262,22 @@ public class EventsBean {
 	}
 
 	// recall of wanted methods/services
+	
+	public void doFollowOrUnfollowEvents(String value){
+		if(value.equals("Follow")){
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 	public List<Event> getEventsThisWeek() {
 		return eventsThisWeek;
@@ -380,13 +399,6 @@ public class EventsBean {
 		this.map = map;
 	}
 
-	public ManageListEventsBean getManageListEventsBean() {
-		return manageListEventsBean;
-	}
-
-	public void setManageListEventsBean(ManageListEventsBean manageListEventsBean) {
-		this.manageListEventsBean = manageListEventsBean;
-	}
 
 	public LoginBean getLoginBean() {
 		return loginBean;

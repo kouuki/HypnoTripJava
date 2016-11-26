@@ -10,10 +10,12 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import com.esprit.hypnotrip.persistence.Invitations;
+import com.esprit.hypnotrip.persistence.Pages;
 import com.esprit.hypnotrip.persistence.User;
 import com.esprit.hypnotrip.services.exceptions.SenderIsRecieverException;
 import com.esprit.hypnotrip.services.interfaces.InvitationServicesLocal;
 import com.esprit.hypnotrip.services.interfaces.InvitationServicesRemote;
+import com.esprit.hypnotrip.services.interfaces.PageServiceLocal;
 import com.esprit.hypnotrip.services.interfaces.UserServicesLocal;
 
 /**
@@ -42,8 +44,8 @@ public class InvitationServices implements InvitationServicesRemote, InvitationS
 	private Integer response;
 	private boolean isInvited = false;
 
-	// @EJB
-	// service de jihen ;
+	@EJB
+	PageServiceLocal pageServiceLocal;
 
 	public InvitationServices() {
 		// TODO Auto-generated constructor stub
@@ -62,14 +64,13 @@ public class InvitationServices implements InvitationServicesRemote, InvitationS
 		reciever = userServicesLocal.findUserById(idReciever);
 
 		// page exists
-		// Pages page = service de jihen;
-
+		Pages page = pageServiceLocal.findPageById(idPage);
 		// the sender musn't be the reciever
 		// we need to verify
 		if (!sender.equals(reciever)) {
 
 			// if this condition is correct, than the invitation will be created
-			Invitations invitation = new Invitations(idPage, invitationStatus, sender, reciever);
+			Invitations invitation = new Invitations(page.getPageId(), invitationStatus, sender, reciever);
 			entityManager.merge(invitation);
 
 		} else {
