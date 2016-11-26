@@ -102,13 +102,13 @@ public class UserServices implements UserServicesRemote, UserServicesLocal {
 	}
 
 	@Override
-	public List<Tickets> listTicketsBookedByUserEvent(User user, Pages event) {
+	public List<Tickets> listTicketsBookedByUserEvent(User user) {
 
 		String jqpl = "SELECT tickets  FROM Tickets tickets INNER JOIN tickets.bookDescriptions db "
-				+ "WHERE db.user =:param1 " + "AND tickets.event =:param2 ";
+				+ "WHERE db.user =:param1 AND db.bookingStatus=true";
 		Query query = entityManager.createQuery(jqpl);
 		query.setParameter("param1", user);
-		query.setParameter("param2", event);
+	
 
 		return query.getResultList();
 	}
