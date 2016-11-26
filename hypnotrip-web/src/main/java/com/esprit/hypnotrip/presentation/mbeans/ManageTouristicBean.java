@@ -12,6 +12,7 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
@@ -22,6 +23,7 @@ import org.primefaces.event.SelectEvent;
 
 import com.esprit.hypnotrip.persistence.Pages;
 import com.esprit.hypnotrip.persistence.Touristicplace;
+import com.esprit.hypnotrip.persistence.User;
 import com.esprit.hypnotrip.services.interfaces.PageServiceLocal;
 import com.esprit.hypnotrip.services.interfaces.RateServiceLocal;
 
@@ -33,13 +35,17 @@ public class ManageTouristicBean {
 	@EJB
 	private RateServiceLocal rateServiceLocal;
 
+	@ManagedProperty(value = "#{loginBean}")
+	private LoginBean loginBean;
+
+	private User user;
+
 	// Controle sur le chargement des form
 	private Boolean displayForm2 = false;
 	private Boolean displayForm1 = true;
 	private Boolean displayForm3 = false;
 	private Boolean displayFormTouristicPage = false;
 
-	private String idOwner;
 	private List<Touristicplace> myPages = new ArrayList<>();
 
 	// la page séléctionnée
@@ -52,8 +58,8 @@ public class ManageTouristicBean {
 
 	@PostConstruct
 	public void init() {
-		idOwner = "b38f3299-6949-42c7-9a6c-f998c66f485d";
-		myPages = pageServiceLocal.ListMyTouristicPages(idOwner);
+		this.setUser(loginBean.getUser());
+		myPages = pageServiceLocal.ListMyTouristicPages(user.getId());
 	}
 
 	// ********************************************************************************
@@ -64,7 +70,7 @@ public class ManageTouristicBean {
 			System.out.println(res);
 			touristicSelected.setImageURL(res);
 		}
-		pageServiceLocal.saveOrUpdatePage(touristicSelected, idOwner);
+		pageServiceLocal.saveOrUpdatePage(touristicSelected, user.getId());
 		return "/pages/simpleUserHome/listMyTouristicPages?faces-redirect=true";
 	}
 
@@ -168,14 +174,6 @@ public class ManageTouristicBean {
 		return rateServiceLocal.getRateLevel(idPost);
 	}
 
-	public String getIdOwner() {
-		return idOwner;
-	}
-
-	public void setIdOwner(String idOwner) {
-		this.idOwner = idOwner;
-	}
-
 	public List<Touristicplace> getMyPages() {
 		return myPages;
 	}
@@ -222,6 +220,14 @@ public class ManageTouristicBean {
 
 	public void setTouristicSelected(Touristicplace touristicSelected) {
 		this.touristicSelected = touristicSelected;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 }
