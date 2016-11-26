@@ -42,7 +42,7 @@ public class ManageTicketsBean {
 		User user = new User();
 		user.setId(this.userID);
 		try {
-			userServicesLocal.cancelBooking(selectedTicket, user,event.getPageId());
+			userServicesLocal.cancelBooking(selectedTicket, user,1);
 		} catch (EventOverException | WrongNumberOfCancelingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
