@@ -98,6 +98,14 @@
 												<f:setPropertyActionListener value="#{p}"
 													target="#{myFollowersPagesBean.followSelected}"></f:setPropertyActionListener>
 											</h:commandButton>
+											<h:commandButton value="Rate"
+											action="#{rateBean.getSelectedItemFromPage(p.pageId)}"
+											onclick="$('#myModal').modal('show');">
+
+											<f:ajax execute="@form" render="@none" />
+
+										</h:commandButton> 
+										
 										</h:form>
 									</center>
 								</div>
@@ -160,7 +168,47 @@
 						</ui:repeat>
 					</h:column>
 				</h:column>
+<!-- ********************** MODAL FOR RATE ******************************************************************************************** -->
+<h:form>					
+<div class="container">
+							<!-- Modal -->
+							<div class="modal fade" id="myModal" role="dialog">
+								<div class="modal-dialog modal-sm">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h4 class="modal-title">Rating Area</h4>
+										</div>
+										<div class="modal-body">
+											<h:form>
+												<p:growl id="messages" showDetail="true" />
+												<p:rating value="#{rateBean.rating1}">
+													<p:ajax event="rate" listener="#{rateBean.onrate}"
+														update="messages" />
+													<p:ajax event="cancel" listener="#{rateBean.oncancel}"
+														update="messages" />
+												</p:rating>
 
+
+												<p:dialog header="Values" widgetVar="dlg" showEffect="fade"
+													hideEffect="fade">
+													<h:panelGrid id="display" columns="2" cellpadding="5">
+														<h:outputText value="Rating 3:" />
+														<h:outputText value="#{rateBean.rating1}" />
+													</h:panelGrid>
+												</p:dialog>
+											</h:form>
+										</div>
+										<div class="modal-footer">
+											<h:commandButton action="#{rateBean.ReturnListBuyAnOffer()}"
+												value="Close" />
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						</h:form>
+						<!-- ************************************************************************************************************* -->
+					
 				<!-- ********************************Display All Offer *********************************************** -->
 				<!-- ********************************Display All Offer *********************************************** -->
 				<!-- ********************************Display All Offer *********************************************** -->
