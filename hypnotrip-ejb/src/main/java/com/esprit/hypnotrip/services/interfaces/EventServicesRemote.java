@@ -29,4 +29,35 @@ public interface EventServicesRemote {
 
 	List<Event> availableOrUpcomingEventsInMyArea(String idUser, String place);
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	 List<Event> getAllEvents();
 }

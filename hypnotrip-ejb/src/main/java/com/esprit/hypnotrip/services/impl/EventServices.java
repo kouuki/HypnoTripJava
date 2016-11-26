@@ -340,5 +340,102 @@ public class EventServices implements EventServicesRemote, EventServicesLocal {
 		return events2;
 
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	public List<Event> getAllEvents(){
+		String jpql="SELECT e FROM Event e ";
+		Query query = entityManager.createQuery(jpql);
+		try{
+			events = query.getResultList();
+		}catch(Exception e) {
+			
+		}
+		
+		return events;
+	}
 
 }
