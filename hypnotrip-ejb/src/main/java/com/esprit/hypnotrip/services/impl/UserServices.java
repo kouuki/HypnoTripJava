@@ -47,7 +47,7 @@ public class UserServices implements UserServicesRemote, UserServicesLocal {
 	@Override
 	public void bookATicket(Tickets ticket, User user)
 			throws NoMoreTicketsException, LimitOfBookingRechedException, EventOverException {
-		if (eventServices.eventIsAvailaible(ticket.getEvent().getPageId())) {
+		if (!eventServices.eventIsAvailaible(ticket.getEvent().getPageId())) {
 			throw new EventOverException("You can not book a ticket for a finished event");
 		} else if (ticket.getNumberOfPlaces() == null) {
 			throw new NoMoreTicketsException("No more tickets avalible");
@@ -69,7 +69,7 @@ public class UserServices implements UserServicesRemote, UserServicesLocal {
 	@Override
 	public void cancelBooking(Tickets ticket, User user, Integer numberOfTicketsToCancel)
 			throws EventOverException, WrongNumberOfCancelingException {
-		if (eventServices.eventIsAvailaible(ticket.getEvent().getPageId())) {
+		if (!eventServices.eventIsAvailaible(ticket.getEvent().getPageId())) {
 			throw new EventOverException("You can not book a ticket for a finished event");
 		} else if (numberOfTicketsReservedByIdUser(ticket, user.getId()) < numberOfTicketsToCancel) {
 			throw new WrongNumberOfCancelingException("Wrong number of cancel");
@@ -103,7 +103,6 @@ public class UserServices implements UserServicesRemote, UserServicesLocal {
 				+ "WHERE db.user =:param1 AND db.bookingStatus=true";
 		Query query = entityManager.createQuery(jqpl);
 		query.setParameter("param1", user);
-	
 
 		return query.getResultList();
 	}
@@ -133,35 +132,35 @@ public class UserServices implements UserServicesRemote, UserServicesLocal {
 
 	@Override
 	public List<User> getAllFriendsWhoAreGoingToTheSameEvent(Pages event, String userId) {
-		
-		try{
-		List<String> listOfIds = new ArrayList<>();
-       
-		Client client = ClientBuilder.newClient();
-		WebTarget target = client.target("http://localhost:63784/api/BelongWS");
-		WebTarget userFriends = target.path("UserFriends").path(userId);
-		Response response = userFriends.request().get();
-		listOfIds = response.readEntity(listOfIds.getClass());
 
-		String jqpl = "SELECT users FROM User users " + "INNER JOIN users.bookDescriptions book "
-				+ "INNER JOIN book.ticket t " + "INNER JOIN t.event e " + "WHERE e=:param1";
-		Query query = entityManager.createQuery(jqpl);
-		query.setParameter("param1", event);
-		List<User> users = query.getResultList();
-		response.close();
+		try {
+			List<String> listOfIds = new ArrayList<>();
 
-		List<User> usersGoingToTheEnvent = new ArrayList<>();
-		if (users != null) {
-			for (User u : users) {
-				if (listOfIds.contains(u.getId())) {
-					usersGoingToTheEnvent.add(u);
+			Client client = ClientBuilder.newClient();
+			WebTarget target = client.target("http://localhost:63784/api/BelongWS");
+			WebTarget userFriends = target.path("UserFriends").path(userId);
+			Response response = userFriends.request().get();
+			listOfIds = response.readEntity(listOfIds.getClass());
+
+			String jqpl = "SELECT users FROM User users " + "INNER JOIN users.bookDescriptions book "
+					+ "INNER JOIN book.ticket t " + "INNER JOIN t.event e " + "WHERE e=:param1";
+			Query query = entityManager.createQuery(jqpl);
+			query.setParameter("param1", event);
+			List<User> users = query.getResultList();
+			response.close();
+
+			List<User> usersGoingToTheEnvent = new ArrayList<>();
+			if (users != null) {
+				for (User u : users) {
+					if (listOfIds.contains(u.getId())) {
+						usersGoingToTheEnvent.add(u);
+					}
 				}
 			}
-		}
 
-		return usersGoingToTheEnvent; } 
-		catch(Exception e ) {
-			return null ; 
+			return usersGoingToTheEnvent;
+		} catch (Exception e) {
+			return null;
 		}
 	}
 
@@ -239,24 +238,6 @@ public class UserServices implements UserServicesRemote, UserServicesLocal {
 		return lr.size();
 	}
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	// service for yasmine
 	@SuppressWarnings("unchecked")
 	@Override

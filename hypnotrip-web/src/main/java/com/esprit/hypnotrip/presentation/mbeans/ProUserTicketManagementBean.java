@@ -5,10 +5,12 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
 import com.esprit.hypnotrip.persistence.Pages;
 import com.esprit.hypnotrip.persistence.Tickets;
+import com.esprit.hypnotrip.persistence.User;
 import com.esprit.hypnotrip.services.exceptions.EventOverException;
 import com.esprit.hypnotrip.services.exceptions.TicketAlreadyBookedException;
 import com.esprit.hypnotrip.services.interfaces.TicketServicesLocal;
@@ -21,7 +23,10 @@ public class ProUserTicketManagementBean {
 	private Tickets selectedTicket = new Tickets();
 	private Tickets bestBookedTicket = new Tickets();
 	private Pages event = new Pages() ; 
-
+	@ManagedProperty(value="#{loginBean}")
+	private LoginBean loginBean ; 
+	private User user; 
+	
 	private boolean showCreateUpdateForm = false;
 	private boolean listAllTickets = true;
 	private boolean displayMostBookedTicket = false ; 
@@ -31,7 +36,7 @@ public class ProUserTicketManagementBean {
 
 	@PostConstruct
 	public void init() {
-	
+		this.user = loginBean.getUser();
 		event.setPageId(11);
 		tickets = ticketServicesLocal.selectAllTicketsByIdEvent(event.getPageId());
 		bestBookedTicket = ticketServicesLocal.mostBookedTicketByEvent(event);
@@ -63,12 +68,7 @@ public class ProUserTicketManagementBean {
 	}
 
 	public Long numberOfTicketsBooked(Tickets ticket) {
-		System.out.println("---------------------------");
-		System.out.println("---------------------------");
-		System.out.println("---------------------------");
-		System.out.println("---------------------------");
-		System.out.println("---------------------------");
-		System.out.println("---------"+ticket+"-------");
+
 		if (ticket!=null) {
 			 return ticketServicesLocal.numberOfTicketsBookedByIdTicket(ticket.getTicketId());
 		} else  {
@@ -155,6 +155,22 @@ public class ProUserTicketManagementBean {
 
 	public void setDisplayMostBookedTicket(boolean displayMostBookedTicket) {
 		this.displayMostBookedTicket = displayMostBookedTicket;
+	}
+
+	public LoginBean getLoginBean() {
+		return loginBean;
+	}
+
+	public void setLoginBean(LoginBean loginBean) {
+		this.loginBean = loginBean;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 }

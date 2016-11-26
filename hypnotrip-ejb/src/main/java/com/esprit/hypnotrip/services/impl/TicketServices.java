@@ -39,7 +39,7 @@ public class TicketServices implements TicketServicesRemote, TicketServicesLocal
 	public void createOrUpdateTicket(Tickets ticket, Integer idEvent)
 			throws EventOverException, TicketAlreadyBookedException {
 
-		if (eventServices.eventIsAvailaible(idEvent)) {
+		if (!eventServices.eventIsAvailaible(idEvent)) {
 			throw new EventOverException("You can not create or update a ticket for a finished event");
 		} else {
 			if (ticket.getTicketId() != null) {
@@ -71,7 +71,7 @@ public class TicketServices implements TicketServicesRemote, TicketServicesLocal
 	@Override
 	public void deleteTicket(Tickets ticket) throws EventOverException, TicketAlreadyBookedException {
 		Tickets mergedTicket = entityManager.merge(ticket);
-		if (eventServices.eventIsAvailaible(ticket.getEvent().getPageId())) {
+		if (!eventServices.eventIsAvailaible(ticket.getEvent().getPageId())) {
 			throw new EventOverException("You can not delete a ticket for a finished event");
 			// TODO test if the user want to delete a ticket of a finished event
 		} else {
