@@ -316,24 +316,24 @@ public class EventServices implements EventServicesRemote, EventServicesLocal {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public Map<Event, Long> statisticsEvent() {
+		public Map<Event, Long> statisticsEvent() {
 
-		jpql = "SELECT  e FROM Event e INNER JOIN e.followers f WHERE e.dateOfEvent>=curdate() GROUP BY f.id.pageId ORDER BY Count(f.id.pageId) DESC";
-		query = entityManager.createQuery(jpql);
-		events = query.getResultList();
-		Map<Event, Long> map = new HashMap<Event, Long>();
-		jpql1 = "SELECT  COUNT(e) FROM Event e INNER JOIN e.followers f WHERE e.dateOfEvent>=curdate() GROUP BY f.id.pageId ORDER BY Count(f.id.pageId) DESC";
-		query1 = entityManager.createQuery(jpql1);
-		List<Long> list = query1.getResultList();
-		int i = 0;
-		for (Event event : events) {
+			jpql = "SELECT  e FROM Event e INNER JOIN e.followers f WHERE e.dateOfEvent>=curdate() GROUP BY f.id.pageId ORDER BY Count(f.id.pageId) DESC";
+			query = entityManager.createQuery(jpql);
+			events = query.getResultList();
+			Map<Event, Long> map = new HashMap<Event, Long>();
+			jpql1 = "SELECT  COUNT(e) FROM Event e INNER JOIN e.followers f WHERE e.dateOfEvent>=curdate() GROUP BY f.id.pageId ORDER BY Count(f.id.pageId) DESC";
+			query1 = entityManager.createQuery(jpql1);
+			List<Long> list = query1.getResultList();
+			int i = 0;
+			for (Event event : events) {
 
-			map.put(entityManager.find(Event.class, event.getPageId()), list.get(i));
-			i++;
+				map.put(entityManager.find(Event.class, event.getPageId()), list.get(i));
+				i++;
+			}
+			System.out.println(map);
+			return map;
 		}
-		System.out.println(map);
-		return map;
-	}
 
 	@SuppressWarnings("unchecked")
 	@Override

@@ -30,42 +30,7 @@ public interface EventServicesLocal {
 
 	List<Event> availableOrUpcomingEventsInMyArea(String idUser, String place);
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	 List<Event> getAllEvents();
+	List<Event> getAllEvents();
 
 	Map<Event, Long> statisticsEvent();
 
