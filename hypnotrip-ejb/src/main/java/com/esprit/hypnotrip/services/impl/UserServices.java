@@ -142,7 +142,7 @@ public class UserServices implements UserServicesRemote, UserServicesLocal {
 
 		Client client = ClientBuilder.newClient();
 		WebTarget target = client.target("http://localhost:63784/api/BelongWS");
-		WebTarget userFriends = target.path("UserFriends").path("1224a95a-8fac-4974-bfa7-7a5e28282a38");
+		WebTarget userFriends = target.path("UserFriends").path(userId);
 		Response response = userFriends.request().get();
 		listOfIds = response.readEntity(listOfIds.getClass());
 

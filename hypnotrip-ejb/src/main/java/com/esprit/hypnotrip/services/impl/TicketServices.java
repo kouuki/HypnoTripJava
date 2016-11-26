@@ -148,7 +148,7 @@ public class TicketServices implements TicketServicesRemote, TicketServicesLocal
 		Query query = entityManager.createQuery(jpql);
 		query.setParameter("param1", event);
 
-		if (query.getResultList() != null) {
+		if (query.getResultList().size() != 0 ) {
 			Tickets ticket = (Tickets) query.getResultList().get(0);
 			return ticket;
 		}
