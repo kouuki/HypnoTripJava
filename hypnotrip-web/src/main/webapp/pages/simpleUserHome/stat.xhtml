@@ -15,9 +15,9 @@
 
 
 <h:form>
-        <h:selectOneMenu id="advanced" value="#{statistics.event}" converter="#{eventsConverter}" panelStyle="width:180px"
+        <h:selectOneMenu id="advanced" value="#{statisticsNumberOfBoughtTicketByEvent.event}" converter="#{eventsConverter}" panelStyle="width:180px"
                          effect="fade" var="e" style="width:160px" filter="true" filterMatchMode="startsWith">
-            <f:selectItems value="#{statistics.events}" var="ev" itemLabel="#{ev.description}" itemValue="#{ev}" />
+            <f:selectItems value="#{statisticsNumberOfBoughtTicketByEvent.events}" var="ev" itemLabel="#{ev.description}" itemValue="#{ev}" />
  
             <p:column style="width:10%">
                 <h:outputText styleClass="ui-theme ui-theme-#{e.description}" />
@@ -28,13 +28,13 @@
             </p:column>
         </h:selectOneMenu>
         
-        <h:commandButton action="#{statistics.createPie()}" value="show" />
-        <h:outputLabel value="#{statistics.event.description}" />
+        <h:commandButton action="#{statisticsNumberOfBoughtTicketByEvent.createPie()}" value="show" />
+        <h:outputLabel value="#{statisticsNumberOfBoughtTicketByEvent.event.description}" />
         
        
 </h:form>
 
-<h:form  id="chartForm" rendered="#{statistics.displayChart}"><p:chart type="pie" model="#{statistics.pieModel}" style="width:400px;height:300px" /></h:form>
+<h:form  id="chartForm" rendered="#{statisticsNumberOfBoughtTicketByEvent.displayChart}"><p:chart type="pie" model="#{statisticsNumberOfBoughtTicketByEvent.pieModel}" style="width:400px;height:300px" /></h:form>
 
 
 	</ui:define>

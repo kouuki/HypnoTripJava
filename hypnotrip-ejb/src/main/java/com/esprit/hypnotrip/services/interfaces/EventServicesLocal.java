@@ -65,4 +65,5 @@ public interface EventServicesLocal {
 	
 	
 	 List<Event> getAllEvents();
+
 }

@@ -60,4 +60,5 @@ public interface EventServicesRemote {
 	
 	
 	 List<Event> getAllEvents();
+	
 }

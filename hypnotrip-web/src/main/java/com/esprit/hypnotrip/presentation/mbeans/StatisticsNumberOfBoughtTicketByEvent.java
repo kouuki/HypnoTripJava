@@ -14,9 +14,9 @@ import com.esprit.hypnotrip.persistence.Tickets;
 import com.esprit.hypnotrip.services.interfaces.EventServicesLocal;
 import com.esprit.hypnotrip.services.interfaces.TicketServicesLocal;
 
-@ManagedBean(name = "statistics")
+@ManagedBean
 @ViewScoped
-public class StatisticsTicketsBoughtByEvent {
+public class StatisticsNumberOfBoughtTicketByEvent {
 	@EJB
 	private EventServicesLocal eventServicesLocal;
 	@EJB

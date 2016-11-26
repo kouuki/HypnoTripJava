@@ -10,17 +10,18 @@ import javax.faces.convert.ConverterException;
 
 import com.esprit.hypnotrip.persistence.Event;
 import com.esprit.hypnotrip.services.interfaces.EventServicesLocal;
+import com.esprit.hypnotrip.services.interfaces.PageServiceLocal;
 
 @ManagedBean(name = "eventsConverter")
 public class EventsConverter implements Converter {
     
 	@EJB
-	private EventServicesLocal service ; 
+	private PageServiceLocal service ; 
 	@Override
 	public Object getAsObject(FacesContext context, UIComponent component, String value) {
 		if (value != null && value.trim().length() > 0) {
 			try {   
-						return service.getAllEvents().get(Integer.parseInt(value) - 1);
+						return service.findPageById(Integer.parseInt(value));
 
 			} catch (NumberFormatException e) {
 				throw new ConverterException(
@@ -40,11 +41,11 @@ public class EventsConverter implements Converter {
 		}
 	}
 
-	public EventServicesLocal getService() {
+	public PageServiceLocal getService() {
 		return service;
 	}
 
-	public void setService(EventServicesLocal service) {
+	public void setService(PageServiceLocal service) {
 		this.service = service;
 	}
 
