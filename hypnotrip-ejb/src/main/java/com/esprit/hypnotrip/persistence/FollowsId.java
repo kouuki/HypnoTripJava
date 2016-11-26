@@ -2,6 +2,7 @@ package com.esprit.hypnotrip.persistence;
 // Generated 19 nov. 2016 19:30:02 by Hibernate Tools 4.3.1.Final
 
 import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
@@ -79,6 +80,12 @@ public class FollowsId implements java.io.Serializable {
 	@Override
 	public String toString() {
 		return "FollowsId [dateFollow=" + dateFollow + ", pageId=" + pageId + ", userId=" + userId + "]";
+	}
+
+	public FollowsId(String userId,int pageId) {
+		this.userId = userId;
+		this.pageId = pageId;
+		this.dateFollow = new Date();
 	}
 
 }
