@@ -27,13 +27,16 @@ public class InvitationServices implements InvitationServicesRemote, InvitationS
 	/**
 	 * Default constructor.
 	 */
-	
+
 	@PersistenceContext
 	EntityManager entityManager;
-	
+
 	// injecting user services EJB
 	@EJB
 	UserServicesLocal userServicesLocal;
+
+	@EJB
+	PageServiceLocal pageServiceLocal;
 
 	private String jpql;
 	private Query query;
@@ -43,9 +46,6 @@ public class InvitationServices implements InvitationServicesRemote, InvitationS
 	private Invitations invitation;
 	private Integer response;
 	private boolean isInvited = false;
-
-	@EJB
-	PageServiceLocal pageServiceLocal;
 
 	public InvitationServices() {
 		// TODO Auto-generated constructor stub
@@ -96,7 +96,7 @@ public class InvitationServices implements InvitationServicesRemote, InvitationS
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Invitations> getAllInvitationsByRecieverId(String idReciever) {
-
+		System.out.println("test1");
 		jpql = "SELECT i FROM Invitations i WHERE i.id.receiverUserId =:param AND i.invitationStatus=:param1";
 		query = entityManager.createQuery(jpql);
 		query.setParameter("param", idReciever);
@@ -109,7 +109,7 @@ public class InvitationServices implements InvitationServicesRemote, InvitationS
 		} catch (Exception e) {
 			System.out.println("aaaaaaa");
 		}
-
+		System.out.println("tt fait");
 		return invitations;
 	}
 
@@ -136,9 +136,9 @@ public class InvitationServices implements InvitationServicesRemote, InvitationS
 	@Override
 	public Integer declineInvitationToFollowAPage(String idReciever, String idSender) {
 
-		jpql = "UPDATE Invitations i SET i.invitationStatus=:param WHERE i.id.receiverUserId =:param1 AND i.id.senderUserId =:param2";
+		jpql = "UPDATE Invitations i SET i.invitationStatus =:param WHERE i.id.receiverUserId =:param1 AND i.id.senderUserId =:param2";
 		query = entityManager.createQuery(jpql);
-		query.setParameter("param1", -1);
+		query.setParameter("param", -1);
 		query.setParameter("param1", idReciever);
 		query.setParameter("param2", idSender);
 
@@ -157,22 +157,37 @@ public class InvitationServices implements InvitationServicesRemote, InvitationS
 	@SuppressWarnings("unchecked")
 	@Override
 	public boolean isInvitedToLikeApage(String idReciever, int pageId) {
-		jpql="SELECT i FROM Invitations i WHERE i.id.receiverUserId =:param AND i.pageId =:param1 AND i.invitationStatus=0";
+		jpql = "SELECT i FROM Invitations i WHERE i.id.receiverUserId =:param AND i.pageId =:param1 AND i.invitationStatus=0";
 		query = entityManager.createQuery(jpql);
 		query.setParameter("param", idReciever);
 		query.setParameter("param1", pageId);
 		try {
-			
+
 			invitation = (Invitations) query.getSingleResult();
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-		
-		if(invitation != null){
+
+		if (invitation != null) {
 			isInvited = true;
 		}
-		
+
 		return isInvited;
+	}
+
+	@Override
+	public String getPageTitleById(int pageId) {
+		String title = "";
+		jpql = "SELECT p.title FROM Pages p where p.pageId =:param";
+		query = entityManager.createQuery(jpql);
+		query.setParameter("param", pageId);
+
+		try {
+			title = (String) query.getSingleResult();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return title;
 	}
 
 }

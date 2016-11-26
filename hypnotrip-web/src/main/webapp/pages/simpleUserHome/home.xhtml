@@ -19,14 +19,7 @@
 				<h:commandLink action="listMyTouristicPages?faces-redirect=true"
 					value="manage My Touristic Pages" />
 					
-					<!-- yasmine -->
-					<br/>
-					<h:commandLink action="upcomingEventsPage?faces-redirect=true"
-					value="All available events!" />
-					<br/>
-					<h:commandLink action="interesetingEvents?faces-redirect=true"
-					value="Interesting!" />
-					<!-- yasmine -->
+
 			</h:form>
 
 			<div class="container-fluid custom-container">
@@ -56,6 +49,39 @@
 
 
 
+								</h:form>
+
+							</div>
+						</div>
+					</div>
+				<!-- list posts -->
+
+
+				</div>
+			</div>
+			
+			
+						<div class="container-fluid custom-container">
+				<div class="row">
+					<div class="col-md-2 left-feild">
+						<div class="creative_filds_block">
+							<div class="ul">
+								<h:form>
+
+
+									<h:commandLink action="upcomingEventsPage?faces-redirect=true"
+										value="All available events by period" class="filter active" />
+								
+									<h:commandLink
+										action="interesetingEvents?faces-redirect=true"
+										value="Interesting about events!" class="filter active" />
+								
+									<h:commandLink action="eventsIFollow?redirect=true"
+										value="Events I follow" class="filter active" />
+						
+									<h:commandLink action="myInvitations?redirect=true"
+										value="My invitations to follow a page" class="filter active" />
+														
 								</h:form>
 
 							</div>
