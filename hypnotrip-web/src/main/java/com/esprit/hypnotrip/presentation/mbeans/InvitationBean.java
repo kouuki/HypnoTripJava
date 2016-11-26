@@ -113,7 +113,7 @@ public class InvitationBean {
 		} else {
 			chaine = "blah";
 		}
-
+		
 		return chaine;
 	}
 
@@ -121,10 +121,16 @@ public class InvitationBean {
 	public String doInviteFriendToLikeEvent() throws SenderIsRecieverException {
 		System.out.println("hedhi el page" + selectedEvent.getPlace());
 		System.out.println("hedha el dsadig" + selectedFriend.getId());
-
-		invitationServicesLocal.saveOrUpdateInvitation(selectedEvent.getPageId(), 0, idUser, selectedFriend.getId());
-
-		return "eventsIFollow?faces-redirect=true";
+		String navigate="";
+		if(chaine == "Invite To Like"){
+			invitationServicesLocal.saveOrUpdateInvitation(selectedEvent.getPageId(), 0, idUser, selectedFriend.getId());
+			navigate= "eventsIFollow?faces-redirect=true";
+		}else{
+			navigate= "eventsIFollow?faces-redirect=true";
+		}
+		selectedFriend = null;
+		selectedEvent = null;
+		return navigate;
 	}
 
 	public List<Event> getEventsIFollow() {

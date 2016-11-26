@@ -70,13 +70,14 @@
 									<br /> <br /> <b>Place :</b>
 
 									<h:outputText value="#{event.place}" />
-
-
-	
-
 								</div>
-			
+								<div class="info-block">
+									<span> </span><span><h:commandButton
+											value="#{eventsBean.followORUnfollowEvents(event.pageId)}"
+											action="#{eventsBean.doTreadtement(event.pageId)}">
 
+										</h:commandButton> </span>
+								</div>
 							</div>
 						</ui:repeat>
 					</div>
@@ -128,12 +129,14 @@
 									<br /> <br /> <b>Place :</b>
 
 									<h:outputText value="#{event.place}" />
-
-
-
 								</div>
+								<div class="info-block">
+									<span> </span><span><h:commandButton
+											value="#{eventsBean.followORUnfollowEvents(event.pageId)}"
+											action="#{eventsBean.doFollowPage(event.pageId)}">
 
-
+										</h:commandButton> </span>
+								</div>
 							</div>
 						</ui:repeat>
 					</div>
@@ -182,12 +185,14 @@
 
 									<h:outputText value="#{event.place}" />
 
-
-
-
 								</div>
+								<div class="info-block">
+									<span> </span><span><h:commandButton
+											value="#{eventsBean.followORUnfollowEvents(event.pageId)}"
+											action="#{eventsBean.doFollowPage(event.pageId)}">
 
-
+										</h:commandButton> </span>
+								</div>
 							</div>
 						</ui:repeat>
 					</div>
@@ -239,14 +244,11 @@
 
 									<h:outputText value="#{event.place}" />
 
-
-
-
 								</div>
 								<div class="info-block">
-									<span>
-										<h:commandButton
-											value="#{eventsBean.followORUnfollowEvents(event.pageId)}" />
+									<span> <h:commandButton
+											value="#{eventsBean.followORUnfollowEvents(event.pageId)}"
+											action="#{eventsBean.doFollowPage(event.pageId)}" />
 									</span>
 								</div>
 

@@ -38,4 +38,7 @@ public interface EventServicesRemote {
 
 	List<Event> getAllEvents();
 
+	void followPage(String idUser, int idPage);
+
+	void unfollowPage(String idUser, int idPage);
 }

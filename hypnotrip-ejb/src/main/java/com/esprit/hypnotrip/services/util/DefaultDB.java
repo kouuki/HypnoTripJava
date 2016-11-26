@@ -126,7 +126,7 @@ public class DefaultDB {
 		user4.setPasswordHash("123456789Azerty");
 		user4.setLogin("Amin");
 		user4.setUserName("ghorbel");
-		user4.setRole("0");
+		user4.setRole("1");
 		user4.setId("c25c4e23-1275-45d8-b327-c6fb06d9455");
 
 

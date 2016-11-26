@@ -19,10 +19,12 @@ public interface InvitationServicesRemote {
 
 	List<Invitations> getAllInvitationsByRecieverId(String idReciever);
 
-	Integer acceptInvitationToFollowAPage(String idReciever,String idSender);
+	Integer acceptInvitationToFollowAPage(String idReciever, String idSender);
 
-	Integer declineInvitationToFollowAPage(String idReciever,String idSender);
-	
+	Integer declineInvitationToFollowAPage(String idReciever, String idSender);
+
 	boolean isInvitedToLikeApage(String idReciever, int pageId);
-	
+
+	String getPageTitleById(int pageId);
+
 }

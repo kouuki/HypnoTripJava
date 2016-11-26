@@ -11,6 +11,7 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 
 import org.primefaces.model.chart.PieChartModel;
 import org.primefaces.model.map.DefaultMapModel;
@@ -69,13 +70,11 @@ public class EventsBean {
 
 	@EJB
 	FollowersServicesLocal followersServicesLocal;
-	
-
 
 	@ManagedProperty(value = "#{loginBean}")
 	private LoginBean loginBean;
 
-	//methode qui charge les events lors de la creation du bean
+	// methode qui charge les events lors de la creation du bean
 	@PostConstruct
 	public void init() {
 
@@ -211,7 +210,6 @@ public class EventsBean {
 		}
 	}
 
-
 	public String followORUnfollowEvents(int pageId) {
 
 		response = eventServicesLocal.isFollowedByUser(idUser, pageId);
@@ -227,7 +225,7 @@ public class EventsBean {
 
 		return chaine;
 	}
-	
+
 	public String followedORUnfollowedEvents(int pageId) {
 
 		response = eventServicesLocal.isFollowedByUser(idUser, pageId);
@@ -243,7 +241,6 @@ public class EventsBean {
 
 		return chaine;
 	}
-
 
 	// create statistics for events
 	public void createStatisticsPie() {
@@ -262,22 +259,19 @@ public class EventsBean {
 	}
 
 	// recall of wanted methods/services
-	
-	public void doFollowOrUnfollowEvents(String value){
-		if(value.equals("Follow")){
+
+
+
+	public void doTreadtement(int pageId){
+		if(chaine =="Follow"){
+			eventServicesLocal.followPage(idUser, pageId);
+			FacesContext.getCurrentInstance().getViewRoot().getViewMap().clear();
+		}else{
+			eventServicesLocal.unfollowPage(idUser, pageId);
+			FacesContext.getCurrentInstance().getViewRoot().getViewMap().clear();
 		}
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 
 	public List<Event> getEventsThisWeek() {
 		return eventsThisWeek;
@@ -398,7 +392,6 @@ public class EventsBean {
 	public void setMap(Map<Event, Long> map) {
 		this.map = map;
 	}
-
 
 	public LoginBean getLoginBean() {
 		return loginBean;
