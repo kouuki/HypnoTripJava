@@ -195,7 +195,6 @@ public class DefaultDB {
 		// ********************************************************************************************************************
 
 		Tickets ticket = new Tickets();
-		ticket.setEvent(offre);
 		ticket.setNumberOfPlaces(15);
 		ticket.setPrice(15);
 		ticket.setLabel("Best Ticket");
