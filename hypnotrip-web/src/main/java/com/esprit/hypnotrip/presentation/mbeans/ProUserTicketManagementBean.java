@@ -5,10 +5,13 @@ import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+
+import org.primefaces.context.RequestContext;
 
 import com.esprit.hypnotrip.persistence.Pages;
 import com.esprit.hypnotrip.persistence.Tickets;
@@ -66,22 +69,36 @@ public class ProUserTicketManagementBean {
 	}
 
 	public String doAddOrUpdateTicket() {
-
+		 FacesContext context = FacesContext.getCurrentInstance();
 		try {
 			ticketServicesLocal.createOrUpdateTicket(selectedTicket, event.getPageId());
-		} catch (EventOverException | TicketAlreadyBookedException e) {
-			e.printStackTrace();
+		} catch (EventOverException e) {
+			  context.addMessage(null, new FacesMessage("Worning", "Event is over"));
+				return "";
 		}
-		return "manageTickets?faces-redirect=false&includeViewParams=true";
-	}
+		catch(TicketAlreadyBookedException e) {
+	       
+	        context.addMessage(null, new FacesMessage("Worning", "Ticket already booked"));
+		
+			return "" ; 
+		}
+		
+
+	  return "manageTickets?faces-redirect=true&includeViewParams=true" ; 
+	} 
 
 	public String doDeleteTicket() {
-
+		 FacesContext context = FacesContext.getCurrentInstance();
 		try {
 			ticketServicesLocal.deleteTicket(selectedTicket);
-		} catch (EventOverException | TicketAlreadyBookedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (EventOverException e) {
+			  context.addMessage(null, new FacesMessage("Worning", "Event is over"));
+				return "";
+		}
+		catch(TicketAlreadyBookedException e) {
+	       
+	        context.addMessage(null, new FacesMessage("Worning", "Ticket already booked"));
+			return "" ; 
 		}
 		return "manageTickets?faces-redirect=true&includeViewParams=true";
 

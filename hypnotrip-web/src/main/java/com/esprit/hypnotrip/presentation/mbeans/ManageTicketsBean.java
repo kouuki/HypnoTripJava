@@ -4,9 +4,11 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 
 import com.esprit.hypnotrip.persistence.Pages;
 import com.esprit.hypnotrip.persistence.Tickets;
@@ -44,11 +46,18 @@ public class ManageTicketsBean {
 	private List<User> friendWhoAreGoingToThisEvent;
 
 	public String doCancelBooking() {
+		 FacesContext context = FacesContext.getCurrentInstance();
+		
+		
 		try {
 			userServicesLocal.cancelBooking(selectedTicket, user,1);
-		} catch (EventOverException | WrongNumberOfCancelingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (EventOverException e) {
+			 context.addMessage(null, new FacesMessage("Worning", "Event over"));
+			 return "";
+			 
+		} catch(WrongNumberOfCancelingException e) {
+			 context.addMessage(null, new FacesMessage("Worning", "WrongNumber of canceling"));
+			 return "";
 		}
 		return "simpleUserTicketManagement?faces-redirect=true";
 	}
@@ -120,14 +129,23 @@ public class ManageTicketsBean {
 	}
 
 	public String doBook() {
-		User user = new User();
+	    FacesContext context = FacesContext.getCurrentInstance();
 		user.setId(this.user.getId());
 		try {
 			userServicesLocal.bookATicket(selectedTicket, user);
-		} catch (NoMoreTicketsException | LimitOfBookingRechedException | EventOverException e) {
-			// TODO Auto-generated catch block
-
+		} catch (NoMoreTicketsException e ) {
+			 context.addMessage(null, new FacesMessage("Worning", "There is no more tickets"));
+			 return "";
+		} catch(LimitOfBookingRechedException  e) {
+			 context.addMessage(null, new FacesMessage("Worning", "You only can book 2 tickets"));
+			 return "";
+			
+		} catch(EventOverException e) {
+			 context.addMessage(null, new FacesMessage("Worning", "event is over"));
+			 return "";
 		}
+		
+		
 		return "simpleUserTicketManagement?faces-redirect=true";
 	}
 
