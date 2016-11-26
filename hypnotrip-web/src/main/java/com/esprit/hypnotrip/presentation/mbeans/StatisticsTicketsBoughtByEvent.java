@@ -16,7 +16,7 @@ import com.esprit.hypnotrip.services.interfaces.TicketServicesLocal;
 
 @ManagedBean(name = "statistics")
 @ViewScoped
-public class Statistics {
+public class StatisticsTicketsBoughtByEvent {
 	@EJB
 	private EventServicesLocal eventServicesLocal;
 	@EJB
