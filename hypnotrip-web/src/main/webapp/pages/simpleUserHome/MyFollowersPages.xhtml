@@ -9,7 +9,26 @@
 	<ui:define name="content">
 		<div class="container-fluid custom-container">
 			<div class="row">
-				<h:column rendered="#{!myFollowersPagesBean.haveFollow}">
+				<div class="col-md-2 left-feild">
+					<div class="creative_filds_block">
+						<div class="ul">
+							<h:form>
+								<h:commandLink action="#{myFollowersPagesBean.DisplayPages()}"
+									value="Display All My Pages" class="filter active" />
+								<h:commandLink action="#{myFollowersPagesBean.DisplayOffer()}"
+									value="Display All My Offer" class="filter active" />
+								<h:commandLink action="#{myFollowersPagesBean.DisplayEvent()}"
+									value="Display All My Events" class="filter active" />
+								<h:commandLink
+									action="#{myFollowersPagesBean.DisplayTouristicPlaces()}"
+									value="Display All My Touristic Places" class="filter active" />
+							</h:form>
+
+						</div>
+					</div>
+				</div>
+
+				<h:column rendered="#{!myFollowersPagesBean.displayAllFollow}">
 					<center>
 						<BR /> <BR />
 						<H1>YOU DON'T HAVE A FOLLOW</H1>
