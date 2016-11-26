@@ -1,0 +1,72 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/template/template.xhtml">
+	<h:head>
+
+	</h:head>
+	<ui:define name="content">
+		<center>
+
+			<H1>My Posts</H1>
+			<br /> <br /> <br /> <br />
+			<!-- ************************************************************************************************************ -->
+			<!-- ************************************************************************************************************ -->
+			<!-- ************************************************************************************************************ -->
+			<h:form id="formListOfPosts">
+
+
+				<ui:repeat var="p" value="#{myPostsBean.myPosts}">
+
+					<div class="category-1 mix custom-column-5"
+						style="display: inline-block;">
+						<div class="be-post">
+							<b>Description :</b>
+							<h:outputText value="#{p.description}" />
+							<br /> <br /> <b>Content :</b>
+
+							<h:outputText value="#{p.content}" />
+
+							<br /> <br /> <b>Publication Post :</b>
+
+
+							<h:outputText value="#{p.publicationPost}" />
+
+						</div>
+						<div class="info-block">
+							<span> <b>Publication Post :</b> <h:outputText
+									value="#{p.publicationPost}" />
+							</span>
+						</div>
+					</div>
+
+				</ui:repeat>
+
+
+
+
+
+
+
+			</h:form>
+
+
+
+
+
+
+			<!-- ************************************************************************************************************ -->
+			<!-- ************************************************************************************************************ -->
+			<!-- ************************************************************************************************************ -->
+
+		</center>
+
+
+	</ui:define>
+
+
+</ui:composition>

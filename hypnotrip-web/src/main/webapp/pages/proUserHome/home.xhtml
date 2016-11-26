@@ -11,15 +11,25 @@
 	</h:head>
 	<ui:define name="content">
 		<center>
-			<h:form>
-				<h:commandLink action="listMyEvents?faces-redirect=true"
-					value="manage My Events" />
-					<br/>
-				<h:commandLink action="listMyOffers?faces-redirect=true"
-					value="manage My Offers" />
-			</h:form>
+			<div class="container-fluid custom-container">
+				<div class="row">
+					<div class="col-md-2 left-feild">
+						<div class="creative_filds_block">
+							<div class="ul">
+								<h:form>
+									<h:commandLink action="listMyEvents?faces-redirect=true"
+										value="manage My Events" class="filter active" />
+									<br />
+									<h:commandLink action="listMyOffers?faces-redirect=true"
+										value="manage My Offers" class="filter active" />
+								</h:form>
 
 
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 
 		</center>
 
