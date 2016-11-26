@@ -1,0 +1,66 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/template/template.xhtml">
+
+	<h:head>
+	</h:head>
+
+	<ui:define name="content">
+		<center>
+			<H1>Get all my invites on liking pages</H1>
+			<br /> <br />
+
+
+			<h:form id="formMyInvites"
+				rendered="#{treatInvitesBean.displayFormMyInvites}">
+				<div id="content-block" class="gallery-block">
+
+					<div class="custom-container gallery-container">
+						<div class="container">
+							<br /> <br />
+							<ui:repeat var="invite" value="#{treatInvitesBean.myInvitations}">
+								<div class="gallery-box clearfix">
+									<div class="gallery-a gallery-info">
+										Sender
+										<h:outputLabel value="#{invite.sender}" />
+										$<br />Suggested Page :
+										<h:outputLabel
+											value="#{treatInvitesBean.selectTitle(invite.pageId)}" />
+
+									</div>
+									<div class="gallery-btn">
+										<h:commandLink class="btn-login btn color-1 size-2 hover-2"
+											action="#{treatInvitesBean.doAcceptInvitation(invite.sender.id)}">
+										Accept
+									</h:commandLink>
+
+
+										<h:commandLink class="btn-login btn color-1 size-2 hover-2"
+											action="#{treatInvitesBean.doDeclineInvitation(invite.sender.id)}">
+										Decline 
+									</h:commandLink>
+
+
+									</div>
+								</div>
+							</ui:repeat>
+							<br /> <br />
+						</div>
+					</div>
+
+				</div>
+				<center></center>
+			</h:form>
+
+		</center>
+
+
+
+	</ui:define>
+
+</ui:composition>

@@ -251,12 +251,13 @@ public class UserServices implements UserServicesRemote, UserServicesLocal {
 		Response response = userFriends.request().get();
 		friendsId = response.readEntity(friendsId.getClass());
 
-		String jqpl = "SELECT u FROM User u WHERE u.id=:param";
+		String jqpl = "SELECT u FROM User u WHERE u.id =:param AND u.etat =:param1 AND u.role =:param2";
 		Query query = entityManager.createQuery(jqpl);
 
 		for (String id : friendsId) {
 			query.setParameter("param", id);
-
+			query.setParameter("param1", 1);
+			query.setParameter("param2", "1");
 			try {
 
 				friends.add((User) query.getSingleResult());

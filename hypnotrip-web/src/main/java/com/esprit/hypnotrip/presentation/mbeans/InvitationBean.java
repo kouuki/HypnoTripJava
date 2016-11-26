@@ -11,6 +11,7 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.model.DataModel;
 
 import com.esprit.hypnotrip.persistence.Event;
+import com.esprit.hypnotrip.persistence.Invitations;
 import com.esprit.hypnotrip.persistence.User;
 import com.esprit.hypnotrip.services.exceptions.SenderIsRecieverException;
 import com.esprit.hypnotrip.services.interfaces.EventServicesLocal;
@@ -36,6 +37,7 @@ public class InvitationBean {
 	private boolean displayFormEventsIFollow = true;
 	private boolean displayFormMyFriends = false;
 	private boolean displayFormInviteFriendToEvent = false;
+
 	private boolean response = false;
 	private String chaine;
 
@@ -50,8 +52,7 @@ public class InvitationBean {
 	InvitationServicesLocal invitationServicesLocal;
 
 	// injection des beans
-	@ManagedProperty(value = "#{manageListEventsBean}")
-	private ManageListEventsBean manageListEventsBean;
+
 
 	@ManagedProperty(value = "#{loginBean}")
 	private LoginBean loginBean;
@@ -69,7 +70,6 @@ public class InvitationBean {
 
 		eventsIFollow = eventServicesLocal.getAllEventsFollowedByUser(idUser);
 		myFriends = userServicesLocal.getAllFriendsByUserId(idUser);
-
 		// display forms
 		// selectEventsIFollowToShow();
 		// selectMyFriendsToShow();
@@ -97,9 +97,11 @@ public class InvitationBean {
 		return null;
 	}
 
+	
+	
 	public String inviteFriendToFollowEvent(String id) {
 
-		response = invitationServicesLocal.isInvitedToLikeApage(id,selectedEvent.getPageId());
+		response = invitationServicesLocal.isInvitedToLikeApage(id, selectedEvent.getPageId());
 		if (response == false) {
 
 			System.out.println("ma3andouch menha");
@@ -111,7 +113,7 @@ public class InvitationBean {
 		} else {
 			chaine = "blah";
 		}
-
+		
 		return chaine;
 	}
 
@@ -119,10 +121,16 @@ public class InvitationBean {
 	public String doInviteFriendToLikeEvent() throws SenderIsRecieverException {
 		System.out.println("hedhi el page" + selectedEvent.getPlace());
 		System.out.println("hedha el dsadig" + selectedFriend.getId());
-
-		invitationServicesLocal.saveOrUpdateInvitation(selectedEvent.getPageId(), 0, idUser, selectedFriend.getId());
-
-		return "eventsIFollow?faces-redirect=true";
+		String navigate="";
+		if(chaine == "Invite To Like"){
+			invitationServicesLocal.saveOrUpdateInvitation(selectedEvent.getPageId(), 0, idUser, selectedFriend.getId());
+			navigate= "eventsIFollow?faces-redirect=true";
+		}else{
+			navigate= "eventsIFollow?faces-redirect=true";
+		}
+		selectedFriend = null;
+		selectedEvent = null;
+		return navigate;
 	}
 
 	public List<Event> getEventsIFollow() {
@@ -133,13 +141,6 @@ public class InvitationBean {
 		this.eventsIFollow = eventsIFollow;
 	}
 
-	public ManageListEventsBean getManageListEventsBean() {
-		return manageListEventsBean;
-	}
-
-	public void setManageListEventsBean(ManageListEventsBean manageListEventsBean) {
-		this.manageListEventsBean = manageListEventsBean;
-	}
 
 	public LoginBean getLoginBean() {
 		return loginBean;
@@ -222,5 +223,7 @@ public class InvitationBean {
 	public void setDisplayFormInviteFriendToEvent(boolean displayFormInviteFriendToEvent) {
 		this.displayFormInviteFriendToEvent = displayFormInviteFriendToEvent;
 	}
+
+
 
 }

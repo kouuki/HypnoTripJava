@@ -11,6 +11,7 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 
 import org.primefaces.model.chart.PieChartModel;
 import org.primefaces.model.map.DefaultMapModel;
@@ -20,6 +21,7 @@ import org.primefaces.model.map.Marker;
 
 import com.esprit.hypnotrip.persistence.Event;
 import com.esprit.hypnotrip.services.interfaces.EventServicesLocal;
+import com.esprit.hypnotrip.services.interfaces.FollowersServicesLocal;
 
 @ManagedBean
 @ViewScoped
@@ -66,13 +68,13 @@ public class EventsBean {
 	@EJB
 	EventServicesLocal eventServicesLocal;
 
-	@ManagedProperty(value = "#{manageListEventsBean}")
-	private ManageListEventsBean manageListEventsBean;
+	@EJB
+	FollowersServicesLocal followersServicesLocal;
 
 	@ManagedProperty(value = "#{loginBean}")
 	private LoginBean loginBean;
 
-	//methode qui charge les events lors de la creation du bean
+	// methode qui charge les events lors de la creation du bean
 	@PostConstruct
 	public void init() {
 
@@ -208,7 +210,6 @@ public class EventsBean {
 		}
 	}
 
-
 	public String followORUnfollowEvents(int pageId) {
 
 		response = eventServicesLocal.isFollowedByUser(idUser, pageId);
@@ -224,7 +225,7 @@ public class EventsBean {
 
 		return chaine;
 	}
-	
+
 	public String followedORUnfollowedEvents(int pageId) {
 
 		response = eventServicesLocal.isFollowedByUser(idUser, pageId);
@@ -240,7 +241,6 @@ public class EventsBean {
 
 		return chaine;
 	}
-
 
 	// create statistics for events
 	public void createStatisticsPie() {
@@ -259,6 +259,19 @@ public class EventsBean {
 	}
 
 	// recall of wanted methods/services
+
+
+
+	public void doTreadtement(int pageId){
+		if(chaine =="Follow"){
+			eventServicesLocal.followPage(idUser, pageId);
+			FacesContext.getCurrentInstance().getViewRoot().getViewMap().clear();
+		}else{
+			eventServicesLocal.unfollowPage(idUser, pageId);
+			FacesContext.getCurrentInstance().getViewRoot().getViewMap().clear();
+		}
+	}
+
 
 	public List<Event> getEventsThisWeek() {
 		return eventsThisWeek;
@@ -378,14 +391,6 @@ public class EventsBean {
 
 	public void setMap(Map<Event, Long> map) {
 		this.map = map;
-	}
-
-	public ManageListEventsBean getManageListEventsBean() {
-		return manageListEventsBean;
-	}
-
-	public void setManageListEventsBean(ManageListEventsBean manageListEventsBean) {
-		this.manageListEventsBean = manageListEventsBean;
 	}
 
 	public LoginBean getLoginBean() {

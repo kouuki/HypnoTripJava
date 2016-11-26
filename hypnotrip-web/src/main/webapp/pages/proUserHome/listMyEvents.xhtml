@@ -66,10 +66,10 @@
 											<f:setPropertyActionListener value="#{p}"
 												target="#{manageListEventsBean.eventSelected}"></f:setPropertyActionListener>
 										</h:commandButton>
-									</span><span><h:commandButton value="Manage Ticket">
-											
-
-										</h:commandButton> </span>
+									</span><span>
+									<p:link outcome="manageTickets"  value="Manage Ticket">
+												 <f:param name="idEvent" value="#{p.pageId}" />
+								    </p:link> </span>
 								</div>
 							</div>
 

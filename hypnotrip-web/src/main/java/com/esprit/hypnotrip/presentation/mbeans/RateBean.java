@@ -55,11 +55,37 @@ public class RateBean {
 		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cancel Event", "Rate Reset");
 		FacesContext.getCurrentInstance().addMessage(null, message);
 	}
-
+//// redirection for different pages
 	public String ReturnList(){
 		rating1=0;
 		return "/pages/simpleUserHome/listofMyPages?faces-redirect=true";
 	}
+	public String ReturnListSortOfferDateAndPrice(){
+		rating1=0;
+		return "/pages/simpleUserHome/sortOfferDateAndPrice?faces-redirect=true";
+	}
+	public String ReturnListbestOffer(){
+		rating1=0;
+		return "/pages/simpleUserHome/bestOffer?faces-redirect=true";
+	}
+	public String ReturnListBuyAnOffer(){
+		rating1=0;
+		return "/pages/simpleUserHome/BuyAnOffer?faces-redirect=true";
+	}
+	public String ReturnListUpcommingEvents(){
+		rating1=0;
+		return "/pages/simpleUserHome/upcommingEventsPage?faces-redirect=true";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	public String RatePage(){
 		return "/pages/simpleUserHome/ratePages?faces-redirect=true";
 	}

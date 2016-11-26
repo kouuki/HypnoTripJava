@@ -114,4 +114,20 @@ public class Follows implements java.io.Serializable {
 		this.wishStat = wishStat;
 	}
 
+	public Follows(boolean followStat, boolean wishStat, User user, Pages pages) {
+		this.followStat = followStat;
+		this.wishStat = wishStat;
+		this.user = user;
+		this.id = new FollowsId(user.getId(),pages.getPageId());
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

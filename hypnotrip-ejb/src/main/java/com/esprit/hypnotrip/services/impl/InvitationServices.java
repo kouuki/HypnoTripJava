@@ -10,10 +10,12 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import com.esprit.hypnotrip.persistence.Invitations;
+import com.esprit.hypnotrip.persistence.Pages;
 import com.esprit.hypnotrip.persistence.User;
 import com.esprit.hypnotrip.services.exceptions.SenderIsRecieverException;
 import com.esprit.hypnotrip.services.interfaces.InvitationServicesLocal;
 import com.esprit.hypnotrip.services.interfaces.InvitationServicesRemote;
+import com.esprit.hypnotrip.services.interfaces.PageServiceLocal;
 import com.esprit.hypnotrip.services.interfaces.UserServicesLocal;
 
 /**
@@ -25,13 +27,16 @@ public class InvitationServices implements InvitationServicesRemote, InvitationS
 	/**
 	 * Default constructor.
 	 */
-	
+
 	@PersistenceContext
 	EntityManager entityManager;
-	
+
 	// injecting user services EJB
 	@EJB
 	UserServicesLocal userServicesLocal;
+
+	@EJB
+	PageServiceLocal pageServiceLocal;
 
 	private String jpql;
 	private Query query;
@@ -41,9 +46,6 @@ public class InvitationServices implements InvitationServicesRemote, InvitationS
 	private Invitations invitation;
 	private Integer response;
 	private boolean isInvited = false;
-
-	// @EJB
-	// service de jihen ;
 
 	public InvitationServices() {
 		// TODO Auto-generated constructor stub
@@ -62,14 +64,13 @@ public class InvitationServices implements InvitationServicesRemote, InvitationS
 		reciever = userServicesLocal.findUserById(idReciever);
 
 		// page exists
-		// Pages page = service de jihen;
-
+		Pages page = pageServiceLocal.findPageById(idPage);
 		// the sender musn't be the reciever
 		// we need to verify
 		if (!sender.equals(reciever)) {
 
 			// if this condition is correct, than the invitation will be created
-			Invitations invitation = new Invitations(idPage, invitationStatus, sender, reciever);
+			Invitations invitation = new Invitations(page.getPageId(), invitationStatus, sender, reciever);
 			entityManager.merge(invitation);
 
 		} else {
@@ -95,7 +96,7 @@ public class InvitationServices implements InvitationServicesRemote, InvitationS
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Invitations> getAllInvitationsByRecieverId(String idReciever) {
-
+		System.out.println("test1");
 		jpql = "SELECT i FROM Invitations i WHERE i.id.receiverUserId =:param AND i.invitationStatus=:param1";
 		query = entityManager.createQuery(jpql);
 		query.setParameter("param", idReciever);
@@ -108,7 +109,7 @@ public class InvitationServices implements InvitationServicesRemote, InvitationS
 		} catch (Exception e) {
 			System.out.println("aaaaaaa");
 		}
-
+		System.out.println("tt fait");
 		return invitations;
 	}
 
@@ -135,9 +136,9 @@ public class InvitationServices implements InvitationServicesRemote, InvitationS
 	@Override
 	public Integer declineInvitationToFollowAPage(String idReciever, String idSender) {
 
-		jpql = "UPDATE Invitations i SET i.invitationStatus=:param WHERE i.id.receiverUserId =:param1 AND i.id.senderUserId =:param2";
+		jpql = "UPDATE Invitations i SET i.invitationStatus =:param WHERE i.id.receiverUserId =:param1 AND i.id.senderUserId =:param2";
 		query = entityManager.createQuery(jpql);
-		query.setParameter("param1", -1);
+		query.setParameter("param", -1);
 		query.setParameter("param1", idReciever);
 		query.setParameter("param2", idSender);
 
@@ -156,22 +157,37 @@ public class InvitationServices implements InvitationServicesRemote, InvitationS
 	@SuppressWarnings("unchecked")
 	@Override
 	public boolean isInvitedToLikeApage(String idReciever, int pageId) {
-		jpql="SELECT i FROM Invitations i WHERE i.id.receiverUserId =:param AND i.pageId =:param1 AND i.invitationStatus=0";
+		jpql = "SELECT i FROM Invitations i WHERE i.id.receiverUserId =:param AND i.pageId =:param1 AND i.invitationStatus=0";
 		query = entityManager.createQuery(jpql);
 		query.setParameter("param", idReciever);
 		query.setParameter("param1", pageId);
 		try {
-			
+
 			invitation = (Invitations) query.getSingleResult();
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-		
-		if(invitation != null){
+
+		if (invitation != null) {
 			isInvited = true;
 		}
-		
+
 		return isInvited;
+	}
+
+	@Override
+	public String getPageTitleById(int pageId) {
+		String title = "";
+		jpql = "SELECT p.title FROM Pages p where p.pageId =:param";
+		query = entityManager.createQuery(jpql);
+		query.setParameter("param", pageId);
+
+		try {
+			title = (String) query.getSingleResult();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return title;
 	}
 
 }

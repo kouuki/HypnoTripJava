@@ -1,18 +1,24 @@
 package com.esprit.hypnotrip.presentation.mbeans;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
+
+import org.primefaces.context.RequestContext;
 
 import com.esprit.hypnotrip.persistence.Pages;
 import com.esprit.hypnotrip.persistence.Tickets;
 import com.esprit.hypnotrip.persistence.User;
 import com.esprit.hypnotrip.services.exceptions.EventOverException;
 import com.esprit.hypnotrip.services.exceptions.TicketAlreadyBookedException;
+import com.esprit.hypnotrip.services.interfaces.PageServiceLocal;
 import com.esprit.hypnotrip.services.interfaces.TicketServicesLocal;
 
 @ViewScoped
@@ -22,60 +28,90 @@ public class ProUserTicketManagementBean {
 	private List<Tickets> tickets;
 	private Tickets selectedTicket = new Tickets();
 	private Tickets bestBookedTicket = new Tickets();
-	private Pages event = new Pages() ; 
-	@ManagedProperty(value="#{loginBean}")
-	private LoginBean loginBean ; 
-	private User user; 
-	
+	private Integer idEvent;
+	private Pages event = new Pages();
+	@ManagedProperty(value = "#{loginBean}")
+	private LoginBean loginBean;
+	private User user;
+
 	private boolean showCreateUpdateForm = false;
 	private boolean listAllTickets = true;
-	private boolean displayMostBookedTicket = false ; 
+	private boolean displayMostBookedTicket = false;
 
 	@EJB
 	private TicketServicesLocal ticketServicesLocal;
+	@EJB
+	private PageServiceLocal pageServiceLocal  ;
 
 	@PostConstruct
 	public void init() {
-		this.user = loginBean.getUser();
-		event.setPageId(11);
-		tickets = ticketServicesLocal.selectAllTicketsByIdEvent(event.getPageId());
-		bestBookedTicket = ticketServicesLocal.mostBookedTicketByEvent(event);
-		if (bestBookedTicket!=null) {
-			displayMostBookedTicket = true; 
+
+		Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
+		try{
+			
+		
+			idEvent = Integer.parseInt(params.get("idEvent"));
+			this.user = loginBean.getUser();
+	
+			event = pageServiceLocal.findPageById(idEvent);
+			tickets = ticketServicesLocal.selectAllTicketsByIdEvent(event.getPageId());
+			bestBookedTicket = ticketServicesLocal.mostBookedTicketByEvent(event);
+			if (bestBookedTicket != null) {
+				displayMostBookedTicket = true;
+			}
+		
+		
+		
+		}catch(Exception e) {
+			
 		}
+
 	}
 
 	public String doAddOrUpdateTicket() {
-
+		 FacesContext context = FacesContext.getCurrentInstance();
 		try {
 			ticketServicesLocal.createOrUpdateTicket(selectedTicket, event.getPageId());
-		} catch (EventOverException | TicketAlreadyBookedException e) {
-			e.printStackTrace();
+		} catch (EventOverException e) {
+			  context.addMessage(null, new FacesMessage("Worning", "Event is over"));
+				return "";
 		}
-		return "manageTickets?faces-redirect=true";
-	}
+		catch(TicketAlreadyBookedException e) {
+	       
+	        context.addMessage(null, new FacesMessage("Worning", "Ticket already booked"));
+		
+			return "" ; 
+		}
+		
+
+	  return "manageTickets?faces-redirect=true&includeViewParams=true" ; 
+	} 
 
 	public String doDeleteTicket() {
-
+		 FacesContext context = FacesContext.getCurrentInstance();
 		try {
 			ticketServicesLocal.deleteTicket(selectedTicket);
-		} catch (EventOverException | TicketAlreadyBookedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (EventOverException e) {
+			  context.addMessage(null, new FacesMessage("Worning", "Event is over"));
+				return "";
 		}
-		return "manageTickets?faces-redirect=true";
+		catch(TicketAlreadyBookedException e) {
+	       
+	        context.addMessage(null, new FacesMessage("Worning", "Ticket already booked"));
+			return "" ; 
+		}
+		return "manageTickets?faces-redirect=true&includeViewParams=true";
 
 	}
 
 	public Long numberOfTicketsBooked(Tickets ticket) {
 
-		if (ticket!=null) {
-			 return ticketServicesLocal.numberOfTicketsBookedByIdTicket(ticket.getTicketId());
-		} else  {
-			return 0L ;
+		if (ticket != null) {
+			return ticketServicesLocal.numberOfTicketsBookedByIdTicket(ticket.getTicketId());
+		} else {
+			return 0L;
 		}
-			
-	
+
 	}
 
 	public String selectTicket() {
@@ -172,5 +208,25 @@ public class ProUserTicketManagementBean {
 	public void setUser(User user) {
 		this.user = user;
 	}
+
+	public PageServiceLocal getPageServiceLocal() {
+		return pageServiceLocal;
+	}
+
+	public void setPageServiceLocal(PageServiceLocal pageServiceLocal) {
+		this.pageServiceLocal = pageServiceLocal;
+	}
+
+	public Integer getIdEvent() {
+		return idEvent;
+	}
+
+	public void setIdEvent(Integer idEvent) {
+		this.idEvent = idEvent;
+	}
+
+	
+	
+
 
 }
