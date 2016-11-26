@@ -37,6 +37,14 @@ public class BestOfferForSimpleUser {
 	@ManagedProperty(value = "#{loginBean}")
 	private LoginBean loginBean;
 
+	public LoginBean getLoginBean() {
+		return loginBean;
+	}
+
+	public void setLoginBean(LoginBean loginBean) {
+		this.loginBean = loginBean;
+	}
+
 	private User user;
 
 	// la page séléctionnée
@@ -51,7 +59,7 @@ public class BestOfferForSimpleUser {
 
 	@PostConstruct
 	public void init() {
-		this.setUser(loginBean.getUser());
+		user=loginBean.getUser();
 		myPages.add(offerServiceLocal.bestOffer());
 	}
 
