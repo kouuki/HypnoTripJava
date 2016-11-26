@@ -48,15 +48,15 @@ public class DefaultDataBaseDhafer {
 		user.setAddress("tunis");
 		user.setAccessFailedCount(0);
 		user.setDateOfBirth(new Date());
-		user.setEmail("daouesd@admin.com");
+		user.setEmail("karim@admin.com");
 		user.setEmailConfirmed(false);
 		user.setEtat(1);
-		user.setFirstName("dhafer");
-		user.setSecondName("daoues");
+		user.setFirstName("karim");
+		user.setSecondName("ben romdhane");
 		user.setPassword("123456789Azerty");
 		user.setPasswordHash("123456789Azerty");
-		user.setLogin("daouesd");
-		user.setUserName("daouesd");
+		user.setLogin("karim");
+		user.setUserName("karim");
 		user.setRole("2");
 		user.setId("b38f3299-6949-42c7-9a6c-f998c66f485f");
 		userServicesLocal.saveOrUpdate(user);
@@ -65,34 +65,42 @@ public class DefaultDataBaseDhafer {
 		tagServicesLocal.SaveOrUpdateTage("nature");
 		tagServicesLocal.SaveOrUpdateTage("plage");
 		tagServicesLocal.SaveOrUpdateTage("compagne");
+		
 		// Touristicplace
 		Touristicplace page1 = new Touristicplace();
 		page1.setCategoriePage("sport");
 		page1.setName("Paris");
+		page1.setDateOfCreation(new Date());
 		page1.setDescription("sport");
 		page1.setTitle("page pour le sport");
 		page1.setUserId("b38f3299-6949-42c7-9a6c-f998c66f485d");
 		page1.setImageURL(
 				"https://travel.jumia.com/blog/ng/wp-content/uploads/2016/01/bigstock-Four-Sports-a-lot-of-balls-an-50626115.jpg");
 		pageServiceLocal.saveOrUpdatePage(page1, "b38f3299-6949-42c7-9a6c-f998c66f485d");
+		
 		Touristicplace page2 = new Touristicplace();
 		page2.setCategoriePage("nature");
+		page2.setDateOfCreation(new Date());
 		page2.setName("London");
 		page2.setDescription("nature");
 		page2.setTitle("page pour le nature");
 		page2.setUserId("b38f3299-6949-42c7-9a6c-f998c66f485d");
 		page2.setImageURL("http://winsdesktop.com/wp-content/uploads/2016/09/Cool-Nature-Wallpaper-HD-1024x576.jpg");
 		pageServiceLocal.saveOrUpdatePage(page2, "b38f3299-6949-42c7-9a6c-f998c66f485d");
+		
 		Touristicplace page3 = new Touristicplace();
-		page3.setName("hawaria");
+		page3.setName("Maroc");
+		page3.setDateOfCreation(new Date());
 		page3.setCategoriePage("plage");
 		page3.setDescription("plage");
 		page3.setTitle("page pour le plage");
 		page3.setUserId("b38f3299-6949-42c7-9a6c-f998c66f485d");
 		page3.setImageURL("https://www.voyageavecnous.fr/wp-content/uploads/2015/01/plage-paradisiaque-maldives.jpg");
-		pageServiceLocal.saveOrUpdatePage(page3, "b38f3299-6949-42c7-9a6c-f998c66f485d");
+		pageServiceLocal.saveOrUpdatePage(page3, "b38f3299-6949-42c7-9a6c-f998c66f4855");
+		
 		Touristicplace page4 = new Touristicplace();
 		page4.setName("Berneville");
+		page4.setDateOfCreation(new Date());
 		page4.setCategoriePage("compagne");
 		page4.setDescription("compagne");
 		page4.setTitle("page pour le compagne");
