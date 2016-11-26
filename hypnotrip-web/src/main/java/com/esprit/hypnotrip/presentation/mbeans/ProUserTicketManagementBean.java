@@ -24,6 +24,7 @@ public class ProUserTicketManagementBean {
 
 	private boolean showCreateUpdateForm = false;
 	private boolean listAllTickets = true;
+	private boolean displayMostBookedTicket = false ; 
 
 	@EJB
 	private TicketServicesLocal ticketServicesLocal;
@@ -34,6 +35,9 @@ public class ProUserTicketManagementBean {
 		event.setPageId(11);
 		tickets = ticketServicesLocal.selectAllTicketsByIdEvent(event.getPageId());
 		bestBookedTicket = ticketServicesLocal.mostBookedTicketByEvent(event);
+		if (bestBookedTicket!=null) {
+			displayMostBookedTicket = true; 
+		}
 	}
 
 	public String doAddOrUpdateTicket() {
@@ -59,7 +63,19 @@ public class ProUserTicketManagementBean {
 	}
 
 	public Long numberOfTicketsBooked(Tickets ticket) {
-		return 0L; //ticketServicesLocal.numberOfTicketsBookedByIdTicket(ticket.getTicketId());
+		System.out.println("---------------------------");
+		System.out.println("---------------------------");
+		System.out.println("---------------------------");
+		System.out.println("---------------------------");
+		System.out.println("---------------------------");
+		System.out.println("---------"+ticket+"-------");
+		if (ticket!=null) {
+			 return ticketServicesLocal.numberOfTicketsBookedByIdTicket(ticket.getTicketId());
+		} else  {
+			return 0L ;
+		}
+			
+	
 	}
 
 	public String selectTicket() {
@@ -131,6 +147,14 @@ public class ProUserTicketManagementBean {
 
 	public void setEvent(Pages event) {
 		this.event = event;
+	}
+
+	public boolean isDisplayMostBookedTicket() {
+		return displayMostBookedTicket;
+	}
+
+	public void setDisplayMostBookedTicket(boolean displayMostBookedTicket) {
+		this.displayMostBookedTicket = displayMostBookedTicket;
 	}
 
 }

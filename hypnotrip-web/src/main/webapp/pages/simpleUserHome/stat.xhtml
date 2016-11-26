@@ -14,27 +14,47 @@
 	<ui:define name="content">
 
 
-<h:form>
-        <h:selectOneMenu id="advanced" value="#{statisticsNumberOfBoughtTicketByEvent.event}" converter="#{eventsConverter}" panelStyle="width:180px"
-                         effect="fade" var="e" style="width:160px" filter="true" filterMatchMode="startsWith">
-            <f:selectItems value="#{statisticsNumberOfBoughtTicketByEvent.events}" var="ev" itemLabel="#{ev.description}" itemValue="#{ev}" />
- 
-            <p:column style="width:10%">
-                <h:outputText styleClass="ui-theme ui-theme-#{e.description}" />
-            </p:column>
- 
-            <p:column>
-                <h:outputText value="#{t.displayName}" />
-            </p:column>
-        </h:selectOneMenu>
-        
-        <h:commandButton action="#{statisticsNumberOfBoughtTicketByEvent.createPie()}" value="show" />
-        <h:outputLabel value="#{statisticsNumberOfBoughtTicketByEvent.event.description}" />
-        
-       
-</h:form>
+		<h:form>
+			<h:selectOneMenu id="advanced"
+				value="#{statisticsNumberOfBoughtTicketByEvent.event}"
+				converter="#{eventsConverter}" panelStyle="width:180px"
+				effect="fade" var="e" style="width:160px" filter="true"
+				filterMatchMode="startsWith">
+				<f:selectItems
+					value="#{statisticsNumberOfBoughtTicketByEvent.events}" var="ev"
+					itemLabel="#{ev.description}" itemValue="#{ev}" />
 
-<h:form  id="chartForm" rendered="#{statisticsNumberOfBoughtTicketByEvent.displayChart}"><p:chart type="pie" model="#{statisticsNumberOfBoughtTicketByEvent.pieModel}" style="width:400px;height:300px" /></h:form>
+				<p:column style="width:10%">
+					<h:outputText styleClass="ui-theme ui-theme-#{e.description}" />
+				</p:column>
+
+				<p:column>
+					<h:outputText value="#{t.displayName}" />
+				</p:column>
+			</h:selectOneMenu>
+
+			<h:commandButton
+				action="#{statisticsNumberOfBoughtTicketByEvent.createPie()}"
+				value="show" />
+			<h:outputLabel
+				value="#{statisticsNumberOfBoughtTicketByEvent.event.description}" />
+
+
+		</h:form>
+
+		<h:form id="chartForm"
+			rendered="#{statisticsNumberOfBoughtTicketByEvent.displayChart}">
+			<p>
+			<h:outputLabel value="The best bought ticket is&#160;" />
+			<h:outputLabel
+				value="&quot;#{statisticsNumberOfBoughtTicketByEvent.bestTicket.label}&quot;" />
+			<h:outputLabel value="&#160;in the event&#160;" /> 
+			<h:outputLabel
+				value="&#160;&quot;#{statisticsNumberOfBoughtTicketByEvent.bestTicket.event.title}&quot;" /> </p>
+			<p:chart type="pie"
+				model="#{statisticsNumberOfBoughtTicketByEvent.pieModel}"
+				style="width:400px;height:300px" />
+		</h:form>
 
 
 	</ui:define>

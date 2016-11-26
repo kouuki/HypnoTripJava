@@ -131,10 +131,12 @@
 				<div class="head-bg">
 					<div class="head-bg-img"></div>
 					<div class="head-bg-content">
+						<h:form id="mostBookedTicket" rendered="#{proUserTicketManagementBean.displayMostBookedTicket}">
 						<h1>The most booked ticket : <h:outputLabel value="#{proUserTicketManagementBean.bestBookedTicket.label}" />
 						 <br/>
 						 Number of booking : <h:outputLabel value="#{proUserTicketManagementBean.numberOfTicketsBooked(proUserTicketManagementBean.bestBookedTicket)}" />
 						 </h1>
+						 </h:form>
 					</div>
 				</div>
 

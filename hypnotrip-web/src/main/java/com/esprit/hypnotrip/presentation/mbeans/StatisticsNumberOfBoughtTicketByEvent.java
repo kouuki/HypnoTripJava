@@ -24,6 +24,7 @@ public class StatisticsNumberOfBoughtTicketByEvent {
 	private List<Event> events;
 
 	private Event event = new Event();
+	private Tickets bestTicket = new  Tickets () ; 
 	private PieChartModel pieModel;
 	
 	private boolean displayChart = false; 
@@ -33,7 +34,6 @@ public class StatisticsNumberOfBoughtTicketByEvent {
 
 		events = eventServicesLocal.getAllEvents();
 
-		createPie();
 
 	}
 
@@ -60,9 +60,12 @@ public class StatisticsNumberOfBoughtTicketByEvent {
 	public void setEvent(Event event) {
 		this.event = event;
 	}
+	
+	
 
 	public String createPie() {
 		this.displayChart = true ; 
+		this.bestTicket = ticketServicesLocal.mostBookedTicket() ; 
 		List<Tickets> tickets = null ; 
 		pieModel = new PieChartModel();
 		if (event!=null) {
@@ -106,6 +109,14 @@ public class StatisticsNumberOfBoughtTicketByEvent {
 
 	public void setDisplayChart(boolean displayChart) {
 		this.displayChart = displayChart;
+	}
+
+	public Tickets getBestTicket() {
+		return bestTicket;
+	}
+
+	public void setBestTicket(Tickets bestTicket) {
+		this.bestTicket = bestTicket;
 	}
 
 }
