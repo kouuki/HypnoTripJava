@@ -29,7 +29,9 @@ public class Posts implements java.io.Serializable {
 	private Date publicationPost;
 	private Integer tagId;
 	private Tags tag;
-
+	private String ImageURL;
+	
+	
 	public Posts() {
 	}
 
@@ -129,6 +131,14 @@ public class Posts implements java.io.Serializable {
 		return "Posts [postId=" + postId + ", content=" + content + ", description=" + description + ", idOwner="
 				+ idOwner + ", pageId=" + pageId + ", publicationPost=" + publicationPost + ", tagId=" + tagId
 				+ ", tag=" + tag + "]";
+	}
+
+	public String getImageURL() {
+		return ImageURL;
+	}
+
+	public void setImageURL(String imageURL) {
+		ImageURL = imageURL;
 	}
 
 }

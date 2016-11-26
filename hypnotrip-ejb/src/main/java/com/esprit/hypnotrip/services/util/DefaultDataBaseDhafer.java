@@ -108,6 +108,7 @@ public class DefaultDataBaseDhafer {
 		post1.setIdOwner("b38f3299-6949-42c7-9a6c-f998c66f4852");
 		post1.setPageId(7);
 		post1.setPublicationPost(new Date());
+		post1.setImageURL("http://3.bp.blogspot.com/-OXiG-KhAUXE/VTiudbE6rEI/AAAAAAAA9WI/L7ycYEmoO0U/s1600/geant.jpg");
 		postServicesLocal.SaveOrUpdatePost(post1);
 		Posts post2 = new Posts();
 		post2.setContent("post qui concerne le nature");
@@ -116,6 +117,7 @@ public class DefaultDataBaseDhafer {
 		post2.setIdOwner("b38f3299-6949-42c7-9a6c-f998c66f4852");
 		post2.setPageId(8);
 		post2.setPublicationPost(new Date());
+		post2.setImageURL("http://www.wallpaperup.com/uploads/wallpapers/2013/03/23/58941/big_thumb_e2df06bf05a11d7bb66a348828845ffe.jpg");
 		postServicesLocal.SaveOrUpdatePost(post2);
 		postServicesLocal.SaveOrUpdatePost(post2);
 		postServicesLocal.SaveOrUpdatePost(post2);
@@ -126,6 +128,8 @@ public class DefaultDataBaseDhafer {
 		post3.setIdOwner("b38f3299-6949-42c7-9a6c-f998c66f4852");
 		post3.setPageId(9);
 		post3.setPublicationPost(new Date());
+		post3.setImageURL("http://www.krasnapolsky.sr/files/thumb/p/o/aanbiedingen_auto_auto_w9df_h9df_c431_c200_Poolpass_fb_post_HK_Eng_versie_22aug16_def.png");
+
 		postServicesLocal.SaveOrUpdatePost(post3);
 		postServicesLocal.SaveOrUpdatePost(post3);
 		Posts post4 = new Posts();
@@ -135,6 +139,7 @@ public class DefaultDataBaseDhafer {
 		post4.setIdOwner("b38f3299-6949-42c7-9a6c-f998c66f4852");
 		post4.setPageId(10);
 		post4.setPublicationPost(new Date());
+		post4.setImageURL("http://www.locatour.com/html_locatour/magazine/photos/destination-campagne-a-9796.jpg");
 		postServicesLocal.SaveOrUpdatePost(post4);
 		postServicesLocal.SaveOrUpdatePost(post4);
 		postServicesLocal.SaveOrUpdatePost(post4);

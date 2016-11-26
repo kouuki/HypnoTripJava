@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -39,7 +40,7 @@ public class ManageListEventsBean {
 	private Boolean displayForm3 = false;
 
 	private Boolean displayFormEvent = false;
-
+	private Date dateTime = new Date();
 	// la page séléctionnée
 
 	private Pages eventSelected = new Event();
@@ -66,6 +67,7 @@ public class ManageListEventsBean {
 
 	// ********************************************************************************
 	public String doAddEvent() {
+	
 		if (res != "") {
 			System.out.println(res);
 			eventSelected.setImageURL(res);
@@ -238,6 +240,14 @@ public class ManageListEventsBean {
 
 	public void setEventSelected(Event eventSelected) {
 		this.eventSelected = eventSelected;
+	}
+
+	public Date getDateTime() {
+		return dateTime;
+	}
+
+	public void setDateTime(Date dateTime) {
+		this.dateTime = dateTime;
 	}
 
 }

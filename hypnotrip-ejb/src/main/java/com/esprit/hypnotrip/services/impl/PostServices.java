@@ -63,17 +63,19 @@ public class PostServices implements PostServicesRemote, PostServicesLocal {
 
 	@Override
 	public List<Posts> listMyPost(String idUser) {
-		List<Posts> listOfpost = new ArrayList<>();
-
+		List<Integer> listOfpost = new ArrayList<Integer>();
+		List<Posts> posts = new ArrayList<Posts>();
 		Client client = ClientBuilder.newClient();
 		WebTarget target = client.target("http://localhost:63784/api/PostWS");
 		WebTarget myPosts = target.path("ListPosts").path(idUser);
 		Response response = myPosts.request().get();
 		listOfpost = response.readEntity(listOfpost.getClass());
-
+		for (Integer integer : listOfpost) {
+			posts.add(entityManager.find(Posts.class, integer));
+		}
 		response.close();
-		System.out.println(listOfpost);
-		return listOfpost;
+		System.out.println(posts);
+		return posts;
 
 	}
 
