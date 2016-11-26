@@ -72,6 +72,10 @@ public class RateBean {
 		rating1=0;
 		return "/pages/simpleUserHome/BuyAnOffer?faces-redirect=true";
 	}
+	public String ReturnListUpcommingEvents(){
+		rating1=0;
+		return "/pages/simpleUserHome/upcommingEventsPage?faces-redirect=true";
+	}
 	
 	
 	
