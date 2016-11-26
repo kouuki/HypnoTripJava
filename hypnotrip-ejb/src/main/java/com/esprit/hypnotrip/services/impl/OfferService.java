@@ -1,6 +1,5 @@
 package com.esprit.hypnotrip.services.impl;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -117,28 +116,12 @@ public class OfferService implements OfferServiceRemote, OfferServiceLocal {
 	}
 
 	@Override
-	public List<Offer> SearchOfferByTitleDescription(String world) {
+	public List<Offer> SearchOffer() {
 		String jpql = "select  b from Offer b";
 		Query query1 = entityManager.createQuery(jpql);
-		List<Offer> result = new ArrayList<Offer>();
-		List<Offer> listOffers = query1.getResultList();
-		for (Offer offer : listOffers) {
-			if (offer.getTitle().contains(world))
-				result.add(offer);
-			if (offer.getDescription().contains(world))
-				result.add(offer);
 
-		}
-		return result;
-
-	}
-
-	@Override
-	public List<Offer> SearchOfferByPriceDiscount(Double prix) {
-		String jpql = "select  b from Offer b where :param >= b.price OR :param >= b.price";
-		Query query1 = entityManager.createQuery(jpql);
-		query1.setParameter("param", prix);
 		return query1.getResultList();
+
 	}
 
 }

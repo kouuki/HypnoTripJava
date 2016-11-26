@@ -24,7 +24,6 @@ public interface OfferServiceLocal {
 
 	void buyAnOffer(String idUser, Integer idOffer);
 
-	List<Offer> SearchOfferByTitleDescription(String world);
+	List<Offer> SearchOffer();
 
-	List<Offer> SearchOfferByPriceDiscount(Double prix);
 }

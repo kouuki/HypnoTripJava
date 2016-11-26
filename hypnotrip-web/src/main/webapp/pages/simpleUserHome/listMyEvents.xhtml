@@ -52,19 +52,16 @@
 
 								</div>
 								<div class="info-block">
-									<span>
-
-								
-									<h:commandButton disabled="true"
+									<span> <h:commandButton disabled="true"
 											action="#{manageListEventsBean.selectPage()}" value="select">
 
 											<f:setPropertyActionListener value="#{p}"
 												target="#{manageListEventsBean.eventSelected}"></f:setPropertyActionListener>
 										</h:commandButton>
-										
-										
+
+
 									</span><span><h:commandButton value="Manage Ticket">
-											
+
 										</h:commandButton> </span>
 								</div>
 							</div>
@@ -83,64 +80,66 @@
 					<!-- ************************************************************************************************************ -->
 					<!-- ************************************************************************************************************ -->
 					<!-- ************************************************************************************************************ -->
-					<h:form id="formForEvent"
-						rendered="#{manageListEventsBean.displayFormEvent}"
-						enctype="multipart/form-data">
-				Picture
-				<p:fileUpload
-							fileUploadListener="#{manageListEventsBean.handleFileUpload}"
-							mode="advanced" update="messages" label="Choose a file"
-							sizeLimit="1048576" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
-							invalidSizeMessage="The maximum file size allowed is 1 Megabyte !"
-							invalidFileMessage="You are allowed to upload only images !" />
-						<p:growl id="messages" showDetail="true" sticky="true" />
-						<table width="80%">
+					<h:form id="formForOffer"
+						rendered="#{payementBean.}">
+
+						<div class="category-1 mix custom-column-5"
+							style="display: inline-block;">
+							<div class="be-post">
+								<a href="page1.html" class="be-img-block"> <h:graphicImage
+										value="#{payementBean.offerSelected.imageURL}" alt="" />
+								</a> <b>Title :</b>
+								<h:outputText value="#{payementBean.offerSelected.title}" />
+								<br /> <br /> <b>Description :</b>
+
+								<h:outputText value="#{payementBean.offerSelected.description}" />
+
+								<br /> <br /> <b>Date of start :</b>
 
 
+								<h:outputText value="#{payementBean.offerSelected.beginDate}" />
+								<br /> <br /> <b>Date of finish :</b>
 
 
-							<tr>
-								<TH>Title</TH>
-								<TD><h:inputText
-										value="#{manageListEventsBean.eventSelected.title}"
-										required="true" requiredMessage="field required" /></TD>
+								<h:outputText value="#{payementBean.offerSelected.finishDate}" />
 
-							</tr>
-							<tr>
-								<TH>Description</TH>
-								<TD><h:inputText
-										value="#{manageListEventsBean.eventSelected.description}"
-										required="true" requiredMessage="field required" /></TD>
 
-							</tr>
-							<tr>
-								<TH>Start date</TH>
-								<TD><p:growl id="msgs1" showDetail="true" /> <h:panelGrid
-										columns="2" cellpadding="5">
-										<p:calendar id="Start"
-											value="#{manageListEventsBean.eventSelected.dateOfEvent}"
-											mode="inline" />
-									</h:panelGrid></TD>
+								<br /> <br /> <b>Price :</b>
 
-							</tr>
 
-							<tr>
-								<TH>Place</TH>
-								<TD><h:inputText
-										value="#{manageListEventsBean.eventSelected.place}"
-										required="true" requiredMessage="field required" /></TD>
+								<h:outputText value="#{payementBean.offerSelected.price}" />
 
-							</tr>
+								<br /> <br /> <b>Discount :</b>
 
-							<tr>
-								<TH>Actions</TH>
-								<TD><h:commandButton
-										action="#{manageListEventsBean.doAddEvent()}" value="save" />
-									<h:commandButton
-										action="#{manageListEventsBean.doDeletePage()}" value="delete" /></TD>
-							</tr>
-						</table>
+								<h:outputText value="#{payementBean.offerSelected.discount}" />
+
+								<p:rating
+									value="#{payementBean.ratingLevels(manageOffersBean.offerSelected.pageId)}"
+									readonly="true" />
+
+							</div>
+							<div class="info-block">
+								<span><table>
+										<tr>
+											<td>compte :</td>
+											<td><h:inputText value="#{payementBean.numCompte}"
+													required="true" requiredMessage="field required" /></td>
+										</tr>
+										<tr>
+											<td>Mot de passe :</td>
+											<td><h:inputText value="#{payementBean.password}"
+													required="true" requiredMessage="field required" /></td>
+										</tr>
+									</table></span><br /> <span> <h:commandButton
+										action="#{payementBean.doBuyOffer()}" value="Buy" />
+
+
+								</span>
+							</div>
+						</div>
+
 					</h:form>
+
 
 					<!-- ************************************************************************************************************ -->
 					<!-- ************************************************************************************************************ -->
