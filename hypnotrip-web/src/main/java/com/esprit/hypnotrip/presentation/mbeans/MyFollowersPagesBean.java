@@ -37,10 +37,10 @@ public class MyFollowersPagesBean {
 	private Follows followSelected = new Follows();
 	private String idUserConnected;
 
-	private boolean haveFollow = false;
-	private boolean haveEvents = false;
-	private boolean haveOffers = false;
-	private boolean haveTouristicPlaces = false;
+	private boolean haveFollow;
+	private boolean haveEvents;
+	private boolean haveOffers;
+	private boolean haveTouristicPlaces;
 
 	// display
 	private boolean displayAllFollow = false;
@@ -51,27 +51,42 @@ public class MyFollowersPagesBean {
 
 	@PostConstruct
 	public void init() {
-
+		haveFollow = false;
+		haveEvents = false;
+		haveOffers = false;
+		haveTouristicPlaces = false;
+		displayAllFollow = false;
+		displayAllEvent = false;
+		displayAllOffer = false;
+		displayAllTouristicPlaces = false;
+		displayAllPages = false;
 		idUserConnected = loginBean.getUser().getId();
 
 		follows = followersServicesLocal.findAllFollowByUserId(idUserConnected);
+
 		for (Follows follow : follows) {
 			displayAllFollow = true;
+			haveFollow = false;
 			follow.setNbrFollowers(followersServicesLocal.nbrFollowers(follow.getId().getPageId()));
 			follow.setNbrPost(followersServicesLocal.nbrPostsByUser(follow.getId().getPageId(), idUserConnected));
 			System.out.println(follow.getNbrFollowers());
 			System.out.println(follow.getNbrPost() + " test nbrpost");
 			if (follow.getPages() instanceof Event) {
+				haveFollow = true;
 				haveEvents = true;
 				events.add((Event) follow.getPages());
 			} else if (follow.getPages() instanceof Offer) {
+				haveFollow = true;
 				haveOffers = true;
 				offers.add((Offer) follow.getPages());
 			} else if (follow.getPages() instanceof Touristicplace) {
+				haveFollow = true;
 				haveTouristicPlaces = true;
 				touristicPlaces.add((Touristicplace) follow.getPages());
-			}
+			} else
+				haveFollow = false;
 		}
+
 	}
 
 	public void DisplayOffer() {
@@ -83,11 +98,7 @@ public class MyFollowersPagesBean {
 	}
 
 	public void DisplayPages() {
-		displayAllFollow = false;
-		displayAllPages = true;
-		displayAllOffer = false;
-		displayAllEvent = false;
-		displayAllTouristicPlaces = false;
+		this.init();
 	}
 
 	public void DisplayEvent() {

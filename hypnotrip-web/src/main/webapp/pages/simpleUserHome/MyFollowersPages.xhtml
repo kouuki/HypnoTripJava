@@ -23,88 +23,254 @@
 									action="#{myFollowersPagesBean.DisplayTouristicPlaces()}"
 									value="Display All My Touristic Places" class="filter active" />
 							</h:form>
-
 						</div>
 					</div>
 				</div>
+				<h:column rendered="#{myFollowersPagesBean.displayAllFollow}">
+					<h:column rendered="#{not myFollowersPagesBean.haveFollow}">
+						<center>
+							<BR /> <BR />
+							<H1>YOU DON'T HAVE A FOLLOW</H1>
+							<h:graphicImage
+								value="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVW9jY9HP8yUbM1fvY5MuYciP1IPp86rQVLF0xRQbAwC2_d7z9"
+								alt="" />
+							<BR /> <BR /> <BR />
+						</center>
+					</h:column>
+					<h:column rendered="#{myFollowersPagesBean.haveFollow}">
 
-				<h:column rendered="#{!myFollowersPagesBean.displayAllFollow}">
-					<center>
-						<BR /> <BR />
-						<H1>YOU DON'T HAVE A FOLLOW</H1>
-						<h:graphicImage
-							value="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVW9jY9HP8yUbM1fvY5MuYciP1IPp86rQVLF0xRQbAwC2_d7z9"
-							alt="" />
-						<BR /> <BR /> <BR />
-					</center>
-				</h:column>
-				<h:column rendered="#{myFollowersPagesBean.haveFollow}">
-
-					<BR />
-					<BR />
-					<center>
-						<H1>ALL YOUR FOLLOW</H1>
-					</center>
-					<BR />
-					<BR />
-					<ui:repeat value="#{myFollowersPagesBean.follows}" var="p">
-						<div class="category-1 mix custom-column-5"
-							style="display: inline-block;">
-							<div class="be-post">
-								<a href="page1.html" class="be-img-block"> <h:graphicImage
-										value="http://localhost:18080/hypnotrip-web/resources/img/p1.jpg"
-										alt="" />
-								</a> <a href="page1.html" class="be-post-title"><h:outputText
-										value="#{p.pages.description}" /></a> <span>
-									<center>
-										<a href="#" class="be-post-tag"><h:outputText
-												value="#{p.pages.categoriePage.toUpperCase()}" /> </a>
-									</center>
-								</span>
-								<div class="author-post">
-									<h:graphicImage
-										value="http://localhost:18080/hypnotrip-web/resources/img/a1.png"
-										alt="" />
-									<span>by <a href="page1.html">HypnoTrip</a>
+						<BR />
+						<BR />
+						<center>
+							<H1>ALL YOUR FOLLOW</H1>
+						</center>
+						<BR />
+						<BR />
+						<ui:repeat value="#{myFollowersPagesBean.follows}" var="p">
+							<div class="category-1 mix custom-column-5"
+								style="display: inline-block;">
+								<div class="be-post">
+									<a href="page1.html" class="be-img-block"> <h:graphicImage
+											value="http://localhost:18080/hypnotrip-web/resources/img/p1.jpg"
+											alt="" />
+									</a> <a href="page1.html" class="be-post-title"><h:outputText
+											value="#{p.pages.description}" /></a> <span>
+										<center>
+											<a href="#" class="be-post-tag"><h:outputText
+													value="#{p.pages.categoriePage.toUpperCase()}" /> </a>
+										</center>
 									</span>
-								</div>
-								<div class="info-block">
+									<div class="author-post">
+										<h:graphicImage
+											value="http://localhost:18080/hypnotrip-web/resources/img/a1.png"
+											alt="" />
+										<span>by <a href="page1.html">HypnoTrip</a>
+										</span>
+									</div>
+									<div class="info-block">
+										<center>
+											<span><i class="fa fa-thumbs-o-up"></i> <h:outputText
+													value="#{p.nbrFollowers}" /></span> <span><i
+												class="fa fa-comment-o"></i> <h:outputText
+													value="#{p.nbrPost}" /></span>
+										</center>
+									</div>
 									<center>
-										<span><i class="fa fa-thumbs-o-up"></i> <h:outputText
-												value="#{p.nbrFollowers}" /></span> <span><i
-											class="fa fa-comment-o"></i> <h:outputText
-												value="#{p.nbrPost}" /></span>
+										<h:form id="f1">
+											<h:commandButton class="btn color-1 size-2 hover-1"
+												action="#{myFollowersPagesBean.unfollow()}" value="UnFollow">
+												<f:setPropertyActionListener value="#{p}"
+													target="#{myFollowersPagesBean.followSelected}"></f:setPropertyActionListener>
+											</h:commandButton>
+											<h:commandButton
+												class="btn color-1 size-2 hover-1 fa fa-thumbs-o-up"
+												style="background: green"
+												action="#{myFollowersPagesBean.Wish()}" value="Wish This"
+												rendered="#{!p.wishStat}">
+												<f:setPropertyActionListener value="#{p}"
+													target="#{myFollowersPagesBean.followSelected}"></f:setPropertyActionListener>
+											</h:commandButton>
+											<h:commandButton
+												class="btn color-1 size-2 hover-1 fa fa-thumbs-o-up"
+												style="background: green"
+												action="#{myFollowersPagesBean.unWish()}" value="UnWish"
+												rendered="#{p.wishStat}">
+												<f:setPropertyActionListener value="#{p}"
+													target="#{myFollowersPagesBean.followSelected}"></f:setPropertyActionListener>
+											</h:commandButton>
+										</h:form>
 									</center>
 								</div>
-								<center>
-									<h:form id="f1">
-										<h:commandButton class="btn color-1 size-2 hover-1"
-											action="#{myFollowersPagesBean.unfollow()}" value="UnFollow">
-											<f:setPropertyActionListener value="#{p}"
-												target="#{myFollowersPagesBean.followSelected}"></f:setPropertyActionListener>
-										</h:commandButton>
-										<h:commandButton
-											class="btn color-1 size-2 hover-1 fa fa-thumbs-o-up"
-											style="background: green"
-											action="#{myFollowersPagesBean.Wish()}" value="Wish This"
-											rendered="#{!p.wishStat}">
-											<f:setPropertyActionListener value="#{p}"
-												target="#{myFollowersPagesBean.followSelected}"></f:setPropertyActionListener>
-										</h:commandButton>
-										<h:commandButton
-											class="btn color-1 size-2 hover-1 fa fa-thumbs-o-up"
-											style="background: green"
-											action="#{myFollowersPagesBean.unWish()}" value="UnWish"
-											rendered="#{p.wishStat}">
-											<f:setPropertyActionListener value="#{p}"
-												target="#{myFollowersPagesBean.followSelected}"></f:setPropertyActionListener>
-										</h:commandButton>
-									</h:form>
-								</center>
 							</div>
-						</div>
-					</ui:repeat>
+						</ui:repeat>
+					</h:column>
 				</h:column>
+
+				<!-- ********************************Display All Event *********************************************** -->
+				<!-- ********************************Display All Event *********************************************** -->
+				<!-- ********************************Display All Event *********************************************** -->
+
+				<h:column rendered="#{myFollowersPagesBean.displayAllEvent}">
+					<h:column rendered="#{!myFollowersPagesBean.haveEvents}">
+						<center>
+							<BR /> <BR />
+							<H1>YOU DON'T FOLLOW AN EVENT</H1>
+							<h:graphicImage
+								value="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVW9jY9HP8yUbM1fvY5MuYciP1IPp86rQVLF0xRQbAwC2_d7z9"
+								alt="" />
+							<BR /> <BR /> <BR />
+						</center>
+					</h:column>
+					<h:column rendered="#{myFollowersPagesBean.haveEvents}">
+
+						<BR />
+						<BR />
+						<center>
+							<H1>ALL YOUR EVENT</H1>
+						</center>
+						<BR />
+						<BR />
+						<ui:repeat value="#{myFollowersPagesBean.events}" var="p">
+							<div class="category-1 mix custom-column-5"
+								style="display: inline-block;">
+								<div class="be-post">
+									<a href="page1.html" class="be-img-block"> <h:graphicImage
+											value="http://localhost:18080/hypnotrip-web/resources/img/p1.jpg"
+											alt="" />
+									</a> <a href="page1.html" class="be-post-title"><h:outputText
+											value="#{p.description}" /></a><a href="page1.html"
+										class="be-post-title"><center>
+											<h:outputText value="Date of Event: #{p.dateOfEvent}" />
+										</center> </a> <span>
+										<center>
+											<a href="#" class="be-post-tag"><h:outputText
+													value="#{p.categoriePage.toUpperCase()}" /> </a>
+										</center>
+									</span>
+									<div class="author-post">
+										<h:graphicImage
+											value="http://localhost:18080/hypnotrip-web/resources/img/a1.png"
+											alt="" />
+										<span>by <a href="page1.html">HypnoTrip</a>
+										</span>
+									</div>
+									<center></center>
+								</div>
+							</div>
+						</ui:repeat>
+					</h:column>
+				</h:column>
+
+				<!-- ********************************Display All Offer *********************************************** -->
+				<!-- ********************************Display All Offer *********************************************** -->
+				<!-- ********************************Display All Offer *********************************************** -->
+
+				<h:column rendered="#{myFollowersPagesBean.displayAllOffer}">
+					<h:column rendered="#{!myFollowersPagesBean.haveOffers}">
+						<center>
+							<BR /> <BR />
+							<H1>YOU DON'T FOLLOW AN OFFER</H1>
+							<h:graphicImage
+								value="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVW9jY9HP8yUbM1fvY5MuYciP1IPp86rQVLF0xRQbAwC2_d7z9"
+								alt="" />
+							<BR /> <BR /> <BR />
+						</center>
+					</h:column>
+					<h:column rendered="#{myFollowersPagesBean.haveOffers}">
+
+						<BR />
+						<BR />
+						<center>
+							<H1>ALL YOUR OFFERS</H1>
+						</center>
+						<BR />
+						<BR />
+						<ui:repeat value="#{myFollowersPagesBean.offers}" var="p">
+							<div class="category-1 mix custom-column-5"
+								style="display: inline-block;">
+								<div class="be-post">
+									<a href="page1.html" class="be-img-block"> <h:graphicImage
+											value="http://localhost:18080/hypnotrip-web/resources/img/p1.jpg"
+											alt="" />
+									</a> <a href="page1.html" class="be-post-title"><h:outputText
+											value="#{p.description}" /></a> <a href="page1.html"
+										class="be-post-title"><center>
+											<h:outputText value="Bengin Date: #{p.beginDate}" />
+											<BR />
+											<h:outputText value="End Date: #{p.finishDate}" />
+										</center></a> <span>
+										<center>
+											<a href="#" class="be-post-tag"><h:outputText
+													value="#{p.categoriePage.toUpperCase()}" /> </a>
+										</center>
+									</span>
+									<div class="author-post">
+										<h:graphicImage
+											value="http://localhost:18080/hypnotrip-web/resources/img/a1.png"
+											alt="" />
+										<span>by <a href="page1.html">HypnoTrip</a>
+										</span>
+									</div>
+									<center></center>
+								</div>
+							</div>
+						</ui:repeat>
+					</h:column>
+				</h:column>
+
+				<!-- ********************************Display All Touristic places *********************************************** -->
+				<!-- ********************************Display All Touristic places *********************************************** -->
+				<!-- ********************************Display All Touristic places *********************************************** -->
+
+				<h:column
+					rendered="#{myFollowersPagesBean.displayAllTouristicPlaces}">
+					<h:column rendered="#{!myFollowersPagesBean.haveTouristicPlaces}">
+						<center>
+							<BR /> <BR />
+							<H1>YOU DON'T FOLLOW A TOURISTIC PLACES</H1>
+							<h:graphicImage
+								value="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVW9jY9HP8yUbM1fvY5MuYciP1IPp86rQVLF0xRQbAwC2_d7z9"
+								alt="" />
+							<BR /> <BR /> <BR />
+						</center>
+					</h:column>
+					<h:column rendered="#{myFollowersPagesBean.haveTouristicPlaces}">
+
+						<BR />
+						<BR />
+						<center>
+							<H1>ALL YOUR TOURISTIC PLACES</H1>
+						</center>
+						<BR />
+						<BR />
+						<ui:repeat value="#{myFollowersPagesBean.touristicPlaces}" var="p">
+							<div class="category-1 mix custom-column-5"
+								style="display: inline-block;">
+								<div class="be-post">
+									<a href="page1.html" class="be-img-block"> <h:graphicImage
+											value="http://localhost:18080/hypnotrip-web/resources/img/p1.jpg"
+											alt="" />
+									</a> <a href="page1.html" class="be-post-title"><h:outputText
+											value="#{p.description}" /></a> <span>
+										<center>
+											<a href="#" class="be-post-tag"><h:outputText
+													value="#{p.categoriePage.toUpperCase()}" /> </a>
+										</center>
+									</span>
+									<div class="author-post">
+										<h:graphicImage
+											value="http://localhost:18080/hypnotrip-web/resources/img/a1.png"
+											alt="" />
+										<span>by <a href="page1.html">HypnoTrip</a>
+										</span>
+									</div>
+									<center></center>
+								</div>
+							</div>
+						</ui:repeat>
+					</h:column>
+				</h:column>
+
 			</div>
 		</div>
 
