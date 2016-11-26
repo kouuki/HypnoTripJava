@@ -212,7 +212,6 @@ public class UserServices implements UserServicesRemote, UserServicesLocal {
 	// services for yasmine
 	@Override
 	public User findUserById(String idUser) {
-
 		return entityManager.find(User.class, idUser);
 	}
 

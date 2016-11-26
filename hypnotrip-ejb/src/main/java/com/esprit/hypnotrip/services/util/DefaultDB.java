@@ -67,7 +67,7 @@ public class DefaultDB {
 		ts1.setImageURL(
 				"http://www.telegraph.co.uk/content/dam/Travel/Destinations/Europe/France/Paris/paris-attractions-xlarge.jpg");
 		ts1.setCategoriePage("sport");
-		pageServiceLocal.saveOrUpdatePage(ts1, "b38f3299-6949-42c7-9a6c-f998c66f4855");
+		pageServiceLocal.saveOrUpdatePage(ts1, "b38f3299-6949-42c7-9a6c-f998c66f4853");
 
 
 		Pages ts2 = new Touristicplace("Second Touristic page", "Titre de la 2eme page", new Date(), "logo2", "Russia");
@@ -78,7 +78,7 @@ public class DefaultDB {
 		Pages ts3 = new Touristicplace("Third Touristic page", "Titre de la 3eme page", new Date(), "logo2", "America");
 		ts3.setImageURL("http://cms.inspirato.com/media/5682444/London_Dest_16531610X.jpg");
 		ts3.setCategoriePage("nature");
-		pageServiceLocal.saveOrUpdatePage(ts3, "b38f3299-6949-42c7-9a6c-f998c66f485d");
+		pageServiceLocal.saveOrUpdatePage(ts3, "b38f3299-6949-42c7-9a6c-f998c66f4853");
 		// ********************************************************************************************************************
 		// ********************************************************************************************************************
 		// ********************************************************************************************************************
@@ -127,7 +127,7 @@ public class DefaultDB {
 		user4.setLogin("Amin");
 		user4.setUserName("ghorbel");
 		user4.setRole("0");
-		user4.setId("c25c4e23-1275-45d8-b327-c6fb06d90455");
+		user4.setId("c25c4e23-1275-45d8-b327-c6fb06d9455");
 
 
 

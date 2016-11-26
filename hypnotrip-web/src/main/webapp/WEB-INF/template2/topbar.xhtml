@@ -37,8 +37,11 @@
              <li>
                 <a class="ripplelink"><i  class="icon-round58"></i> <span class="Txt">Alerts</span></a>
                 <ul>
-                    <li>  <a href="#" class="menulink ripplelink"><i
-							class="icon-thermostat1 Fs16"></i> Logout</a></li>
+                    <li>  <h:form><h:commandLink action="#{loginBean.logout()}" class="menulink ripplelink" ajax="false"
+										value="Logout" /></h:form>
+<!--                     <a href="#" class="menulink ripplelink"><i -->
+<!-- 							class="icon-thermostat1 Fs16"></i> Logout</a></li> -->
+</li> 
                 </ul>
             </li>
           
