@@ -53,7 +53,7 @@ public class SortOfferByDateAndPrice {
 		offerServiceLocal.buyAnOffer(idOwner, offerSelected.getPageId());
 		Double somme = (offerSelected.getPrice()) * ((100 - offerSelected.getDiscount()) / 100);
 		service.retraitArgent(numCompte, password, somme);
-		return "/pages/simpleUserHome/BuyAnOffer?faces-redirect=true";
+		return "/pages/simpleUserHome/sortOfferDateAndPrice?faces-redirect=true";
 	}
 
 	// ********************************************************************************

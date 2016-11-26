@@ -11,53 +11,40 @@
 	</h:head>
 	<ui:define name="content">
 		<center>
-			<!-- ************************************************************************************************************ -->
-			<!-- ************************************************************************************************************ -->
-			<!-- ************************************************************************************************************ -->
-			<div class="col-md-3">
-				<div class="footer-block">
-					<form action="http://demo.nrgthemes.com/projects/nrgnetwork/"
-						class="subscribe-form">
-						.
-						<h:inputText value="" />
-						<div class="submit-block">
-							<i class="fa fa-envelope-o"></i>
-							<h:commandButton value="login" />
+			<div class="container-fluid custom-container">
+				<div class="row">
+					<div class="col-md-2 left-feild">
+						<div class="creative_filds_block">
+							<div class="ul">
+								<h:form>
+
+
+									<h:commandLink action="listMyEvents?faces-redirect=true"
+										value="manage My Events" class="filter active" />
+									<br />
+									<h:commandLink
+										action="listMyTouristicPages?faces-redirect=true"
+										value="manage My Touristic Pages" class="filter active" />
+									<br />
+									<h:commandLink action="BuyAnOffer?faces-redirect=true"
+										value="Buy an offer" class="filter active" />
+									<br />
+									<h:commandLink action="bestOffer?faces-redirect=true"
+										value="Buy Best Offer" class="filter active" />
+									<br />
+									<h:commandLink
+										action="sortOfferDateAndPrice?faces-redirect=true"
+										value="Sort and Buy best offer" class="filter active" />
+
+
+
+								</h:form>
+
+							</div>
 						</div>
-					</form>
+					</div>
 				</div>
 			</div>
-			<!-- ************************************************************************************************************ -->
-			<!-- ************************************************************************************************************ -->
-			<!-- ************************************************************************************************************ -->
-			<h:form>
-				<!-- ************************************************************************************************************ -->
-				<!-- ************************************************************************************************************ -->
-				<!-- ************************************************************************************************************ -->
-
-
-				<!-- ************************************************************************************************************ -->
-				<!-- ************************************************************************************************************ -->
-				<!-- ************************************************************************************************************ -->
-
-
-				<h:commandLink action="listMyEvents?faces-redirect=true"
-					value="manage My Events" />
-				<br />
-				<h:commandLink action="listMyTouristicPages?faces-redirect=true"
-					value="manage My Touristic Pages" />
-				<br />
-				<h:commandLink action="BuyAnOffer?faces-redirect=true"
-					value="Buy an offer" />
-				<br />
-				<h:commandLink action="bestOffer?faces-redirect=true"
-					value="Buy Best Offer" />
-				<br />
-				<h:commandLink action="sortOfferDateAndPrice?faces-redirect=true"
-					value="Sort and Buy best offer" />
-			</h:form>
-
-
 
 		</center>
 

@@ -168,7 +168,13 @@ public class DefaultDataBaseDhafer {
 		pageServiceLocal.saveOrUpdatePage(envent3, "b38f3299-6949-42c7-9a6c-f998c66f485d");
 
 		// follow
-	
+		String IdUser = "b38f3299-6949-42c7-9a6c-f998c66f4852";
+		FollowsId followsId = new FollowsId();
+		followsId.setDateFollow(new Date());
+		followsId.setPageId(17);
+		followsId.setUserId(IdUser);
+
+		followersServicesLocal.SaveOrUpdate(followsId, true, true);
 
 	}
 

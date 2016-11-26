@@ -67,12 +67,12 @@ public class PostServices implements PostServicesRemote, PostServicesLocal {
 
 		Client client = ClientBuilder.newClient();
 		WebTarget target = client.target("http://localhost:63784/api/PostWS");
-		WebTarget myPosts = target.path("ListMessages").path(idUser);
+		WebTarget myPosts = target.path("ListPosts").path(idUser);
 		Response response = myPosts.request().get();
 		listOfpost = response.readEntity(listOfpost.getClass());
 
 		response.close();
-
+		System.out.println(listOfpost);
 		return listOfpost;
 
 	}
