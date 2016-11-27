@@ -95,10 +95,7 @@ public class ManageTicketsBean {
 		this.event = event;
 	}
 
-	public List<Tickets> doFindAllBookedtickets() {
 
-		return userServicesLocal.listTicketsBookedByUserEvent(user);
-	}
 
 	@PostConstruct
 	public void init() {
