@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.ejb.Remote;
 
-import com.esprit.hypnotrip.persistence.Event;
 import com.esprit.hypnotrip.persistence.Follows;
 import com.esprit.hypnotrip.persistence.FollowsId;
 import com.esprit.hypnotrip.persistence.Pages;
@@ -38,8 +37,11 @@ public interface FollowersServicesRemote {
 	List<Integer> listIdPagesInFollow();
 
 	String TitlePageById(Integer idPage);
-	
+
 	Integer nbrWish(Integer idPages);
 
+	Follows GetLastFollowForPageByIdUser(Integer idPage, String userId);
+
+	List<Pages> listPagesOrdredByFollowing();
 
 }

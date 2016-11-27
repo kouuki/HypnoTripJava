@@ -13,8 +13,17 @@
 					<div class="creative_filds_block">
 						<div class="ul">
 							<h:form>
-								<h:commandLink action="#{myFollowersPagesBean.DisplayPages()}"
-									value="Display All My Pages" class="filter active" />
+								<BR />
+								<BR />
+								<BR />
+								<BR />
+								<BR />
+								<BR />
+								<BR />
+								<BR />
+								<BR />
+								<BR />
+								<BR />
 								<h:commandLink action="#{myFollowersPagesBean.DisplayOffer()}"
 									value="Display All My Offer" class="filter active" />
 								<h:commandLink action="#{myFollowersPagesBean.DisplayEvent()}"
@@ -22,6 +31,15 @@
 								<h:commandLink
 									action="#{myFollowersPagesBean.DisplayTouristicPlaces()}"
 									value="Display All My Touristic Places" class="filter active" />
+								<BR />
+								<BR />
+								<BR />
+								<BR />
+								<BR />
+								<BR />
+								<BR />
+								<BR />
+								<BR />
 							</h:form>
 						</div>
 					</div>
@@ -29,7 +47,7 @@
 				<h:column rendered="#{myFollowersPagesBean.displayAllFollow}">
 					<h:column rendered="#{not myFollowersPagesBean.haveFollow}">
 						<center>
-							<BR /> <BR />
+							<BR /> <BR /> <BR /> <BR /> <BR /> <BR /> <BR /> <BR />
 							<H1>YOU DON'T HAVE A FOLLOW</H1>
 							<h:graphicImage
 								value="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVW9jY9HP8yUbM1fvY5MuYciP1IPp86rQVLF0xRQbAwC2_d7z9"
@@ -51,7 +69,7 @@
 								style="display: inline-block;">
 								<div class="be-post">
 									<a href="page1.html" class="be-img-block"> <h:graphicImage
-											value="http://localhost:18080/hypnotrip-web/resources/img/p1.jpg"
+											value="#{p.pages.imageURL}" style="width:400px;height:200px"
 											alt="" />
 									</a> <a href="page1.html" class="be-post-title"><h:outputText
 											value="#{p.pages.description}" /></a> <span>
@@ -98,13 +116,6 @@
 												<f:setPropertyActionListener value="#{p}"
 													target="#{myFollowersPagesBean.followSelected}"></f:setPropertyActionListener>
 											</h:commandButton>
-											<h:commandButton value="Rate"
-												action="#{rateBean.getSelectedItemFromPage(p.pages.pageId)}"
-												onclick="$('#myModal').modal('show');">
-
-												<f:ajax execute="@form" render="@none" />
-
-											</h:commandButton>
 
 										</h:form>
 									</center>
@@ -121,7 +132,7 @@
 				<h:column rendered="#{myFollowersPagesBean.displayAllEvent}">
 					<h:column rendered="#{!myFollowersPagesBean.haveEvents}">
 						<center>
-							<BR /> <BR />
+							<BR /> <BR /> <BR /> <BR /> <BR /> <BR /> <BR /> <BR />
 							<H1>YOU DON'T FOLLOW AN EVENT</H1>
 							<h:graphicImage
 								value="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVW9jY9HP8yUbM1fvY5MuYciP1IPp86rQVLF0xRQbAwC2_d7z9"
@@ -143,8 +154,7 @@
 								style="display: inline-block;">
 								<div class="be-post">
 									<a href="page1.html" class="be-img-block"> <h:graphicImage
-											value="http://localhost:18080/hypnotrip-web/resources/img/p1.jpg"
-											alt="" />
+											value="#{p.imageURL}" style="width:400px;height:200px" alt="" />
 									</a> <a href="page1.html" class="be-post-title"><h:outputText
 											value="#{p.description}" /></a><a href="page1.html"
 										class="be-post-title"><center>
@@ -162,53 +172,41 @@
 										<span>by <a href="page1.html">HypnoTrip</a>
 										</span>
 									</div>
-									<center></center>
+									<div class="info-block">
+										<center>
+											<span><i class="fa fa-thumbs-o-up"></i> <h:outputText
+													value="#{allEventTouristicPlacesAndOfferBean.nbrFollowers(p.pageId)}" /></span>
+										</center>
+									</div>
+									<center>
+										<h:form id="f22">
+											<h:commandButton class="btn color-1 size-2 hover-1"
+												action="#{myFollowersPagesBean.unfollowPage(p.pageId)}"
+												value="UnFollow">
+											</h:commandButton>
+											<h:commandButton
+												class="btn color-1 size-2 hover-1 fa fa-thumbs-o-up"
+												style="background: green"
+												action="#{myFollowersPagesBean.wishPage(p.pageId)}"
+												value="Wish This"
+												rendered="#{!myFollowersPagesBean.isWishPage(p.pageId)}">
+											</h:commandButton>
+											<h:commandButton
+												class="btn color-1 size-2 hover-1 fa fa-thumbs-o-up"
+												style="background: green"
+												action="#{myFollowersPagesBean.unWish(p.pageId)}"
+												value="UnWish"
+												rendered="#{myFollowersPagesBean.isWishPage(p.pageId)}">
+											</h:commandButton>
+										</h:form>
+									</center>
 								</div>
 							</div>
 						</ui:repeat>
 					</h:column>
 				</h:column>
-				<!-- ********************** MODAL FOR RATE ******************************************************************************************** -->
-				<h:form>
-					<div class="container">
-						<!-- Modal -->
-						<div class="modal fade" id="myModal" role="dialog">
-							<div class="modal-dialog modal-sm">
-								<div class="modal-content">
-									<div class="modal-header">
-										<h4 class="modal-title">Rating Area</h4>
-									</div>
-									<div class="modal-body">
-										<h:form>
-											<p:growl id="messages" showDetail="true" />
-											<p:rating value="#{rateBean.rating1}">
-												<p:ajax event="rate" listener="#{rateBean.onrate}"
-													update="messages" />
-												<p:ajax event="cancel" listener="#{rateBean.oncancel}"
-													update="messages" />
-											</p:rating>
 
-
-											<p:dialog header="Values" widgetVar="dlg" showEffect="fade"
-												hideEffect="fade">
-												<h:panelGrid id="display" columns="2" cellpadding="5">
-													<h:outputText value="Rating 3:" />
-													<h:outputText value="#{rateBean.rating1}" />
-												</h:panelGrid>
-											</p:dialog>
-										</h:form>
-									</div>
-									<div class="modal-footer">
-										<h:commandButton action="#{rateBean.ReturnListBuyAnOffer()}"
-											value="Close" />
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</h:form>
-				<!-- ************************************************************************************************************* -->
-
+	
 				<!-- ********************************Display All Offer *********************************************** -->
 				<!-- ********************************Display All Offer *********************************************** -->
 				<!-- ********************************Display All Offer *********************************************** -->
@@ -216,7 +214,7 @@
 				<h:column rendered="#{myFollowersPagesBean.displayAllOffer}">
 					<h:column rendered="#{!myFollowersPagesBean.haveOffers}">
 						<center>
-							<BR /> <BR />
+							<BR /> <BR /> <BR /> <BR /> <BR /> <BR /> <BR /> <BR />
 							<H1>YOU DON'T FOLLOW AN OFFER</H1>
 							<h:graphicImage
 								value="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVW9jY9HP8yUbM1fvY5MuYciP1IPp86rQVLF0xRQbAwC2_d7z9"
@@ -238,8 +236,7 @@
 								style="display: inline-block;">
 								<div class="be-post">
 									<a href="page1.html" class="be-img-block"> <h:graphicImage
-											value="http://localhost:18080/hypnotrip-web/resources/img/p1.jpg"
-											alt="" />
+											value="#{p.imageURL}" style="width:400px;height:200px" alt="" />
 									</a> <a href="page1.html" class="be-post-title"><h:outputText
 											value="#{p.description}" /></a> <a href="page1.html"
 										class="be-post-title"><center>
@@ -259,7 +256,34 @@
 										<span>by <a href="page1.html">HypnoTrip</a>
 										</span>
 									</div>
-									<center></center>
+									<div class="info-block">
+										<center>
+											<span><i class="fa fa-thumbs-o-up"></i> <h:outputText
+													value="#{allEventTouristicPlacesAndOfferBean.nbrFollowers(p.pageId)}" /></span>
+										</center>
+									</div>
+									<center>
+										<h:form id="f22">
+											<h:commandButton class="btn color-1 size-2 hover-1"
+												action="#{myFollowersPagesBean.unfollowPage(p.pageId)}"
+												value="UnFollow">
+											</h:commandButton>
+											<h:commandButton
+												class="btn color-1 size-2 hover-1 fa fa-thumbs-o-up"
+												style="background: green"
+												action="#{myFollowersPagesBean.wishPage(p.pageId)}"
+												value="Wish This"
+												rendered="#{!myFollowersPagesBean.isWishPage(p.pageId)}">
+											</h:commandButton>
+											<h:commandButton
+												class="btn color-1 size-2 hover-1 fa fa-thumbs-o-up"
+												style="background: green"
+												action="#{myFollowersPagesBean.unWish(p.pageId)}"
+												value="UnWish"
+												rendered="#{myFollowersPagesBean.isWishPage(p.pageId)}">
+											</h:commandButton>
+										</h:form>
+									</center>
 								</div>
 							</div>
 						</ui:repeat>
@@ -274,7 +298,7 @@
 					rendered="#{myFollowersPagesBean.displayAllTouristicPlaces}">
 					<h:column rendered="#{!myFollowersPagesBean.haveTouristicPlaces}">
 						<center>
-							<BR /> <BR />
+							<BR /> <BR /> <BR /> <BR /> <BR /> <BR /> <BR /> <BR />
 							<H1>YOU DON'T FOLLOW A TOURISTIC PLACES</H1>
 							<h:graphicImage
 								value="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVW9jY9HP8yUbM1fvY5MuYciP1IPp86rQVLF0xRQbAwC2_d7z9"
@@ -296,8 +320,7 @@
 								style="display: inline-block;">
 								<div class="be-post">
 									<a href="page1.html" class="be-img-block"> <h:graphicImage
-											value="http://localhost:18080/hypnotrip-web/resources/img/p1.jpg"
-											alt="" />
+											value="#{p.imageURL}" style="width:400px;height:200px" alt="" />
 									</a> <a href="page1.html" class="be-post-title"><h:outputText
 											value="#{p.description}" /></a> <span>
 										<center>
@@ -312,7 +335,34 @@
 										<span>by <a href="page1.html">HypnoTrip</a>
 										</span>
 									</div>
-									<center></center>
+									<div class="info-block">
+										<center>
+											<span><i class="fa fa-thumbs-o-up"></i> <h:outputText
+													value="#{allEventTouristicPlacesAndOfferBean.nbrFollowers(p.pageId)}" /></span>
+										</center>
+									</div>
+									<center>
+										<h:form id="f22">
+											<h:commandButton class="btn color-1 size-2 hover-1"
+												action="#{myFollowersPagesBean.unfollowPage(p.pageId)}"
+												value="UnFollow">
+											</h:commandButton>
+											<h:commandButton
+												class="btn color-1 size-2 hover-1 fa fa-thumbs-o-up"
+												style="background: green"
+												action="#{myFollowersPagesBean.wishPage(p.pageId)}"
+												value="Wish This"
+												rendered="#{!myFollowersPagesBean.isWishPage(p.pageId)}">
+											</h:commandButton>
+											<h:commandButton
+												class="btn color-1 size-2 hover-1 fa fa-thumbs-o-up"
+												style="background: green"
+												action="#{myFollowersPagesBean.unWish(p.pageId)}"
+												value="UnWish"
+												rendered="#{myFollowersPagesBean.isWishPage(p.pageId)}">
+											</h:commandButton>
+										</h:form>
+									</center>
 								</div>
 							</div>
 						</ui:repeat>

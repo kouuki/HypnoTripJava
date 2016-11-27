@@ -69,8 +69,6 @@ public class MyFollowersPagesBean {
 			haveFollow = false;
 			follow.setNbrFollowers(followersServicesLocal.nbrFollowers(follow.getId().getPageId()));
 			follow.setNbrPost(followersServicesLocal.nbrPostsByUser(follow.getId().getPageId(), idUserConnected));
-			System.out.println(follow.getNbrFollowers());
-			System.out.println(follow.getNbrPost() + " test nbrpost");
 			if (follow.getPages() instanceof Event) {
 				haveFollow = true;
 				haveEvents = true;
@@ -116,6 +114,29 @@ public class MyFollowersPagesBean {
 		displayAllOffer = false;
 		displayAllEvent = false;
 
+	}
+
+	public void unfollowPage(Integer idPages) {
+		Follows follow = followersServicesLocal.GetLastFollowForPageByIdUser(idPages, idUserConnected);
+		followersServicesLocal.SaveOrUpdate(follow.getId(), false, false);
+		FacesContext.getCurrentInstance().getViewRoot().getViewMap().clear();
+	}
+
+	public void unWishPage(Integer idPages) {
+		Follows follow = followersServicesLocal.GetLastFollowForPageByIdUser(idPages, idUserConnected);
+		followersServicesLocal.SaveOrUpdate(follow.getId(), true, false);
+		FacesContext.getCurrentInstance().getViewRoot().getViewMap().clear();
+	}
+
+	public void wishPage(Integer idPages) {
+		Follows follow = followersServicesLocal.GetLastFollowForPageByIdUser(idPages, idUserConnected);
+		followersServicesLocal.SaveOrUpdate(follow.getId(), true, true);
+		FacesContext.getCurrentInstance().getViewRoot().getViewMap().clear();
+	}
+
+	public boolean isWishPage(Integer idPages) {
+		Follows follow = followersServicesLocal.GetLastFollowForPageByIdUser(idPages, idUserConnected);
+		return follow.isWishStat();
 	}
 
 	public void unfollow() {

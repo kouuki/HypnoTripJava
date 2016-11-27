@@ -11,29 +11,38 @@
 		<h:head>
 		</h:head>
 		<h:body>
-			<br />
-			<br />
-			<br />
-			<br />
-			<br />
-			<br />
-			<br />
+
+
 			<div class="Card ShadowEffect HeiAutoOnMobile">
 				<div class="Card ShadowEffect HeiAutoOnMobile">
-					<center>
-						<p:chart type="bar"
-							model="#{statisticForAllPagesByFollowersAndWishBean.horizontalBarModel}"
-							style="height:300px" />
 
+					<p:chart type="line"
+						model="#{statPagesOrderByFollowersAndOrderByWish.multiAxisModelFollowers}"
+						style="height:400px;" />
 
-
-
-
-					</center>
 				</div>
 
 			</div>
-		</h:body>
 
+			<div class="Card ShadowEffect HeiAutoOnMobile">
+				<div class="Card ShadowEffect HeiAutoOnMobile">
+					<BR />
+					<p:chart type="line"
+						model="#{statPagesOrderByFollowersAndOrderByWish.multiAxisModelWish}"
+						style="height:400px;" />
+
+				</div>
+
+			</div>
+
+
+
+
+
+
+
+
+
+		</h:body>
 	</ui:define>
 </ui:composition>

@@ -90,7 +90,7 @@ public class FollowersServices implements FollowersServicesRemote, FollowersServ
 		Follows follow : follows) {
 			nbrfollowrs++;
 		}
-		System.out.println(nbrfollowrs + "   nbr foloooooooo");
+
 		return nbrfollowrs;
 	}
 
@@ -191,7 +191,6 @@ public class FollowersServices implements FollowersServicesRemote, FollowersServ
 				String dateEndOffer = dateFormat.format(((Offer) follows.getPages()).getFinishDate());
 				if (dateNow.equals(dateEndOffer)) {
 					listMyEventForToDay.add(follows);
-					System.out.println("jit hné");
 				}
 			} else if (follows.getPages() instanceof Event) {
 				if (dateNow.equals(((Event) follows.getPages()).getDateOfEvent().toString())) {
@@ -199,7 +198,6 @@ public class FollowersServices implements FollowersServicesRemote, FollowersServ
 				}
 			}
 		}
-		System.out.println("5rajt men hné ");
 		return listMyEventForToDay;
 	}
 
@@ -265,4 +263,37 @@ public class FollowersServices implements FollowersServicesRemote, FollowersServ
 		return nbrWish;
 	}
 
+	public Follows GetLastFollowForPageByIdUser(Integer idPage, String userId) {
+
+		// String jpql = "UPDATE Follows f SET f.followStat=false,
+		// f.wishStat=false WHERE f.id.pageId=(SELECT "
+		// + "fo.id.pageId FROM Follows fo WHERE fo.id.pageId=:param ORDER BY
+		// fo.id.dateFollow DESC LIMIT 1) AND f.id.userId=(SELECT "
+		// + "fo.id.userId FROM Follows fo WHERE fo.id.userId=:param1 ORDER BY
+		// fo.id.dateFollow DESC LIMIT 1)";
+		// Query query = entityManager.createQuery(jpql);
+		// query.setParameter("param", idPage);
+		// query.setParameter("param1", userId);
+		// query.executeUpdate();
+
+		String jpql = "SELECT f FROM Follows f WHERE f.id.pageId=:param AND f.id.userId=:param1";
+		Query query = entityManager.createQuery(jpql);
+		query.setParameter("param", idPage);
+		query.setParameter("param1", userId);
+		@SuppressWarnings("unchecked")
+		List<Follows> follows = query.getResultList();
+		return follows.get(follows.size() - 1);
+
+	}
+
+	public List<Pages> listPagesOrdredByFollowing() {
+		List<Pages> ListPagesToReturn = new ArrayList<>();
+		String jpql = "SELECT f FROM Follows f GROUP BY f.id.pageId ORDER BY Count(f.id.pageId) DESC";
+		Query query = entityManager.createQuery(jpql);
+		List<Follows> listFollowersByOrederOfFollowers = query.getResultList();
+		for (Follows follows : listFollowersByOrederOfFollowers) {
+			ListPagesToReturn.add(follows.getPages());
+		}
+		return ListPagesToReturn;
+	}
 }

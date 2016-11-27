@@ -13,9 +13,18 @@
 					<div class="creative_filds_block">
 						<div class="ul">
 							<h:form>
-								<h:commandLink
-									action="#{allEventTouristicPlacesAndOfferBean.DisplayPages()}"
-									value="Display All Pages" class="filter active" />
+								<BR />
+								<BR />
+								<BR />
+								<BR />
+								<BR />
+								<BR />
+								<BR />
+								<BR />
+								<BR />
+								<BR />
+								<BR />
+
 								<h:commandLink
 									action="#{allEventTouristicPlacesAndOfferBean.DisplayOffer()}"
 									value="Display All Offer" class="filter active" />
@@ -25,6 +34,17 @@
 								<h:commandLink
 									action="#{allEventTouristicPlacesAndOfferBean.DisplayTouristicPlaces()}"
 									value="Display All Touristic Places" class="filter active" />
+								<BR />
+								<BR />
+								<BR />
+								<BR />
+								<BR />
+								<BR />
+								<BR />
+								<BR />
+								<BR />
+								<BR />
+
 							</h:form>
 
 						</div>
@@ -33,7 +53,6 @@
 				<!-- *************************************************************************************************************************** -->
 				<!-- *********************************************************** ALL OFFER ***************************************************** -->
 				<!-- *************************************************************************************************************************** -->
-
 
 				<ui:repeat
 					value="#{allEventTouristicPlacesAndOfferBean.listAllOffers}"
@@ -45,7 +64,7 @@
 						style="display: inline-block;">
 						<div class="be-post">
 							<a href="page1.html" class="be-img-block"> <h:graphicImage
-									value="#{p.imageURL}" alt="" />
+									value="#{p.imageURL}" style="width:400px;height:200px" alt="" />
 							</a> <a href="page1.html" class="be-post-title"><h:outputText
 									value="#{p.description}" /></a> <a href="page1.html"
 								class="be-post-title"><center>
@@ -64,6 +83,12 @@
 									alt="" />
 								<span>by <a href="page1.html">HypnoTrip</a>
 								</span>
+							</div>
+							<div class="info-block">
+								<center>
+									<span><i class="fa fa-thumbs-o-up"></i> <h:outputText
+											value="#{allEventTouristicPlacesAndOfferBean.nbrFollowers(p.pageId)}" /></span>
+								</center>
 							</div>
 							<center>
 								<h:form id="f1" rendered="#{!empty loginBean.identifiedUser}">
@@ -102,7 +127,7 @@
 						style="display: inline-block;">
 						<div class="be-post">
 							<a href="page1.html" class="be-img-block"> <h:graphicImage
-									value="#{p.imageURL}" alt="" />
+									value="#{p.imageURL}" style="width:400px;height:200px" alt="" />
 							</a> <a href="page1.html" class="be-post-title"><h:outputText
 									value="#{p.description}" /></a><a href="page1.html"
 								class="be-post-title"><center>
@@ -113,12 +138,19 @@
 											value="#{p.categoriePage.toUpperCase()}" /> </a>
 								</center>
 							</span>
+
 							<div class="author-post">
 								<h:graphicImage
 									value="http://localhost:18080/hypnotrip-web/resources/img/a1.png"
 									alt="" />
 								<span>by <a href="page1.html">HypnoTrip</a>
 								</span>
+							</div>
+							<div class="info-block">
+								<center>
+									<span><i class="fa fa-thumbs-o-up"></i> <h:outputText
+											value="#{allEventTouristicPlacesAndOfferBean.nbrFollowers(p.pageId)}" /></span>
+								</center>
 							</div>
 							<center>
 								<h:form id="f1" rendered="#{!empty loginBean.identifiedUser}">
@@ -158,9 +190,9 @@
 						style="display: inline-block;">
 						<div class="be-post">
 							<a href="page1.html" class="be-img-block"><h:graphicImage
-									value="#{p.imageURL}" alt="" /> </a> <a href="page1.html"
-								class="be-post-title"><h:outputText value="#{p.description}" /></a>
-							<span>
+									value="#{p.imageURL}" style="width:400px;height:200px" alt="" />
+							</a> <a href="page1.html" class="be-post-title"><h:outputText
+									value="#{p.description}" /></a> <span>
 								<center>
 									<a href="#" class="be-post-tag"><h:outputText
 											value="#{p.categoriePage.toUpperCase()}" /> </a>
@@ -172,6 +204,12 @@
 									alt="" />
 								<span>by <a href="page1.html">HypnoTrip</a>
 								</span>
+							</div>
+							<div class="info-block">
+								<center>
+									<span><i class="fa fa-thumbs-o-up"></i> <h:outputText
+											value="#{allEventTouristicPlacesAndOfferBean.nbrFollowers(p.pageId)}" /></span>
+								</center>
 							</div>
 							<center>
 								<h:form id="f1" rendered="#{!empty loginBean.identifiedUser}">
@@ -203,16 +241,21 @@
 				<!-- *************************************************************************************************************************** -->
 
 
+				
+
+
+
 				<ui:repeat
-					value="#{allEventTouristicPlacesAndOfferBean.listAllPages}" var="p"
-					rendered="#{allEventTouristicPlacesAndOfferBean.displayAllPages}">
+					value="#{allEventTouristicPlacesAndOfferBean.listAllPagesToDisplay}"
+					var="p"
+					rendered="#{allEventTouristicPlacesAndOfferBean.displayForm1}">
 
 
 					<div class="category-1 mix custom-column-5"
 						style="display: inline-block;">
 						<div class="be-post">
-							<a href="page1.html" class="be-img-block"> <h:graphicImage
-									value="#{p.imageURL}" alt="" />
+							<a href="page1.html" class="be-img-block"><h:graphicImage
+									value="#{p.imageURL}" style="width:400px;height:200px" alt="" />
 							</a> <a href="page1.html" class="be-post-title"><h:outputText
 									value="#{p.description}" /></a> <span>
 								<center>
@@ -227,58 +270,11 @@
 								<span>by <a href="page1.html">HypnoTrip</a>
 								</span>
 							</div>
-							<center>
-								<h:form id="f1" rendered="#{!empty loginBean.identifiedUser}">
-									<h:commandButton class="btn color-1 size-2 hover-1"
-										action="#{allEventTouristicPlacesAndOfferBean.follow()}"
-										value="Follow">
-										<f:setPropertyActionListener value="#{p}"
-											target="#{allEventTouristicPlacesAndOfferBean.pagesSelected}"></f:setPropertyActionListener>
-									</h:commandButton>
-
-									<h:commandButton
-										class="btn color-1 size-2 hover-1 fa fa-thumbs-o-up"
-										style="background: green"
-										action="#{allEventTouristicPlacesAndOfferBean.WishDirect()}"
-										value="Wish">
-										<f:setPropertyActionListener value="#{p}"
-											target="#{allEventTouristicPlacesAndOfferBean.pagesSelected}"></f:setPropertyActionListener>
-									</h:commandButton>
-								</h:form>
-							</center>
-						</div>
-					</div>
-				</ui:repeat>
-
-
-				<!-- *************************************************************************************************************************** -->
-				<!-- *************************************************************************************************************************** -->
-				<!-- *************************************************************************************************************************** -->
-
-				<ui:repeat
-					value="#{allEventTouristicPlacesAndOfferBean.listAllPagesToDisplay}"
-					var="p"
-					rendered="#{allEventTouristicPlacesAndOfferBean.displayForm1}">
-
-
-					<div class="category-1 mix custom-column-5"
-						style="display: inline-block;">
-						<div class="be-post">
-							<a href="page1.html" class="be-img-block"> <h:graphicImage
-									value="#{p.imageURL}" alt="" />
-							</a> <a href="page1.html" class="be-post-title"><h:outputText
-									value="#{p.description}" /></a> <span>
+							<div class="info-block">
 								<center>
-									<a href="#" class="be-post-tag"><h:outputText
-											value="#{p.categoriePage.toUpperCase()}" /> </a>
+									<span><i class="fa fa-thumbs-o-up"></i> <h:outputText
+											value="#{allEventTouristicPlacesAndOfferBean.nbrFollowers(p.pageId)}" /></span>
 								</center>
-							</span>
-							<div class="author-post">
-								<h:graphicImage
-									value="http://localhost:18080/hypnotrip-web/resources/img/a1.png"
-									alt="" />
-								<span>by <a href="page1.html">HypnoTrip</a>
-								</span>
 							</div>
 							<center>
 								<h:form id="f1" rendered="#{!empty loginBean.identifiedUser}">
@@ -315,7 +311,7 @@
 						<div class="category-1 mix " style="display: inline-block;">
 							<div class="be-post">
 								<a href="page1.html" class="be-img-block"> <h:graphicImage
-										value="#{p.imageURL}" alt="" />
+										value="#{p.imageURL}" style="width:400px;height:200px" alt="" />
 								</a> <a href="page1.html" class="be-post-title"><h:outputText
 										value="#{allEventTouristicPlacesAndOfferBean.pagesSelected.description}" /></a>
 								<span>
