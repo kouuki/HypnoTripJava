@@ -1,6 +1,7 @@
 package com.esprit.hypnotrip.presentation.mbeans;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -17,6 +18,7 @@ import com.esprit.hypnotrip.services.exceptions.EventOverException;
 import com.esprit.hypnotrip.services.exceptions.LimitOfBookingRechedException;
 import com.esprit.hypnotrip.services.exceptions.NoMoreTicketsException;
 import com.esprit.hypnotrip.services.exceptions.WrongNumberOfCancelingException;
+import com.esprit.hypnotrip.services.interfaces.PageServiceLocal;
 import com.esprit.hypnotrip.services.interfaces.TicketServicesLocal;
 import com.esprit.hypnotrip.services.interfaces.UserServicesLocal;
 
@@ -28,6 +30,9 @@ public class ManageTicketsBean {
 	private TicketServicesLocal ticketServicesLocal;
 	@EJB
 	private UserServicesLocal userServicesLocal;
+	@EJB
+	private PageServiceLocal pageServiceLocal;
+	
 	@ManagedProperty(value = "#{loginBean}")
 	private LoginBean loginBean;
 
@@ -41,6 +46,7 @@ public class ManageTicketsBean {
 	private Tickets selectedTicket = new Tickets();
 	private Tickets mostBookedTicket = new Tickets();
 	private List<Tickets> tickesBooked;
+	private Integer idEvent ; 
 
 	private List<User> friendWhoAreGoingToThisEvent;
 
@@ -59,7 +65,7 @@ public class ManageTicketsBean {
 					new FacesMessage(FacesMessage.SEVERITY_WARN, "Warning!", "Wrong number of cancellation"));
 			return null;
 		}
-		return "simpleUserTicketManagement?faces-redirect=true";
+		return "simpleUserTicketManagement?faces-redirect=true&includeViewParams=true";
 	}
 
 	public Long numberOfReserverTicket(Tickets ticket) {
@@ -99,16 +105,20 @@ public class ManageTicketsBean {
 
 	@PostConstruct
 	public void init() {
-
+		Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
+		  try{
 		this.user = loginBean.getUser();
-
-		this.event = new Pages();
-		event.setPageId(11);
+		setIdEvent(Integer.parseInt(params.get("idEvent")));
+       
+		this.event = pageServiceLocal.findPageById(idEvent);
 
 		this.tickets = ticketServicesLocal.selectAllTicketsByIdEvent(event.getPageId());
 		this.mostBookedTicket = ticketServicesLocal.mostBookedTicketByEvent(event);
 		this.friendWhoAreGoingToThisEvent = userServicesLocal.getAllFriendsWhoAreGoingToTheSameEvent(event,
-				this.user.getId());
+				this.user.getId()); }
+		  catch(Exception e ) {
+			  
+		  }
 
 	}
 
@@ -146,7 +156,7 @@ public class ManageTicketsBean {
 			return null;
 		}
 
-		return "simpleUserTicketManagement?faces-redirect=true";
+		return "simpleUserTicketManagement?faces-redirect=true&includeViewParams=true";
 	}
 
 	public UserServicesLocal getUserServicesLocal() {
@@ -220,5 +230,23 @@ public class ManageTicketsBean {
 	public void setUser(User user) {
 		this.user = user;
 	}
+
+	public Integer getIdEvent() {
+		return idEvent;
+	}
+
+	public void setIdEvent(Integer idEvent) {
+		this.idEvent = idEvent;
+	}
+
+	public PageServiceLocal getPageServiceLocal() {
+		return pageServiceLocal;
+	}
+
+	public void setPageServiceLocal(PageServiceLocal pageServiceLocal) {
+		this.pageServiceLocal = pageServiceLocal;
+	}
+	
+	
 
 }
