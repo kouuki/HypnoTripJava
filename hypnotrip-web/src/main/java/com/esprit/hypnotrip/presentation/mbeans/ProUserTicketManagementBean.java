@@ -11,8 +11,6 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
-import org.primefaces.context.RequestContext;
-
 import com.esprit.hypnotrip.persistence.Pages;
 import com.esprit.hypnotrip.persistence.Tickets;
 import com.esprit.hypnotrip.persistence.User;
@@ -41,64 +39,62 @@ public class ProUserTicketManagementBean {
 	@EJB
 	private TicketServicesLocal ticketServicesLocal;
 	@EJB
-	private PageServiceLocal pageServiceLocal  ;
+	private PageServiceLocal pageServiceLocal;
 
 	@PostConstruct
 	public void init() {
 
 		Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
-		try{
-			
-		
+		try {
+
 			idEvent = Integer.parseInt(params.get("idEvent"));
 			this.user = loginBean.getUser();
-	
+
 			event = pageServiceLocal.findPageById(idEvent);
 			tickets = ticketServicesLocal.selectAllTicketsByIdEvent(event.getPageId());
 			bestBookedTicket = ticketServicesLocal.mostBookedTicketByEvent(event);
 			if (bestBookedTicket != null) {
 				displayMostBookedTicket = true;
 			}
-		
-		
-		
-		}catch(Exception e) {
-			
+
+		} catch (Exception e) {
+
 		}
 
 	}
 
 	public String doAddOrUpdateTicket() {
-		 FacesContext context = FacesContext.getCurrentInstance();
+		FacesContext context = FacesContext.getCurrentInstance();
 		try {
 			ticketServicesLocal.createOrUpdateTicket(selectedTicket, event.getPageId());
 		} catch (EventOverException e) {
-			  context.addMessage(null, new FacesMessage("Worning", "Event is over"));
-				return "";
-		}
-		catch(TicketAlreadyBookedException e) {
-	       
-	        context.addMessage(null, new FacesMessage("Worning", "Ticket already booked"));
-		
-			return "" ; 
-		}
-		
+			context.addMessage(null, new FacesMessage("Worning", "Event is over"));
+			return "";
+		} catch (TicketAlreadyBookedException e) {
 
-	  return "manageTickets?faces-redirect=true&includeViewParams=true" ; 
-	} 
+			context.addMessage(null, new FacesMessage("Worning", "Ticket already booked"));
+
+			return "";
+		}
+
+		return "manageTickets?faces-redirect=true&includeViewParams=true";
+	}
 
 	public String doDeleteTicket() {
-		 FacesContext context = FacesContext.getCurrentInstance();
+
 		try {
 			ticketServicesLocal.deleteTicket(selectedTicket);
 		} catch (EventOverException e) {
-			  context.addMessage(null, new FacesMessage("Worning", "Event is over"));
-				return "";
-		}
-		catch(TicketAlreadyBookedException e) {
-	       
-	        context.addMessage(null, new FacesMessage("Worning", "Ticket already booked"));
-			return "" ; 
+
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_WARN, "Warning!", "The event is over"));
+			return null;
+
+		} catch (TicketAlreadyBookedException e) {
+
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_WARN, "Warning!", "Event is already booked"));
+			return null;
 		}
 		return "manageTickets?faces-redirect=true&includeViewParams=true";
 
@@ -224,9 +220,5 @@ public class ProUserTicketManagementBean {
 	public void setIdEvent(Integer idEvent) {
 		this.idEvent = idEvent;
 	}
-
-	
-	
-
 
 }

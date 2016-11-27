@@ -28,14 +28,13 @@ public class ManageTicketsBean {
 	private TicketServicesLocal ticketServicesLocal;
 	@EJB
 	private UserServicesLocal userServicesLocal;
-	@ManagedProperty(value="#{loginBean}")
-	private LoginBean loginBean ;
-	
-	private User user; 
+	@ManagedProperty(value = "#{loginBean}")
+	private LoginBean loginBean;
+
+	private User user;
 
 	private boolean showListForm = true;
 	private boolean showListOfFriends = false;
-
 
 	private Pages event;
 	private List<Tickets> tickets;
@@ -46,18 +45,19 @@ public class ManageTicketsBean {
 	private List<User> friendWhoAreGoingToThisEvent;
 
 	public String doCancelBooking() {
-		 FacesContext context = FacesContext.getCurrentInstance();
-		
-		
+
 		try {
-			userServicesLocal.cancelBooking(selectedTicket, user,1);
+			userServicesLocal.cancelBooking(selectedTicket, user, 1);
 		} catch (EventOverException e) {
-			 context.addMessage(null, new FacesMessage("Worning", "Event over"));
-			 return "";
-			 
-		} catch(WrongNumberOfCancelingException e) {
-			 context.addMessage(null, new FacesMessage("Worning", "WrongNumber of canceling"));
-			 return "";
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_WARN, "Warning!", "The event is over"));
+			return null;
+
+		} catch (WrongNumberOfCancelingException e) {
+
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_WARN, "Warning!", "Wrong number of cancellation"));
+			return null;
 		}
 		return "simpleUserTicketManagement?faces-redirect=true";
 	}
@@ -102,9 +102,9 @@ public class ManageTicketsBean {
 
 	@PostConstruct
 	public void init() {
-		
+
 		this.user = loginBean.getUser();
-		
+
 		this.event = new Pages();
 		event.setPageId(11);
 
@@ -129,23 +129,26 @@ public class ManageTicketsBean {
 	}
 
 	public String doBook() {
-	    FacesContext context = FacesContext.getCurrentInstance();
+
 		user.setId(this.user.getId());
 		try {
 			userServicesLocal.bookATicket(selectedTicket, user);
-		} catch (NoMoreTicketsException e ) {
-			 context.addMessage(null, new FacesMessage("Worning", "There is no more tickets"));
-			 return "";
-		} catch(LimitOfBookingRechedException  e) {
-			 context.addMessage(null, new FacesMessage("Worning", "You only can book 2 tickets"));
-			 return "";
-			
-		} catch(EventOverException e) {
-			 context.addMessage(null, new FacesMessage("Worning", "event is over"));
-			 return "";
+		} catch (NoMoreTicketsException e) {
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_WARN, "Warning!", "No more tickets are avalible"));
+			return null;
+		} catch (LimitOfBookingRechedException e) {
+
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_WARN, "Warning!", "You only can book 2 tickets"));
+			return null;
+
+		} catch (EventOverException e) {
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_WARN, "Warning!", "The event is over"));
+			return null;
 		}
-		
-		
+
 		return "simpleUserTicketManagement?faces-redirect=true";
 	}
 
