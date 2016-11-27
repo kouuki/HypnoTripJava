@@ -30,11 +30,9 @@
 					value="Statistics On Upcoming Events" />
 			</h:form>
 
-			<br />
 
 			<h:form id="formEvenetsThisWeek"
 				rendered="#{eventsBean.displayFormThisWeek}">
-
 				<p:commandButton id="btn" type="button" icon="ui-icon-pin-s"
 					value="More directions?" onclick="PF('dlg').show();" />
 
@@ -44,8 +42,8 @@
 					<p:gmap id="gmap" center="36.806495, 10.181532" zoom="15"
 						type="ROADMAP" style="width:100%;height:400px"
 						model="#{eventsBean.simpleModelThisWeek}" />
-				</p:dialog>
 
+				</p:dialog>
 				<div class="container-fluid custom-container">
 					<div class="row">
 						<ui:repeat var="event" value="#{eventsBean.eventsThisWeek}">
@@ -97,66 +95,22 @@
 					</div>
 				</div>
 
-
-				<!-- ********************** MODAL FOR RATE ******************************************************************************************** -->
-				<div class="container">
-					<!-- Modal -->
-					<div class="modal fade" id="myModal" role="dialog">
-						<div class="modal-dialog modal-sm">
-							<div class="modal-content">
-								<div class="modal-header">
-									<h4 class="modal-title">Rating Area</h4>
-								</div>
-								<div class="modal-body">
-									<h:form>
-										<p:growl id="messages" showDetail="true" />
-										<p:rating value="#{rateBean.rating1}">
-											<p:ajax event="rate" listener="#{rateBean.onrate}"
-												update="messages" />
-											<p:ajax event="cancel" listener="#{rateBean.oncancel}"
-												update="messages" />
-										</p:rating>
-
-
-										<p:dialog header="Values" widgetVar="dlg" showEffect="fade"
-											hideEffect="fade">
-											<h:panelGrid id="display" columns="2" cellpadding="5">
-												<h:outputText value="Rating 3:" />
-												<h:outputText value="#{rateBean.rating1}" />
-											</h:panelGrid>
-										</p:dialog>
-									</h:form>
-								</div>
-								<div class="modal-footer">
-									<!-- 										ajouter une methode dans le rateBean pour redirect -->
-									<h:commandButton
-										action="#{rateBean.ReturnListUpcommingEvents()}" value="Close" />
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- ************************************************************************************************************* -->
-
 			</h:form>
-
 
 
 			<h:form id="formEvenetsNextWeek"
 				rendered="#{eventsBean.displayFormNextWeek}">
+				<p:commandButton id="btn" type="button" icon="ui-icon-pin-s"
+					value="More directions?" onclick="PF('dlg').show();" />
 
-				<p:commandButton id="btn" immediate="true" type="button"
-					icon="ui-icon-pin-s" value="More directions?"
-					onclick="PF('dlg').show();" />
-				<f:view contentType="text/html">
-					<p:dialog id="gmapDialog" widgetVar="dlg" width="625" height="400"
-						modal="true">
-						<p:growl id="messages" showDetail="true" life="2000" />
-						<p:gmap id="gmap" center="36.806495, 10.181532" zoom="15"
-							type="ROADMAP" style="width:100%;height:400px"
-							model="#{eventsBean.simpleModelNextWeek}" />
-					</p:dialog>
-				</f:view>
+				<p:dialog id="gmapDialog" widgetVar="dlg" width="625" height="400"
+					modal="true">
+					<p:growl id="messages" showDetail="true" life="2000" />
+					<p:gmap id="gmap" center="36.806495, 10.181532" zoom="15"
+						type="ROADMAP" style="width:100%;height:400px"
+						model="#{eventsBean.simpleModelNextWeek}" />
+
+				</p:dialog>
 				<div class="container-fluid custom-container">
 					<div class="row">
 						<ui:repeat var="event" value="#{eventsBean.eventsNextWeek}">
@@ -173,8 +127,6 @@
 
 									<h:outputText value="#{event.description}" />
 
-									<h:outputText value="#{event.description}" />
-
 									<br /> <br /> <b>Date of start :</b>
 
 
@@ -189,75 +141,24 @@
 
 								</div>
 								<div class="info-block">
-									<span> </span><span><h:commandButton
+									<span> <h:commandButton
 											value="#{eventsBean.followORUnfollowEvents(event.pageId)}"
 											action="#{eventsBean.doTreatement(event.pageId)}">
 
-										</h:commandButton> <h:commandButton value="Rate"
-											action="#{rateBean.getSelectedItemFromPage(event.pageId)}"
-											onclick="$('#myModal').modal('show');">
-
-											<f:ajax execute="@form" render="@none" />
-
-										</h:commandButton><BR /> <p:link outcome="simpleUserTicketManagement"
-											value="Book Ticket">
-											<f:param name="idEvent" value="#{event.pageId}" />
-										</p:link></span>
+										</h:commandButton>
+									</span>
 								</div>
 							</div>
 						</ui:repeat>
 					</div>
 				</div>
-
-				<!-- ********************** MODAL FOR RATE ******************************************************************************************** -->
-				<div class="container">
-					<!-- Modal -->
-					<div class="modal fade" id="myModal" role="dialog">
-						<div class="modal-dialog modal-sm">
-							<div class="modal-content">
-								<div class="modal-header">
-									<h4 class="modal-title">Rating Area</h4>
-								</div>
-								<div class="modal-body">
-									<h:form>
-										<p:growl id="messages" showDetail="true" />
-										<p:rating value="#{rateBean.rating1}">
-											<p:ajax event="rate" listener="#{rateBean.onrate}"
-												update="messages" />
-											<p:ajax event="cancel" listener="#{rateBean.oncancel}"
-												update="messages" />
-										</p:rating>
-
-
-										<p:dialog header="Values" widgetVar="dlg" showEffect="fade"
-											hideEffect="fade">
-											<h:panelGrid id="display" columns="2" cellpadding="5">
-												<h:outputText value="Rating 3:" />
-												<h:outputText value="#{rateBean.rating1}" />
-											</h:panelGrid>
-										</p:dialog>
-									</h:form>
-								</div>
-								<div class="modal-footer">
-									<!-- 										ajouter une methode dans le rateBean pour redirect -->
-									<h:commandButton
-										action="#{rateBean.ReturnListUpcommingEvents()}" value="Close" />
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- ************************************************************************************************************* -->
-
 			</h:form>
 
 
 			<h:form id="formEvenetsThisMonth"
 				rendered="#{eventsBean.displayFormThisMonth}">
-
-				<p:commandButton id="btn" immediate="true" type="button"
-					icon="ui-icon-pin-s" value="More directions?"
-					onclick="PF('dlg').show();" />
+				<p:commandButton id="btn" type="button" icon="ui-icon-pin-s"
+					value="More directions?" onclick="PF('dlg').show();" />
 
 				<p:dialog id="gmapDialog" widgetVar="dlg" width="625" height="400"
 					modal="true">
@@ -266,7 +167,6 @@
 						type="ROADMAP" style="width:100%;height:400px"
 						model="#{eventsBean.simpleModelThisMonth}" />
 				</p:dialog>
-
 				<div class="container-fluid custom-container">
 					<div class="row">
 						<ui:repeat var="event" value="#{eventsBean.eventsThisMonth}">
@@ -283,8 +183,6 @@
 
 									<h:outputText value="#{event.description}" />
 
-									<h:outputText value="#{event.description}" />
-
 									<br /> <br /> <b>Date of start :</b>
 
 
@@ -299,84 +197,32 @@
 
 								</div>
 								<div class="info-block">
-									<span> </span><span><h:commandButton
+									<span> <h:commandButton
 											value="#{eventsBean.followORUnfollowEvents(event.pageId)}"
 											action="#{eventsBean.doTreatement(event.pageId)}">
 
-										</h:commandButton> <h:commandButton value="Rate"
-											action="#{rateBean.getSelectedItemFromPage(event.pageId)}"
-											onclick="$('#myModal').modal('show');">
-
-											<f:ajax execute="@form" render="@none" />
-
-										</h:commandButton><BR /> <p:link outcome="simpleUserTicketManagement"
-											value="Book Ticket">
-											<f:param name="idEvent" value="#{event.pageId}" />
-										</p:link></span>
+										</h:commandButton>
+									</span>
 								</div>
 							</div>
 						</ui:repeat>
 					</div>
 				</div>
-
-				<!-- ********************** MODAL FOR RATE ******************************************************************************************** -->
-				<div class="container">
-					<!-- Modal -->
-					<div class="modal fade" id="myModal" role="dialog">
-						<div class="modal-dialog modal-sm">
-							<div class="modal-content">
-								<div class="modal-header">
-									<h4 class="modal-title">Rating Area</h4>
-								</div>
-								<div class="modal-body">
-									<h:form>
-										<p:growl id="messages" showDetail="true" />
-										<p:rating value="#{rateBean.rating1}">
-											<p:ajax event="rate" listener="#{rateBean.onrate}"
-												update="messages" />
-											<p:ajax event="cancel" listener="#{rateBean.oncancel}"
-												update="messages" />
-										</p:rating>
-
-
-										<p:dialog header="Values" widgetVar="dlg" showEffect="fade"
-											hideEffect="fade">
-											<h:panelGrid id="display" columns="2" cellpadding="5">
-												<h:outputText value="Rating 3:" />
-												<h:outputText value="#{rateBean.rating1}" />
-											</h:panelGrid>
-										</p:dialog>
-									</h:form>
-								</div>
-								<div class="modal-footer">
-									<!-- 										ajouter une methode dans le rateBean pour redirect -->
-									<h:commandButton
-										action="#{rateBean.ReturnListUpcommingEvents()}" value="Close" />
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- ************************************************************************************************************* -->
-
 			</h:form>
 
 			<h:form id="formEvenetsInMyArea"
 				rendered="#{eventsBean.displayFormMyArea}">
-				<h:form>
-					<p:commandButton id="btn" immediate="true" type="button"
-						icon="ui-icon-pin-s" value="More directions?"
-						onclick="PF('dlg').show();" />
-				</h:form>
+				<p:commandButton id="btn" type="button" icon="ui-icon-pin-s"
+					value="More directions?" onclick="PF('dlg').show();" />
+
 				<p:dialog id="gmapDialog" widgetVar="dlg" width="625" height="400"
 					modal="true">
 					<p:growl id="messages" showDetail="true" life="2000" />
 					<p:gmap id="gmap" center="36.806495, 10.181532" zoom="15"
 						type="ROADMAP" style="width:100%;height:400px"
 						model="#{eventsBean.simpleModelMyArea}" />
+
 				</p:dialog>
-
-
 
 				<div class="container-fluid custom-container">
 					<div class="row">
@@ -388,15 +234,9 @@
 											value="#{event.imageURL}" alt="" /> <!-- 									</a> <b>Title :</b> -->
 										<!-- 									<h:outputText value="#{event.title}" /> --> <!-- 									<br /> <br /> <b>Description :</b> -->
 
-										<!-- 									<h:outputText value="#{event.description}" /> -->
-
-										<!-- 									</a> <b>Title :</b> --> <!-- 									<h:outputText value="#{event.title}" /> -->
-										<!-- 									<br /> <br /> <b>Description :</b> -->
-
 									</a> <b>Title :</b>
 									<h:outputText value="#{event.pageId}" />
 									<br /> <br /> <b>Description :</b>
-
 
 									<h:outputText value="#{event.description}" />
 
@@ -414,79 +254,23 @@
 
 								</div>
 								<div class="info-block">
-									<span> </span><span><h:commandButton
+									<span> <h:commandButton
 											value="#{eventsBean.followORUnfollowEvents(event.pageId)}"
 											action="#{eventsBean.doTreatement(event.pageId)}">
 
-										</h:commandButton> <h:commandButton value="Rate"
-											action="#{rateBean.getSelectedItemFromPage(event.pageId)}"
-											onclick="$('#myModal').modal('show');">
-
-											<f:ajax execute="@form" render="@none" />
-
-										</h:commandButton><BR /> <p:link outcome="simpleUserTicketManagement"
-											value="Book Ticket">
-											<f:param name="idEvent" value="#{event.pageId}" />
-										</p:link></span>
+										</h:commandButton>
+									</span>
 								</div>
 							</div>
 						</ui:repeat>
 					</div>
 				</div>
-
-				<!-- ********************** MODAL FOR RATE ******************************************************************************************** -->
-				<div class="container">
-					<!-- Modal -->
-					<div class="modal fade" id="myModal" role="dialog">
-						<div class="modal-dialog modal-sm">
-							<div class="modal-content">
-								<div class="modal-header">
-									<h4 class="modal-title">Rating Area</h4>
-								</div>
-								<div class="modal-body">
-									<h:form>
-										<p:growl id="messages" showDetail="true" />
-										<p:rating value="#{rateBean.rating1}">
-											<p:ajax event="rate" listener="#{rateBean.onrate}"
-												update="messages" />
-											<p:ajax event="cancel" listener="#{rateBean.oncancel}"
-												update="messages" />
-										</p:rating>
-
-
-										<p:dialog header="Values" widgetVar="dlg" showEffect="fade"
-											hideEffect="fade">
-											<h:panelGrid id="display" columns="2" cellpadding="5">
-												<h:outputText value="Rating 3:" />
-												<h:outputText value="#{rateBean.rating1}" />
-											</h:panelGrid>
-										</p:dialog>
-									</h:form>
-								</div>
-								<div class="modal-footer">
-									<!-- 										ajouter une methode dans le rateBean pour redirect -->
-									<h:commandButton
-										action="#{rateBean.ReturnListUpcommingEvents()}" value="Close" />
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- ************************************************************************************************************* -->
-
 			</h:form>
 
-
-			<h:form id="formStatistics"
-				rendered="#{eventsBean.displayFormStatistics}">
-				<p:poll interval="3" update="votes" />
-				<p:chart id="votes" type="pie" model="#{eventsBean.pieChartModel}"
-					style="width:800px;height:300px" />
-			</h:form>
 		</center>
 
 		<script
-			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAio1SGmmUjVwrfIOdXbtg3mp6v5R7_0mY"
+			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGxxaKOGKwGa4wwtlZP9-R7NhL1l2MCyk"
 			async="" defer="defer" type="text/javascript"></script>
 
 	</ui:define>

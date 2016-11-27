@@ -16,6 +16,7 @@
 	<h:outputStylesheet library="style" name="idangerous.swiper.css" />
 	<h:outputStylesheet library="style" name="stylesheet.css" />
 	<h:outputStylesheet library="css" name="style.css" />
+
 </h:head>
 <h:body>
 	<div id="container">
@@ -25,6 +26,7 @@
 			<ui:insert name="content">
                 [Content goes here]
             </ui:insert>
+			<br /> <br />
 		</div>
 		<ui:include src="/WEB-INF/template/popupLogin.xhtml" />
 		<div id="footer">
@@ -32,12 +34,12 @@
 		</div>
 	</div>
 
-	<h:outputScript library="primefaces" name="jquery/jquery.js"/>
 	<h:outputScript library="script" name="bootstrap.min.js" />
 	<h:outputScript library="script" name="idangerous.swiper.min.js" />
 	<h:outputScript library="script" name="isotope.pkgd.min.js" />
 	<h:outputScript library="script" name="jquery.viewportchecker.min.js" />
 	<h:outputScript library="script" name="/global.js" />
 	<h:outputScript library="script" name="postNotification.js" />
+
 </h:body>
 </html>
