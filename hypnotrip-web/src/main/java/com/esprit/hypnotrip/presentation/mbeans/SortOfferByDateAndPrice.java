@@ -1,6 +1,7 @@
 package com.esprit.hypnotrip.presentation.mbeans;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -57,10 +58,15 @@ public class SortOfferByDateAndPrice {
 	}
 
 	public String doBuyOffer() throws EventOverException {
-		offerServiceLocal.buyAnOffer(user.getId(), offerSelected.getPageId());
-		Double somme = (offerSelected.getPrice()) * ((100 - offerSelected.getDiscount()) / 100);
-		service.retraitArgent(numCompte, password, somme);
-		return "/pages/simpleUserHome/sortOfferDateAndPrice?faces-redirect=true";
+		Date actuelle = new Date();
+		if (offerSelected.getFinishDate().after(actuelle)) {
+			offerServiceLocal.buyAnOffer(user.getId(), offerSelected.getPageId());
+			Double somme = (offerSelected.getPrice()) * ((100 - offerSelected.getDiscount()) / 100);
+			service.retraitArgent(numCompte, password, somme);
+			return "/pages/simpleUserHome/sortOfferDateAndPrice?faces-redirect=true";
+		} else {
+			return "/pages/simpleUserHome/offreInvalide?faces-redirect=true";
+		}
 	}
 
 	// ********************************************************************************
@@ -95,7 +101,12 @@ public class SortOfferByDateAndPrice {
 
 		return "";
 	}
+	
+	public String quitter() {
 
+
+		return "/pages/simpleUserHome/home?faces-redirect=true";
+	}
 	// **********************************************************************************
 
 	// **********************************************************************************

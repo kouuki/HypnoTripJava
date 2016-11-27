@@ -55,15 +55,15 @@
 									<span>
 
 								
-									<h:commandButton disabled="true"
-											action="#{manageListEventsBean.selectPage()}" value="select">
+									<h:commandButton
+											action="#{manageListEventsBean.selectPage()}" value="select" class="btn color-1 size-2 hover-1">
 
 											<f:setPropertyActionListener value="#{p}"
 												target="#{manageListEventsBean.eventSelected}"></f:setPropertyActionListener>
 										</h:commandButton>
 										
 										
-									</span><span><h:commandButton value="Manage Ticket">
+									</span><span><h:commandButton value="Manage Ticket" class="btn color-3 size-2 hover-1">
 											
 										</h:commandButton> </span>
 								</div>
@@ -135,9 +135,9 @@
 							<tr>
 								<TH>Actions</TH>
 								<TD><h:commandButton
-										action="#{manageListEventsBean.doAddEvent()}" value="save" />
+										action="#{manageListEventsBean.doAddEvent()}" value="save" class="btn color-1 size-2 hover-1"/>
 									<h:commandButton
-										action="#{manageListEventsBean.doDeletePage()}" value="delete" /></TD>
+										action="#{manageListEventsBean.doDeletePage()}" value="delete" class="btn color-3 size-2 hover-1"/></TD>
 							</tr>
 						</table>
 					</h:form>

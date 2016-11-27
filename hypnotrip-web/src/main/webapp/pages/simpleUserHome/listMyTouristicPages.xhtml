@@ -51,15 +51,18 @@
 								</div>
 								<div class="info-block">
 									<span> <h:commandButton
-											action="#{manageTouristicBean.selectPage()}" value="select">
+											action="#{manageTouristicBean.selectPage()}" value="select"
+											class="btn color-1 size-2 hover-1">
 
 											<f:setPropertyActionListener value="#{p}"
 												target="#{manageTouristicBean.touristicSelected}"></f:setPropertyActionListener>
 										</h:commandButton>
 									</span><span><h:commandButton value="Rate"
-											action="#{manageTouristicBean.ratePage()}">
+											action="#{manageTouristicBean.ratePage()}"
+											class="btn color-3 size-2 hover-1">
 											<f:setPropertyActionListener value="#{p}"
-												target="#{manageTouristicBean.touristicSelected}"></f:setPropertyActionListener>
+												target="#{manageTouristicBean.touristicSelected}"
+												class="btn color-3 size-2 hover-1"></f:setPropertyActionListener>
 
 										</h:commandButton> </span>
 								</div>
@@ -121,10 +124,12 @@
 							<tr>
 								<TH>Actions</TH>
 								<TD><h:commandButton
-										action="#{manageTouristicBean.doAddTouristic()}" value="save" />
-									<h:commandButton action="#{manageTouristicBean.doDeletePage()}"
-										value="delete" /> <h:commandButton
-										action="#{manageTouristicBean.cancel()}" value="cancel" /></TD>
+										action="#{manageTouristicBean.doAddTouristic()}" value="save"
+										class="btn color-1 size-2 hover-1" /> <h:commandButton
+										action="#{manageTouristicBean.doDeletePage()}" value="delete"
+										class="btn color-2 size-2 hover-1" /> <h:commandButton
+										action="#{manageTouristicBean.cancel()}" value="cancel"
+										class="btn color-3 size-2 hover-1" /></TD>
 							</tr>
 						</table>
 					</h:form>

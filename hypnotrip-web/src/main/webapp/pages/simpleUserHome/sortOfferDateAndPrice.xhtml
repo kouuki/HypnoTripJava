@@ -61,14 +61,14 @@
 								</div>
 								<div class="info-block">
 									<span> <h:commandButton
-											action="#{sortOfferByDateAndPrice.selectPage()}" value="Buy">
+											action="#{sortOfferByDateAndPrice.selectPage()}" value="Buy"  class="btn color-1 size-2 hover-1">
 
 											<f:setPropertyActionListener value="#{p}"
 												target="#{sortOfferByDateAndPrice.offerSelected}"></f:setPropertyActionListener>
 										</h:commandButton>
 									</span><span><h:commandButton value="Rate"
 											action="#{rateBean.getSelectedItemFromPage(p.pageId)}"
-											onclick="$('#myModal').modal('show');">
+											onclick="$('#myModal').modal('show');" class="btn color-3 size-2 hover-1">
 
 											<f:ajax execute="@form" render="@none" />
 
@@ -172,8 +172,8 @@
 											<td><h:inputText value="#{sortOfferByDateAndPrice.password}"
 													required="true" requiredMessage="field required" /></td>
 										</tr>
-									</table></span><br /> <span> <h:commandButton
-										action="#{sortOfferByDateAndPrice.doBuyOffer()}" value="Buy" />
+									</table></span><br /> <br /><span> <h:commandButton
+										action="#{sortOfferByDateAndPrice.doBuyOffer()}" value="Buy"  class="btn color-1 size-2 hover-1"/>
 
 
 								</span>
