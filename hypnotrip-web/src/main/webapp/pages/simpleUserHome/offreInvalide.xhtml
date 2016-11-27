@@ -1,0 +1,46 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/template/template.xhtml">
+	<h:head>
+
+	</h:head>
+	<ui:define name="content">
+		<center>
+
+			<H1>Sorry Offer EXPIRED</H1>
+			<br /> <br /> <br /> <br />
+			<!-- ************************************************************************************************************ -->
+			<!-- ************************************************************************************************************ -->
+			<!-- ************************************************************************************************************ -->
+			<div class="container-fluid custom-container">
+				<div class="row">
+
+
+
+
+
+					<div class="category-1 mix" style="display: inline-block;">
+						<div class="be-post">
+							<a href="page1.html" class="be-img-block"> <h:graphicImage
+									value="http://drewcoaching.com/wp-content/uploads/2014/07/offer-expired.jpg"
+									alt="" /></a>
+
+						</div>
+					</div>
+					<h:form>
+						<h:commandButton action="#{sortOfferByDateAndPrice.quitter()}"
+							value="Exit" class="be-popup-sign-button" />
+					</h:form>
+				</div>
+			</div>
+		</center>
+
+	</ui:define>
+
+
+</ui:composition>

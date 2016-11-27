@@ -68,14 +68,14 @@
 									</div>
 									<div class="info-block">
 										<span> <h:commandButton
-												action="#{bestOfferForSimpleUser.selectPage()}" value="Buy">
+												action="#{bestOfferForSimpleUser.selectPage()}" value="Buy"  class="btn color-1 size-2 hover-1">
 
 												<f:setPropertyActionListener value="#{p}"
 													target="#{bestOfferForSimpleUser.offerSelected}"></f:setPropertyActionListener>
 											</h:commandButton>
 										</span><span><h:commandButton value="Rate"
 												action="#{rateBean.getSelectedItemFromPage(p.pageId)}"
-												onclick="$('#myModal').modal('show');">
+												onclick="$('#myModal').modal('show');"  class="btn color-3 size-2 hover-1">
 
 												<f:ajax execute="@form" render="@none" />
 
@@ -132,7 +132,7 @@
 						<h:form id="formForOffer"
 							rendered="#{bestOfferForSimpleUser.displayFormOffer}">
 
-							<div class="category-1 mix custom-column-5"
+							<div class="category-1 mix"
 								style="display: inline-block;">
 								<div class="be-post">
 									<a href="page1.html" class="be-img-block"> <h:graphicImage
@@ -188,8 +188,8 @@
 														value="#{bestOfferForSimpleUser.password}" required="true"
 														requiredMessage="field required" /></td>
 											</tr>
-										</table></span><br /> <span> <h:commandButton
-											action="#{bestOfferForSimpleUser.doBuyOffer()}" value="Buy" />
+										</table></span><br /><br/> <span> <h:commandButton
+											action="#{bestOfferForSimpleUser.doBuyOffer()}" value="Buy" class="btn color-1 size-2 hover-1"/>
 
 
 									</span>
