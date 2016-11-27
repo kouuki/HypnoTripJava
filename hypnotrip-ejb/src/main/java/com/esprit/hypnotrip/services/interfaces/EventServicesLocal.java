@@ -41,5 +41,7 @@ public interface EventServicesLocal {
 	void followPage(String idUser, int idPage);
 
 	void unfollowPage(String idUser, int idPage);
+	
+	int numberOfEvents();
 
 }
