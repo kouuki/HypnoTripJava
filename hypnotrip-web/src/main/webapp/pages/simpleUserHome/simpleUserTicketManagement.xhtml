@@ -29,6 +29,7 @@
 							<div id="container-mix" class="be-user-wrapper row">
 
 
+ 
 
 					<ui:repeat var="friend" value="#{manageTicketsBean.friendWhoAreGoingToThisEvent}">
 								<div class="mix category-4 custom-column-5"
@@ -77,7 +78,7 @@
 		<h:form id="listAllTickets"
 			rendered="#{manageTicketsBean.showListForm}">
 			<div id="content-block" class="gallery-block">
-
+					
 				<div class="head-bg">
 					<div class="head-bg-img"></div>
 					<div class="head-bg-content">
@@ -95,6 +96,8 @@
 				<div class="custom-container gallery-container">
 					<div class="container">
 						<br /> <br />
+						 <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+			
 						<ui:repeat var="ticket" value="#{manageTicketsBean.tickets}">
 							<div class="gallery-box clearfix">
 								<div class="gallery-a gallery-info">
@@ -146,7 +149,7 @@
 		</h:form>
 
 
-  <p:growl id="messages" showDetail="true" />
+
 	</ui:define>
 
 </ui:composition>

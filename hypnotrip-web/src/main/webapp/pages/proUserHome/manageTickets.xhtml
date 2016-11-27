@@ -19,11 +19,13 @@
 	<ui:define name="content">
 
 
-
+		  <p:growl id="messages" showDetail="true" />
 
 		<h:form id="CreateOrUpdateTicket"
 			rendered="#{proUserTicketManagementBean.showCreateUpdateForm}">
 			<div id="content-block">
+		
+	
 				<div class="container be-detail-container">
 					<div class="row">
 					
@@ -89,7 +91,7 @@
 													<h:commandLink
 														action="#{proUserTicketManagementBean.doAddOrUpdateTicket()}"
 														value="Go" class="be-register btn color-1 size-1 hover-3" >
-														<f:param name="idEvent" value="#{proUserTicketManagementBean.idEvent}" />
+														
 													</h:commandLink>
 												</div>
 											</div>
@@ -154,6 +156,7 @@
 				<div class="custom-container gallery-container">
 					<div class="container">
 						<br /> <br />
+						   <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
 						<ui:repeat var="ticket"
 							value="#{proUserTicketManagementBean.tickets}">
 							<div class="gallery-box clearfix">
@@ -202,7 +205,7 @@
 		</h:form>
 
 
-  <p:growl id="messages" showDetail="true" />
+
 
 
 	</ui:define>
