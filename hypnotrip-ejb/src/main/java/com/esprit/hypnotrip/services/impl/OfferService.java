@@ -13,6 +13,7 @@ import javax.persistence.Query;
 
 import com.esprit.hypnotrip.persistence.Buy;
 import com.esprit.hypnotrip.persistence.BuyId;
+import com.esprit.hypnotrip.persistence.Event;
 import com.esprit.hypnotrip.persistence.Offer;
 import com.esprit.hypnotrip.persistence.Pages;
 import com.esprit.hypnotrip.persistence.User;
@@ -132,6 +133,12 @@ public class OfferService implements OfferServiceRemote, OfferServiceLocal {
 
 		return query1.getResultList();
 
+	}
+
+	@Override
+	public int numberOfOffers() {
+		List<Offer> ls = SearchOffer();
+		return ls.size();
 	}
 
 }
