@@ -78,11 +78,6 @@
 											value="#{eventsBean.followORUnfollowEvents(event.pageId)}"
 											action="#{eventsBean.doTreatement(event.pageId)}">
 
-										</h:commandButton> <h:commandButton value="Rate"
-											action="#{rateBean.getSelectedItemFromPage(event.pageId)}"
-											onclick="$('#myModal').modal('show');">
-
-											<f:ajax execute="@form" render="@none" />
 
 										</h:commandButton> <BR /> <p:link outcome="simpleUserTicketManagement"
 											value="Book Ticket">
