@@ -51,7 +51,7 @@ public class StatisticForAllPagesByFollowersAndWishBean {
 		Axis xAxis = horizontalBarModel.getAxis(AxisType.X);
 		xAxis.setLabel("Follow And Wish");
 		xAxis.setMin(0);
-		xAxis.setMax(30);
+		xAxis.setMax(12);
 
 		Axis yAxis = horizontalBarModel.getAxis(AxisType.Y);
 		yAxis.setLabel("Pages");

@@ -5,7 +5,6 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
 import com.esprit.hypnotrip.services.interfaces.FollowersServicesRemote;
-import com.esprit.hypnotrip.services.interfaces.OfferServiceRemote;
 
 public class DhaferTests {
 
@@ -20,8 +19,9 @@ public class DhaferTests {
 
 		String jndi = "hypnotrip-ear/hypnotrip-ejb/FollowersServices!com.esprit.hypnotrip.services.interfaces.FollowersServicesRemote";
 		FollowersServicesRemote followersServicesRemote = (FollowersServicesRemote) context.lookup(jndi);
-
-//		followersServicesRemote.unfollowLastFollowForPage(11, "b38f3299-6949-42c7-9a6c-f998c666658f");
+		System.out.println(followersServicesRemote.listPagesOrdredByFollowing().toString());
+		// followersServicesRemote.unfollowLastFollowForPage(11,
+		// "b38f3299-6949-42c7-9a6c-f998c666658f");
 	}
 
 }

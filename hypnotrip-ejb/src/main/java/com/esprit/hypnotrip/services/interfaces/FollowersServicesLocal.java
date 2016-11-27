@@ -41,6 +41,9 @@ public interface FollowersServicesLocal {
 	Integer nbrWish(Integer idPages);
 
 	Follows GetLastFollowForPageByIdUser(Integer idPage, String userId);
+	
+	List<Pages> listPagesOrdredByFollowing();
+
 
 
 }

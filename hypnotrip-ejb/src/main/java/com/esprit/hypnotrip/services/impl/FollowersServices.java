@@ -90,7 +90,7 @@ public class FollowersServices implements FollowersServicesRemote, FollowersServ
 		Follows follow : follows) {
 			nbrfollowrs++;
 		}
-		
+
 		return nbrfollowrs;
 	}
 
@@ -191,7 +191,6 @@ public class FollowersServices implements FollowersServicesRemote, FollowersServ
 				String dateEndOffer = dateFormat.format(((Offer) follows.getPages()).getFinishDate());
 				if (dateNow.equals(dateEndOffer)) {
 					listMyEventForToDay.add(follows);
-					System.out.println("jit hné");
 				}
 			} else if (follows.getPages() instanceof Event) {
 				if (dateNow.equals(((Event) follows.getPages()).getDateOfEvent().toString())) {
@@ -199,7 +198,6 @@ public class FollowersServices implements FollowersServicesRemote, FollowersServ
 				}
 			}
 		}
-		System.out.println("5rajt men hné ");
 		return listMyEventForToDay;
 	}
 
@@ -284,7 +282,18 @@ public class FollowersServices implements FollowersServicesRemote, FollowersServ
 		query.setParameter("param1", userId);
 		@SuppressWarnings("unchecked")
 		List<Follows> follows = query.getResultList();
-		return follows.get(follows.size()-1);
+		return follows.get(follows.size() - 1);
 
+	}
+
+	public List<Pages> listPagesOrdredByFollowing() {
+		List<Pages> ListPagesToReturn = new ArrayList<>();
+		String jpql = "SELECT f FROM Follows f GROUP BY f.id.pageId ORDER BY Count(f.id.pageId) DESC";
+		Query query = entityManager.createQuery(jpql);
+		List<Follows> listFollowersByOrederOfFollowers = query.getResultList();
+		for (Follows follows : listFollowersByOrederOfFollowers) {
+			ListPagesToReturn.add(follows.getPages());
+		}
+		return ListPagesToReturn;
 	}
 }
