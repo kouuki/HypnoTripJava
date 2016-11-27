@@ -143,6 +143,7 @@ public class DefaultDataBaseDhafer {
 		Touristicplace page1 = new Touristicplace();
 		page1.setCategoriePage("sport");
 		page1.setName("Italia");
+		page1.setEtat(1);
 		page1.setDateOfCreation(new Date());
 		page1.setDescription("sport");
 		page1.setTitle("page pour le sport");
@@ -153,6 +154,7 @@ public class DefaultDataBaseDhafer {
 
 		Touristicplace page2 = new Touristicplace();
 		page2.setCategoriePage("nature");
+		page2.setEtat(1);
 		page2.setDateOfCreation(new Date());
 		page2.setName("Australia");
 		page2.setDescription("nature");
@@ -163,6 +165,7 @@ public class DefaultDataBaseDhafer {
 
 		Touristicplace page3 = new Touristicplace();
 		page3.setName("Maroc");
+		page3.setEtat(1);
 		page3.setDateOfCreation(new Date());
 		page3.setCategoriePage("plage");
 		page3.setDescription("plage");
