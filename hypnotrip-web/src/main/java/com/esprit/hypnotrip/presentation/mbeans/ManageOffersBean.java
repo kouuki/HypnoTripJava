@@ -24,6 +24,7 @@ import org.primefaces.event.SelectEvent;
 import com.esprit.hypnotrip.persistence.Offer;
 import com.esprit.hypnotrip.persistence.Pages;
 import com.esprit.hypnotrip.persistence.User;
+import com.esprit.hypnotrip.services.exceptions.EventOverException;
 import com.esprit.hypnotrip.services.interfaces.PageServiceLocal;
 import com.esprit.hypnotrip.services.interfaces.RateServiceLocal;
 
@@ -63,7 +64,7 @@ public class ManageOffersBean {
 
 	// ********************************************************************************
 
-	public String doAddOffer() {
+	public String doAddOffer() throws EventOverException {
 		if (res != "") {
 			System.out.println(res);
 			offerSelected.setImageURL(res);

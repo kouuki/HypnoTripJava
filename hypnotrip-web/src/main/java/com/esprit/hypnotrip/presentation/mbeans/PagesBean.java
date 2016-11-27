@@ -20,6 +20,7 @@ import org.primefaces.event.SelectEvent;
 import com.esprit.hypnotrip.persistence.Event;
 import com.esprit.hypnotrip.persistence.Offer;
 import com.esprit.hypnotrip.persistence.Pages;
+import com.esprit.hypnotrip.services.exceptions.EventOverException;
 import com.esprit.hypnotrip.services.interfaces.PageServiceLocal;
 import com.esprit.hypnotrip.services.interfaces.RateServiceLocal;
 
@@ -64,26 +65,26 @@ public class PagesBean {
 
 	// ********************************************************************************
 	// Ajout ou update offer Event Touristic page
-	public String doAddPage() {
+	public String doAddPage() throws EventOverException {
 		pageServiceLocal.saveOrUpdatePage(pageSelected, idOwner);
 		return "/pages/simpleUserHome/listofMyPages?faces-redirect=true";
 	}
 
-	public String doAddOffer() {
+	public String doAddOffer() throws EventOverException {
 		offerSelected.setImageURL(fileContent);
 		pageServiceLocal.saveOrUpdatePage(offerSelected, idOwner);
 		return "/pages/simpleUserHome/listofMyPages?faces-redirect=true";
 	}
 
 	// TODO doAddEvent()
-	public String doAddEvent() {
+	public String doAddEvent() throws EventOverException {
 		pageServiceLocal.saveOrUpdatePage(eventSelected, idOwner);
 		return "/pages/simpleUserHome/listofMyPages?faces-redirect=true";
 	}
 
 	// TODO doAddEvent()
 
-	public String doAddTouristic() {
+	public String doAddTouristic() throws EventOverException {
 
 		pageServiceLocal.saveOrUpdatePage(offerSelected, idOwner);
 		return "/pages/simpleUserHome/listofMyPages?faces-redirect=true";

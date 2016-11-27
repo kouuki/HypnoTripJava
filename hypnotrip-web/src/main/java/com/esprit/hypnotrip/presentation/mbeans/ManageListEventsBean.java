@@ -25,6 +25,7 @@ import org.primefaces.event.SelectEvent;
 import com.esprit.hypnotrip.persistence.Event;
 import com.esprit.hypnotrip.persistence.Pages;
 import com.esprit.hypnotrip.persistence.User;
+import com.esprit.hypnotrip.services.exceptions.EventOverException;
 import com.esprit.hypnotrip.services.interfaces.PageServiceLocal;
 import com.esprit.hypnotrip.services.interfaces.RateServiceLocal;
 
@@ -38,11 +39,12 @@ public class ManageListEventsBean {
 
 	@ManagedProperty(value = "#{loginBean}")
 	private LoginBean loginBean;
-	
+
 	private User user;
 
 	// Controle sur le chargement des form
 	private Boolean displayForm2 = false;
+
 	public LoginBean getLoginBean() {
 		return loginBean;
 	}
@@ -68,7 +70,7 @@ public class ManageListEventsBean {
 
 	@PostConstruct
 	public void init() {
-		user=loginBean.getUser();
+		user = loginBean.getUser();
 
 		myPages = pageServiceLocal.ListMyEvents(user.getId());
 	}
@@ -81,7 +83,7 @@ public class ManageListEventsBean {
 	}
 
 	// ********************************************************************************
-	public String doAddEvent() {
+	public String doAddEvent() throws EventOverException {
 
 		if (res != "") {
 			System.out.println(res);
@@ -93,7 +95,7 @@ public class ManageListEventsBean {
 
 	// ********************************************************************************
 	// ********************************************************************************
-	public String doAddEventForPro() {
+	public String doAddEventForPro() throws EventOverException {
 		if (res != "") {
 			System.out.println(res);
 			eventSelected.setImageURL(res);

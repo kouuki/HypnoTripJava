@@ -11,6 +11,7 @@ import javax.faces.bean.ViewScoped;
 
 import com.esprit.hypnotrip.persistence.Offer;
 import com.esprit.hypnotrip.persistence.User;
+import com.esprit.hypnotrip.services.exceptions.EventOverException;
 import com.esprit.hypnotrip.services.interfaces.OfferServiceLocal;
 import com.esprit.hypnotrip.services.interfaces.RateServiceLocal;
 
@@ -63,7 +64,7 @@ public class BestOfferForSimpleUser {
 		myPages.add(offerServiceLocal.bestOffer());
 	}
 
-	public String doBuyOffer() {
+	public String doBuyOffer() throws EventOverException {
 		offerServiceLocal.buyAnOffer(user.getId(), offerSelected.getPageId());
 		Double somme = (offerSelected.getPrice()) * ((100 - offerSelected.getDiscount()) / 100);
 		service.retraitArgent(numCompte, password, somme);

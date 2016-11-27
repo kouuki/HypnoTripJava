@@ -5,17 +5,21 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import com.esprit.hypnotrip.persistence.Buy;
+import com.esprit.hypnotrip.persistence.BuyId;
 import com.esprit.hypnotrip.persistence.Offer;
 import com.esprit.hypnotrip.persistence.Pages;
 import com.esprit.hypnotrip.persistence.User;
+import com.esprit.hypnotrip.services.exceptions.EventOverException;
 import com.esprit.hypnotrip.services.interfaces.OfferServiceLocal;
 import com.esprit.hypnotrip.services.interfaces.OfferServiceRemote;
+import com.esprit.hypnotrip.services.interfaces.PageServiceLocal;
 
 /**
  * Session Bean implementation class OfferService
@@ -24,6 +28,9 @@ import com.esprit.hypnotrip.services.interfaces.OfferServiceRemote;
 public class OfferService implements OfferServiceRemote, OfferServiceLocal {
 	@PersistenceContext
 	private EntityManager entityManager;
+
+	@EJB
+	private PageServiceLocal pageService;
 
 	/**
 	 * Default constructor.
@@ -108,11 +115,14 @@ public class OfferService implements OfferServiceRemote, OfferServiceLocal {
 	}
 
 	@Override
-	public void buyAnOffer(String idUser, Integer idOffer) {
+	public void buyAnOffer(String idUser, Integer idOffer) throws EventOverException {
+
 		Offer offer = (Offer) entityManager.find(Pages.class, idOffer);
 		User user = entityManager.find(User.class, idUser);
+		BuyId buyId = new BuyId(offer.getPageId(), user.getId());
 
-		offer.setUser(user);
+		Buy buy = new Buy(buyId);
+		entityManager.merge(buy);
 	}
 
 	@Override

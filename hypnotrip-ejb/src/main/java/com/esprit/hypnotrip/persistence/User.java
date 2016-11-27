@@ -55,7 +55,7 @@ public class User implements java.io.Serializable {
 
 	private List<Invitations> pagesRecieveInvitation;
 
-	private List<Offer> listOffers;
+	private List<Buy> listBuy;
 
 	public User() {
 	}
@@ -368,32 +368,37 @@ public class User implements java.io.Serializable {
 		return "User [firstName=" + firstName + ", secondName=" + secondName + "]";
 	}
 
-
-//	@Override
-//	public String toString() {
-//		return "User [id=" + id + ", accessFailedCount=" + accessFailedCount + ", address=" + address + ", dateOfBirth="
-//				+ dateOfBirth + ", email=" + email + ", emailConfirmed=" + emailConfirmed + ", etat=" + etat
-//				+ ", firstName=" + firstName + ", imageUrl=" + imageUrl + ", lockoutEnabled=" + lockoutEnabled
-//				+ ", lockoutEndDateUtc=" + lockoutEndDateUtc + ", login=" + login + ", password=" + password
-//				+ ", passwordHash=" + passwordHash + ", phoneNumber=" + phoneNumber + ", phoneNumberConfirmed="
-//				+ phoneNumberConfirmed + ", role=" + role + ", secondName=" + secondName + ", securityStamp="
-//				+ securityStamp + ", twoFactorEnabled=" + twoFactorEnabled + ", userName=" + userName + ", rates="
-//				+ rates + ", bookDescriptions=" + bookDescriptions + ", pagesFollowed=" + pagesFollowed
-//				+ ", pagesSendInvitation=" + pagesSendInvitation + ", pagesRecieveInvitation=" + pagesRecieveInvitation
-//				+ "]";
-//	}
-//	
-	
-	
-	
-
 	@OneToMany(mappedBy = "user")
-	public List<Offer> getListOffers() {
-		return listOffers;
+	public List<Buy> getListBuy() {
+		return listBuy;
 	}
 
-	public void setListOffers(List<Offer> listOffers) {
-		this.listOffers = listOffers;
+	public void setListBuy(List<Buy> listBuy) {
+		this.listBuy = listBuy;
 	}
+
+	// @Override
+	// public String toString() {
+	// return "User [id=" + id + ", accessFailedCount=" + accessFailedCount + ",
+	// address=" + address + ", dateOfBirth="
+	// + dateOfBirth + ", email=" + email + ", emailConfirmed=" + emailConfirmed
+	// + ", etat=" + etat
+	// + ", firstName=" + firstName + ", imageUrl=" + imageUrl + ",
+	// lockoutEnabled=" + lockoutEnabled
+	// + ", lockoutEndDateUtc=" + lockoutEndDateUtc + ", login=" + login + ",
+	// password=" + password
+	// + ", passwordHash=" + passwordHash + ", phoneNumber=" + phoneNumber + ",
+	// phoneNumberConfirmed="
+	// + phoneNumberConfirmed + ", role=" + role + ", secondName=" + secondName
+	// + ", securityStamp="
+	// + securityStamp + ", twoFactorEnabled=" + twoFactorEnabled + ",
+	// userName=" + userName + ", rates="
+	// + rates + ", bookDescriptions=" + bookDescriptions + ", pagesFollowed=" +
+	// pagesFollowed
+	// + ", pagesSendInvitation=" + pagesSendInvitation + ",
+	// pagesRecieveInvitation=" + pagesRecieveInvitation
+	// + "]";
+	// }
+	//
 
 }

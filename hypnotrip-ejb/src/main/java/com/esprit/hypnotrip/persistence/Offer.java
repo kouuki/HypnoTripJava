@@ -2,10 +2,10 @@ package com.esprit.hypnotrip.persistence;
 // Generated 19 nov. 2016 19:30:02 by Hibernate Tools 4.3.1.Final
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -27,23 +27,22 @@ public class Offer extends Pages implements java.io.Serializable {
 	private double price;
 	private double discount;
 
-	private User user;
+	private List<Buy> listBuy;
 
 	public Offer() {
 
 	}
 
-	public Offer(String description, String userId) {
+	public Offer(String description, String userId, Date finishDate) {
 		super(description, userId);
 		this.beginDate = new Date();
-		this.finishDate = new Date();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Offer(String description, String title, double price, double discount) {
+	public Offer(String description, String title, double price, double discount, Date finishDate) {
 		super(description, title);
 		this.beginDate = new Date();
-		this.finishDate = new Date();
+		this.finishDate = finishDate;
 		this.price = price;
 		this.discount = discount;
 		// TODO Auto-generated constructor stub
@@ -97,13 +96,13 @@ public class Offer extends Pages implements java.io.Serializable {
 				+ discount + "]";
 	}
 
-	@ManyToOne
-	public User getUser() {
-		return user;
+	@OneToMany(mappedBy = "offer")
+	public List<Buy> getListBuy() {
+		return listBuy;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setListBuy(List<Buy> listBuy) {
+		this.listBuy = listBuy;
 	}
 
 }

@@ -24,6 +24,7 @@ import org.primefaces.event.SelectEvent;
 import com.esprit.hypnotrip.persistence.Pages;
 import com.esprit.hypnotrip.persistence.Touristicplace;
 import com.esprit.hypnotrip.persistence.User;
+import com.esprit.hypnotrip.services.exceptions.EventOverException;
 import com.esprit.hypnotrip.services.interfaces.PageServiceLocal;
 import com.esprit.hypnotrip.services.interfaces.RateServiceLocal;
 
@@ -65,7 +66,7 @@ public class ManageTouristicBean {
 	// ********************************************************************************
 	// Ajout ou update offer Event Touristic page
 
-	public String doAddTouristic() {
+	public String doAddTouristic() throws EventOverException {
 		if (res != "") {
 			System.out.println(res);
 			touristicSelected.setImageURL(res);

@@ -39,7 +39,7 @@ public class Event extends Pages implements java.io.Serializable {
 
 	public Event(String description, String userId, Date dateOfEvent, float latitude, float longitude, String place) {
 		super(description, userId);
-		this.dateOfEvent = new Date();
+		this.dateOfEvent = dateOfEvent;
 		this.latitude = latitude;
 		this.longitude = longitude;
 		this.place = place;
@@ -47,7 +47,7 @@ public class Event extends Pages implements java.io.Serializable {
 
 	public Event(String description, String title, Date dateOfEvent, String place) {
 		super(description, title);
-		this.dateOfEvent = new Date();
+		this.dateOfEvent = dateOfEvent;
 
 		this.place = place;
 	}

@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.ejb.Remote;
 
 import com.esprit.hypnotrip.persistence.Offer;
+import com.esprit.hypnotrip.services.exceptions.EventOverException;
 
 @Remote
 public interface OfferServiceRemote {
@@ -22,7 +23,7 @@ public interface OfferServiceRemote {
 
 	List<Offer> listOffers();
 
-	void buyAnOffer(String idUser, Integer idOffer);
+	void buyAnOffer(String idUser, Integer idOffer) throws EventOverException;
 
 	List<Offer> SearchOffer();
 

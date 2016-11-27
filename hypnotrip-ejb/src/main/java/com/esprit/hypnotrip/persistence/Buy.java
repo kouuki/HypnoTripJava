@@ -1,11 +1,10 @@
 package com.esprit.hypnotrip.persistence;
 // Generated 19 nov. 2016 19:30:02 by Hibernate Tools 4.3.1.Final
 
-import javax.persistence.AttributeOverride;
-import javax.persistence.AttributeOverrides;
-import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -19,9 +18,20 @@ public class Buy implements java.io.Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+
 	private BuyId id;
 
+	private User user;
+
+	private Offer offer;
+
 	public Buy() {
+	}
+
+	public Buy(User user, Offer offer) {
+		super();
+		this.user = user;
+		this.offer = offer;
 	}
 
 	public Buy(BuyId id) {
@@ -29,15 +39,32 @@ public class Buy implements java.io.Serializable {
 	}
 
 	@EmbeddedId
-
-	@AttributeOverrides({ @AttributeOverride(name = "offerId", column = @Column(name = "OfferId", nullable = false) ),
-			@AttributeOverride(name = "userId", column = @Column(name = "UserId", nullable = false, length = 128) ) })
 	public BuyId getId() {
 		return this.id;
 	}
 
 	public void setId(BuyId id) {
 		this.id = id;
+	}
+
+	@ManyToOne
+	@JoinColumn(name = "userId", referencedColumnName = "id", updatable = false, insertable = false)
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	@ManyToOne
+	@JoinColumn(name = "offerId", referencedColumnName = "pageId", updatable = false, insertable = false)
+	public Offer getOffer() {
+		return offer;
+	}
+
+	public void setOffer(Offer offer) {
+		this.offer = offer;
 	}
 
 }

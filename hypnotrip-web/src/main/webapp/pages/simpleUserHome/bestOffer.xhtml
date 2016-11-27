@@ -7,7 +7,11 @@
 	xmlns:p="http://primefaces.org/ui"
 	template="/WEB-INF/template/template.xhtml">
 	<h:head>
-
+		<style>
+.panelGridCenter {
+    margin: 0 auto;
+}
+</style>
 	</h:head>
 	<ui:define name="content">
 
@@ -20,178 +24,180 @@
 			<!-- ************************************************************************************************************ -->
 			<div class="container-fluid custom-container">
 				<div class="row">
-					<h:form id="formListOfPages"
-						rendered="#{bestOfferForSimpleUser.displayForm1}">
+				
+						<h:form id="formListOfPages"
+							rendered="#{bestOfferForSimpleUser.displayForm1}">
 
 
-						<ui:repeat var="p" value="#{bestOfferForSimpleUser.myPages}">
+							<ui:repeat var="p" value="#{bestOfferForSimpleUser.myPages}">
+
+								<div class="category-1 mix custom-column-50"
+									style="display: inline-block;">
+									<div class="be-post">
+										<a href="page1.html" class="be-img-block"> <h:graphicImage
+												value="#{p.imageURL}" alt="" />
+										</a> <b>Title :</b>
+										<h:outputText value="#{p.title}" />
+										<br /> <br /> <b>Description :</b>
+
+										<h:outputText value="#{p.description}" />
+
+										<br /> <br /> <b>Date of start :</b>
+
+
+										<h:outputText value="#{p.beginDate}" />
+										<br /> <br /> <b>Date of finish :</b>
+
+
+										<h:outputText value="#{p.finishDate}" />
+
+
+										<br /> <br /> <b>Price :</b>
+
+
+										<h:outputText value="#{p.price}" />
+
+										<br /> <br /> <b>Discount :</b>
+
+										<h:outputText value="#{p.discount}" />
+
+										<p:rating
+											value="#{bestOfferForSimpleUser.ratingLevels(p.pageId)}"
+											readonly="true" />
+
+									</div>
+									<div class="info-block">
+										<span> <h:commandButton
+												action="#{bestOfferForSimpleUser.selectPage()}" value="Buy">
+
+												<f:setPropertyActionListener value="#{p}"
+													target="#{bestOfferForSimpleUser.offerSelected}"></f:setPropertyActionListener>
+											</h:commandButton>
+										</span><span><h:commandButton value="Rate"
+												action="#{rateBean.getSelectedItemFromPage(p.pageId)}"
+												onclick="$('#myModal').modal('show');">
+
+												<f:ajax execute="@form" render="@none" />
+
+											</h:commandButton> </span>
+									</div>
+								</div>
+
+							</ui:repeat>
+
+							<!-- ********************** MODAL FOR RATE ******************************************************************************************** -->
+							<div class="container">
+								<!-- Modal -->
+								<div class="modal fade" id="myModal" role="dialog">
+									<div class="modal-dialog modal-sm">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h4 class="modal-title">Rating Area</h4>
+											</div>
+											<div class="modal-body">
+												<h:form>
+													<p:growl id="messages" showDetail="true" />
+													<p:rating value="#{rateBean.rating1}">
+														<p:ajax event="rate" listener="#{rateBean.onrate}"
+															update="messages" />
+														<p:ajax event="cancel" listener="#{rateBean.oncancel}"
+															update="messages" />
+													</p:rating>
+
+
+													<p:dialog header="Values" widgetVar="dlg" showEffect="fade"
+														hideEffect="fade">
+														<h:panelGrid id="display" columns="2" cellpadding="5">
+															<h:outputText value="Rating 3:" />
+															<h:outputText value="#{rateBean.rating1}" />
+														</h:panelGrid>
+													</p:dialog>
+												</h:form>
+											</div>
+											<div class="modal-footer">
+												<h:commandButton action="#{rateBean.ReturnListbestOffer()}"
+													value="Close" />
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- ************************************************************************************************************* -->
+						</h:form>
+					
+					<!-- ************************************************************************************************************ -->
+					<!-- ************************************************************************************************************ -->
+					<!-- ************************************************************************************************************ -->
+					
+						<h:form id="formForOffer"
+							rendered="#{bestOfferForSimpleUser.displayFormOffer}">
 
 							<div class="category-1 mix custom-column-5"
 								style="display: inline-block;">
 								<div class="be-post">
 									<a href="page1.html" class="be-img-block"> <h:graphicImage
-											value="#{p.imageURL}" alt="" />
+											value="#{bestOfferForSimpleUser.offerSelected.imageURL}"
+											alt="" />
 									</a> <b>Title :</b>
-									<h:outputText value="#{p.title}" />
+									<h:outputText
+										value="#{bestOfferForSimpleUser.offerSelected.title}" />
 									<br /> <br /> <b>Description :</b>
 
-									<h:outputText value="#{p.description}" />
+									<h:outputText
+										value="#{bestOfferForSimpleUser.offerSelected.description}" />
 
 									<br /> <br /> <b>Date of start :</b>
 
 
-									<h:outputText value="#{p.beginDate}" />
+									<h:outputText
+										value="#{bestOfferForSimpleUser.offerSelected.beginDate}" />
 									<br /> <br /> <b>Date of finish :</b>
 
 
-									<h:outputText value="#{p.finishDate}" />
+									<h:outputText
+										value="#{bestOfferForSimpleUser.offerSelected.finishDate}" />
 
 
 									<br /> <br /> <b>Price :</b>
 
 
-									<h:outputText value="#{p.price}" />
+									<h:outputText
+										value="#{bestOfferForSimpleUser.offerSelected.price}" />
 
 									<br /> <br /> <b>Discount :</b>
 
-									<h:outputText value="#{p.discount}" />
+									<h:outputText
+										value="#{bestOfferForSimpleUser.offerSelected.discount}" />
 
 									<p:rating
-										value="#{bestOfferForSimpleUser.ratingLevels(p.pageId)}"
+										value="#{bestOfferForSimpleUser.ratingLevels(manageOffersBean.offerSelected.pageId)}"
 										readonly="true" />
 
 								</div>
 								<div class="info-block">
-									<span> <h:commandButton
-											action="#{bestOfferForSimpleUser.selectPage()}" value="Buy">
+									<span><table>
+											<tr>
+												<td>compte :</td>
+												<td><h:inputText
+														value="#{bestOfferForSimpleUser.numCompte}"
+														required="true" requiredMessage="field required" /></td>
+											</tr>
+											<tr>
+												<td>Mot de passe :</td>
+												<td><h:inputText
+														value="#{bestOfferForSimpleUser.password}" required="true"
+														requiredMessage="field required" /></td>
+											</tr>
+										</table></span><br /> <span> <h:commandButton
+											action="#{bestOfferForSimpleUser.doBuyOffer()}" value="Buy" />
 
-											<f:setPropertyActionListener value="#{p}"
-												target="#{bestOfferForSimpleUser.offerSelected}"></f:setPropertyActionListener>
-										</h:commandButton>
-									</span><span><h:commandButton value="Rate"
-											action="#{rateBean.getSelectedItemFromPage(p.pageId)}"
-											onclick="$('#myModal').modal('show');">
 
-											<f:ajax execute="@form" render="@none" />
-
-										</h:commandButton> </span>
+									</span>
 								</div>
 							</div>
 
-						</ui:repeat>
-
-						<!-- ********************** MODAL FOR RATE ******************************************************************************************** -->
-						<div class="container">
-							<!-- Modal -->
-							<div class="modal fade" id="myModal" role="dialog">
-								<div class="modal-dialog modal-sm">
-									<div class="modal-content">
-										<div class="modal-header">
-											<h4 class="modal-title">Rating Area</h4>
-										</div>
-										<div class="modal-body">
-											<h:form>
-												<p:growl id="messages" showDetail="true" />
-												<p:rating value="#{rateBean.rating1}">
-													<p:ajax event="rate" listener="#{rateBean.onrate}"
-														update="messages" />
-													<p:ajax event="cancel" listener="#{rateBean.oncancel}"
-														update="messages" />
-												</p:rating>
-
-
-												<p:dialog header="Values" widgetVar="dlg" showEffect="fade"
-													hideEffect="fade">
-													<h:panelGrid id="display" columns="2" cellpadding="5">
-														<h:outputText value="Rating 3:" />
-														<h:outputText value="#{rateBean.rating1}" />
-													</h:panelGrid>
-												</p:dialog>
-											</h:form>
-										</div>
-										<div class="modal-footer">
-											<h:commandButton action="#{rateBean.ReturnListbestOffer()}"
-												value="Close" />
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<!-- ************************************************************************************************************* -->
-					</h:form>
-
-					<!-- ************************************************************************************************************ -->
-					<!-- ************************************************************************************************************ -->
-					<!-- ************************************************************************************************************ -->
-					<h:form id="formForOffer"
-						rendered="#{bestOfferForSimpleUser.displayFormOffer}">
-
-						<div class="category-1 mix custom-column-5"
-							style="display: inline-block;">
-							<div class="be-post">
-								<a href="page1.html" class="be-img-block"> <h:graphicImage
-										value="#{bestOfferForSimpleUser.offerSelected.imageURL}"
-										alt="" />
-								</a> <b>Title :</b>
-								<h:outputText
-									value="#{bestOfferForSimpleUser.offerSelected.title}" />
-								<br /> <br /> <b>Description :</b>
-
-								<h:outputText
-									value="#{bestOfferForSimpleUser.offerSelected.description}" />
-
-								<br /> <br /> <b>Date of start :</b>
-
-
-								<h:outputText
-									value="#{bestOfferForSimpleUser.offerSelected.beginDate}" />
-								<br /> <br /> <b>Date of finish :</b>
-
-
-								<h:outputText
-									value="#{bestOfferForSimpleUser.offerSelected.finishDate}" />
-
-
-								<br /> <br /> <b>Price :</b>
-
-
-								<h:outputText
-									value="#{bestOfferForSimpleUser.offerSelected.price}" />
-
-								<br /> <br /> <b>Discount :</b>
-
-								<h:outputText
-									value="#{bestOfferForSimpleUser.offerSelected.discount}" />
-
-								<p:rating
-									value="#{bestOfferForSimpleUser.ratingLevels(manageOffersBean.offerSelected.pageId)}"
-									readonly="true" />
-
-							</div>
-							<div class="info-block">
-								<span><table>
-										<tr>
-											<td>compte :</td>
-											<td><h:inputText
-													value="#{bestOfferForSimpleUser.numCompte}" required="true"
-													requiredMessage="field required" /></td>
-										</tr>
-										<tr>
-											<td>Mot de passe :</td>
-											<td><h:inputText
-													value="#{bestOfferForSimpleUser.password}" required="true"
-													requiredMessage="field required" /></td>
-										</tr>
-									</table></span><br /> <span> <h:commandButton
-										action="#{bestOfferForSimpleUser.doBuyOffer()}" value="Buy" />
-
-
-								</span>
-							</div>
-						</div>
-
-					</h:form>
-
+						</h:form>
+				
 					<!-- ************************************************************************************************************ -->
 					<!-- ************************************************************************************************************ -->
 					<!-- ************************************************************************************************************ -->
@@ -201,6 +207,4 @@
 		</center>
 
 	</ui:define>
-
-
 </ui:composition>

@@ -7,6 +7,7 @@ import javax.ejb.Local;
 
 import com.esprit.hypnotrip.persistence.Buy;
 import com.esprit.hypnotrip.persistence.Offer;
+import com.esprit.hypnotrip.services.exceptions.EventOverException;
 
 @Local
 public interface OfferServiceLocal {
@@ -22,7 +23,7 @@ public interface OfferServiceLocal {
 
 	List<Offer> listOffers();
 
-	void buyAnOffer(String idUser, Integer idOffer);
+	void buyAnOffer(String idUser, Integer idOffer) throws EventOverException;
 
 	List<Offer> SearchOffer();
 

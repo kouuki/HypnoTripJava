@@ -12,6 +12,7 @@ import com.esprit.hypnotrip.persistence.Event;
 import com.esprit.hypnotrip.persistence.Offer;
 import com.esprit.hypnotrip.persistence.Pages;
 import com.esprit.hypnotrip.persistence.Touristicplace;
+import com.esprit.hypnotrip.services.exceptions.EventOverException;
 import com.esprit.hypnotrip.services.interfaces.PageServiceLocal;
 import com.esprit.hypnotrip.services.interfaces.PageServiceRemote;
 
@@ -32,6 +33,7 @@ public class PageService implements PageServiceRemote, PageServiceLocal {
 
 	@Override
 	public void saveOrUpdatePage(Pages page, String idOwner) {
+
 		page.setUserId(idOwner);
 		entityManager.merge(page);
 
@@ -109,4 +111,5 @@ public class PageService implements PageServiceRemote, PageServiceLocal {
 			event = (Event) page;
 		return event;
 	}
+
 }

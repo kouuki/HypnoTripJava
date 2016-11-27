@@ -24,4 +24,5 @@ public interface PageServiceLocal {
 	List<Touristicplace> ListMyTouristicPages(String idOwner);
 
 	Event findPageById(Integer idPage);
+
 }
