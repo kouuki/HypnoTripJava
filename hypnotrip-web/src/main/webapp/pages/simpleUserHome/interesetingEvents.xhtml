@@ -31,7 +31,28 @@
 
 				<h:outputText value="Most Followed Upcoming event" />
 				<br />
-				<h:outputText value="#{eventsBean.mostFollowedUpcoming}" />
+<!-- 				<h:outputText var="event" value="#{eventsBean.mostFollowedUpcoming}" /> -->
+			<h:form><b>Title :</b>
+				<h:outputText value="#{eventsBean.mostFollowedUpcoming.pageId}" />
+				<br />
+				<br />
+				<b>Description :</b>
+
+				<h:outputText value="#{eventsBean.mostFollowedUpcoming.description}" />
+
+				<br />
+				<br />
+				<b>Date :</b>
+
+
+				<h:outputText value="#{eventsBean.mostFollowedUpcoming.dateOfEvent}" />
+
+				<br />
+				<br />
+				<b>Place :</b>
+
+				<h:outputText value="#{eventsBean.mostFollowedUpcoming.place}" /></h:form>
+				
 			</h:form>
 
 
@@ -71,16 +92,16 @@
 								<div class="info-block">
 									<span> <h:commandButton
 											value="#{eventsBean.followedORUnfollowedEvents(event.pageId)}" />
-											<span><h:commandButton value="Rate"
-											action="#{rateBean.getSelectedItemFromPage(event.pageId)}"
-											onclick="$('#myModal').modal('show');">
+										<span><h:commandButton value="Rate"
+												action="#{rateBean.getSelectedItemFromPage(event.pageId)}"
+												onclick="$('#myModal').modal('show');">
 
-											<f:ajax execute="@form" render="@none" />
+												<f:ajax execute="@form" render="@none" />
 
-										</h:commandButton><BR />
-										<p:link outcome="simpleUserTicketManagement"  value="Book Ticket">
-												 <f:param name="idEvent" value="#{event.pageId}" />
-								    </p:link></span>
+											</h:commandButton><BR /> <p:link outcome="simpleUserTicketManagement"
+												value="Book Ticket">
+												<f:param name="idEvent" value="#{event.pageId}" />
+											</p:link></span>
 									</span>
 								</div>
 
@@ -88,7 +109,7 @@
 						</ui:repeat>
 					</div>
 				</div>
-					<!-- ********************** MODAL FOR RATE ******************************************************************************************** -->
+				<!-- ********************** MODAL FOR RATE ******************************************************************************************** -->
 				<div class="container">
 					<!-- Modal -->
 					<div class="modal fade" id="myModal" role="dialog">
@@ -127,7 +148,7 @@
 					</div>
 				</div>
 				<!-- ************************************************************************************************************* -->
-				
+
 			</h:form>
 
 

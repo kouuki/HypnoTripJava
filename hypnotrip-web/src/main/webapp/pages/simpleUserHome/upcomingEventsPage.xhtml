@@ -17,16 +17,6 @@
 
 
 			<h:form>
-			
-			<p:commandButton id="btn2" type="button" icon="ui-icon-pin-s"
-					value="Show Map" onclick="PF('dlg2').show();" />
-
-				<p:dialog id="gmapDialog2" widgetVar="dlg2" width="625" height="400"
-					modal="true">
-					<p:gmap id="gmap2" center="41.381542, 2.122893" zoom="15"
-						type="HYBRID" style="width:100%;height:400px" />
-				</p:dialog>
-				
 				<h:commandButton action="#{eventsBean.selectThisWeekEventsToShow()}"
 					value="This Week" />
 				<h:commandButton action="#{eventsBean.selectNextWeekEventsToShow()}"
@@ -44,10 +34,8 @@
 
 			<h:form id="formEvenetsThisWeek"
 				rendered="#{eventsBean.displayFormThisWeek}">
-				
-				
-				
-				<h:commandButton id="btn" type="button" icon="ui-icon-pin-s"
+
+				<p:commandButton id="btn" type="button" icon="ui-icon-pin-s"
 					value="More directions?" onclick="PF('dlg').show();" />
 
 				<p:dialog id="gmapDialog" widgetVar="dlg" width="625" height="400"
@@ -88,9 +76,9 @@
 
 								</div>
 								<div class="info-block">
-									<span> </span><span><h:commandButton
+									<span> <h:commandButton
 											value="#{eventsBean.followORUnfollowEvents(event.pageId)}"
-											action="#{eventsBean.doTreadtement(event.pageId)}">
+											action="#{eventsBean.doTreatement(event.pageId)}">
 
 										</h:commandButton> <h:commandButton value="Rate"
 											action="#{rateBean.getSelectedItemFromPage(event.pageId)}"
@@ -101,7 +89,8 @@
 										</h:commandButton> <BR /> <p:link outcome="simpleUserTicketManagement"
 											value="Book Ticket">
 											<f:param name="idEvent" value="#{event.pageId}" />
-										</p:link></span>
+										</p:link>
+									</span>
 								</div>
 							</div>
 						</ui:repeat>
@@ -156,17 +145,18 @@
 			<h:form id="formEvenetsNextWeek"
 				rendered="#{eventsBean.displayFormNextWeek}">
 
-				<p:commandButton id="btn" type="button" icon="ui-icon-pin-s"
-					value="More directions?" onclick="PF('dlg').show();" />
-
-				<p:dialog id="gmapDialog" widgetVar="dlg" width="625" height="400"
-					modal="true">
-					<p:growl id="messages" showDetail="true" life="2000" />
-					<p:gmap id="gmap" center="36.806495, 10.181532" zoom="15"
-						type="ROADMAP" style="width:100%;height:400px"
-						model="#{eventsBean.simpleModelNextWeek}" />
-				</p:dialog>
-
+				<p:commandButton id="btn" immediate="true" type="button"
+					icon="ui-icon-pin-s" value="More directions?"
+					onclick="PF('dlg').show();" />
+				<f:view contentType="text/html">
+					<p:dialog id="gmapDialog" widgetVar="dlg" width="625" height="400"
+						modal="true">
+						<p:growl id="messages" showDetail="true" life="2000" />
+						<p:gmap id="gmap" center="36.806495, 10.181532" zoom="15"
+							type="ROADMAP" style="width:100%;height:400px"
+							model="#{eventsBean.simpleModelNextWeek}" />
+					</p:dialog>
+				</f:view>
 				<div class="container-fluid custom-container">
 					<div class="row">
 						<ui:repeat var="event" value="#{eventsBean.eventsNextWeek}">
@@ -201,7 +191,7 @@
 								<div class="info-block">
 									<span> </span><span><h:commandButton
 											value="#{eventsBean.followORUnfollowEvents(event.pageId)}"
-											action="#{eventsBean.doTreadtement(event.pageId)}">
+											action="#{eventsBean.doTreatement(event.pageId)}">
 
 										</h:commandButton> <h:commandButton value="Rate"
 											action="#{rateBean.getSelectedItemFromPage(event.pageId)}"
@@ -265,8 +255,9 @@
 			<h:form id="formEvenetsThisMonth"
 				rendered="#{eventsBean.displayFormThisMonth}">
 
-				<p:commandButton id="btn" type="button" icon="ui-icon-pin-s"
-					value="More directions?" onclick="PF('dlg').show();" />
+				<p:commandButton id="btn" immediate="true" type="button"
+					icon="ui-icon-pin-s" value="More directions?"
+					onclick="PF('dlg').show();" />
 
 				<p:dialog id="gmapDialog" widgetVar="dlg" width="625" height="400"
 					modal="true">
@@ -310,7 +301,7 @@
 								<div class="info-block">
 									<span> </span><span><h:commandButton
 											value="#{eventsBean.followORUnfollowEvents(event.pageId)}"
-											action="#{eventsBean.doTreadtement(event.pageId)}">
+											action="#{eventsBean.doTreatement(event.pageId)}">
 
 										</h:commandButton> <h:commandButton value="Rate"
 											action="#{rateBean.getSelectedItemFromPage(event.pageId)}"
@@ -372,10 +363,11 @@
 
 			<h:form id="formEvenetsInMyArea"
 				rendered="#{eventsBean.displayFormMyArea}">
-
-				<p:commandButton id="btn" type="button" icon="ui-icon-pin-s"
-					value="More directions?" onclick="PF('dlg').show();" />
-
+				<h:form>
+					<p:commandButton id="btn" immediate="true" type="button"
+						icon="ui-icon-pin-s" value="More directions?"
+						onclick="PF('dlg').show();" />
+				</h:form>
 				<p:dialog id="gmapDialog" widgetVar="dlg" width="625" height="400"
 					modal="true">
 					<p:growl id="messages" showDetail="true" life="2000" />
@@ -383,6 +375,8 @@
 						type="ROADMAP" style="width:100%;height:400px"
 						model="#{eventsBean.simpleModelMyArea}" />
 				</p:dialog>
+
+
 
 				<div class="container-fluid custom-container">
 					<div class="row">
@@ -422,7 +416,7 @@
 								<div class="info-block">
 									<span> </span><span><h:commandButton
 											value="#{eventsBean.followORUnfollowEvents(event.pageId)}"
-											action="#{eventsBean.doTreadtement(event.pageId)}">
+											action="#{eventsBean.doTreatement(event.pageId)}">
 
 										</h:commandButton> <h:commandButton value="Rate"
 											action="#{rateBean.getSelectedItemFromPage(event.pageId)}"
@@ -492,7 +486,7 @@
 		</center>
 
 		<script
-			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGxxaKOGKwGa4wwtlZP9-R7NhL1l2MCyk"
+			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAio1SGmmUjVwrfIOdXbtg3mp6v5R7_0mY"
 			async="" defer="defer" type="text/javascript"></script>
 
 	</ui:define>

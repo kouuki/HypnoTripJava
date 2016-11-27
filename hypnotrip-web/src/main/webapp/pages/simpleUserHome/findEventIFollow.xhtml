@@ -1,0 +1,60 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/template/template.xhtml">
+
+	<h:head>
+	</h:head>
+
+	<ui:define name="content">
+		<center>
+			<H1>Events I follow</H1>
+			<br /> <br /> <br />
+
+			<h:form id="formSearchForEvent"
+				rendered="true" class="text-center">
+				<h1></h1>
+				<p:dataTable var="event" value="#{invitationBean.eventsIFollow}"
+					widgetVar="tpTable"
+					emptyMessage="You are currently not following any events!"
+					filteredValue="#{invitationBean.filteredPlaces}">
+
+					<f:facet name="header">
+						<p:outputPanel>
+							<h:outputText value="Key word:" />
+							<p:inputText id="globalFilter" onkeyup="PF('tpTable').filter()"
+								style="width:150px" placeholder="" />
+						</p:outputPanel>
+					</f:facet>
+
+					<p:column filterBy="#{event.title}" headerText="Title">
+						<h:outputText value="#{event.title}" />
+					</p:column>
+					<p:column filterBy="#{event.dateOfEvent}"
+						headerText="Date of the event">
+						<h:outputText value="#{event.dateOfEvent}" />
+					</p:column>
+
+					<p:column filterBy="#{event.place}" headerText="Place">
+						<h:outputText value="#{event.place}" />
+					</p:column>
+
+				</p:dataTable>
+			</h:form>
+
+
+
+
+
+
+
+
+		</center>
+
+	</ui:define>
+
+</ui:composition>
