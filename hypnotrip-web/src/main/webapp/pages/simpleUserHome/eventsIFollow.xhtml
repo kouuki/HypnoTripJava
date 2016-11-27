@@ -44,7 +44,7 @@
 
 									<h:outputText value="#{event.place}" />
 
-<p:rating
+									<p:rating
 										value="#{manageListEventsBean.ratingLevels(event.pageId)}"
 										readonly="true" />
 
@@ -57,22 +57,22 @@
 											<f:setPropertyActionListener value="#{event}"
 												target="#{invitationBean.selectedEvent}"></f:setPropertyActionListener>
 										</h:commandButton> <span><h:commandButton value="Rate"
-											action="#{rateBean.getSelectedItemFromPage(event.pageId)}"
-											onclick="$('#myModal').modal('show');">
+												action="#{rateBean.getSelectedItemFromPage(event.pageId)}"
+												onclick="$('#myModal').modal('show');">
 
-											<f:ajax execute="@form" render="@none" />
+												<f:ajax execute="@form" render="@none" />
 
-										</h:commandButton></span><BR />
-										<p:link outcome="simpleUserTicketManagement"  value="Book Ticket">
-												 <f:param name="idEvent" value="#{event.pageId}" />
-								    </p:link></span>
+											</h:commandButton></span><BR /> <p:link outcome="simpleUserTicketManagement"
+											value="Book Ticket">
+											<f:param name="idEvent" value="#{event.pageId}" />
+										</p:link></span>
 								</div>
 
 							</div>
 						</ui:repeat>
 					</div>
 				</div>
-					<!-- ********************** MODAL FOR RATE ******************************************************************************************** -->
+				<!-- ********************** MODAL FOR RATE ******************************************************************************************** -->
 				<div class="container">
 					<!-- Modal -->
 					<div class="modal fade" id="myModal" role="dialog">
@@ -111,7 +111,7 @@
 					</div>
 				</div>
 				<!-- ************************************************************************************************************* -->
-				
+
 			</h:form>
 
 
@@ -144,7 +144,8 @@
 									</div>
 									<h:commandButton
 										value="#{invitationBean.inviteFriendToFollowEvent(user.id)}"
-										class="btn color-1 size-2 hover-1" action="#{invitationBean.selectFriendToInvite()}">
+										class="btn color-1 size-2 hover-1"
+										action="#{invitationBean.selectFriendToInvite()}">
 
 										<f:setPropertyActionListener value="#{user}"
 											target="#{invitationBean.selectedFriend}"></f:setPropertyActionListener>
@@ -165,12 +166,12 @@
 
 				<div class="container-fluid custom-container">
 					<div class="row">
-						<h:commandButton action="#{invitationBean.doInviteFriendToLikeEvent()}" value="Click here to confirm all steps" />
+						<h:commandButton
+							action="#{invitationBean.doInviteFriendToLikeEvent()}"
+							value="Click here to confirm all steps" />
 					</div>
 				</div>
 			</h:form>
-
-
 
 
 		</center>

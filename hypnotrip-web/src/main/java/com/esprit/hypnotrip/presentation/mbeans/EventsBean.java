@@ -11,7 +11,6 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
 
 import org.primefaces.model.chart.PieChartModel;
 import org.primefaces.model.map.DefaultMapModel;
@@ -160,7 +159,7 @@ public class EventsBean {
 
 	// map for this week's events
 	public void showMapForThisWeekEvents() {
-
+		System.out.println("hani dkhalt lel bean");
 		for (Event event : eventsThisWeek) {
 			// Shared coordinates
 			LatLng coord = new LatLng(event.getLatitude(), event.getLongitude());
@@ -169,6 +168,7 @@ public class EventsBean {
 			simpleModelThisWeek.addOverlay(new Marker(coord, event.getPlace()));
 
 		}
+		System.out.println("hani kamalt");
 	}
 
 	// show map for next week events
@@ -260,18 +260,15 @@ public class EventsBean {
 
 	// recall of wanted methods/services
 
+	public void doTreatement(int pageId) {
+		String navigate = "";
 
-
-	public void doTreadtement(int pageId){
-		if(chaine =="Follow"){
+		if (chaine == "Follow") {
 			eventServicesLocal.followPage(idUser, pageId);
-			FacesContext.getCurrentInstance().getViewRoot().getViewMap().clear();
-		}else{
+		} else {
 			eventServicesLocal.unfollowPage(idUser, pageId);
-			FacesContext.getCurrentInstance().getViewRoot().getViewMap().clear();
 		}
 	}
-
 
 	public List<Event> getEventsThisWeek() {
 		return eventsThisWeek;

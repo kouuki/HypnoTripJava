@@ -11,7 +11,6 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.model.DataModel;
 
 import com.esprit.hypnotrip.persistence.Event;
-import com.esprit.hypnotrip.persistence.Invitations;
 import com.esprit.hypnotrip.persistence.User;
 import com.esprit.hypnotrip.services.exceptions.SenderIsRecieverException;
 import com.esprit.hypnotrip.services.interfaces.EventServicesLocal;
@@ -25,6 +24,7 @@ public class InvitationBean {
 	// model
 	private List<Event> eventsIFollow = new ArrayList<Event>();
 	private List<User> myFriends = new ArrayList<User>();
+	private List<Event> filteredPlaces = new ArrayList<Event>();
 
 	DataModel<Event> dataModelEvents;
 	DataModel<User> dataModelFriends;
@@ -37,6 +37,7 @@ public class InvitationBean {
 	private boolean displayFormEventsIFollow = true;
 	private boolean displayFormMyFriends = false;
 	private boolean displayFormInviteFriendToEvent = false;
+	private boolean displayFormSearch = false;
 
 	private boolean response = false;
 	private String chaine;
@@ -52,7 +53,6 @@ public class InvitationBean {
 	InvitationServicesLocal invitationServicesLocal;
 
 	// injection des beans
-
 
 	@ManagedProperty(value = "#{loginBean}")
 	private LoginBean loginBean;
@@ -73,13 +73,13 @@ public class InvitationBean {
 		// display forms
 		// selectEventsIFollowToShow();
 		// selectMyFriendsToShow();
-
 	}
 
 	public String selectEventsIFollowToShow() {
 		displayFormEventsIFollow = true;
 		displayFormMyFriends = false;
 		displayFormInviteFriendToEvent = false;
+		displayFormSearch = false;
 		return null;
 	}
 
@@ -87,6 +87,7 @@ public class InvitationBean {
 		displayFormEventsIFollow = false;
 		displayFormMyFriends = true;
 		displayFormInviteFriendToEvent = false;
+		displayFormSearch = false;
 		return null;
 	}
 
@@ -94,11 +95,18 @@ public class InvitationBean {
 		displayFormEventsIFollow = false;
 		displayFormMyFriends = false;
 		displayFormInviteFriendToEvent = true;
+		displayFormSearch = false;
 		return null;
 	}
 
-	
-	
+	public String selectSearchEvent() {
+		displayFormEventsIFollow = false;
+		displayFormMyFriends = false;
+		displayFormInviteFriendToEvent = false;
+		displayFormSearch = true;
+		return null;
+	}
+
 	public String inviteFriendToFollowEvent(String id) {
 
 		response = invitationServicesLocal.isInvitedToLikeApage(id, selectedEvent.getPageId());
@@ -113,7 +121,7 @@ public class InvitationBean {
 		} else {
 			chaine = "blah";
 		}
-		
+
 		return chaine;
 	}
 
@@ -121,12 +129,13 @@ public class InvitationBean {
 	public String doInviteFriendToLikeEvent() throws SenderIsRecieverException {
 		System.out.println("hedhi el page" + selectedEvent.getPlace());
 		System.out.println("hedha el dsadig" + selectedFriend.getId());
-		String navigate="";
-		if(chaine == "Invite To Like"){
-			invitationServicesLocal.saveOrUpdateInvitation(selectedEvent.getPageId(), 0, idUser, selectedFriend.getId());
-			navigate= "eventsIFollow?faces-redirect=true";
-		}else{
-			navigate= "eventsIFollow?faces-redirect=true";
+		String navigate = "";
+		if (chaine == "Invite To Like") {
+			invitationServicesLocal.saveOrUpdateInvitation(selectedEvent.getPageId(), 0, idUser,
+					selectedFriend.getId());
+			navigate = "eventsIFollow?faces-redirect=true";
+		} else {
+			navigate = "eventsIFollow?faces-redirect=true";
 		}
 		selectedFriend = null;
 		selectedEvent = null;
@@ -140,7 +149,6 @@ public class InvitationBean {
 	public void setEventsIFollow(List<Event> eventsIFollow) {
 		this.eventsIFollow = eventsIFollow;
 	}
-
 
 	public LoginBean getLoginBean() {
 		return loginBean;
@@ -224,6 +232,20 @@ public class InvitationBean {
 		this.displayFormInviteFriendToEvent = displayFormInviteFriendToEvent;
 	}
 
+	public List<Event> getFilteredPlaces() {
+		return filteredPlaces;
+	}
 
+	public void setFilteredPlaces(List<Event> filteredPlaces) {
+		this.filteredPlaces = filteredPlaces;
+	}
+
+	public boolean isDisplayFormSearch() {
+		return displayFormSearch;
+	}
+
+	public void setDisplayFormSearch(boolean displayFormSearch) {
+		this.displayFormSearch = displayFormSearch;
+	}
 
 }

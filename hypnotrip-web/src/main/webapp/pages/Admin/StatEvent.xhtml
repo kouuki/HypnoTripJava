@@ -10,13 +10,13 @@
 	<h:head>
 	</h:head>
 	<ui:define name="content">
-		<h:form id="formStatistics"
-			rendered="#{eventsBean.displayFormStatistics}">
-			<p:poll interval="3" update="votes" />
-			<p:chart id="votes" type="pie" model="#{eventsBean.pieChartModel}"
-				style="width:800px;height:300px" />
-		</h:form>
-
+		<div class="Card ShadowEffect HeiAutoOnMobile">
+			<h:form>
+				<p:poll interval="3" update="votes" />
+				<p:chart id="votes" type="pie" model="#{eventsBean.pieChartModel}"
+					style="width:800px;height:300px" />
+			</h:form>
+		</div>
 	</ui:define>
 
 </ui:composition>

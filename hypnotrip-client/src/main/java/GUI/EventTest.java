@@ -69,9 +69,9 @@ public class EventTest {
 //				}
 //			}
 
-			Map<Event,Long> events = eventServicesRemote.statisticsEvent();
-			System.out.println(events);
-
+//			Map<Event,Long> events = eventServicesRemote.statisticsEvent();
+//			System.out.println(events);
+//
 
 			
 			
