@@ -142,7 +142,7 @@ public class DefaultDataBaseDhafer {
 		// Touristicplace
 		Touristicplace page1 = new Touristicplace();
 		page1.setCategoriePage("sport");
-		page1.setName("Italia");
+		page1.setName("Paris");
 		page1.setDateOfCreation(new Date());
 		page1.setDescription("sport");
 		page1.setTitle("page pour le sport");
@@ -154,7 +154,7 @@ public class DefaultDataBaseDhafer {
 		Touristicplace page2 = new Touristicplace();
 		page2.setCategoriePage("nature");
 		page2.setDateOfCreation(new Date());
-		page2.setName("Australia");
+		page2.setName("London");
 		page2.setDescription("nature");
 		page2.setTitle("page pour le nature");
 		page2.setUserId("b38f3299-6949-42c7-9a6c-f998c66f485d");

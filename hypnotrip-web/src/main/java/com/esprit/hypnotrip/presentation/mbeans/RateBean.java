@@ -76,10 +76,6 @@ public class RateBean {
 		rating1=0;
 		return "/pages/simpleUserHome/upcommingEventsPage?faces-redirect=true";
 	}
-	public String ReturnListRatetouristicPlaces(){
-		rating1=0;
-		return "/pages/simpleUserHome/TouristicPlacesForRate?faces-redirect=true";
-	}
 	
 	
 	
