@@ -17,6 +17,16 @@
 
 
 			<h:form>
+			
+			<p:commandButton id="btn2" type="button" icon="ui-icon-pin-s"
+					value="Show Map" onclick="PF('dlg2').show();" />
+
+				<p:dialog id="gmapDialog2" widgetVar="dlg2" width="625" height="400"
+					modal="true">
+					<p:gmap id="gmap2" center="41.381542, 2.122893" zoom="15"
+						type="HYBRID" style="width:100%;height:400px" />
+				</p:dialog>
+				
 				<h:commandButton action="#{eventsBean.selectThisWeekEventsToShow()}"
 					value="This Week" />
 				<h:commandButton action="#{eventsBean.selectNextWeekEventsToShow()}"
@@ -34,8 +44,10 @@
 
 			<h:form id="formEvenetsThisWeek"
 				rendered="#{eventsBean.displayFormThisWeek}">
-
-				<p:commandButton id="btn" type="button" icon="ui-icon-pin-s"
+				
+				
+				
+				<h:commandButton id="btn" type="button" icon="ui-icon-pin-s"
 					value="More directions?" onclick="PF('dlg').show();" />
 
 				<p:dialog id="gmapDialog" widgetVar="dlg" width="625" height="400"
@@ -86,11 +98,10 @@
 
 											<f:ajax execute="@form" render="@none" />
 
-										</h:commandButton>
-										<BR />
-										<p:link outcome="simpleUserTicketManagement"  value="Book Ticket">
-												 <f:param name="idEvent" value="#{event.pageId}" />
-								    </p:link></span>
+										</h:commandButton> <BR /> <p:link outcome="simpleUserTicketManagement"
+											value="Book Ticket">
+											<f:param name="idEvent" value="#{event.pageId}" />
+										</p:link></span>
 								</div>
 							</div>
 						</ui:repeat>
@@ -198,10 +209,10 @@
 
 											<f:ajax execute="@form" render="@none" />
 
-										</h:commandButton><BR />
-										<p:link outcome="simpleUserTicketManagement"  value="Book Ticket">
-												 <f:param name="idEvent" value="#{event.pageId}" />
-								    </p:link></span>
+										</h:commandButton><BR /> <p:link outcome="simpleUserTicketManagement"
+											value="Book Ticket">
+											<f:param name="idEvent" value="#{event.pageId}" />
+										</p:link></span>
 								</div>
 							</div>
 						</ui:repeat>
@@ -307,10 +318,10 @@
 
 											<f:ajax execute="@form" render="@none" />
 
-										</h:commandButton><BR />
-										<p:link outcome="simpleUserTicketManagement"  value="Book Ticket">
-												 <f:param name="idEvent" value="#{event.pageId}" />
-								    </p:link></span>
+										</h:commandButton><BR /> <p:link outcome="simpleUserTicketManagement"
+											value="Book Ticket">
+											<f:param name="idEvent" value="#{event.pageId}" />
+										</p:link></span>
 								</div>
 							</div>
 						</ui:repeat>
@@ -419,10 +430,10 @@
 
 											<f:ajax execute="@form" render="@none" />
 
-										</h:commandButton><BR />
-										<p:link outcome="simpleUserTicketManagement"  value="Book Ticket">
-												 <f:param name="idEvent" value="#{event.pageId}" />
-								    </p:link></span>
+										</h:commandButton><BR /> <p:link outcome="simpleUserTicketManagement"
+											value="Book Ticket">
+											<f:param name="idEvent" value="#{event.pageId}" />
+										</p:link></span>
 								</div>
 							</div>
 						</ui:repeat>

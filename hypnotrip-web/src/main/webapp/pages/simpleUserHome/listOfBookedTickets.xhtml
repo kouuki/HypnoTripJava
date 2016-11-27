@@ -20,7 +20,9 @@
 				<div class="custom-container gallery-container">
 					<div class="container">
 						<br /> <br />
-						<ui:repeat var="ticket" value="#{manageTicketsBean.doFindAllBookedtickets()}">
+						<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+			
+						<ui:repeat var="ticket" value="#{listOfUserBookingBean.doFindAllBookedtickets()}">
 							<div class="gallery-box clearfix">
 								<div class="gallery-a gallery-info">
 									Price
@@ -37,21 +39,21 @@
 										<h:outputLabel value="#{ticket.description}" />
 										<br /> Booked :
 										<h:outputLabel
-											value="#{manageTicketsBean.numberOfReserverTicket(ticket)}" />
+											value="#{listOfUserBookingBean.numberOfReserverTicket(ticket)}" />
 									</p>
 								</div>
 								<div class="gallery-btn">
 									<h:commandLink class="btn-login btn color-1 size-2 hover-2"
-										action="#{manageTicketsBean.doBook()}">
+										action="#{listOfUserBookingBean.doBook()}">
 										Book<f:setPropertyActionListener value="#{ticket}"
-											target="#{manageTicketsBean.selectedTicket}"></f:setPropertyActionListener>
+											target="#{listOfUserBookingBean.selectedTicket}"></f:setPropertyActionListener>
 									</h:commandLink>
 
 
 									<p:commandLink class="btn-login btn color-1 size-2 hover-2"
-										action="#{manageTicketsBean.doCancelBooking()}">
+										action="#{listOfUserBookingBean.doCancelBooking()}">
 										Cancel <f:setPropertyActionListener value="#{ticket}"
-											target="#{manageTicketsBean.selectedTicket}"></f:setPropertyActionListener>
+											target="#{listOfUserBookingBean.selectedTicket}"></f:setPropertyActionListener>
 									</p:commandLink>
 
 
@@ -64,12 +66,12 @@
 
 			</div>
 			<center>
-				<h:commandLink action="#{manageTicketsBean.showFriendsForm()}"
+				<h:commandLink action="pages/simpleUserHome/home.jsf?faces-redirect=true"
 					value="Go back"
 					class="be-register btn color-3 size-1 hover-1" />
 			</center>
 		</h:form>
-  <p:growl id="messages" showDetail="true" />
+
 	</ui:define>
 
 </ui:composition>

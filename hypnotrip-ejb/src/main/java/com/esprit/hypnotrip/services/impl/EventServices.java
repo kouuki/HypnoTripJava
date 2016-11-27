@@ -16,6 +16,7 @@ import javax.persistence.Query;
 import com.esprit.hypnotrip.persistence.Event;
 import com.esprit.hypnotrip.persistence.Follows;
 import com.esprit.hypnotrip.persistence.Pages;
+import com.esprit.hypnotrip.persistence.Touristicplace;
 import com.esprit.hypnotrip.persistence.User;
 import com.esprit.hypnotrip.services.interfaces.EventServicesLocal;
 import com.esprit.hypnotrip.services.interfaces.EventServicesRemote;
@@ -431,6 +432,12 @@ public class EventServices implements EventServicesRemote, EventServicesLocal {
 		
 		Follows follows = new Follows(false, false, userFound, page);
 		entityManager.merge(follows);
+	}
+
+	@Override
+	public int numberOfEvents() {
+		List<Event> ls = getAllEvents();
+		return ls.size();
 	}
 
 }
