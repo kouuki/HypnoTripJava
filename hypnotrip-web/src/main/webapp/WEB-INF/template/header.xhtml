@@ -12,17 +12,30 @@
 		<div class="container-fluid custom-container">
 			<div class="row no_row row-header">
 				<div class="brand-be">
-					<a href="index-2.html"> <h:graphicImage
-							value="http://localhost:18080/hypnotrip-web/resources/img/logo.png"
-							alt="" />
-					</a>
+					<h:column rendered="#{loginBean.loggedInAsSimpleUser}">
+						<a
+							href="http://localhost:18080/hypnotrip-web/pages/simpleUserHome/home.jsf">
+							<h:graphicImage
+								value="http://localhost:18080/hypnotrip-web/resources/img/logo.png"
+								alt="" />
+						</a>
+					</h:column>
+					<h:column rendered="#{loginBean.loggedInAsProUser}">
+						<a
+							href="http://localhost:18080/hypnotrip-web/pages/proUserHome/home.jsf">
+							<h:graphicImage
+								value="http://localhost:18080/hypnotrip-web/resources/img/logo.png"
+								alt="" />
+						</a>
+					</h:column>
+
 				</div>
 				<div class="header-menu-block">
 					<button class="cmn-toggle-switch cmn-toggle-switch__htx">
 						<span></span>
 					</button>
 					<ul class="header-menu" id="one" style="max-height: 292px;">
-						<li><a href="http://localhost:18080/hypnotrip-web/pages/simpleUserHome/TouristicPlacesForRate.jsf">Touristic Places</a></li>
+
 						<li><a href="search.html">Discover</a>
 							<ul>
 								<li><a
@@ -42,15 +55,25 @@
 
 
 									<li><a
-										href="http://localhost:18080/hypnotrip-web/pages/simpleUserHome/upcomingEventsPage.jsf">Available/Upcoming Events</a></li>
+										href="http://localhost:18080/hypnotrip-web/pages/simpleUserHome/upcomingEventsPage.jsf">Available/Upcoming
+											Events</a></li>
 									<li><a
-										href="http://localhost:18080/hypnotrip-web/pages/simpleUserHome/interesetingEvents.jsf">More about events</a></li>
+										href="http://localhost:18080/hypnotrip-web/pages/simpleUserHome/interesetingEvents.jsf">More
+											about events</a></li>
 									<li><a
-										href="http://localhost:18080/hypnotrip-web/pages/simpleUserHome/eventsIFollow.jsf">Events I Follow</a></li>
+										href="http://localhost:18080/hypnotrip-web/pages/simpleUserHome/eventsIFollow.jsf">Events
+											I Follow</a></li>
+									<li><a
+										href="http://localhost:18080/hypnotrip-web/pages/simpleUserHome/findEventIFollow.jsf">Search
+											for an event I Follow</a></li>
+									<li><a
+										href="http://localhost:18080/hypnotrip-web/pages/simpleUserHome/myInvitations.jsf">My
+											Invitations</a></li>
+									<h:column rendered="#{loginBean.loggedInAsSimpleUser}">
 										<li><a
-										href="http://localhost:18080/hypnotrip-web/pages/simpleUserHome/findEventIFollow.jsf">Search for an event I Follow</a></li>
-									<li><a
-										href="http://localhost:18080/hypnotrip-web/pages/simpleUserHome/myInvitations.jsf">My Invitations</a></li>
+											href="http://localhost:18080/hypnotrip-web/pages/simpleUserHome/TouristicPlacesForRate.jsf">Touristic
+												Places</a></li>
+									</h:column>
 								</h:form>
 							</ul></li>
 						<h:column rendered="#{not empty loginBean.identifiedUser}">
