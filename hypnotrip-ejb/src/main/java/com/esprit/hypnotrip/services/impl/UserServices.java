@@ -142,7 +142,7 @@ public class UserServices implements UserServicesRemote, UserServicesLocal {
 			Response response = userFriends.request().get();
 			listOfIds = response.readEntity(listOfIds.getClass());
 
-			String jqpl = "SELECT users FROM User users " + "INNER JOIN users.bookDescriptions book "
+			String jqpl = "SELECT DISTINCT(users) FROM User users " + "INNER JOIN users.bookDescriptions book "
 					+ "INNER JOIN book.ticket t " + "INNER JOIN t.event e " + "WHERE e=:param1";
 			Query query = entityManager.createQuery(jqpl);
 			query.setParameter("param1", event);
