@@ -10,6 +10,7 @@ import javax.ejb.Startup;
 
 import com.esprit.hypnotrip.persistence.Event;
 import com.esprit.hypnotrip.persistence.FollowsId;
+import com.esprit.hypnotrip.persistence.Offer;
 import com.esprit.hypnotrip.persistence.Posts;
 import com.esprit.hypnotrip.persistence.Touristicplace;
 import com.esprit.hypnotrip.persistence.User;
@@ -49,7 +50,7 @@ public class DefaultDataBaseDhafer {
 		user1.setAddress("tunis");
 		user1.setAccessFailedCount(0);
 		user1.setDateOfBirth(new Date());
-		user1.setEmail("user@simple.com");
+		user1.setEmail("dhafer@simple.com");
 		user1.setEmailConfirmed(false);
 		user1.setEtat(1);
 		user1.setFirstName("dhafer");
@@ -138,12 +139,12 @@ public class DefaultDataBaseDhafer {
 		tagServicesLocal.SaveOrUpdateTage("nature");
 		tagServicesLocal.SaveOrUpdateTage("plage");
 		tagServicesLocal.SaveOrUpdateTage("compagne");
-
+		
+		
 		// Touristicplace
 		Touristicplace page1 = new Touristicplace();
 		page1.setCategoriePage("sport");
 		page1.setName("Italia");
-		page1.setEtat(1);
 		page1.setDateOfCreation(new Date());
 		page1.setDescription("sport");
 		page1.setTitle("page pour le sport");
@@ -154,7 +155,6 @@ public class DefaultDataBaseDhafer {
 
 		Touristicplace page2 = new Touristicplace();
 		page2.setCategoriePage("nature");
-		page2.setEtat(1);
 		page2.setDateOfCreation(new Date());
 		page2.setName("Australia");
 		page2.setDescription("nature");
@@ -165,7 +165,6 @@ public class DefaultDataBaseDhafer {
 
 		Touristicplace page3 = new Touristicplace();
 		page3.setName("Maroc");
-		page3.setEtat(1);
 		page3.setDateOfCreation(new Date());
 		page3.setCategoriePage("plage");
 		page3.setDescription("plage");
@@ -173,7 +172,6 @@ public class DefaultDataBaseDhafer {
 		page3.setUserId("b38f3299-6949-42c7-9a6c-f998c66f485d");
 		page3.setImageURL("https://www.voyageavecnous.fr/wp-content/uploads/2015/01/plage-paradisiaque-maldives.jpg");
 		pageServiceLocal.saveOrUpdatePage(page3, "b38f3299-6949-42c7-9a6c-f998c66f4852");
-
 
 		Touristicplace page4 = new Touristicplace();
 		page4.setName("Berneville");
@@ -190,7 +188,7 @@ public class DefaultDataBaseDhafer {
 		post1.setContent("post qui concerne le sport");
 		post1.setDescription("Sport");
 		post1.setTagId(1);
-		post1.setIdOwner("b38f3299-6949-42c7-9a6c-f998c66f4852");
+		post1.setIdOwner("b38f3299-6949-42c7-9a6c-f998c66f4fde");
 		post1.setPageId(7);
 		post1.setPublicationPost(new Date());
 		post1.setImageURL("http://3.bp.blogspot.com/-OXiG-KhAUXE/VTiudbE6rEI/AAAAAAAA9WI/L7ycYEmoO0U/s1600/geant.jpg");
@@ -199,10 +197,11 @@ public class DefaultDataBaseDhafer {
 		post2.setContent("post qui concerne le nature");
 		post2.setDescription("nature");
 		post2.setTagId(2);
-		post2.setIdOwner("b38f3299-6949-42c7-9a6c-f998c66f4852");
+		post2.setIdOwner("b38f3299-6949-42c7-9a6c-f998c66f4fde");
 		post2.setPageId(8);
 		post2.setPublicationPost(new Date());
-		post2.setImageURL("http://www.wallpaperup.com/uploads/wallpapers/2013/03/23/58941/big_thumb_e2df06bf05a11d7bb66a348828845ffe.jpg");
+		post2.setImageURL(
+				"http://www.wallpaperup.com/uploads/wallpapers/2013/03/23/58941/big_thumb_e2df06bf05a11d7bb66a348828845ffe.jpg");
 		postServicesLocal.SaveOrUpdatePost(post2);
 		postServicesLocal.SaveOrUpdatePost(post2);
 		postServicesLocal.SaveOrUpdatePost(post2);
@@ -210,10 +209,11 @@ public class DefaultDataBaseDhafer {
 		post3.setContent("post qui concerne le plage");
 		post3.setDescription("plage");
 		post3.setTagId(3);
-		post3.setIdOwner("b38f3299-6949-42c7-9a6c-f998c66f4852");
+		post3.setIdOwner("b38f3299-6949-42c7-9a6c-f998c66f4fde");
 		post3.setPageId(9);
 		post3.setPublicationPost(new Date());
-		post3.setImageURL("http://www.krasnapolsky.sr/files/thumb/p/o/aanbiedingen_auto_auto_w9df_h9df_c431_c200_Poolpass_fb_post_HK_Eng_versie_22aug16_def.png");
+		post3.setImageURL(
+				"http://www.krasnapolsky.sr/files/thumb/p/o/aanbiedingen_auto_auto_w9df_h9df_c431_c200_Poolpass_fb_post_HK_Eng_versie_22aug16_def.png");
 
 		postServicesLocal.SaveOrUpdatePost(post3);
 		postServicesLocal.SaveOrUpdatePost(post3);
@@ -221,7 +221,7 @@ public class DefaultDataBaseDhafer {
 		post4.setContent("post qui concerne le compagne");
 		post4.setDescription("compagne");
 		post4.setTagId(4);
-		post4.setIdOwner("b38f3299-6949-42c7-9a6c-f998c66f4852");
+		post4.setIdOwner("b38f3299-6949-42c7-9a6c-f998c66f4fde");
 		post4.setPageId(10);
 		post4.setPublicationPost(new Date());
 		post4.setImageURL("http://www.locatour.com/html_locatour/magazine/photos/destination-campagne-a-9796.jpg");
@@ -238,11 +238,14 @@ public class DefaultDataBaseDhafer {
 		envent.setDateOfEvent(new Date());
 		envent.setTitle("page pour le sport");
 		envent.setUserId("b38f3299-6949-42c7-9a6c-f998c66f485d");
+		envent.setImageURL("http://i.huffpost.com/gen/4599420/images/o-PATRICK-BORDIER-facebook.jpg");
 		pageServiceLocal.saveOrUpdatePage(envent, "b38f3299-6949-42c7-9a6c-f998c66f485d");
 		Event envent1 = new Event();
 		envent1.setCategoriePage("nature");
 		envent1.setDescription("nature");
 		envent1.setDateOfEvent(new Date());
+		envent1.setImageURL(
+				"https://upload.wikimedia.org/wikipedia/commons/3/38/4-Nature-Wallpapers-2014-1_ukaavUI.jpg");
 		envent1.setTitle("page pour le nature");
 		envent1.setUserId("b38f3299-6949-42c7-9a6c-f998c66f485d");
 		pageServiceLocal.saveOrUpdatePage(envent1, "b38f3299-6949-42c7-9a6c-f998c66f485d");
@@ -250,6 +253,8 @@ public class DefaultDataBaseDhafer {
 		envent2.setCategoriePage("plage");
 		envent2.setDateOfEvent(new Date());
 		envent2.setDescription("plage");
+		envent2.setImageURL(
+				"https://i1.wp.com/www.votretourdumonde.com/wp-content/uploads/2015/02/plage-des-cath%C3%A9drales.jpg");
 		envent2.setTitle("page pour le plage");
 		envent2.setUserId("b38f3299-6949-42c7-9a6c-f998c66f485d");
 		pageServiceLocal.saveOrUpdatePage(envent2, "b38f3299-6949-42c7-9a6c-f998c66f485d");
@@ -257,6 +262,8 @@ public class DefaultDataBaseDhafer {
 		envent3.setDateOfEvent(new Date());
 		envent3.setCategoriePage("compagne");
 		envent3.setDescription("compagne");
+		envent3.setImageURL(
+				"http://media.rtl2.fr/cache/3UINQGhjIqiVJgvKrWuJgQ/795v530-0/online/image/2015/1117/7780539700_les-stars-quittent-les-grandes-villes-pour-les-week-end-dans-des-chaumieres-a-la-campagne.jpg");
 		envent3.setTitle("page pour le compagne");
 		envent3.setUserId("b38f3299-6949-42c7-9a6c-f998c66f485d");
 		pageServiceLocal.saveOrUpdatePage(envent3, "b38f3299-6949-42c7-9a6c-f998c66f485d");

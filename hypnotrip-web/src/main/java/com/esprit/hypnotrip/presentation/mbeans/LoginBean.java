@@ -15,6 +15,7 @@ import com.esprit.hypnotrip.services.interfaces.UserServicesLocal;
 public class LoginBean {
 
 	private User user = new User();
+	private User userLoggedIn = null;
 	private Boolean loggedInAsSimpleUser = false;
 	private Boolean loggedInAsProUser = false;
 	private Boolean loggedInAsAdmin = false;
@@ -40,8 +41,8 @@ public class LoginBean {
 
 	public String doLogin() {
 		String navaigateTo = "";
-		User userLoggedIn = userServicesLocal.findUserByLoginAndPassword(user.getEmail(), user.getPassword());
-		System.out.println(userLoggedIn.toString());
+
+		userLoggedIn = userServicesLocal.findUserByLoginAndPassword(user.getEmail(), user.getPassword());
 		if (userLoggedIn != null) {
 			System.out.println("userFounded");
 			user = userLoggedIn;
@@ -59,8 +60,9 @@ public class LoginBean {
 				loggedInAsAdmin = true;
 				navaigateTo = "/pages/Admin/AdminHome?faces-redirect=true";
 			}
-		} else
-			navaigateTo = "/LoginFailed?faces-redirect=true";
+		} else if (userLoggedIn == null) {
+			navaigateTo = "/IncorrectPassword?faces-redirect=true";
+		}
 
 		return navaigateTo;
 
@@ -120,6 +122,14 @@ public class LoginBean {
 
 	public void setNotification(Boolean notification) {
 		this.notification = notification;
+	}
+
+	public User getUserLoggedIn() {
+		return userLoggedIn;
+	}
+
+	public void setUserLoggedIn(User userLoggedIn) {
+		this.userLoggedIn = userLoggedIn;
 	}
 
 }

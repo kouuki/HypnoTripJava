@@ -29,13 +29,11 @@ public class StatBeanForTouristicPLaces implements Serializable {
 		ToursiticPlaceServiceLocal toursiticPlaceServiceLocal;
 
 		private BarChartModel barModel;
-		private BarChartModel barModel2;
 		
 
 		@PostConstruct
 		public void init() {
 			createBarModels();
-			
 		}
 
 		public BarChartModel getBarModel() {
@@ -58,26 +56,32 @@ public class StatBeanForTouristicPLaces implements Serializable {
 			model.addSeries(stats);
 
 			return model;
-		}
-		private BarChartModel initBarModel2() {
-			BarChartModel model = new BarChartModel();
-
-			ChartSeries stats = new ChartSeries();
-			stats.setLabel("Rating Level");
-			List<Touristicplace> ltp = toursiticPlaceServiceLocal.getAllTouristicPlaces();
-			for (Touristicplace touristicplace : ltp) {
-				int numberRates = rateServiceLocal.getRateLevel(touristicplace.getPageId());
-				stats.set(touristicplace.getName(), numberRates);
-			}
-
-			model.addSeries(stats);
-
-			return model;
+//			   BarChartModel model = new BarChartModel();
+//			   
+//		        ChartSeries boys = new ChartSeries();
+//		        boys.setLabel("Boys");
+//		        boys.set("2004", 120);
+//		        boys.set("2005", 100);
+//		        boys.set("2006", 44);
+//		        boys.set("2007", 150);
+//		        boys.set("2008", 25);
+//		 
+//		        ChartSeries girls = new ChartSeries();
+//		        girls.setLabel("Girls");
+//		        girls.set("2004", 52);
+//		        girls.set("2005", 60);
+//		        girls.set("2006", 110);
+//		        girls.set("2007", 135);
+//		        girls.set("2008", 120);
+//		 
+//		        model.addSeries(boys);
+//		        model.addSeries(girls);
+//		         
+//		        return model;
 		}
 
 		private void createBarModels() {
 			createBarModel();
-			createBarModel2();
 
 		}
 
@@ -94,29 +98,6 @@ public class StatBeanForTouristicPLaces implements Serializable {
 			yAxis.setLabel("Rate Level");
 			yAxis.setMin(0);
 			yAxis.setMax(10);
-		}
-		
-		private void createBarModel2() {
-			barModel2 = initBarModel2();
-
-			barModel2.setTitle("Bar Chart");
-			barModel2.setLegendPosition("ne");
-
-			Axis xAxis = barModel2.getAxis(AxisType.X);
-			xAxis.setLabel("Touristic Places");
-
-			Axis yAxis = barModel2.getAxis(AxisType.Y);
-			yAxis.setLabel("Rate Level");
-			yAxis.setMin(0);
-			yAxis.setMax(10);
-		}
-
-		public BarChartModel getBarModel2() {
-			return barModel2;
-		}
-
-		public void setBarModel2(BarChartModel barModel2) {
-			this.barModel2 = barModel2;
 		}
 
 	}

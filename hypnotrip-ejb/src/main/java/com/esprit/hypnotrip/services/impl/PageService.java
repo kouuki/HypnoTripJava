@@ -92,7 +92,7 @@ public class PageService implements PageServiceRemote, PageServiceLocal {
 
 		List<Touristicplace> myTouristicPlaces = new ArrayList<Touristicplace>();
 
-		String jpql = "SELECT p FROM Pages p WHERE p.userId=:param1 AND p.etat<>0";
+		String jpql = "SELECT p FROM Pages p WHERE p.userId=:param1";
 		Query query = entityManager.createQuery(jpql);
 		query.setParameter("param1", idOwner);
 		List<Pages> myListOfPages = query.getResultList();

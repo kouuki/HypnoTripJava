@@ -30,7 +30,7 @@
 								style="display: inline-block;">
 								<div class="be-post">
 									<a href="page1.html" class="be-img-block"> <h:graphicImage
-											value="#{p.imageURL}" alt="" />
+											value="#{p.imageURL}" style="width:400px;height:200px" alt="" />
 									</a> <b>Title :</b>
 									<h:outputText value="#{p.title}" />
 									<br /> <br /> <b>Description :</b>
@@ -52,20 +52,22 @@
 
 								</div>
 								<div class="info-block">
-									<span>
-
-								
-									<h:commandButton
-											action="#{manageListEventsBean.selectPage()}" value="select" class="btn color-1 size-2 hover-1">
+									<span> <h:commandButton
+											action="#{manageListEventsBean.selectPage()}" value="select"
+											class="btn color-1 size-2 hover-1">
 
 											<f:setPropertyActionListener value="#{p}"
 												target="#{manageListEventsBean.eventSelected}"></f:setPropertyActionListener>
 										</h:commandButton>
-										
-										
-									</span><span><h:commandButton value="Manage Ticket" class="btn color-3 size-2 hover-1">
-											
-										</h:commandButton> </span>
+
+
+									</span>
+									<h:column rendered="#{loginBean.loggedInAsProUser}">
+										<span><h:commandButton value="Manage Ticket"
+												class="btn color-3 size-2 hover-1">
+
+											</h:commandButton> </span>
+									</h:column>
 								</div>
 							</div>
 
@@ -135,9 +137,10 @@
 							<tr>
 								<TH>Actions</TH>
 								<TD><h:commandButton
-										action="#{manageListEventsBean.doAddEvent()}" value="save" class="btn color-1 size-2 hover-1"/>
-									<h:commandButton
-										action="#{manageListEventsBean.doDeletePage()}" value="delete" class="btn color-3 size-2 hover-1"/></TD>
+										action="#{manageListEventsBean.doAddEvent()}" value="save"
+										class="btn color-1 size-2 hover-1" /> <h:commandButton
+										action="#{manageListEventsBean.doDeletePage()}" value="delete"
+										class="btn color-3 size-2 hover-1" /></TD>
 							</tr>
 						</table>
 					</h:form>

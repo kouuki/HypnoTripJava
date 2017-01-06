@@ -9,15 +9,22 @@
 	<ui:define name="content">
 		<div class="container-fluid custom-container">
 			<div class="row">
+				<br />
+				<center>
+					<h1>YOUR EVENT FOR TO DAY</h1>
+				</center>
+				<br />
 				<ui:repeat value="#{recallEventBean.listAllMyEventForToDay}" var="p">
 					<div class="category-1 mix custom-column-5"
 						style="display: inline-block;">
 						<div class="be-post">
 							<a href="page1.html" class="be-img-block"> <h:graphicImage
-									value="http://localhost:18080/hypnotrip-web/resources/img/p1.jpg"
+									value="#{p.pages.imageURL}" style="width:400px;height:200px"
 									alt="" />
-							</a> <a href="page1.html" class="be-post-title"><h:outputText
+							</a> <a href="page1.html" class="be-post-title"> </a> <a
+								href="page1.html" class="be-post-title"><h:outputText
 									value="#{p.pages.description}" /></a> <span>
+
 								<center>
 									<a href="#" class="be-post-tag"><h:outputText
 											value="#{p.pages.categoriePage.toUpperCase()}" /> </a>
@@ -47,17 +54,15 @@
 									</h:commandButton>
 									<h:commandButton
 										class="btn color-1 size-2 hover-1 fa fa-thumbs-o-up"
-										style="background: green"
-										action="#{recallEventBean.Wish()}" value="Wish This"
-										rendered="#{!p.wishStat}">
+										style="background: green" action="#{recallEventBean.Wish()}"
+										value="Wish This" rendered="#{!p.wishStat}">
 										<f:setPropertyActionListener value="#{p}"
 											target="#{recallEventBean.followSelected}"></f:setPropertyActionListener>
 									</h:commandButton>
 									<h:commandButton
 										class="btn color-1 size-2 hover-1 fa fa-thumbs-o-up"
-										style="background: green"
-										action="#{recallEventBean.unWish()}" value="UnWish"
-										rendered="#{p.wishStat}">
+										style="background: green" action="#{recallEventBean.unWish()}"
+										value="UnWish" rendered="#{p.wishStat}">
 										<f:setPropertyActionListener value="#{p}"
 											target="#{recallEventBean.followSelected}"></f:setPropertyActionListener>
 									</h:commandButton>

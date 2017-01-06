@@ -30,60 +30,62 @@
 					</h:column>
 
 				</div>
-				<div class="header-menu-block">
-					<button class="cmn-toggle-switch cmn-toggle-switch__htx">
-						<span></span>
-					</button>
-					<ul class="header-menu" id="one" style="max-height: 292px;">
+				<h:column rendered="#{not empty loginBean.identifiedUser}">
+					<div class="header-menu-block">
+						<button class="cmn-toggle-switch cmn-toggle-switch__htx">
+							<span></span>
+						</button>
+						<ul class="header-menu" id="one" style="max-height: 292px;">
 
-						<li><a href="search.html">Discover</a>
-							<ul>
-								<li><a
-									href="http://localhost:18080/hypnotrip-web/pages/simpleUserHome/ListAllEventTouristicPlacesAndOffer.jsf">Explore</a></li>
+							<li><a href="search.html">Discover</a>
+								<ul>
+									<li><a
+										href="http://localhost:18080/hypnotrip-web/pages/simpleUserHome/ListAllEventTouristicPlacesAndOffer.jsf">Explore</a></li>
 
-								<li><a href="people.html">People</a></li>
-								<li><a href="gallery.html">Galleries</a></li>
-								<h:form rendered="#{not empty loginBean.identifiedUser}">
-									<li><a
-										href="http://localhost:18080/hypnotrip-web/pages/simpleUserHome/RecommendedPages.jsf">Recommended
-											Touristic Places</a></li>
-									<li><a
-										href="http://localhost:18080/hypnotrip-web/pages/simpleUserHome/RecommendedEvent.jsf">Recommended
-											Event</a></li>
-
-
-
-
-									<li><a
-										href="http://localhost:18080/hypnotrip-web/pages/simpleUserHome/upcomingEventsPage.jsf">Available/Upcoming
-											Events</a></li>
-									<li><a
-										href="http://localhost:18080/hypnotrip-web/pages/simpleUserHome/interesetingEvents.jsf">More
-											about events</a></li>
-									<li><a
-										href="http://localhost:18080/hypnotrip-web/pages/simpleUserHome/eventsIFollow.jsf">Events
-											I Follow</a></li>
-									<li><a
-										href="http://localhost:18080/hypnotrip-web/pages/simpleUserHome/findEventIFollow.jsf">Search
-											for an event I Follow</a></li>
-									<li><a
-										href="http://localhost:18080/hypnotrip-web/pages/simpleUserHome/myInvitations.jsf">My
-											Invitations</a></li>
-									<h:column rendered="#{loginBean.loggedInAsSimpleUser}">
+									<li><a href="people.html">People</a></li>
+									<li><a href="gallery.html">Galleries</a></li>
+									<h:form rendered="#{not empty loginBean.identifiedUser}">
 										<li><a
-											href="http://localhost:18080/hypnotrip-web/pages/simpleUserHome/TouristicPlacesForRate.jsf">Touristic
-												Places</a></li>
-									</h:column>
-								</h:form>
-							</ul></li>
-						<h:column rendered="#{not empty loginBean.identifiedUser}">
-							<li><a href="author-login.html">My Portfolio</a></li>
-							<li id="ad-work-li"><a id="add-work-btn" class="btn color-1"
-								href="work.html">Add Work </a></li>
+											href="http://localhost:18080/hypnotrip-web/pages/simpleUserHome/RecommendedPages.jsf">Recommended
+												Touristic Places</a></li>
+										<li><a
+											href="http://localhost:18080/hypnotrip-web/pages/simpleUserHome/RecommendedEvent.jsf">Recommended
+												Event</a></li>
 
-						</h:column>
-					</ul>
-				</div>
+
+
+
+										<li><a
+											href="http://localhost:18080/hypnotrip-web/pages/simpleUserHome/upcomingEventsPage.jsf">Available/Upcoming
+												Events</a></li>
+										<li><a
+											href="http://localhost:18080/hypnotrip-web/pages/simpleUserHome/interesetingEvents.jsf">More
+												about events</a></li>
+										<li><a
+											href="http://localhost:18080/hypnotrip-web/pages/simpleUserHome/eventsIFollow.jsf">Events
+												I Follow</a></li>
+										<li><a
+											href="http://localhost:18080/hypnotrip-web/pages/simpleUserHome/findEventIFollow.jsf">Search
+												for an event I Follow</a></li>
+										<li><a
+											href="http://localhost:18080/hypnotrip-web/pages/simpleUserHome/myInvitations.jsf">My
+												Invitations</a></li>
+										<h:column rendered="#{loginBean.loggedInAsSimpleUser}">
+											<li><a
+												href="http://localhost:18080/hypnotrip-web/pages/simpleUserHome/TouristicPlacesForRate.jsf">Touristic
+													Places</a></li>
+										</h:column>
+									</h:form>
+								</ul></li>
+							<h:column rendered="#{not empty loginBean.identifiedUser}">
+								<li><a href="author-login.html">My Portfolio</a></li>
+								<li id="ad-work-li"><a id="add-work-btn"
+									class="btn color-1" href="work.html">Add Work </a></li>
+
+							</h:column>
+						</ul>
+					</div>
+				</h:column>
 				<h:form rendered="#{empty loginBean.identifiedUser}">
 					<div class="login-header-block">
 						<div class="login_block">

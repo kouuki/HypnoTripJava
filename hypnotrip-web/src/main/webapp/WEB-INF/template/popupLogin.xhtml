@@ -30,13 +30,13 @@
 								<h:outputText value="Password" />
 								<p:password value="#{loginBean.user.password}" />
 							</div>
-<!-- 							<div class="col-md-6"> -->
-<!-- 								<p:messages showDetail="true" /> -->
-<!-- 								<p:captcha label="Captcha" /> -->
-<!-- 							</div> -->
+	<div class="col-md-6"> 
+<p:messages showDetail="true" /> 
+							<p:captcha label="Captcha" /> 
+ 							</div> 
 							<div class="col-md-6">
-								<h:commandButton action="#{loginBean.doLogin()}" class="be-popup-sign-button" value="SIGN IN" />
-<!-- 									actionListener="#{captchaBean.submit()}" -->
+								<h:commandButton action="#{loginBean.doLogin()}" actionListener="#{captchaBean.submit()}" class="be-popup-sign-button" value="SIGN IN" />
+									 
 									
 							</div>
 						</h:form>

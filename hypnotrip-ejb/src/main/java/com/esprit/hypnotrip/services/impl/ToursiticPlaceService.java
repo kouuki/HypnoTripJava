@@ -35,7 +35,7 @@ public class ToursiticPlaceService implements ToursiticPlaceServiceRemote, Tours
 
 	@Override
 	public List<Touristicplace> getAllTouristicPlaces() {
-		String jpql = "select  t from Touristicplace t WHERE t.etat=1";
+		String jpql = "select  t from Touristicplace t";
 		Query query = entityManager.createQuery(jpql);
 		List<Touristicplace> Tp = query.getResultList();
 		return Tp;

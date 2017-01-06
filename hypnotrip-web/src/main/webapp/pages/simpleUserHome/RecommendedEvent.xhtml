@@ -33,10 +33,12 @@
 								style="display: inline-block;">
 								<div class="be-post">
 									<a href="page1.html" class="be-img-block"> <h:graphicImage
-											value="http://localhost:18080/hypnotrip-web/resources/img/p1.jpg"
-											alt="" />
+											value="#{p.imageURL}" style="width:400px;height:200px" alt="" />
 									</a> <a href="page1.html" class="be-post-title"><h:outputText
-											value="#{p.description}" /></a> <span>
+											value="#{p.description}" /></a><a href="page1.html"
+										class="be-post-title"><center>
+											<h:outputText value="Date of Event: #{p.dateOfEvent}" />
+										</center> </a> <span>
 										<center>
 											<a href="#" class="be-post-tag"><h:outputText
 													value="#{p.categoriePage.toUpperCase()}" /> </a>
@@ -48,6 +50,12 @@
 											alt="" />
 										<span>by <a href="page1.html">HypnoTrip</a>
 										</span>
+									</div>
+									<div class="info-block">
+										<center>
+											<span><i class="fa fa-thumbs-o-up"></i> <h:outputText
+													value="#{allEventTouristicPlacesAndOfferBean.nbrFollowers(p.pageId)}" /></span>
+										</center>
 									</div>
 									<center>
 										<h:form id="f1" rendered="#{!empty loginBean.identifiedUser}">
@@ -83,11 +91,12 @@
 							<div class="category-1 mix " style="display: inline-block;">
 								<div class="be-post">
 									<a href="page1.html" class="be-img-block"> <h:graphicImage
-											value="http://localhost:18080/hypnotrip-web/resources/img/p1.jpg"
-											alt="" />
+											value="#{p.imageURL}" style="width:400px;height:200px" alt="" />
 									</a> <a href="page1.html" class="be-post-title"><h:outputText
-											value="#{recommendedEventBean.pagesSelected.description}" /></a>
-									<span>
+											value="#{recommendedEventBean.pagesSelected.description}" /></a><a
+										href="page1.html" class="be-post-title"><center>
+											<h:outputText value="Date of Event: #{p.dateOfEvent}" />
+										</center> </a> <span>
 										<center>
 											<a href="#" class="be-post-tag"><h:outputText
 													value="#{recommendedEventBean.pagesSelected.categoriePage.toUpperCase()}" />
